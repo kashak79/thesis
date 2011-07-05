@@ -1,0 +1,83 @@
+%
+%  THESISBOEK
+%
+%  Dit bestand zorgt voor algemene (layout)definities, en groepeert de
+%  afzonderlijke LaTeX-files tot een geheel.
+%
+%  @author Erwin Six, David De Reu, Brecht Vermeulen
+%
+
+\documentclass[11pt,a4paper,oneside,notitlepage]{book}
+\usepackage[english,dutch]{babel}
+%\usepackage[nottoc]{tocbibind} % Bibliografie in ToC; zie tocbibind.dvi
+
+% marges aanpassen
+% (opmerking: moet *voor* inclusie van fancyhdr package komen)
+\setlength{\hoffset}{-1in}
+\setlength{\voffset}{-1in}
+\setlength{\topmargin}{2cm}
+\setlength{\headheight}{0.5cm}
+\setlength{\headsep}{1cm}
+\setlength{\oddsidemargin}{3.5cm}
+\setlength{\evensidemargin}{3.5cm}
+\setlength{\textwidth}{16cm}
+\setlength{\textheight}{23.3cm}
+\setlength{\footskip}{1.5cm}
+
+\usepackage{fancyhdr}
+\usepackage{graphicx}
+% \usepackage[colorlinks]{hyperref}
+% Het bibliografisch opmaak bestand.
+\bibliographystyle{unsrt}
+%\bibliographystyle{bibliodutch}
+%\bibpunct{[}{]}{,}{n}{,}{,}
+
+\pagestyle{fancy}
+
+\renewcommand{\chaptermark}[1]{\markright{\MakeUppercase{#1}}}
+\renewcommand{\sectionmark}[1]{\markright{\thesection~#1}}
+
+\newcommand{\headerfmt}[1]{\textsl{\textsf{#1}}}
+\newcommand{\headerfmtpage}[1]{\textsf{#1}}
+
+\fancyhf{}
+\fancyhead[LE,RO]{\headerfmtpage{\thepage}}
+\fancyhead[LO]{\headerfmt{\rightmark}}
+\fancyhead[RE]{\headerfmt{\leftmark}}
+\renewcommand{\headrulewidth}{0.5pt}
+\renewcommand{\footrulewidth}{0pt}
+
+\fancypagestyle{plain}{ % eerste bladzijde van een hoofdstuk
+  \fancyhf{}
+  \fancyhead[LE,RO]{\headerfmtpage{\thepage}}
+  \fancyhead[LO]{\headerfmt{\rightmark}}
+  \fancyhead[RE]{\headerfmt{\leftmark}}
+  \renewcommand{\headrulewidth}{0.5pt}
+  \renewcommand{\footrulewidth}{0pt}
+}
+
+% anderhalve interlinie (opm: titelblad gaat uit van 1.5)
+\renewcommand{\baselinestretch}{1.5}
+
+% indien LaTeX niet goed splitst, neem je woord hierin op, of evt om splitsen 
+% te voorkomen
+\hyphenation{ditmagnooitgesplitstworden dit-woord-splitst-hier}
+
+\begin{document}
+
+%!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+%!!!!!!!!!!!              onderaan/bovenaan elk blad thesistitel zetten                !!!!!!!!!!!
+%!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+% overzicht/samenvatting
+%\include{overzicht}
+
+\pagestyle{fancy}
+\frontmatter
+
+% hoofdstukken
+\mainmatter
+
+\include{sota}
+\backmatter
+\end{document}

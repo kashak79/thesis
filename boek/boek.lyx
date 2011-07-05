@@ -1,0 +1,936 @@
+#LyX file created by tex2lyx 1.6.8
+\lyxformat 264
+\begin_document
+\begin_header
+\textclass book
+\begin_preamble
+%
+%  THESISBOEK
+%
+%  Dit bestand zorgt voor algemene (layout)definities, en groepeert de
+%  afzonderlijke LaTeX-files tot een geheel.
+%
+%  @author Erwin Six, David De Reu, Brecht Vermeulen
+%
+
+
+%\usepackage[nottoc]{tocbibind} % Bibliografie in ToC; zie tocbibind.dvi
+
+% marges aanpassen
+% (opmerking: moet *voor* inclusie van fancyhdr package komen)
+\setlength{\hoffset}{-1in}
+\setlength{\voffset}{-1in}
+\setlength{\topmargin}{2cm}
+\setlength{\headheight}{0.5cm}
+\setlength{\headsep}{1cm}
+\setlength{\oddsidemargin}{3.5cm}
+\setlength{\evensidemargin}{3.5cm}
+\setlength{\textwidth}{16cm}
+\setlength{\textheight}{23.3cm}
+\setlength{\footskip}{1.5cm}
+
+\usepackage{fancyhdr}% \usepackage[colorlinks]{hyperref}
+% Het bibliografisch opmaak bestand.
+\bibliographystyle{unsrt}
+%\bibliographystyle{bibliodutch}
+%\bibpunct{[}{]}{,}{n}{,}{,}
+
+
+
+\renewcommand{\chaptermark}[1]{\markright{\MakeUppercase{#1}}}
+\renewcommand{\sectionmark}[1]{\markright{\thesection~#1}}
+
+\newcommand{\headerfmt}[1]{\textsl{\textsf{#1}}}
+\newcommand{\headerfmtpage}[1]{\textsf{#1}}
+
+\fancyhf{}
+\fancyhead[LE,RO]{\headerfmtpage{\thepage}}
+\fancyhead[LO]{\headerfmt{\rightmark}}
+\fancyhead[RE]{\headerfmt{\leftmark}}
+\renewcommand{\headrulewidth}{0.5pt}
+\renewcommand{\footrulewidth}{0pt}
+
+\fancypagestyle{plain}{ % eerste bladzijde van een hoofdstuk
+  \fancyhf{}
+  \fancyhead[LE,RO]{\headerfmtpage{\thepage}}
+  \fancyhead[LO]{\headerfmt{\rightmark}}
+  \fancyhead[RE]{\headerfmt{\leftmark}}
+  \renewcommand{\headrulewidth}{0.5pt}
+  \renewcommand{\footrulewidth}{0pt}
+}
+
+% anderhalve interlinie (opm: titelblad gaat uit van 1.5)
+\renewcommand{\baselinestretch}{1.5}
+
+% indien LaTeX niet goed splitst, neem je woord hierin op, of evt om splitsen 
+% te voorkomen
+\hyphenation{ditmagnooitgesplitstworden dit-woord-splitst-hier}
+
+
+\end_preamble
+\options notitlepage
+\language dutch
+\inputencoding auto
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_default_family default
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+\graphics default
+\paperfontsize 11
+\spacing single
+\papersize a4paper
+\use_geometry false
+\use_amsmath 1
+\use_esint 1
+\cite_engine basic
+\use_bibtopic false
+\paperorientation portrait
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\defskip medskip
+\quotes_language polish
+\papercolumns 1
+\papersides 1
+\paperpagestyle fancy
+\tracking_changes false
+\output_changes false
+\end_header
+
+\begin_body
+
+\begin_layout Standard
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+% titelblad (voor kaft)
+\end_layout
+
+\begin_layout Standard
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Include \include{titel.lyx}
+preview false
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+% lege pagina (!!)
+\end_layout
+
+\begin_layout Standard
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+% titelblad (!!)
+\end_layout
+
+\begin_layout Standard
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+% geen paginanummering tot we aan de inhoudsopgave komen
+\end_layout
+
+\begin_layout Standard
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+pagestyle
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+{
+\end_layout
+
+\end_inset
+
+empty
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+% voorwoord met dankwoord en toelating tot bruikleen (ondertekend)
+\end_layout
+
+\begin_layout Standard
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Include \include{voorwoord.lyx}
+preview false
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+%!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+\end_layout
+
+\begin_layout Standard
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+%!!!!!!!!!!!              onderaan/bovenaan elk blad thesistitel zetten                !!!!!!!!!!!
+\end_layout
+
+\begin_layout Standard
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+%!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+\end_layout
+
+\begin_layout Standard
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+% overzicht/samenvatting
+\end_layout
+
+\begin_layout Standard
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+%
+\backslash
+include{overzicht}
+\end_layout
+
+\begin_layout Standard
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+pagestyle
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+{
+\end_layout
+
+\end_inset
+
+fancy
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+}
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+frontmatter
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+% inhoudstafel
+\end_layout
+
+\begin_layout Standard
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset LatexCommand tableofcontents
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+% opmaak voor het eigenlijke boek; onderstaande lijnen
+\end_layout
+
+\begin_layout Standard
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+% weglaten als de eerste regel van een nieuwe alinea moet
+\end_layout
+
+\begin_layout Standard
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+% inspringen in plaats van extra tussenruimte
+\end_layout
+
+\begin_layout Standard
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+%
+\backslash
+setlength{
+\backslash
+parindent}{0pt}
+\end_layout
+
+\begin_layout Standard
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+%
+\backslash
+setlength{
+\backslash
+parskip}{0.5
+\backslash
+baselineskip plus 0.5ex minus 0.2ex}
+\end_layout
+
+\begin_layout Standard
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+%
+\backslash
+setlength{
+\backslash
+parskip}{1ex plus 0.5ex minus 0.2ex}
+\end_layout
+
+\begin_layout Standard
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+% hoofdstukken
+\end_layout
+
+\begin_layout Standard
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+mainmatter
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+% hier worden de hoofdstukken ingevoegd (
+\backslash
+includes)
+\end_layout
+
+\begin_layout Standard
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Include \include{inleiding.lyx}
+preview false
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Chapter
+
+Begrippen
+\end_layout
+
+\begin_layout Standard
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+%
+\backslash
+include{gerelateerdwerk}
+\end_layout
+
+\begin_layout Standard
+
+
+\end_layout
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Chapter
+
+Gerelateerd werk
+\end_layout
+
+\begin_layout Standard
+
+
+\begin_inset LatexCommand label
+name "chap:gerelateerdwerk"
+
+\end_inset
+
+ 
+\begin_inset Include \include{data}
+preview false
+
+\end_inset
+
+ 
+\begin_inset Include \include{datacollectie}
+preview false
+
+\end_inset
+
+ 
+\begin_inset Include \include{clustering}
+preview false
+
+\end_inset
+
+ 
+\begin_inset Include \include{vervolgonderzoek}
+preview false
+
+\end_inset
+
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+%
+\backslash
+include{gelijkheid}
+\end_layout
+
+\begin_layout Standard
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+%
+\backslash
+include{aanbevelingen}
+\end_layout
+
+\begin_layout Standard
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+% appendices
+\end_layout
+
+\begin_layout Standard
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+%
+\backslash
+appendix
+\end_layout
+
+\begin_layout Standard
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+% hier worden de appendices ingevoegd (
+\backslash
+includes)
+\end_layout
+
+\begin_layout Standard
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+%
+\backslash
+include{referenties}
+\end_layout
+
+\begin_layout Standard
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+% De bibliografie en de index
+\end_layout
+
+\begin_layout Standard
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset LatexCommand bibtex
+bibfiles "collection"
+
+\end_inset
+
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+backmatter
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+% eventueel: lijst van figuren en tabellen
+\end_layout
+
+\begin_layout Standard
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+%
+\backslash
+listoffigures
+\end_layout
+
+\begin_layout Standard
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+%
+\backslash
+listoftables
+\end_layout
+
+\begin_layout Standard
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+% lege pagina (!!)
+\end_layout
+
+\begin_layout Standard
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+% kaft
+\end_layout
+
+\begin_layout Standard
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document

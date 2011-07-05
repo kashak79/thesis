@@ -1,0 +1,5 @@
+/boek/*.pdf
+/boek/*~
+/boek/*.aux
+/boek/*.log
+/boek/*.lnk

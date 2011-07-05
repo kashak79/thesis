@@ -1,0 +1,14 @@
+This is BibTeX, Version 0.99dThe top-level auxiliary file: C:\Users\Simon Buelens\Documents\Unief\2de master\thesis\boek\boek.aux
+The style file: unsrt.bst
+A level-1 auxiliary file: titel.aux
+A level-1 auxiliary file: voorwoord.aux
+A level-1 auxiliary file: inleiding.aux
+A level-1 auxiliary file: sota.aux
+I couldn't open database file collection.bib
+---line 12 of file C:\Users\Simon Buelens\Documents\Unief\2de master\thesis\boek\boek.aux
+ : \bibdata{collection
+ :                    }
+I'm skipping whatever remains of this command
+I found no \citation commands---while reading file C:\Users\Simon Buelens\Documents\Unief\2de master\thesis\boek\boek.aux
+I found no database files---while reading file C:\Users\Simon Buelens\Documents\Unief\2de master\thesis\boek\boek.aux
+(There were 3 error messages)
