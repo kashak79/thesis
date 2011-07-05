@@ -1,11 +1,17 @@
 \section{Disambiguation rules}
 
-Per regel zouden we een soort van gewicht moeten meegeven die genormaliseerd is over alle regels heen. Hier moeten we nog over nadenken.
+Every publication will have a number of authors tied to it and each author is in first instance saved as a seperate identity. However, as we expand our database a lot of names will relate to the same author. In order to find these relationships, it is not enough to just compare the notation using string-matching. Different authors may have the same name and an author's name may be misspelled or abbreviated.
+
+In order to map the names onto an identity, we came up with a number of rules. Each of these increase or decrease the likelihood that two names should map to the same author. We use this likelihood to decide if names should be tied to the same author or disconnected, a dynamic process as we collect more and more information.
+
+%Per regel zouden we een soort van gewicht moeten meegeven die genormaliseerd is over alle regels heen. Hier moeten we nog over nadenken.
+%Misschien moeten we ook per regel verwijzen naar een plaats in het boek waar dit beter uitgelegd wordt, bv Interest rule in combinatie met Category builder.
 
 \subsection{Prequel - Doc split}
 
 In order to enlarge our disambiguation possibilities, we want access to the actual text of the publications. Using a search engine, like Google Scholar, we can find most of the actual publications in pdf on the internet. By using the Ruby library Doc split \footnote{http://documentcloud.github.com/docsplit/}, we can easily parse the pdf into computer-understandable text. Most of the time it will be enough to just get the first page, giving us access to the authors, their affiliations and location. The first page also almost always has an abstract and a list of keywords.
 
+%Nog nodig van dit duidelijker aan te duiden. Sommige regels kunnen opgesplitst worden in 2 versies, versie met en zonder. Dus misschien eerst opsomming van regels die er geen gebruik van maken, daarna opsomming van regels die dit wel doen.
 In the following rules we will make a distinction between those who rely on this extra information and those who don't. The rule who rely on it will be followed by an asterisk *.
 
 \subsection{Place of publication rule*}
@@ -14,6 +20,24 @@ This rule defines that is less likely to have multiple persons with the exact sa
 
 \subsection{Co-author clustering}
 
-Authors often work together with the same people, writing multiple publications together. If we find clusters \footnote{how do we formally define clusters and where do we explain this concept? Should this be in the sota related towards the publication 'Clustering using min cut tree'?} of co-authors which are completely indepent, it enlarges the chance that name we are investigating is related to multiple authors.
+%Slecht uitgelegd, gebruik maken van een figuur ?
 
-We can also use this rule to enlarge the possibility of author names being related by using this rule the other 
+Authors often work together with the same people, writing multiple publications together. If we find clusters 
+%\footnote{how do we formally define clusters and where do we explain this concept? Should this be in the sota related towards the publication 'Clustering using min cut tree'?} 
+of co-authors which are completely indepent, it enlarges the chance that name we are investigating is related to multiple authors.
+
+We can also use this rule to enlarge the possibility of author names being related by using this rule the other way around. When we have a big cluster of related co-authors, the change is big the author correlated to this cluster is the same person.
+
+\subsection{Name notation rule}
+
+Using string matching to detect similarities between names which are written differently, but are the same person. Examples include abbreviations of firstnames, usage of special characters, double family names...
+
+\subsection{Affiliation rule*}
+
+It is unlikely for an author to be tied towards multiple affiliations at the same time.
+
+\subsection{Interest rule}
+
+This is an important rule and it can define a lot of the precision of our whole framework. It states that different authors with the same name are unlikely to work on the same topic or have the same area of expertise.
+
+The hard part is deciding the subject of the publication.
