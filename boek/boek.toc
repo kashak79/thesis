@@ -4,33 +4,42 @@
 \contentsline {chapter}{\numberline {2}State of the art}{2}
 \contentsline {section}{\numberline {2.1}Opinion mining}{2}
 \contentsline {subsection}{\numberline {2.1.1}Introduction}{2}
-\contentsline {subsection}{\numberline {2.1.2}Current situation}{3}
+\contentsline {subsection}{\numberline {2.1.2}Current situation}{2}
 \contentsline {subsection}{\numberline {2.1.3}Improvements and additions}{3}
 \contentsline {section}{\numberline {2.2}Twitter influencers}{3}
 \contentsline {subsection}{\numberline {2.2.1}Introduction}{3}
-\contentsline {subsection}{\numberline {2.2.2}Current situation}{3}
+\contentsline {subsection}{\numberline {2.2.2}Current situation}{4}
 \contentsline {subsection}{\numberline {2.2.3}Improvements and additions}{4}
-\contentsline {section}{\numberline {2.3}Event detection}{4}
-\contentsline {subsection}{\numberline {2.3.1}General problem statement}{4}
-\contentsline {subsection}{\numberline {2.3.2}Current situation}{4}
-\contentsline {subsection}{\numberline {2.3.3}Improvements and additions}{4}
-\contentsline {section}{\numberline {2.4}Expert Finding}{4}
-\contentsline {subsection}{\numberline {2.4.1}Introduction}{4}
-\contentsline {subsection}{\numberline {2.4.2}Current situation}{5}
-\contentsline {subsection}{\numberline {2.4.3}Improvements and additions}{5}
-\contentsline {subsection}{\numberline {2.4.4}What do we need}{6}
-\contentsline {chapter}{\numberline {3}The framework}{7}
-\contentsline {section}{\numberline {3.1}Features}{7}
-\contentsline {subsection}{\numberline {3.1.1}Information extraction}{7}
-\contentsline {subsection}{\numberline {3.1.2}Information linkage}{7}
-\contentsline {subsection}{\numberline {3.1.3}Pitfalls}{7}
-\contentsline {section}{\numberline {3.2}Components / Architecture}{8}
-\contentsline {section}{\numberline {3.3}Technologies}{8}
-\contentsline {subsection}{\numberline {3.3.1}MySQL}{8}
-\contentsline {subsubsection}{Relational datastore}{8}
-\contentsline {subsubsection}{A record-store}{8}
-\contentsline {subsubsection}{Triple-store}{8}
-\contentsline {subsubsection}{Conclusion}{8}
-\contentsline {subsection}{\numberline {3.3.2}Two databases}{8}
-\contentsline {subsection}{\numberline {3.3.3}Ruby}{8}
-\contentsline {chapter}{\numberline {4}Future work}{9}
+\contentsline {section}{\numberline {2.3}Expert Finding}{5}
+\contentsline {subsection}{\numberline {2.3.1}Introduction}{5}
+\contentsline {subsection}{\numberline {2.3.2}Current situation}{5}
+\contentsline {subsection}{\numberline {2.3.3}Improvements and additions}{6}
+\contentsline {subsection}{\numberline {2.3.4}Scraping}{6}
+\contentsline {subsection}{\numberline {2.3.5}API}{6}
+\contentsline {subsection}{\numberline {2.3.6}DBLP}{7}
+\contentsline {subsection}{\numberline {2.3.7}LinkedIn}{7}
+\contentsline {subsection}{\numberline {2.3.8}Google Scholar}{7}
+\contentsline {subsection}{\numberline {2.3.9}Microsoft Academic Search}{8}
+\contentsline {subsection}{\numberline {2.3.10}FOAF}{8}
+\contentsline {subsection}{\numberline {2.3.11}Stemming}{8}
+\contentsline {subsection}{\numberline {2.3.12}Clustering}{8}
+\contentsline {subsection}{\numberline {2.3.13}Stanford Part-Of-Speech Tagger}{8}
+\contentsline {subsection}{\numberline {2.3.14}Gremlin}{9}
+\contentsline {subsection}{\numberline {2.3.15}JUNG}{9}
+\contentsline {subsection}{\numberline {2.3.16}Neo4j}{9}
+\contentsline {chapter}{\numberline {3}The framework}{10}
+\contentsline {section}{\numberline {3.1}Main Scenario}{10}
+\contentsline {section}{\numberline {3.2}Features}{10}
+\contentsline {subsection}{\numberline {3.2.1}Information extraction}{10}
+\contentsline {subsection}{\numberline {3.2.2}Information linkage}{10}
+\contentsline {subsection}{\numberline {3.2.3}Pitfalls}{10}
+\contentsline {section}{\numberline {3.3}Components / Architecture}{11}
+\contentsline {section}{\numberline {3.4}Technologies}{11}
+\contentsline {subsection}{\numberline {3.4.1}MySQL}{11}
+\contentsline {subsubsection}{Relational datastore}{11}
+\contentsline {subsubsection}{A record-store}{11}
+\contentsline {subsubsection}{Triple-store}{11}
+\contentsline {subsubsection}{Conclusion}{11}
+\contentsline {subsection}{\numberline {3.4.2}Two databases}{11}
+\contentsline {subsection}{\numberline {3.4.3}Ruby}{11}
+\contentsline {chapter}{\numberline {4}Future work}{12}

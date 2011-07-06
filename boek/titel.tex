@@ -1,52 +1,80 @@
-\chapter{The framework}
+%  Titelblad
 
-The goal is to build a platform that allows a user to query for experts in a particular domain. The
-platform extracts and unifies the required information from a variety of online sources and
-subsequently builds a repository of user profiles.
+% Opmerking: gaat uit van een \baselinestretch waarde van 1.5 (die moet
+% ingesteld worden voor het begin van de document environment)
 
-We basically want to create a framework that would function as a Google for finding experts given a certain subject.
+\begin{titlepage}
 
-%Describe how we got to the architecture for the framework, show a figure of the (simplified + extensive) architecture and explain the different components.
+\setlength{\hoffset}{-1in}
+\setlength{\voffset}{-1in}
+\setlength{\topmargin}{1.5cm}
+\setlength{\headheight}{0.5cm}
+\setlength{\headsep}{1cm}
+\setlength{\oddsidemargin}{3cm}
+\setlength{\evensidemargin}{3cm}
+\setlength{\footskip}{1.5cm}
+\enlargethispage{1cm}
+% \textwidth en \textheight hier aanpassen blijkt niet te werken
 
-\section{Features}
+\fontsize{12pt}{14pt}
+\selectfont
 
-\subsection{Information extraction}
+\begin{center}
 
-%We want to create a framework that can search different online sources autonomously and extract information. We 
+\includegraphics[height=2cm]{fig/ruglogo}
+
+\vspace{0.5cm}
+
+Faculteit Ingenieurswetenschappen\\
+Vakgroep Informatietechnologie\\
+%Voorzitter: Prof.~Dr.~Ir.~P.~LAGASSE
 
 
-\subsection{Information linkage}
+%\vspace{3cm} verdeeld door comment
+\vspace{1cm}
+
+\fontseries{bx}
+\fontsize{24pt}{24pt}
+\selectfont
+
+VOORLOPIGE DRAFT
+\vspace{1cm}
+
+\fontsize{17.28pt}{21pt}
+\selectfont
 
 
+Identifying experts through a framework for knowledge extraction from public online sources
+\fontseries{m}
+\fontsize{12pt}{14pt}
+\selectfont
 
-\subsection{Pitfalls}
+\vspace{.5cm}
 
-Describe the possible difficulties: people with the same name that are a different person, a person who's name is written differently (usage of abbreviations, altering last name due to marriage...), change of expertise due to change of interest/job.
+door 
 
-\section{Components / Architecture}
+\vspace{.4cm}
 
-Plugins, IterationManager, CategoryBuilder, Disambiguator, DataMerger
+Simon Buelens\\
+Mattias Putman
 
-\section{Technologies}
+\vspace{2.5cm}
 
-\subsection{MySQL}
+Promotoren:\\
+Prof.~Dr.~Ir.~Filip.~De.~Turck \\
+Elena.~Tsiporkova.~(Sirris) \\
+Begeleider:\\
+Anna.~Hristoskova\\
 
-Discuss the differences, advantages and disadvantages between a relational datastore, a record-store and a triple-store.
+\vspace{2cm}
 
-\subsubsection{Relational datastore}
+Masterproef ingediend tot het behalen van de academische graad van\\
+ingediend tot het behalen van de academische graad van\\
+Master in de ingenieurswetenschappen: computerwetenschappen
 
-\subsubsection{A record-store}
+\vspace{1cm}
 
-\subsubsection{Triple-store}
+Academiejaar 2010--2011
 
-\subsubsection{Conclusion}
-
-We choose to use MySQL, a relational datastore, because we are familiar with it. It allows us to quickly set up our prototype to work and test our framework on.
-
-\subsection{Two databases}
-
-We use two databases, one for development and one for production.
-
-The former is used to collect all information about the possible experts and their work. 
-
-\subsection{Ruby}
+\end{center}
+\end{titlepage}
