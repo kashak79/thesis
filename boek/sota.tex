@@ -1,6 +1,7 @@
 \chapter{State of the art}
 
-We examined a broad range of different topics with social media as central subject. It was an evolution starting from simple Twitter-related subjects to a full-fledged problem assignment many people struggle with. The journey towards this problem is interesting enough to devote a full thesis to in itself, but we will spare you the details and cover it in this chapter.
+We examined a broad range of different topics with social media as central subject. It was an evolution starting from simple Twitter-related subjects to a full-fledged problem assignment many people struggle with. 
+%The journey towards this problem is interesting enough to devote a full thesis to in itself, but we will spare you the details and cover it in this chapter.
 
 \section{Opinion mining}
 
@@ -8,13 +9,30 @@ We examined a broad range of different topics with social media as central subje
 \label{general - opinion mining}
 Opinion mining is part of the general area of \textit{sentiment analysis, opinion extraction or opinion mining and feature-based opinion summarization} from the user-generated content or user-generated media on the Web. The applications are manifold with the most important ones in the area of in business intelligence. 
 
-Large companies receive thousands of pieces of feedback on a daily basis, both direct as indirect. Examples are online customer reviews, customer feedback, survey responses, social media messages, blogposts and comments. Human processing of such text volumes is prohibitively expensive and close to impossible. The only alternative is automatic extraction of relevant information. Ideally one would like to be able to quickly and cheaply customize a system to provide reasonably accurate sentiment classification for a domain, a brand or a specific product.
+%Large companies receive thousands of pieces of feedback on a daily basis, both direct as indirect. Examples are online customer reviews, customer feedback, survey responses, social media messages, blogposts and comments. Human processing of such text volumes is prohibitively expensive and close to impossible. The only alternative is automatic extraction of relevant information. Ideally one would like to be able to quickly and cheaply customize a system to provide reasonably accurate sentiment classification for a domain, a brand or a specific product.
 
 \subsection{Current situation}
 
 %Sentiment360, lots of papers and onderzoek, really to much to name and to add something of importance.
 
+Opinion mining has been a hot topic the last 10 years due to the rise of social media such as blogs and social networks. Businesses are looking to automate the process of following up on the conversation about their company image and products and opinion mining can help them take steps toward accomplishing this \footnote{Wright, Alex. "Mining the Web for Feelings, Not Facts", New York Times, 2009-08-23. Retrieved on 2010-11-05}.
+
+One step towards this is accomplished in research. Several universities around the world have research teams focussing on the dynamics of sentiment. There is research focused on creating sentiment summaries to capture an author's opinion about a subject based on a publication \footnote{An exploration of sentiment summarization}, predicting the semantic orientation of adjectectives and combinations of adjectives \footnote{Predicting the Semantic Orientation of Adjectives}, identifying the sources of the opinions rather than the actual sentiment itself \footnote{Identifying Sources of Opinions with Conditional Random Fields and Extraction Patterns}...
+
+An interesting ongoing project is \footnote{http://www.cs.uic.edu/~liub/FBS/sentiment-analysis.html} at the University of Illinois, Chicago, backed by Google and Microsoft Corporation. It is a project working in three areas: 
+
+\begin{itemize}
+	\item Mining direct (or regular) opinions. Example: after taking the drug, I got stomach pain.
+	\item Mining comparative opinions. Example: Coke tastes better than Pepsi.
+	\item Review and opinion spam analysis and detection. An example is detecting of fake reviews.
+\end{itemize}
+
+It is particularly interesting as others can follow the status of and updates on the project. There are also references to the opinion lexicon and data sets they used to evaluate their results allowing third parties to easily compare their own work using the same input.
+
 \subsection{Improvements and additions}
+
+%Voorloping nog heel erg dunnetjes, Google Prediction API is het enige dat we aanbrengen en dit is meer iets simpel uitvoeren dan echt een uitdagende opdracht. Beter de uitdaging van Twitter aankaarten en hoe we dit concreet wouden aanpakken.
+
 We are looking into the analysis of social media messages, more specifically Twitter messages. We want to use Google's new service, Google Prediction API, which provides pattern-matching and machine learning capabilities. We can compare the results with one or more of the many papers and see if there is any added value in using this service.
 
 We need a lot of training data in order for the Prediction API to learn likely future outcomes. As this service decides what algorithms it uses, there is a lack of possible research to make an interesting thesis.
@@ -30,34 +48,43 @@ We need a lot of training data in order for the Prediction API to learn likely f
 \subsection{Introduction}
 As discussed in \ref{general - opinion mining} about opinion mining, people talk about products, both positive as negative. They have the ability to influence the buying behavior of others who respect their opinion about a certain area. Identifying these influencers can be of great value, for instance in the advertising industry.
 
+There are two main aspects, reach and trust. A person's reach determines the number of people who listen when he has something of value to say. Trust or influence depicts the value people give a certain person's opinion. Both aspects can vary a lot when comparing different topics for the same person.
+
 \subsection{Current situation}
-There are two main aspects, reach and trust. A person's reach determines the number of people who listen when he has something of value to say. Trust or influence depicts the value people give a certain person's opinion. Both aspects can vary a lot when comparing different topics for the same person.\\
-There are papers discussing algorithms to find the ideal subset of individuals which will trigger a large cascade of conversions and papers researching the more general economic issues regarding influencers.\\
-Also regarding the second aspect, trust, there are a lot of well documented scientific results. \footnote{Propagation Models for Trust and Distrust in Social Networks} describes propagation models which can be used to present trust and distrust in social networks. Just as in \footnote{Inferring Trust Relationships in Web-based Social Networks} an algorithm for calculating a trust metric is presented based on the EigenTrust algorithm\footnote{The eigentrust algorithm for reputation management in p2p networks, Kamvar 2003}.\\
-The amount of applications focusing on calculating social media influence, as their core business or a useful option, is growing rapidly. Following is a short summary a few better applications.\\
-Klout is a well-known online tool focusing on ranking Twitter profiles (and recently also Facebook profiles) using over 35 variables. These rankings are, though fun, not particularly useful as finding influencers based on topic is very limited, however there are interesting third-party applications providing this feature.\\
+
+There are papers discussing algorithms to find the ideal subset of individuals which will trigger a large cascade of conversions and papers researching the more general economic issues regarding influencers.
+
+Also regarding the second aspect, trust, there are a lot of well documented scientific results. \footnote{Propagation Models for Trust and Distrust in Social Networks} describes propagation models which can be used to present trust and distrust in social networks. Just as in \footnote{Inferring Trust Relationships in Web-based Social Networks} an algorithm for calculating a trust metric is presented based on the EigenTrust algorithm\footnote{The eigentrust algorithm for reputation management in p2p networks, Kamvar 2003}.
+
+The amount of applications focusing on calculating social media influence, as their core business or a useful option, is growing rapidly. Following is a short summary a few better applications.
+
+Klout is a well-known online tool focusing on ranking Twitter profiles (and recently also Facebook profiles) using over 35 variables. These rankings are, though fun, not particularly useful as finding influencers based on topic is very limited, however there are interesting third-party applications providing this feature.
+
 PeerIndex and Traackr focus more on identifying topics. Just like Klout, PeerIndex focuses on Twitter profiles and parameters captured from Twitter to assign a certain score to each profile. Traackr on the other hand uses data from multiple online sources connected to the users such as their blog, YouTube channel, LinkedIn and Twitter profile and more. Traackr combines the results and provides a three-way score (reach, relevance and resonance) based on a certain topic together with detailed contact information.
 
 \subsection{Improvements and additions}
-We want to start from a Twitter profile and find out more about a user using other social media networks, semantic databases and social graphs, comparable to Traackr.
 
-\section{Event detection}
+%We kunnen hier nog zo veel meer over vertellen, dit is eigelijk de voornaamste voorloper van ons echt onderwerp, dus hier kunnen we reeds heel wat belangrijke dingen aankaarten die we uiteindelijk ook echt zullen gebruiken. 
+%Belangrijke dingen die nog aangekaart moeten worden: Semantic Web (Web of Data), DBPedia, RDF, OWL, FOAF, Google Social Graph, location based?, 
 
-\subsection{General problem statement}
+We want to start from a Twitter profile and find out more about a user using other social media networks, semantic databases and social graphs, comparable to Traackr. 
 
-
-\subsection{Current situation}
-
-\subsection{Improvements and additions}
+%\section{Event detection}
+%
+%\subsection{General problem statement}
+%
+%
+%\subsection{Current situation}
+%
+%\subsection{Improvements and additions}
 
 
 \section{Expert Finding}
 
-%Te bespreken: neo4j, Tinkerpop, Gremlin, Stanford POS tagger, lemmatizer, doc split (ruby gem), resque (ruby library - https://github.com/defunkt/resque), max flow :: min-cut
-
 \subsection{Introduction}
 
 Finding experts is useful for seeking consultants, collaborators or speakers. It is also of great value within the academic world as it provides a source of information to supplement or complement papers and theses. Many researchers and reporters lose a lot of time doing this manually as the amount of sources is ever growing: documents, email, databases, conferences, scientific papers and so on. The topic is luckily seeing an increase in attention in recent years.
+
 %Expert finding is a difficult task requiring a multitude of different steps in order to find results bearing certain value. There are databases containing records of people matched with their area of expertise, which can be queried for a nominal fee, mostly used by reporters. The data has been gathered manually over time. To receive a more up-to-date or specific result, one will have to send a separate request which will come with a higher price and take its time.\\
 %Another option is to do it manually. There are several steps which can be undertaken and they can be executed in fashionable order, repeated as often as necessary. One can search for conference sites about the topic and look up the names of the speakers. Current and past working experience can possibly be found on LinkedIn. Publications and co-authors can be retrieved from online databases with dedicated research publications or from more general databases such as Google Scholar. The authors and papers can be interlinked in order to see who works with who and who is most often cited or referenced. Influence can be measured on social media.\\
 %It is clearly a lengthy process.
@@ -65,12 +92,79 @@ Finding experts is useful for seeking consultants, collaborators or speakers. It
 \subsection{Current situation}
 
 \footnote{Balog, K. and Rijke, M.: Finding Experts and Their Details in E-mail Corpora. In Proceedings
-of the 15th International Conference on World Wide Web (2006)} proposed four simple binary association methods to find expertise information from emails. \footnote{5} investigated the expertise of users and experts by combining information retrieval techniques. Both these solutions are insufficient for topic-based expert finding as their datasets (emails and online communities) are too limited, they focus too much on previous encounters and lack context.\\
-\footnote{6} retrieves experts based on the amount of documents persons have for a given topic. As input a keyword phrase is used in order to find relevant documents. The results are however unsatisfactory caused by its slow response time and incorrect relationship between persons and documents. \footnote{8} gets better results using an algorithm based on a PageRank for document authority, a co-occurrence model for authors and multiple levels of associations between experts and topics. It succeeds to map variants of experts' names on the same author, but fails to identify different authors with the same name.\\
+of the 15th International Conference on World Wide Web (2006)} proposed four simple binary association methods to find expertise information from emails. \footnote{5} investigated the expertise of users and experts by combining information retrieval techniques. Both these solutions are insufficient for topic-based expert finding as their datasets (emails and online communities) are too limited, they focus too much on previous encounters and lack context.
+
+\footnote{6} retrieves experts based on the amount of documents persons have for a given topic. As input a keyword phrase is used in order to find relevant documents. The results are however unsatisfactory caused by its slow response time and incorrect relationship between persons and documents. \footnote{8} gets better results using an algorithm based on a PageRank for document authority, a co-occurrence model for authors and multiple levels of associations between experts and topics. It succeeds to map variants of experts' names on the same author, but fails to identify different authors with the same name.
+
 \footnote{Finding Topic-centric Identified Experts based on Full Text Analysis} proposes OntoFrame. It is an information service platforum using Semantic Web technologies and is based on an extensive ontology of 16 classes using RDF triples. Identity resolution and full text analysis forms the basis of their expert-finding method. The framework looks promising, however the prototype does not function \footnote{$http://ontoframe.kr/2008/2008_new/main.jsp$}.
 
 \subsection{Improvements and additions}
-We want to continue the research proposed in \footnote{Finding Topic-centric ...}, but less focused towards the full text analysis of documents. We want to combine multiple online sources, written as plugins, in order to achieve more information about experts, positiviely influencing the outcome of the algorithm.
+
+%Iets vermelden over de connectie met het TWIRL project?
+
+We want to continue the research proposed in \footnote{Finding Topic-centric ...}, but less focused towards the full text analysis of documents. We want to create a platform that extracts and unifies the required information from a variety of online sources and subsequently builds a repository of user profiles.
+
+%Te bespreken: neo4j, Tinkerpop, Gremlin, Stanford POS tagger, lemmatizer, doc split (ruby gem), resque (ruby library - https://github.com/defunkt/resque), max flow :: min-cut
 
 %\subsection{What do we need}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% Several components we still have to explain or discuss inside the text %%
+
+\subsection{Scraping}
+
+Web scraping (also called Web harvesting or Web data extraction) is a computer software technique of extracting information from websites. Usually, such software programs simulate human exploration of the Web by either implementing low-level Hypertext Transfer Protocol (HTTP), or embedding certain full-fledged Web browsers, such as the Internet Explorer (IE) and the Mozilla Web browser. Web scraping is closely related to Web indexing, which indexes information on the Web using a bot and is a universal technique adopted by most search engines. In contrast, Web scraping focuses more on the transformation of unstructured data on the Web, typically in HTML format, into structured data that can be stored and analyzed in a central local database or spreadsheet. Web scraping is also related to Web automation, which simulates human Web browsing using computer software. Uses of Web scraping include online price comparison, weather data monitoring, website change detection, Web research, Web content mashup and Web data integration \footnote{http://en.wikipedia.org/wiki/Web scraping}.
+
+\subsection{API}
+
+Web scraping (also called Web harvesting or Web data extraction) is a computer software technique of extracting information from websites. Usually, such software programs simulate human exploration of the Web by either implementing low-level Hypertext Transfer Protocol (HTTP), or embedding certain full-fledged Web browsers, such as the Internet Explorer (IE) and the Mozilla Web browser. Web scraping is closely related to Web indexing, which indexes information on the Web using a bot and is a universal technique adopted by most search engines. In contrast, Web scraping focuses more on the transformation of unstructured data on the Web, typically in HTML format, into structured data that can be stored and analyzed in a central local database or spreadsheet. Web scraping is also related to Web automation, which simulates human Web browsing using computer software. Uses of Web scraping include online price comparison, weather data monitoring, website change detection, Web research, Web content mashup and Web data integration \footnote{http://en.wikipedia.org/wiki/Web scraping}.
+
+\subsection{DBLP}
+
+DBLP is produced by the Computer Science department of the University of Trier and was initially focused on \textit{DataBase systems and Logic Programming}, but has gradually expanded toward being an confidential server providing bibliographic information on major computer science journals and proceedings, indexing more than one million articles.
+DBLP allows to search by author name, giving back a list of publications and other bibliographic information.
+
+%Link naar de volledige uitleg van de werking van de plugin voor meer informatie hieromtrent
+
+\subsection{LinkedIn}
+
+LinkedIn is a business-related social networking site launched in May 2003, mainly used for professional networking by more than 100 million registered users \footnote{http://en.wikipedia.org/wiki/LinkedIn}. Each user has a profile which may contain the following information: current affiliation and title, past working experiences, education, specialties, location, connections with other users...
+
+Using the LinkedIn API we can search for users by entering a name. This will give back list of profiles we can browse and whose information we can extract and use in our framework. As the service is based on a \textit{gated-access approach}, which means you need to be at least a second level connection of the profile you are looking at to see their connections, we can not use this to connect authors to eachother. However, the information provided by the profile which is publicly available does allow us to get a better insight into the subject the person is interested in and what affiliation he is and was connected to.
+
+%Link naar de volledige uitleg van de werking van de plugin voor meer informatie hieromtrent
+
+\subsection{Google Scholar}
+
+Google Scholar is a freely accessible web search engine that indexes the full text of scholarly literature accross an array of publishing formats and disciplines. It allows to search publications based on subject keywords, partial publication titles and author names. It's ranking algorithm uses a combination of factors, but puts mainly high weight to citation count and the words included in a document's title.
+
+Google Scholar is not yet available to the Google AJAX API and Google does not allow automatic crawling or scraping of its services. Thus, it can not be used as a publication reference in our framework.
+
+\subsection{Microsoft Academic Search}
+
+Microsoft Academic Search is a free search engine for academic papers and resources principally in the field of computer science, developed by Microsoft Research Asia, Beijing. The database consists of the bibliographic information (metadata) for academic papers published in journals, conferences proceedings and the citations between them. Objects are ranked according to two factors: their relevance to the query, which is computed by its attributes; and their global importance, calculated by its relationships with other objects \footnote{http://en.wikipedia.org/wiki/Microsoft Academic Search}.
+
+It is a direct competitor of Google Scholar and it allows us to scrape the information of the site, making it useful to extract publications written by a specific author, his fields of interest, the amount of times he was cited and his co-authors for our framework.
+
+\subsection{FOAF}
+
+FOAF is a descriptive vocabulary expressed using the Resource Description Framework (RDF) and the Web Ontology Language (OWL). Computers may use these FOAF profiles to find, for example, all people living in Europe, or to list all people both you and a friend of yours know. This is accomplished by defining relationships between people. Each profile has a unique identifier (such as the person's e-mail addresses, a Jabber ID, or a URI of the homepage or weblog of the person), which is used when defining these relationships \footnote{http://en.wikipedia.org/wiki/FOAF (software)}.
+
+% Meer uitleggen wat wij hier mee zijn en hoe dit gebruikt kan worden.
+
+\subsection{Stemming}
+
+\subsection{Clustering}
+
+\subsection{Stanford Part-Of-Speech Tagger}
+
+A Part-Of-Speech Tagger, or POS Tagger, is a piece of software that reads text in some language and assigns parts of speech to each word (and other token), such as noun, verb, adjective, etc., although generally computational applications use more fine-grained POS tags like 'noun-plural'. The Stanford POS Tagger is Java implementation of the log-linear part-of-speech taggers described in the papers \footnote{Kristina Toutanova and Christopher D. Manning. 2000. Enriching the Knowledge Sources Used in a Maximum Entropy Part-of-Speech Tagger. In Proceedings of the Joint SIGDAT Conference on Empirical Methods in Natural Language Processing and Very Large Corpora (EMNLP/VLC-2000), pp. 63-70.} and \footnote{Kristina Toutanova, Dan Klein, Christopher Manning, and Yoram Singer. 2003. Feature-Rich Part-of-Speech Tagging with a Cyclic Dependency Network. In Proceedings of HLT-NAACL 2003, pp. 252-259.}.
+
+We will use this POS Tagger to determine the nouns and adjectives in the publication title which we will use to determine the subject of the publication.
+
+\subsection{Gremlin}
+
+\subsection{JUNG}
+
+\subsection{Neo4j}
