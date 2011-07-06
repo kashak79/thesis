@@ -26,22 +26,27 @@ We will use the following steps to build such a platform:
 
 \section{Features}
 
-We need to extract information. We need seed data which we can use to start this process. We need data which we can link to this seed data. We need sites or databases where we can find this data. As data we need publication titles, author names, affiliations, abstracts, keywords, publication text, author profiles, email adresses, subjects ... We will write plugins, each dedicated to one source which will be used to add extra information to the database, connected to existing data, in some way.
+Based on the main scenario, we can identify a few key features our framework will need. A short summarization of each follows, explaining the challenges we face with our thesis. Each of these features will be discussed more deeply throughout this chapter.
 
-
+%Beter verwijzen waar ze meer informatie per feature kunnen doornemen?
 
 \subsection{Information extraction}
 
-We want to create a framework that can search different online sources autonomously and extract information. We 
+We need to extract information from multiple sources, which we will accomplish by using a plugin system. Each plugin is responsible for one source and will extract specific information which can be used by other plugins or other steps in our framework.
 
+\subsection{Categorization}
 
-\subsection{Information linkage}
+In order to decide who is an expert regarding a certain subject, we will have to decide the subject of expertise of each author. A very important part of this will be in deciding the subject of the publications. The challenge is to decide this using as few information as possible, preferably by just inspecting the title, as getting access to the text of the publication itself is a whole lot more time- and resource-consuming.
 
+\subsection{Disambiguation}
 
+A challenging feature is the disambiguation. There are two reasons. The first is the fact that an author's name is not a unique reference for a person. There might be multiple authors with the same name, which means we have to take this into account when deciding who is an expert.
 
-\subsection{Pitfalls}
+Secondly, an name might be spelled differently or changed throughout time. Examples are abbreviations, an extra family name because of a marriage or simply spelling errors.
 
-Describe the possible difficulties: people with the same name that are a different person, a person who's name is written differently (usage of abbreviations, altering last name due to marriage...), change of expertise due to change of interest/job.
+\subsection{Dynamic}
+
+There is a big dynamic concept tied to our thesis. People who are experts on a certain subject a decade ago, may not be as important anymore now or may have changed their subject of expertise. An interesting point of view would be to enable users to scroll through a timeline so they could see the changes themselves. This is however out of the scope of our thesis.
 
 \section{Components / Architecture}
 

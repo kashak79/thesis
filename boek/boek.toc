@@ -30,16 +30,17 @@
 \contentsline {chapter}{\numberline {3}The framework}{10}
 \contentsline {section}{\numberline {3.1}Main Scenario}{10}
 \contentsline {section}{\numberline {3.2}Features}{10}
-\contentsline {subsection}{\numberline {3.2.1}Information extraction}{10}
-\contentsline {subsection}{\numberline {3.2.2}Information linkage}{10}
-\contentsline {subsection}{\numberline {3.2.3}Pitfalls}{10}
+\contentsline {subsection}{\numberline {3.2.1}Information extraction}{11}
+\contentsline {subsection}{\numberline {3.2.2}Categorization}{11}
+\contentsline {subsection}{\numberline {3.2.3}Disambiguation}{11}
+\contentsline {subsection}{\numberline {3.2.4}Dynamic}{11}
 \contentsline {section}{\numberline {3.3}Components / Architecture}{11}
-\contentsline {section}{\numberline {3.4}Technologies}{11}
-\contentsline {subsection}{\numberline {3.4.1}MySQL}{11}
-\contentsline {subsubsection}{Relational datastore}{11}
-\contentsline {subsubsection}{A record-store}{11}
-\contentsline {subsubsection}{Triple-store}{11}
-\contentsline {subsubsection}{Conclusion}{11}
-\contentsline {subsection}{\numberline {3.4.2}Two databases}{11}
-\contentsline {subsection}{\numberline {3.4.3}Ruby}{11}
-\contentsline {chapter}{\numberline {4}Future work}{12}
+\contentsline {section}{\numberline {3.4}Technologies}{12}
+\contentsline {subsection}{\numberline {3.4.1}MySQL}{12}
+\contentsline {subsubsection}{Relational datastore}{12}
+\contentsline {subsubsection}{A record-store}{12}
+\contentsline {subsubsection}{Triple-store}{12}
+\contentsline {subsubsection}{Conclusion}{12}
+\contentsline {subsection}{\numberline {3.4.2}Two databases}{12}
+\contentsline {subsection}{\numberline {3.4.3}Ruby}{13}
+\contentsline {chapter}{\numberline {4}Future work}{14}

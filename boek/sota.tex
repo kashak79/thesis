@@ -112,18 +112,20 @@ We want to continue the research proposed in \footnote{Finding Topic-centric ...
 
 %% Several components we still have to explain or discuss inside the text %%
 
-\subsection{Scraping}
+\subsection{Web scraping}
 
-Web scraping (also called Web harvesting or Web data extraction) is a computer software technique of extracting information from websites. Usually, such software programs simulate human exploration of the Web by either implementing low-level Hypertext Transfer Protocol (HTTP), or embedding certain full-fledged Web browsers, such as the Internet Explorer (IE) and the Mozilla Web browser. Web scraping is closely related to Web indexing, which indexes information on the Web using a bot and is a universal technique adopted by most search engines. In contrast, Web scraping focuses more on the transformation of unstructured data on the Web, typically in HTML format, into structured data that can be stored and analyzed in a central local database or spreadsheet. Web scraping is also related to Web automation, which simulates human Web browsing using computer software. Uses of Web scraping include online price comparison, weather data monitoring, website change detection, Web research, Web content mashup and Web data integration \footnote{http://en.wikipedia.org/wiki/Web scraping}.
+Web scraping (also called Web harvesting or Web data extraction) is a computer software technique of extracting information from websites. Usually, such software programs simulate human exploration of the Web by implementing low-level Hypertext Transfer Protocol (HTTP). Web scraping focuses on the transformation of unstructured data on the Web, typically in HTML format, into structured data that can be stored and analyzed in a central local database or spreadsheet. Web scraping is also related to Web automation, which simulates human Web browsing using computer software \footnote{http://en.wikipedia.org/wiki/Web scraping}.
+
+We will use scraping in several of our plugins to collect information about authors and publications as we don't have a large database with this information and constructing one ourselves would take too much time and resources. The downside is that it is typically a slow process as the content of each page has to be downloaded and parsed by the computer.
 
 \subsection{API}
-
-Web scraping (also called Web harvesting or Web data extraction) is a computer software technique of extracting information from websites. Usually, such software programs simulate human exploration of the Web by either implementing low-level Hypertext Transfer Protocol (HTTP), or embedding certain full-fledged Web browsers, such as the Internet Explorer (IE) and the Mozilla Web browser. Web scraping is closely related to Web indexing, which indexes information on the Web using a bot and is a universal technique adopted by most search engines. In contrast, Web scraping focuses more on the transformation of unstructured data on the Web, typically in HTML format, into structured data that can be stored and analyzed in a central local database or spreadsheet. Web scraping is also related to Web automation, which simulates human Web browsing using computer software. Uses of Web scraping include online price comparison, weather data monitoring, website change detection, Web research, Web content mashup and Web data integration \footnote{http://en.wikipedia.org/wiki/Web scraping}.
 
 \subsection{DBLP}
 
 DBLP is produced by the Computer Science department of the University of Trier and was initially focused on \textit{DataBase systems and Logic Programming}, but has gradually expanded toward being an confidential server providing bibliographic information on major computer science journals and proceedings, indexing more than one million articles.
 DBLP allows to search by author name, giving back a list of publications and other bibliographic information.
+
+DBLP does not provide us with an API, so we will use web scraping in order to extract all the necessairy information.
 
 %Link naar de volledige uitleg van de werking van de plugin voor meer informatie hieromtrent
 
@@ -163,7 +165,7 @@ FOAF is a descriptive vocabulary expressed using the Resource Description Framew
 
 A Part-Of-Speech Tagger, or POS Tagger, is a piece of software that reads text in some language and assigns parts of speech to each word (and other token), such as noun, verb, adjective, etc., although generally computational applications use more fine-grained POS tags like 'noun-plural'. The Stanford POS Tagger is Java implementation of the log-linear part-of-speech taggers described in the papers \footnote{Kristina Toutanova and Christopher D. Manning. 2000. Enriching the Knowledge Sources Used in a Maximum Entropy Part-of-Speech Tagger. In Proceedings of the Joint SIGDAT Conference on Empirical Methods in Natural Language Processing and Very Large Corpora (EMNLP/VLC-2000), pp. 63-70.} and \footnote{Kristina Toutanova, Dan Klein, Christopher Manning, and Yoram Singer. 2003. Feature-Rich Part-of-Speech Tagging with a Cyclic Dependency Network. In Proceedings of HLT-NAACL 2003, pp. 252-259.}.
 
-We will use this POS Tagger to determine the nouns and adjectives in the publication title which we will use to determine the subject of the publication.
+We will use this POS Tagger to determine the nouns and adjectives in the publication title which, on their turn, will be used to determine the subject of the publication as 
 
 \subsection{Gremlin}
 
