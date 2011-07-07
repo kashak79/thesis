@@ -106,6 +106,10 @@ We want to continue the research proposed in \footnote{Finding Topic-centric ...
 
 %Te bespreken: neo4j, Tinkerpop, Gremlin, Stanford POS tagger, lemmatizer, doc split (ruby gem), resque (ruby library - https://github.com/defunkt/resque), max flow :: min-cut
 
+\section{Technologies}
+
+This is a temporary section, containing a list of keywords and technologies we use in our thesis. Each of these is explained (or should be), but they should be merged into the previous text.
+
 %\subsection{What do we need}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -159,13 +163,17 @@ FOAF is a descriptive vocabulary expressed using the Resource Description Framew
 
 \subsection{Clustering}
 
+\subsection{Wikipedia API}
+
 \subsection{Stanford Part-Of-Speech Tagger}
 
 %http://nlp.stanford.edu/software/tagger.shtml
 
-A Part-Of-Speech Tagger, or POS Tagger, is a piece of software that reads text in some language and assigns parts of speech to each word (and other token), such as noun, verb, adjective, etc., although generally computational applications use more fine-grained POS tags like 'noun-plural'. The Stanford POS Tagger is Java implementation of the log-linear part-of-speech taggers described in the papers \footnote{Kristina Toutanova and Christopher D. Manning. 2000. Enriching the Knowledge Sources Used in a Maximum Entropy Part-of-Speech Tagger. In Proceedings of the Joint SIGDAT Conference on Empirical Methods in Natural Language Processing and Very Large Corpora (EMNLP/VLC-2000), pp. 63-70.} and \footnote{Kristina Toutanova, Dan Klein, Christopher Manning, and Yoram Singer. 2003. Feature-Rich Part-of-Speech Tagging with a Cyclic Dependency Network. In Proceedings of HLT-NAACL 2003, pp. 252-259.}.
+A Part-Of-Speech Tagger, or POS Tagger, is a piece of software that reads text in some language and assigns parts of speech to each word (and other token), such as noun, verb, adjective, etc., although generally computational applications use more fine-grained POS tags like 'noun-plural'. 
 
-We will use this POS Tagger to determine the nouns and adjectives in the publication title which, on their turn, will be used to determine the subject of the publication as 
+The Stanford POS Tagger is Java implementation of the log-linear part-of-speech taggers described in the papers \footnote{Kristina Toutanova and Christopher D. Manning. 2000. Enriching the Knowledge Sources Used in a Maximum Entropy Part-of-Speech Tagger. In Proceedings of the Joint SIGDAT Conference on Empirical Methods in Natural Language Processing and Very Large Corpora (EMNLP/VLC-2000), pp. 63-70.} and \footnote{Kristina Toutanova, Dan Klein, Christopher Manning, and Yoram Singer. 2003. Feature-Rich Part-of-Speech Tagging with a Cyclic Dependency Network. In Proceedings of HLT-NAACL 2003, pp. 252-259.}.
+
+We will use this POS Tagger to determine the nouns and adjectives in the publication title which, on their turn, will be used to determine the subject of the publication. 
 
 \subsection{Gremlin}
 

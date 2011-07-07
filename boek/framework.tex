@@ -22,6 +22,15 @@ We will use the following steps to build such a platform:
 	\item \textbf{Disambiguation} Decide if there are different authors with the same name or different spellings of the same author's name which should be mapped to one author.
 \end{itemize}
 
+A simplified representation of these steps can be seen on \ref{fig:db-gegevens}. It shows the steps that are responsible for finding the data that we will store in our database and which will be used to find experts.
+
+\begin{figure}[htbp]
+	\centering
+		\includegraphics[width=0.75\textwidth]{fig/database-gegevens.png}
+	\caption{A simplified representation of the different steps our framework takes to find data about experts.}
+	\label{fig:db-gegevens}
+\end{figure}
+
 %Describe how we got to the architecture for the framework, show a figure of the (simplified + extensive) architecture and explain the different components.
 
 \section{Features}
@@ -38,47 +47,79 @@ We need to extract information from multiple sources, which we will accomplish b
 
 In order to decide who is an expert regarding a certain subject, we will have to decide the subject of expertise of each author. A very important part of this will be in deciding the subject of the publications. The challenge is to decide this using as few information as possible, preferably by just inspecting the title, as getting access to the text of the publication itself is a whole lot more time- and resource-consuming.
 
+\ref{categorybuilder} describes this more in-depth.
+
 \subsection{Disambiguation}
 
-A challenging feature is the disambiguation. There are two reasons. The first is the fact that an author's name is not a unique reference for a person. There might be multiple authors with the same name, which means we have to take this into account when deciding who is an expert.
+A challenging feature is the disambiguation. There are two reasons. The first is the fact that an author's name is not a unique reference for a person. There might be multiple authors with the same name, which means we have to take this into account when deciding who is an expert. Secondly, a name might be spelled differently or changed throughout time. Examples are abbreviations, an extra family name because of a marriage or simply spelling errors.
 
-Secondly, an name might be spelled differently or changed throughout time. Examples are abbreviations, an extra family name because of a marriage or simply spelling errors.
+More on disambiguation can be found in \ref{disambiguator}, describing the component responsible for the disambiguation.
 
 \subsection{Dynamic}
 
 There is a big dynamic concept tied to our thesis. People who are experts on a certain subject a decade ago, may not be as important anymore now or may have changed their subject of expertise. An interesting point of view would be to enable users to scroll through a timeline so they could see the changes themselves. This is however out of the scope of our thesis.
 
-\section{Components / Architecture}
+\section{Architecture}
+
+Based on the scenario, we came up with the necessary components our framework needs. \ref{fig:architectuur} shows a simplistic version of how the architecture will look like. The different components of the framework and their connection toward eachother is displayed. In the next sections, the most important components will be explained at large.
 
 \begin{figure}[htbp]
 	\centering
-		\includegraphics[width=1.00\textwidth]{fig/architectuur.png}
+		\includegraphics[width=0.75\textwidth]{fig/architectuur.png}
 	\caption{First attempt at the architecture based on the necessary components}
 	\label{fig:architectuur}
 \end{figure}
 
-Plugins, IterationManager, CategoryBuilder, Disambiguator, DataMerger
+\subsection{Iteration Manager}
 
-\section{Technologies}
+This component is responsible for the flow of the entire framework. It knows what iteration our program is at and knows what the next steps are. 
 
-\subsection{MySQL}
+\subsection{Data Collector}
 
-Discuss the differences, advantages and disadvantages between a relational datastore, a record-store and a triple-store.
+\subsection{Source Generator}
 
-\subsubsection{Relational datastore}
+\subsection{Category Builder}
+\label{categorybuilder}
 
-\subsubsection{A record-store}
+%Category builder is eigelijk verantwoordelijk voor het opstellen van de categorie boom, zou beter zijn moest dit verantwoordelijk zijn voor het assignen van een category aan een publicatie (of een auteur?) en alles wat hier komt bij te kijken.
 
-\subsubsection{Triple-store}
+The Category Builder's role is deciding the subject(s) of the publications and assigning it to a category which fits in a category tree.
 
-\subsubsection{Conclusion}
+%Uitleg hoe dit precies in zijn werk gaat, gebruik makende van de Wikipedia API, Stanford POS Tagger.
 
-We choose to use MySQL, a relational datastore, because we are familiar with it. It allows us to quickly set up our prototype to work and test our framework on.
+\subsection{Disambiguator}
+\label{disambiguator}
 
-\subsection{Two databases}
+The disambiguation is an important factor towards the strength of our framework. In the data collection phase, we view each name as e new object in our database, even if that name is already stored. This is necessairy to keep the option open that the same name might be connected towards different authors. This also means our database grows fast. 
 
-We use two databases, one for development and one for production.
+The disambiguation exists out of a number of rules. These inspect several objects in the database and define the probabilities that names, typically connected to a publication or a profile, are connected to eachother and to one author. These probabilities are stored as weights of edges between these objects.
 
-The former is used to collect all information about the possible experts and their work. 
+An in-depth explanation of these rules can be found in \ref{disamb_rules}.
 
-\subsection{Ruby}
+\subsection{Data Merger}
+
+%\section{Technologies}
+%
+%\subsection{MySQL}
+%
+%Discuss the differences, advantages and disadvantages between a relational datastore, a record-store and a triple-store.
+%
+%\subsubsection{Relational datastore}
+%
+%\subsubsection{A record-store}
+%
+%\subsubsection{Triple-store}
+%
+%\subsubsection{Conclusion}
+%
+%We choose to use MySQL, a relational datastore, because we are familiar with it. It allows us to quickly set up our prototype to work and test our framework on.
+%
+%\subsection{Two databases}
+%
+%We use two databases, one for development and one for production.
+%
+%The former is used to collect all information about the possible experts and their work. 
+%
+%\subsection{Ruby}
+
+\input{disambiguationrules}
