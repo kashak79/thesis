@@ -1,4 +1,11 @@
+/compileAndOpenBoek.bat
+/texput.log
+
 /boek/*.pdf
 /boek/*~
 /boek/*.aux
 /boek/*.log
+
+/experiments/*
+
+/vendor/*
