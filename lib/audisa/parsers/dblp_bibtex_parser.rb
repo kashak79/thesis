@@ -1,5 +1,3 @@
-require 'nokogiri'
-
 class Parsers::DblpBibtexParser < Core::Pipe
 
   def execute(page)

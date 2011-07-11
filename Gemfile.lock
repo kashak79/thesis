@@ -20,6 +20,7 @@ GEM
     typhoeus (0.2.4)
       mime-types
       mime-types
+    yajl-ruby (0.8.2)
 
 PLATFORMS
   ruby
@@ -30,3 +31,4 @@ DEPENDENCIES
   rake
   redis
   typhoeus
+  yajl-ruby

@@ -1,5 +1,3 @@
-require 'typhoeus'
-
 class Helpers::Network < Core::Pipe
 
   def execute(url, options = {})
