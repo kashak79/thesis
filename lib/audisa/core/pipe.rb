@@ -1,40 +1,18 @@
 class Core::Pipe
-  class << self
-    attr_accessor :pipes
-  end
-
   @queue = :test
+  @@repo = Core::Repository.new
 
   def initialize(name = nil)
     @chains = []
     @name = name
-    yield self if block_given?
   end
 
   def self.define(name)
-    self.pipes ||= {}
-    pipe = self.new(name)
-    yield(pipe)
-    self.pipes[name] = pipe
+    @@repo.store(name, yield(Core::Pipe.new(name)))
   end
 
-  def self.get(name)
-    self.pipes[name]
-  end
-
-  # resque
-  def self.perform(name, *args)
-    p self.pipes
-    p name
-    self.get(name.to_sym).execute(*args)
-  end
-
-  def execute(*args)
-    push(*args)
-  end
-
-  def async_execute(*args)
-    Resque.enqueue(self.class, @name, *args)
+  def self.[](name)
+    @@repo[name]
   end
 
   def push(*output)
@@ -44,10 +22,25 @@ class Core::Pipe
     end
   end
 
-  def chain(pipe, *args)
-    pipe = pipe.new(*args)
+  def chain_pure(pipe_klass, *args)
+    pipe = pipe_klass.new(*args)
     @chains << pipe
     pipe
+  end
+
+  def chain(pipe_klass, *args)
+    Core::Pipeline.new(self, chain_pure(pipe_klass, *args))
+  end
+
+  ## ASYNC
+  # Performing is executing a named pipe(line)
+  def self.perform(name, *args)
+    self[name.to_sym].push(*args)
+  end
+
+  # Executing asynchronously is the same as scheduling it in Resque
+  def async_push(*args)
+    Resque.enqueue(self.class, @name, *args)
   end
 
 end
