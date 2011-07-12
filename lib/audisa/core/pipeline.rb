@@ -19,4 +19,9 @@ class Core::Pipeline
     self
   end
 
+  def filter(&block)
+    @last = @last.filter_pure(&block)
+    self
+  end
+
 end

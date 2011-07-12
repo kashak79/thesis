@@ -1,6 +1,7 @@
 class Pipes::Bind < Core::Pipe
 
   def initialize(to)
+    super()
     @to = to
   end
 

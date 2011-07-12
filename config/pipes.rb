@@ -25,5 +25,6 @@ end
 # bind the dblp pipe to the placement pipe
 Core::Pipe[:dblp_bibtex].chain(Pipes::Bind, :placement)
 Core::Pipe.define(:placement) do |p|
-  p.chain(Pipes::Stdout)
+  p.filter { |type,instance| instance if type == Core::Discovery::INSTANCE}.
+    chain(Pipes::Stdout)
 end

@@ -8,4 +8,5 @@ module Pipes
   autoload :Persistor,             'audisa/pipes/persistor'
   autoload :Stdout,                'audisa/pipes/stdout'
   autoload :Bind,                  'audisa/pipes/bind'
+  autoload :Filter,                'audisa/pipes/filter'
 end

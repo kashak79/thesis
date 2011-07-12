@@ -22,14 +22,22 @@ class Core::Pipe
     end
   end
 
-  def chain_pure(pipe_klass, *args)
-    pipe = pipe_klass.new(*args)
+  def chain_pure(pipe_klass, *args, &block)
+    pipe = pipe_klass.new(*args, &block)
     @chains << pipe
     pipe
   end
 
-  def chain(pipe_klass, *args)
-    Core::Pipeline.new(self, chain_pure(pipe_klass, *args))
+  def chain(pipe_klass, *args, &block)
+    Core::Pipeline.new(self, chain_pure(pipe_klass, *args, &block))
+  end
+
+  def filter_pure &block
+    chain_pure(Pipes::Filter, &block)
+  end
+
+  def filter &block
+    chain(Pipes::Filter, &block)
   end
 
   ## ASYNC
