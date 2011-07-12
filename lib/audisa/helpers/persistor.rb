@@ -11,6 +11,7 @@ class Helpers::Persistor < Core::Pipe
         :params => properties.reject { |k,v| k == :id }
       )
     end
+    push(type, properties)
   end
 
 end
