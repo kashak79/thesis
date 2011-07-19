@@ -1,14 +1,17 @@
-class Pipes::Filter < Core::Pipe
+class Pipes::Filter < Pipes::Pipe
 
-  def initialize(&filter)
-    super()
+  def initialize(filter)
+    super([:in], [true,false])
     @filter = filter
   end
 
-  def execute(*args)
-    filtered = @filter.call(*args)
-    filtered_data = filtered.kind_of?(Array) ? filtered : [filtered]
-    push(*filtered_data) if filtered
+  def execute
+    filtered = @filter.call(_in.get)
+    if filtered
+      out(true).push(filtered) # also filtering on the incoming data
+    else
+      out(false).push(_in.get)
+    end
   end
 
 end

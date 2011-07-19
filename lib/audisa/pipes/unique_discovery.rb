@@ -1,4 +1,4 @@
-class Pipes::UniqueDiscovery < Core::Pipe
+class Pipes::UniqueDiscovery < Pipes::Pipe
 
   def initialize(id_provider)
     super()
@@ -6,9 +6,8 @@ class Pipes::UniqueDiscovery < Core::Pipe
   end
 
   # assign a unique id to every discovery
-  def execute(type, properties)
-    properties[:id] = @id_provider.get if type.is? Core::Discovery
-    push(type, properties)
+  def execute
+    out.push(_in.get.merge(:id => @id_provider.get))
   end
 
 end
