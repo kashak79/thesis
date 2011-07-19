@@ -1,9 +1,13 @@
-class Pipes::Stdout < Core::Pipe
+class Pipes::Stdout < Pipes::Pipe
 
-  def execute(*args)
-    puts args
+  def initialize
+    super()
+  end
+
+  def execute
+    puts _in.get
     # push through
-    push(*args)
+    out.push(_in.get)
   end
 
 end

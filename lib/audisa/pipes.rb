@@ -1,12 +1,11 @@
 require 'typhoeus'
 require 'yajl'
-require 'resque'
 
 module Pipes
+  autoload :Pipe,                  'audisa/pipes/pipe'
   autoload :UniqueDiscovery,       'audisa/pipes/unique_discovery'
   autoload :Network,               'audisa/pipes/network'
-  autoload :Persistor,             'audisa/pipes/persistor'
+  autoload :Persist,               'audisa/pipes/persist'
   autoload :Stdout,                'audisa/pipes/stdout'
-  autoload :Bind,                  'audisa/pipes/bind'
   autoload :Filter,                'audisa/pipes/filter'
 end

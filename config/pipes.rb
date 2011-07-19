@@ -1,30 +1,27 @@
-Core::Pipe.define(:dblp_bibtex) do |p|
-  p.chain(Pipes::Network).
-    #chain(Pipes::Stdout).
-    chain(Parsers::DblpBibtexParser).
-    #chain(Pipes::Stdout).
-    chain(Pipes::UniqueDiscovery, Helpers::DistributedIdProvider.new).
-    #chain(Pipes::Stdout).
-    chain(Pipes::Persistor, 'http://192.168.179.128:8182/emptygraph')
-    #chain(Pipes::Stdout)
-end
+
+# PLACEMENT PIPE ##
 
 
-#
-#                /--(name)-- |PossibleAuthors| ------|:possibility-|#############|
-#  >---instance--                                                  | NameMatcher |---->
-#                \------------(name,id)--------------|:instance----|#############|
-#
-#Core::Pipe.define(:placement) do |p|
-#  local define, every placement pipe has another matcher
-#  p.define(:matcher, NameMatcher)
-#  p.filter(:name).chain(PossibleAuthors).chain(:matcher, :possibility)
-#  p.filter(:name, :id).chain(:matcher, :instance)
-#end
+# begin with network pipe
+$pipe   = (Connections::Local).connection.to(Pipes::Network)
 
-# bind the dblp pipe to the placement pipe
-Core::Pipe[:dblp_bibtex].chain(Pipes::Bind, :placement)
-Core::Pipe.define(:placement) do |p|
-  p.filter { |type,instance| instance if type == Core::Discovery::INSTANCE}.
-    chain(Pipes::Stdout)
-end
+# connect network to bibtex parser
+parser  = $pipe.out.connect.to(Parsers::DblpBibtexParser)
+
+# take discoveries apart (and filter the type)
+dfilter = parser.out.connect.to(Pipes::Filter.pipe(lambda { |d|
+  d.reject { |k,v| k == :type } if d[:type].is? Core::Discovery
+}))
+
+# give them an id
+add_id  = dfilter.out(true).connect(Connections::Async.connection(:persist, :urgent)).to(
+  Pipes::UniqueDiscovery.pipe(Helpers::DistributedIdProvider.new)
+)
+
+# now persist all discoveries
+persist = add_id.out.connect.to(
+  Pipes::Persist.pipe('http://192.168.179.128:8182/emptygraph')
+)
+
+# print
+persist.out.connect.to(Pipes::Stdout)

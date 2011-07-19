@@ -1,8 +1,12 @@
-class Pipes::Network < Core::Pipe
+class Pipes::Network < Pipes::Pipe
 
-  def execute(url, options = {})
-    response = Typhoeus::Request.get(url, options)
-    push(response.body)
+  def initialize
+    super()
+  end
+
+  def execute
+    response = Typhoeus::Request.get(_in.get[:url])
+    out.push(response.body)
   end
 
 end
