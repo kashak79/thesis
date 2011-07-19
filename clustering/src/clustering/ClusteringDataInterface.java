@@ -1,8 +1,10 @@
 package clustering;
 
+import java.util.Set;
+
 import com.tinkerpop.blueprints.pgm.Vertex;
 
-public interface ClusteringDataInterface {
+public interface ClusteringDataInterface extends AdjacencyInterface {
 	
 	double getIcw(Vertex v);
 	
@@ -16,10 +18,12 @@ public interface ClusteringDataInterface {
 	
 	void increaseOcw(Vertex v, double amount);
 	
-	double getAdjacency(Vertex v, Vertex u);
+	Cluster<Vertex> getCluster(Vertex v);
 	
-	void setAdjacency(Vertex v, Vertex u, double weight);
+	Set<Cluster<Vertex>> getClusters();
 	
-	void increaseAdjacency(Vertex v, Vertex u, double weight);
+	void addCluster(Cluster<Vertex> cluster);
+	
+	void removeCluster(Cluster<Vertex> cluster);
 
 }

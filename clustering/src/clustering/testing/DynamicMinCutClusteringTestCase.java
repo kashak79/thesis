@@ -5,6 +5,7 @@ package clustering.testing;
 
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -61,6 +62,103 @@ public class DynamicMinCutClusteringTestCase extends TestCase {
 		assertEquals(ClusteringUtility.sumWeights(dmcc.getAdjacency(), graph.getVertex(4), cluster), 0.0);
 	}
 	
+	@Test
+	public void testMaxFlowAlgorithm() {
+		Graph g = new TinkerGraph();
+		Vertex v1 = g.addVertex(1);
+		Vertex v2 = g.addVertex(2);
+		Vertex v3 = g.addVertex(3);
+		Vertex v4 = g.addVertex(4);
+		Vertex v5 = g.addVertex(5);
+		Vertex v6 = g.addVertex(6);
+		Edge e1 = g.addEdge(1, v1, v2, "similarity");
+		e1.setProperty("weight", 0.05);
+		Edge e2 = g.addEdge(2, v2, v3, "similarity");
+		e2.setProperty("weight", 0.1);
+		Edge e3 = g.addEdge(3, v1, v6, "similarity");
+		e3.setProperty("weight", 0.15);
+		Edge e4 = g.addEdge(4, v4, v3, "similarity");
+		e4.setProperty("weight", 0.05);
+		Edge e5 = g.addEdge(5, v5, v4, "similarity");
+		e5.setProperty("weight", 0.1);
+		Edge e6 = g.addEdge(6, v6, v5, "similarity");
+		e6.setProperty("weight", 0.05);
+		Edge e7 = g.addEdge(7, v6, v2, "similarity");
+		e7.setProperty("weight", 0.05);
+		Edge e8 = g.addEdge(8, v3, v5, "similarity");
+		e8.setProperty("weight", 0.05);
+		
+		// We don't want to work with directed graphs ...
+		Edge temp;
+		for (int i = 1; i <=  8; i++) {
+			temp = g.getEdge(i);
+			g.addEdge(null, temp.getInVertex(), temp.getOutVertex(), "s").setProperty("weight", temp.getProperty("weight"));
+		}
+		
+		Object[] result = ClusteringUtility.getMaxFlow(g, v1, v4, ClusteringUtility.createAdjacencyInterface(g));
+		
+		assertEquals(0.15, result[0]);
+		Collection<Edge> c = (Collection<Edge>) result[1];
+		
+		assertTrue(c.size() == 3);
+		assertTrue(c.contains(e1));
+		assertTrue(c.contains(e7));
+		assertTrue(c.contains(e6));
+	}
+
+	@Test
+	public void testGusfield() {
+		Graph g = new TinkerGraph();
+		Vertex v1 = g.addVertex(1);
+		Vertex v2 = g.addVertex(2);
+		Vertex v3 = g.addVertex(3);
+		Vertex v4 = g.addVertex(4);
+		g.addEdge(1, v1, v2, "s").setProperty("weight", 1d);
+		g.addEdge(2, v2, v3, "s").setProperty("weight", 2d);
+		g.addEdge(3, v3, v4, "s").setProperty("weight", 2d);
+		g.addEdge(4, v2, v4, "s").setProperty("weight", 1d);
+		g.addEdge(null, v2, v1, "s").setProperty("weight", 1d);
+		g.addEdge(null, v3, v2, "s").setProperty("weight", 2d);
+		g.addEdge(null, v4, v3, "s").setProperty("weight", 2d);
+		g.addEdge(null, v4, v2, "s").setProperty("weight", 1d);
+		
+		Graph t = ClusteringUtility.sequentialGusfieldAlgorithm(g);
+		// TODO is this graph unique ? I don't think so... What can we test ?
+		int i = 0;
+		for (Edge e : t.getEdges())
+			i++;
+		assertEquals(i, 3);
+		for (Edge e : t.getEdges()) {
+			if (e.getInVertex() == v1)
+				assertEquals(e.getOutVertex(), v2);
+			if (e.getOutVertex() == v1)
+				assertEquals(e.getInVertex(), v2);
+			if (e.getInVertex() == v4)
+				assertEquals(e.getOutVertex(), v3);
+			if (e.getOutVertex() == v4)
+				assertEquals(e.getInVertex(), v3);
+		}
+	}
+	
+	@Test
+	public void testCalculateClusterAdjacency() {
+		Graph g = new TinkerGraph();
+		Vertex v1 = g.addVertex(1);
+		Vertex v2 = g.addVertex(2);
+		Vertex v3 = g.addVertex(3);
+		Vertex v4 = g.addVertex(4);
+		Vertex v5 = g.addVertex(5);
+		g.addEdge(1, v1, v2, "s").setProperty("weight", 1d);
+		g.addEdge(2, v2, v3, "s").setProperty("weight", 2d);
+		g.addEdge(3, v5, v4, "s").setProperty("weight", 2d);
+		Set<Vertex> cluster = ClusteringUtility.calculateCluster(g, v1, ClusteringUtility.createAdjacencyInterface(g), new HashSet<Vertex>());
+		assertTrue(cluster.contains(v1));
+		assertTrue(cluster.contains(v2));
+		assertTrue(cluster.contains(v3));
+		assertFalse(cluster.contains(v4));
+		assertFalse(cluster.contains(v5));
+	}
+
 	@Test
 	/**
 	 * Testing the algorithm as explained in pseudocode in the paper, figure 3
@@ -162,6 +260,11 @@ public class DynamicMinCutClusteringTestCase extends TestCase {
 			assertEquals(dmcc.getIcw(v), icw_n.get(v));
 			assertEquals(dmcc.getOcw(v), ocw_n.get(v));
 		}
+		
+	}
+	
+	@Test
+	public void testSequentialGusfield() {
 		
 	}
 	
