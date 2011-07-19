@@ -124,34 +124,38 @@ We will use scraping in several of our plugins to collect information about auth
 
 \subsection{API}
 
-\subsection{DBLP}
+%% TODO : verzetten! Deze opsomming van sources zou beter vermeld worden bij plugins, deze zijn niet echt nodig in dit hoofdstuk
 
-DBLP is produced by the Computer Science department of the University of Trier and was initially focused on \textit{DataBase systems and Logic Programming}, but has gradually expanded toward being an confidential server providing bibliographic information on major computer science journals and proceedings, indexing more than one million articles.
-DBLP allows to search by author name, giving back a list of publications and other bibliographic information.
+%\subsection{DBLP}
+%
+%DBLP is produced by the Computer Science department of the University of Trier and was initially focused on \textit{DataBase systems and Logic Programming}, but has gradually expanded toward being an confidential server providing bibliographic information on major computer science journals and proceedings, indexing more than one million articles.
+%DBLP allows to search by author name, giving back a list of publications and other bibliographic information.
+%
+%DBLP does not provide us with an API, so we will use web scraping in order to extract all the necessairy information.
+%
+%%Link naar de volledige uitleg van de werking van de plugin voor meer informatie hieromtrent
+%
+%\subsection{LinkedIn}
+%
+%LinkedIn is a business-related social networking site launched in May 2003, mainly used for professional networking by more than 100 million registered users \footnote{http://en.wikipedia.org/wiki/LinkedIn}. Each user has a profile which may contain the following information: current affiliation and title, past working experiences, education, specialties, location, connections with other users...
+%
+%Using the LinkedIn API we can search for users by entering a name. This will give back list of profiles we can browse and whose information we can extract and use in our framework. As the service is based on a \textit{gated-access approach}, which means you need to be at least a second level connection of the profile you are looking at to see their connections, we can not use this to connect authors to eachother. However, the information provided by the profile which is publicly available does allow us to get a better insight into the subject the person is interested in and what affiliation he is and was connected to.
+%
+%%Link naar de volledige uitleg van de werking van de plugin voor meer informatie hieromtrent
+%
+%\subsection{Google Scholar}
+%
+%Google Scholar is a freely accessible web search engine that indexes the full text of scholarly literature accross an array of publishing formats and disciplines. It allows to search publications based on subject keywords, partial publication titles and author names. It's ranking algorithm uses a combination of factors, but puts mainly high weight to citation count and the words included in a document's title.
+%
+%Google Scholar is not yet available to the Google AJAX API and Google does not allow automatic crawling or scraping of its services. Thus, it can not be used as a publication reference in our framework.
+%
+%\subsection{Microsoft Academic Search}
+%
+%Microsoft Academic Search is a free search engine for academic papers and resources principally in the field of computer science, developed by Microsoft Research Asia, Beijing. The database consists of the bibliographic information (metadata) for academic papers published in journals, conferences proceedings and the citations between them. Objects are ranked according to two factors: their relevance to the query, which is computed by its attributes; and their global importance, calculated by its relationships with other objects \footnote{http://en.wikipedia.org/wiki/Microsoft Academic Search}.
+%
+%It is a direct competitor of Google Scholar and it allows us to scrape the information of the site, making it useful to extract publications written by a specific author, his fields of interest, the amount of times he was cited and his co-authors for our framework.
 
-DBLP does not provide us with an API, so we will use web scraping in order to extract all the necessairy information.
-
-%Link naar de volledige uitleg van de werking van de plugin voor meer informatie hieromtrent
-
-\subsection{LinkedIn}
-
-LinkedIn is a business-related social networking site launched in May 2003, mainly used for professional networking by more than 100 million registered users \footnote{http://en.wikipedia.org/wiki/LinkedIn}. Each user has a profile which may contain the following information: current affiliation and title, past working experiences, education, specialties, location, connections with other users...
-
-Using the LinkedIn API we can search for users by entering a name. This will give back list of profiles we can browse and whose information we can extract and use in our framework. As the service is based on a \textit{gated-access approach}, which means you need to be at least a second level connection of the profile you are looking at to see their connections, we can not use this to connect authors to eachother. However, the information provided by the profile which is publicly available does allow us to get a better insight into the subject the person is interested in and what affiliation he is and was connected to.
-
-%Link naar de volledige uitleg van de werking van de plugin voor meer informatie hieromtrent
-
-\subsection{Google Scholar}
-
-Google Scholar is a freely accessible web search engine that indexes the full text of scholarly literature accross an array of publishing formats and disciplines. It allows to search publications based on subject keywords, partial publication titles and author names. It's ranking algorithm uses a combination of factors, but puts mainly high weight to citation count and the words included in a document's title.
-
-Google Scholar is not yet available to the Google AJAX API and Google does not allow automatic crawling or scraping of its services. Thus, it can not be used as a publication reference in our framework.
-
-\subsection{Microsoft Academic Search}
-
-Microsoft Academic Search is a free search engine for academic papers and resources principally in the field of computer science, developed by Microsoft Research Asia, Beijing. The database consists of the bibliographic information (metadata) for academic papers published in journals, conferences proceedings and the citations between them. Objects are ranked according to two factors: their relevance to the query, which is computed by its attributes; and their global importance, calculated by its relationships with other objects \footnote{http://en.wikipedia.org/wiki/Microsoft Academic Search}.
-
-It is a direct competitor of Google Scholar and it allows us to scrape the information of the site, making it useful to extract publications written by a specific author, his fields of interest, the amount of times he was cited and his co-authors for our framework.
+\subsection{OWL}
 
 \subsection{FOAF}
 
@@ -161,9 +165,35 @@ FOAF is a descriptive vocabulary expressed using the Resource Description Framew
 
 \subsection{Stemming}
 
+In linguistic morphology, stemming is the process for reducing inflected (or sometimes derived) words to their stem, base or root form – generally a written word form. The stem need not be identical to the morphological root of the word; it is usually sufficient that related words map to the same stem, even if this stem is not in itself a valid root. 
+
+Algorithms for stemming have been studied in computer science since 1968. The Porter stemming algorithm \footnote{M.F. Porter, 1980, An algorithm for suffix stripping, Program, 14(3) pp 130-137.} dates back to 1979, but is very widely used and the de-facto standard for the English language.
+
+Closely related to stemming is lemmatisation, the algorithmic process of determining the lemma for a given word. The difference is that a stemmer operates on a single word, while a lemmatiser also has knowledge of the context. Stemmers typically run faster and the reduced accuracy may not matter for some applications.
+
 \subsection{Clustering}
 
-\subsection{Wikipedia API}
+Cluster analysis or clustering is the assignment of a set of observations into subsets (called clusters) so that observations in the same cluster are similar in some sense. Clustering is a method of unsupervised learning, and a common technique for statistical data analysis used in many fields, including machine learning, data mining, pattern recognition, image analysis, information retrieval, and bioinformatics \footnote{http://en.wikipedia.org/wiki/Cluster analysis}.
+
+There are a lot of different graph clustering algorithms. Algorithms based on spectral clustering \footnote{R. Kannan, S. Vempala, and A. Veta. On clusterings-good,
+bad and spectral. In FOCS ’00:, page 367, 2000.}, multilevel graph partitioning schemes like METIS \footnote{G. Karypis and V. Kumar. A Fast and High Quality Multilevel
+Scheme for Partitioning Irregular Graphs. Technical Report
+95-035, University of Minnesota, June 1995.} and the MLKM algorithm \footnote{Inderjit S. Dhillon, Yuqiang Guan, and Brian Kulis. A fast
+kernel-based multilevel algorithm for graph clustering. In
+KDD’05, pages 629–634, 2005.}. 
+
+More recently there has been a new direction to graph clustering, modeling the minimum-cut, maximum-flow problem of the underlying graph \footnote{Inderjit S. Dhillon, Yuqiang Guan, and Brian Kulis. A fast
+kernel-based multilevel algorithm for graph clustering. In
+KDD’05, pages 629–634, 2005.} \footnote{G. W. Flake, R. E. Tarjan, and K. Tsioutsiouliklis. Graph
+clustering and minimum cut trees, Internet Mathematics, 1(3),
+355-378, 2004.}. The algorithm we will use is the dynamic version of \footnote{Dynamic Algorithm for Graph Clustering Using Minimum Cut Tree}. It is a dynamic algorithm based on the minimum-cut tree problem. It produces a high quality of clusters without having to look at the entire graph but only a subset of nodes, severely reducing the time of the algorithm.
+
+
+\subsection{Machine learning}
+
+\subsection{Forward Chaining}
+
+\subsection{String matching}
 
 \subsection{Stanford Part-Of-Speech Tagger}
 
@@ -172,8 +202,6 @@ FOAF is a descriptive vocabulary expressed using the Resource Description Framew
 A Part-Of-Speech Tagger, or POS Tagger, is a piece of software that reads text in some language and assigns parts of speech to each word (and other token), such as noun, verb, adjective, etc., although generally computational applications use more fine-grained POS tags like 'noun-plural'. 
 
 The Stanford POS Tagger is Java implementation of the log-linear part-of-speech taggers described in the papers \footnote{Kristina Toutanova and Christopher D. Manning. 2000. Enriching the Knowledge Sources Used in a Maximum Entropy Part-of-Speech Tagger. In Proceedings of the Joint SIGDAT Conference on Empirical Methods in Natural Language Processing and Very Large Corpora (EMNLP/VLC-2000), pp. 63-70.} and \footnote{Kristina Toutanova, Dan Klein, Christopher Manning, and Yoram Singer. 2003. Feature-Rich Part-of-Speech Tagging with a Cyclic Dependency Network. In Proceedings of HLT-NAACL 2003, pp. 252-259.}.
-
-We will use this POS Tagger to determine the nouns and adjectives in the publication title which, on their turn, will be used to determine the subject of the publication. 
 
 \subsection{Gremlin}
 

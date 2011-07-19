@@ -34,20 +34,20 @@
 \contentsline {section}{\numberline {3.2}Features}{11}
 \contentsline {subsection}{\numberline {3.2.1}Information extraction}{11}
 \contentsline {subsection}{\numberline {3.2.2}Categorization}{11}
-\contentsline {subsection}{\numberline {3.2.3}Disambiguation}{11}
+\contentsline {subsection}{\numberline {3.2.3}Disambiguation}{12}
 \contentsline {subsection}{\numberline {3.2.4}Dynamic}{12}
 \contentsline {section}{\numberline {3.3}Architecture}{12}
 \contentsline {subsection}{\numberline {3.3.1}Iteration Manager}{12}
-\contentsline {subsection}{\numberline {3.3.2}Data Collector}{13}
+\contentsline {subsection}{\numberline {3.3.2}Data Collector}{12}
 \contentsline {subsection}{\numberline {3.3.3}Source Generator}{13}
 \contentsline {subsection}{\numberline {3.3.4}Category Builder}{13}
-\contentsline {subsection}{\numberline {3.3.5}Disambiguator}{13}
-\contentsline {subsection}{\numberline {3.3.6}Data Merger}{13}
-\contentsline {section}{\numberline {3.4}Disambiguation rules}{13}
-\contentsline {subsection}{\numberline {3.4.1}Prequel - Doc split}{14}
-\contentsline {subsection}{\numberline {3.4.2}Place of publication rule*}{14}
-\contentsline {subsection}{\numberline {3.4.3}Co-author clustering}{14}
-\contentsline {subsection}{\numberline {3.4.4}Name notation rule}{14}
-\contentsline {subsection}{\numberline {3.4.5}Affiliation rule*}{14}
-\contentsline {subsection}{\numberline {3.4.6}Interest rule}{15}
-\contentsline {chapter}{\numberline {4}Future work}{16}
+\contentsline {subsection}{\numberline {3.3.5}Disambiguator}{14}
+\contentsline {subsection}{\numberline {3.3.6}Data Merger}{14}
+\contentsline {section}{\numberline {3.4}Disambiguation rules}{14}
+\contentsline {subsection}{\numberline {3.4.1}Prequel - Doc split}{15}
+\contentsline {subsection}{\numberline {3.4.2}Place of publication rule*}{15}
+\contentsline {subsection}{\numberline {3.4.3}Co-author clustering}{15}
+\contentsline {subsection}{\numberline {3.4.4}Name notation rule}{15}
+\contentsline {subsection}{\numberline {3.4.5}Affiliation rule*}{16}
+\contentsline {subsection}{\numberline {3.4.6}Interest rule}{16}
+\contentsline {chapter}{\numberline {4}Future work}{17}
