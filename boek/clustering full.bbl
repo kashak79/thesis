@@ -1,0 +1,18 @@
+\begin{thebibliography}{1}
+
+\bibitem{saha2006dynamic}
+B.~Saha and P.~Mitra.
+\newblock Dynamic algorithm for graph clustering using minimum cut tree.
+\newblock 2006.
+
+\bibitem{flake2004graph}
+G.W. Flake, R.E. Tarjan, and K.~Tsioutsiouliklis.
+\newblock Graph clustering and minimum cut trees.
+\newblock {\em Internet Mathematics}, 1(4):385--408, 2004.
+
+\bibitem{rodrigues2011mpi}
+Luiz~Antonio Rodrigues.
+\newblock A mpi implementation of gusfield’s algorithm to generate cut trees.
+\newblock 2011.
+
+\end{thebibliography}

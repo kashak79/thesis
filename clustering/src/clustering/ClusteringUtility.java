@@ -125,7 +125,7 @@ public class ClusteringUtility {
 				adj.setAdjacency(e.getInVertex(), e.getOutVertex(), 0);
 			Set<Vertex> cluster1 = calculateCluster(g, vertex[i], adj, new HashSet<Vertex>());
 			for (int j = 1; j < n; j++) {
-				if (j == i)
+				if (j == i || j == tree[i])
 					continue;
 				// If the vertex and the parent are currently not in the same cluster (actually components divided by the cut)
 				// then change the parent to point to the source of the sink of this iteration

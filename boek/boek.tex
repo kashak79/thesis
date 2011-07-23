@@ -9,6 +9,10 @@
 
 \documentclass[11pt,a4paper,oneside,notitlepage]{book}
 \usepackage[english,dutch]{babel}
+\usepackage{algorithmic}
+\usepackage{algorithm}
+\usepackage{amsthm}
+\usepackage{hyperref}
 %\usepackage[nottoc]{tocbibind} % Bibliografie in ToC; zie tocbibind.dvi
 
 % marges aanpassen
@@ -31,6 +35,8 @@
 \bibliographystyle{unsrt}
 %\bibliographystyle{bibliodutch}
 %\bibpunct{[}{]}{,}{n}{,}{,}
+
+\newtheorem{mydef}{Definition}
 
 \pagestyle{fancy}
 
@@ -107,6 +113,8 @@
 \include{sota}
 
 \include{framework}
+
+\include{clustering}
 
 %\include{gerelateerdwerk}
 %\include{gelijkheid}

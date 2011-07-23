@@ -74,6 +74,12 @@ public class DynMinCutClustering {
 		return d;
 	}
 	
+	/**
+	 * The actual merging of the clusters in the graph itself
+	 * @param cluster1
+	 * @param cluster2
+	 * @return
+	 */
 	private Cluster<Vertex> clusterMerge(Cluster<Vertex> cluster1,
 			Cluster<Vertex> cluster2) {
 		// TODO Auto-generated method stub
@@ -90,7 +96,7 @@ public class DynMinCutClustering {
 	private double case1formula(Cluster<Vertex> cluster1, double weight) {
 		// TODO Auto-generated method stub
 		return 0;
-	}
+	} 
 
 	public void case3(Vertex i, Vertex j, Cluster<Vertex> cluster1, Cluster<Vertex> cluster2, double alpha) {
 		ClusteringDataInterface cdi = null;
@@ -99,12 +105,17 @@ public class DynMinCutClustering {
 		Vertex t = graph.addVertex(null);
 		
 		// Add an artificial SINK t: connect v to t, for all v in cluster1 or cluster2 with edge of weight alpha
-		for (Vertex v : cluster1)
+		for (Vertex v : cluster1) {
 			this.addEdgeWithWeight(g, v, t, alpha);
-		for (Vertex v : cluster2)
+			this.addEdgeWithWeight(g, t, v, alpha);
+		}
+		for (Vertex v : cluster2) {
 			this.addEdgeWithWeight(g, v, t, alpha);
+			this.addEdgeWithWeight(g, t, v, alpha);
+		}
 		// Also connect this sink to the vertex x we added in the contract step
 		this.addEdgeWithWeight(g, t, g.getVertex(-1), alpha * (n - cluster1.size() - cluster2.size()));
+		this.addEdgeWithWeight(g, g.getVertex(-1), t, alpha * (n - cluster1.size() - cluster2.size()));
 
 		Graph T = ClusteringUtility.sequentialGusfieldAlgorithm(g);
 		
@@ -128,41 +139,6 @@ public class DynMinCutClustering {
 		// TODO implement
 		return null;
 	}
-	
-	/**
-	 * Contraction of the clusters to a vertex x which is still connected to all the other vertices of the original graph.
-	 * @param graph
-	 * @param clusters The clusters which should be contracted
-	 * @return
-	 */
-	public Graph contract(Graph graph, List<Set<Vertex>> clusters) {
-		Graph g = new TinkerGraph();
-		// V' = {V-S,x}
-		for (Vertex v : graph.getVertices())
-			if (!vertexInClusters(v, clusters))
-				g.addVertex(v);
-		Vertex x = g.addVertex(null);
-		// TODO define local clustering interface
-		ClusteringDataInterface local = null;
-		// Copy the entries of A, involving both the vertices from V - S, to A'
-		for (Vertex v : g.getVertices())
-			for (Vertex u : g.getVertices())
-				local.setAdjacency(v, u, clustering.getAdjacency(v, u));
-		// A'(i, n) = ICW(i) + OCW(i) -	sum A'(i, j) with j between 1 and n
-		for (Vertex v : g.getVertices()) {
-			double sum = 0;
-			for (Vertex u : g.getVertices())
-				if (u != x)
-					sum += local.getAdjacency(v, u);
-			local.setAdjacency(v, x, clustering.getIcw(v) + clustering.getOcw(v) - sum);
-		}
-		// Extract E' from A'
-		for (Vertex v : graph.getVertices())
-			for (Vertex u : graph.getVertices())
-				addEdgeWithWeight(g, v, u, local.getAdjacency(v, u));
-		return g;
-	}
-	
 	
 	/**
 	 * Contraction of the graph of all clusters that are not defined by clusters.
@@ -195,9 +171,10 @@ public class DynMinCutClustering {
 			local.setAdjacency(v, x, clustering.getIcw(v) + clustering.getOcw(v) - sum);
 		}
 		// Extract E' from A'
-		for (Vertex v : graph.getVertices())
-			for (Vertex u : graph.getVertices())
-				addEdgeWithWeight(g, v, u, local.getAdjacency(v, u));
+		for (Vertex v : g.getVertices())
+			for (Vertex u : g.getVertices())
+				if (local.getAdjacency(v, u) > 0)
+					addEdgeWithWeight(g, v, u, local.getAdjacency(v, u));
 		
 		return g;
 	}
@@ -210,7 +187,6 @@ public class DynMinCutClustering {
 	}
 	
 	private Edge addEdgeWithWeight(Graph g, Vertex v, Vertex u, double weight) {
-		g.addEdge(null, u, v, "similarity").setProperty("weight", weight);
 		Edge e = g.addEdge(null, v, u, "similarity");
 		e.setProperty("weight", weight);
 		return e;
@@ -230,7 +206,7 @@ public class DynMinCutClustering {
 		Edge e1 = g.addEdge(null, v1, v2, "similarity");
 		e1.setProperty("weight", 0.05);
 		Edge e2 = g.addEdge(null, v2, v3, "similarity");
-		e2.setProperty("weight", 0.1);
+		e2.setProperty("weight", 0.06);
 		Edge e3 = g.addEdge(null, v1, v6, "similarity");
 		e3.setProperty("weight", 0.15);
 		Edge e4 = g.addEdge(null, v3, v4, "similarity");
@@ -243,11 +219,23 @@ public class DynMinCutClustering {
 		e7.setProperty("weight", 0.05);
 		Edge e8 = g.addEdge(null, v3, v5, "similarity");
 		e8.setProperty("weight", 0.05);
-		g.addEdge(null, v1, v3, "similarity").setProperty("weight", 0.4);
+		//g.addEdge(null, v1, v3, "similarity").setProperty("weight", 0.4);
+		g.addEdge(null, v2, v1, "similarity").setProperty("weight", 0.05);
+		g.addEdge(null, v3, v2, "similarity").setProperty("weight", 0.06);
+		g.addEdge(null, v6, v1, "similarity").setProperty("weight", 0.15);
+		g.addEdge(null, v4, v3, "similarity").setProperty("weight", 0.05);
+		g.addEdge(null, v4, v5, "similarity").setProperty("weight", 0.1);
+		g.addEdge(null, v5, v6, "similarity").setProperty("weight", 0.05);
+		g.addEdge(null, v2, v6, "similarity").setProperty("weight", 0.05);
+		g.addEdge(null, v5, v3, "similarity").setProperty("weight", 0.05);
+		//g.addEdge(null, v3, v1, "similarity").setProperty("weight", 0.4);
 		
 		DynMinCutClustering dmcc = new DynMinCutClustering(null);
 		//VisualizationViewer vv = new VisualizationViewer(new FRLayout(ClusteringUtility.convertToDirectedGraph(ClusteringUtility.undirectedGraph(g))));
-        VisualizationViewer vv = new VisualizationViewer(new FRLayout(ClusteringUtility.convertToDirectedGraph(ClusteringUtility.sequentialGusfieldAlgorithm(g))));
+		Graph t = ClusteringUtility.sequentialGusfieldAlgorithm(g);
+        VisualizationViewer vv = new VisualizationViewer(new FRLayout(ClusteringUtility.convertToDirectedGraph(t)));
+        for (Edge e : t.getEdges())
+        	System.out.println(e.getOutVertex() + " connected to " + e.getInVertex() + " with weight " + e.getProperty("weight"));
         //VisualizationViewer vv = new VisualizationViewer(new FRLayout(ClusteringUtility.convertToDirectedGraph(g)));
         vv.setVertexToolTipTransformer(new ToStringLabeller<Integer>());
         //jf.getContentPane().add(vv1);

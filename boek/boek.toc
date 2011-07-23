@@ -1,53 +1,57 @@
 \select@language {dutch}
-\contentsline {chapter}{\numberline {1}Introduction}{1}
-\contentsline {section}{\numberline {1.1}Idea}{1}
-\contentsline {chapter}{\numberline {2}State of the art}{2}
-\contentsline {section}{\numberline {2.1}Opinion mining}{2}
-\contentsline {subsection}{\numberline {2.1.1}Introduction}{2}
-\contentsline {subsection}{\numberline {2.1.2}Current situation}{2}
-\contentsline {subsection}{\numberline {2.1.3}Improvements and additions}{3}
-\contentsline {section}{\numberline {2.2}Twitter influencers}{3}
-\contentsline {subsection}{\numberline {2.2.1}Introduction}{3}
-\contentsline {subsection}{\numberline {2.2.2}Current situation}{4}
-\contentsline {subsection}{\numberline {2.2.3}Improvements and additions}{4}
-\contentsline {section}{\numberline {2.3}Expert Finding}{5}
-\contentsline {subsection}{\numberline {2.3.1}Introduction}{5}
-\contentsline {subsection}{\numberline {2.3.2}Current situation}{5}
-\contentsline {subsection}{\numberline {2.3.3}Improvements and additions}{6}
-\contentsline {section}{\numberline {2.4}Technologies}{6}
-\contentsline {subsection}{\numberline {2.4.1}Web scraping}{6}
-\contentsline {subsection}{\numberline {2.4.2}API}{6}
-\contentsline {subsection}{\numberline {2.4.3}DBLP}{6}
-\contentsline {subsection}{\numberline {2.4.4}LinkedIn}{7}
-\contentsline {subsection}{\numberline {2.4.5}Google Scholar}{7}
-\contentsline {subsection}{\numberline {2.4.6}Microsoft Academic Search}{7}
-\contentsline {subsection}{\numberline {2.4.7}FOAF}{8}
-\contentsline {subsection}{\numberline {2.4.8}Stemming}{8}
-\contentsline {subsection}{\numberline {2.4.9}Clustering}{8}
-\contentsline {subsection}{\numberline {2.4.10}Wikipedia API}{8}
-\contentsline {subsection}{\numberline {2.4.11}Stanford Part-Of-Speech Tagger}{8}
-\contentsline {subsection}{\numberline {2.4.12}Gremlin}{9}
-\contentsline {subsection}{\numberline {2.4.13}JUNG}{9}
-\contentsline {subsection}{\numberline {2.4.14}Neo4j}{9}
-\contentsline {chapter}{\numberline {3}The framework}{10}
-\contentsline {section}{\numberline {3.1}Main Scenario}{10}
-\contentsline {section}{\numberline {3.2}Features}{11}
-\contentsline {subsection}{\numberline {3.2.1}Information extraction}{11}
-\contentsline {subsection}{\numberline {3.2.2}Categorization}{11}
-\contentsline {subsection}{\numberline {3.2.3}Disambiguation}{12}
-\contentsline {subsection}{\numberline {3.2.4}Dynamic}{12}
-\contentsline {section}{\numberline {3.3}Architecture}{12}
-\contentsline {subsection}{\numberline {3.3.1}Iteration Manager}{12}
-\contentsline {subsection}{\numberline {3.3.2}Data Collector}{12}
-\contentsline {subsection}{\numberline {3.3.3}Source Generator}{13}
-\contentsline {subsection}{\numberline {3.3.4}Category Builder}{13}
-\contentsline {subsection}{\numberline {3.3.5}Disambiguator}{14}
-\contentsline {subsection}{\numberline {3.3.6}Data Merger}{14}
-\contentsline {section}{\numberline {3.4}Disambiguation rules}{14}
-\contentsline {subsection}{\numberline {3.4.1}Prequel - Doc split}{15}
-\contentsline {subsection}{\numberline {3.4.2}Place of publication rule*}{15}
-\contentsline {subsection}{\numberline {3.4.3}Co-author clustering}{15}
-\contentsline {subsection}{\numberline {3.4.4}Name notation rule}{15}
-\contentsline {subsection}{\numberline {3.4.5}Affiliation rule*}{16}
-\contentsline {subsection}{\numberline {3.4.6}Interest rule}{16}
-\contentsline {chapter}{\numberline {4}Future work}{17}
+\contentsline {chapter}{\numberline {1}Introduction}{1}{chapter.1}
+\contentsline {section}{\numberline {1.1}Idea}{1}{section.1.1}
+\contentsline {chapter}{\numberline {2}State of the art}{2}{chapter.2}
+\contentsline {section}{\numberline {2.1}Technologies}{2}{section.2.1}
+\contentsline {subsection}{\numberline {2.1.1}Web scraping}{2}{subsection.2.1.1}
+\contentsline {subsection}{\numberline {2.1.2}OWL}{3}{subsection.2.1.2}
+\contentsline {subsection}{\numberline {2.1.3}FOAF}{3}{subsection.2.1.3}
+\contentsline {subsection}{\numberline {2.1.4}Stemming}{3}{subsection.2.1.4}
+\contentsline {subsection}{\numberline {2.1.5}Clustering}{4}{subsection.2.1.5}
+\contentsline {subsection}{\numberline {2.1.6}Machine learning}{4}{subsection.2.1.6}
+\contentsline {subsection}{\numberline {2.1.7}Forward Chaining}{4}{subsection.2.1.7}
+\contentsline {subsection}{\numberline {2.1.8}String matching}{4}{subsection.2.1.8}
+\contentsline {subsection}{\numberline {2.1.9}Part-Of-Speech Tagger}{4}{subsection.2.1.9}
+\contentsline {subsection}{\numberline {2.1.10}Graph representation}{5}{subsection.2.1.10}
+\contentsline {section}{\numberline {2.2}Opinion mining}{5}{section.2.2}
+\contentsline {subsection}{\numberline {2.2.1}Introduction}{5}{subsection.2.2.1}
+\contentsline {subsection}{\numberline {2.2.2}Current situation}{5}{subsection.2.2.2}
+\contentsline {subsection}{\numberline {2.2.3}Improvements and additions}{6}{subsection.2.2.3}
+\contentsline {section}{\numberline {2.3}Twitter influencers}{6}{section.2.3}
+\contentsline {subsection}{\numberline {2.3.1}Introduction}{6}{subsection.2.3.1}
+\contentsline {subsection}{\numberline {2.3.2}Current situation}{7}{subsection.2.3.2}
+\contentsline {subsection}{\numberline {2.3.3}Improvements and additions}{7}{subsection.2.3.3}
+\contentsline {section}{\numberline {2.4}Expert Finding}{8}{section.2.4}
+\contentsline {subsection}{\numberline {2.4.1}Introduction}{8}{subsection.2.4.1}
+\contentsline {subsection}{\numberline {2.4.2}Current situation}{8}{subsection.2.4.2}
+\contentsline {subsection}{\numberline {2.4.3}Improvements and additions}{9}{subsection.2.4.3}
+\contentsline {chapter}{\numberline {3}The framework}{10}{chapter.3}
+\contentsline {section}{\numberline {3.1}Main Scenario}{10}{section.3.1}
+\contentsline {section}{\numberline {3.2}Features}{11}{section.3.2}
+\contentsline {subsection}{\numberline {3.2.1}Information extraction}{11}{subsection.3.2.1}
+\contentsline {subsection}{\numberline {3.2.2}Categorization}{11}{subsection.3.2.2}
+\contentsline {subsection}{\numberline {3.2.3}Disambiguation}{12}{subsection.3.2.3}
+\contentsline {subsection}{\numberline {3.2.4}Dynamic}{12}{subsection.3.2.4}
+\contentsline {section}{\numberline {3.3}Architecture}{12}{section.3.3}
+\contentsline {subsection}{\numberline {3.3.1}Iteration Manager}{12}{subsection.3.3.1}
+\contentsline {subsection}{\numberline {3.3.2}Data Collector}{12}{subsection.3.3.2}
+\contentsline {subsection}{\numberline {3.3.3}Source Generator}{13}{subsection.3.3.3}
+\contentsline {subsection}{\numberline {3.3.4}Category Builder}{13}{subsection.3.3.4}
+\contentsline {subsection}{\numberline {3.3.5}Disambiguator}{14}{subsection.3.3.5}
+\contentsline {subsection}{\numberline {3.3.6}Data Merger}{14}{subsection.3.3.6}
+\contentsline {section}{\numberline {3.4}Disambiguation rules}{14}{section.3.4}
+\contentsline {subsection}{\numberline {3.4.1}Prequel - Doc split}{15}{subsection.3.4.1}
+\contentsline {subsection}{\numberline {3.4.2}Place of publication rule*}{15}{subsection.3.4.2}
+\contentsline {subsection}{\numberline {3.4.3}Co-author clustering}{15}{subsection.3.4.3}
+\contentsline {subsection}{\numberline {3.4.4}Name notation rule}{15}{subsection.3.4.4}
+\contentsline {subsection}{\numberline {3.4.5}Affiliation rule*}{16}{subsection.3.4.5}
+\contentsline {subsection}{\numberline {3.4.6}Interest rule}{16}{subsection.3.4.6}
+\contentsline {section}{\numberline {3.5}Clustering algorithm}{17}{section.3.5}
+\contentsline {subsection}{\numberline {3.5.1}Introduction}{17}{subsection.3.5.1}
+\contentsline {subsection}{\numberline {3.5.2}Minimum-cut tree algorithm}{17}{subsection.3.5.2}
+\contentsline {subsection}{\numberline {3.5.3}Cut clustering}{19}{subsection.3.5.3}
+\contentsline {paragraph}{Intra-cluster edge addition}{20}{section*.2}
+\contentsline {paragraph}{Inter-cluster edge addition}{20}{section*.3}
+\contentsline {subparagraph}{Merging of clusters}{21}{section*.4}
+\contentsline {subparagraph}{Contraction of clusters}{21}{section*.5}
+\contentsline {chapter}{\numberline {4}Future work}{24}{chapter.4}
