@@ -11,6 +11,7 @@ For the algorithm we based ourselves largely on the algorithm described in \cite
 The main feature of this dynamic algorithm is that it only builds part of the minimum-cut tree as and when necessary. The tree is computed over a subset of nodes, limited to a number of clusters. In our graph there might be an immense number of authors, and thus clusters. However, the amount of authors involved with one change is limited. By just computing the clusters of this coarsened graph we can obtain the clusters of the original graph. These two properties are the reason the algorithm is efficient while maintaining an identical cluster quality as the static version described in \ref{staticcutclustering}. Formal proof for this quality can be found in \cite{saha2006dynamic}.
 
 \subsection{Minimum-cut tree algorithm}
+\label{minimumcuttree}
 
 \begin{algorithm}
 \caption{Sequential Gusfield's Algorithm}
@@ -124,7 +125,7 @@ There are three identifiable cases:
 	\item \textbf{CASE 3} The new edge deteriorates the cluster quality and the nodes in both the clusters have to be reclustered
 \end{enumerate}
 
-In order to understand the complete algorithm shown in \ref{intercluster} for inter-cluster edge addition, we first have to explain two new processes: merging and contraction of clusters.
+In order to understand the complete algorithm shown in \ref{intercluster} for inter-cluster edge addition which also uses the minimum-cut tree algorithm discussed in \ref{minimumcuttree}, we have to explain two new processes: merging and contraction of clusters.
 
 \subparagraph{Merging of clusters} occurs in CASE 2 and is described in \ref{merging}. Two clusters $C_u$ and $C_v$ are merged into one new cluster containing the nodes of the two original clusters. This causes the ICW of all the nodes involved to increase and the OCW to decrease as all the nodes are now more connected.
 
