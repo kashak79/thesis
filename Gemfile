@@ -5,11 +5,13 @@ gem 'typhoeus'
 gem 'redis'
 gem 'yajl-ruby'
 gem 'resque'
+gem 'redis-lock'
+gem 'amatch'
 
 group :development do
   gem 'rake'
 end
 
 group :testing do
-  gem 'cucumber'
+  gem 'rspec'
 end

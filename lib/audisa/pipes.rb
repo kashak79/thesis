@@ -1,6 +1,3 @@
-require 'typhoeus'
-require 'yajl'
-
 module Pipes
   autoload :Pipe,                  'audisa/pipes/pipe'
   autoload :UniqueDiscovery,       'audisa/pipes/unique_discovery'
@@ -8,4 +5,13 @@ module Pipes
   autoload :Persist,               'audisa/pipes/persist'
   autoload :Stdout,                'audisa/pipes/stdout'
   autoload :Filter,                'audisa/pipes/filter'
+  autoload :Merge,                 'audisa/pipes/merge'
+
+  # integration pipes
+  autoload :Integration,           'audisa/pipes/integration/integration'
+  autoload :NameMatching,          'audisa/pipes/integration/name_matching'
+  autoload :PersistFamily,         'audisa/pipes/integration/persist_family'
+  autoload :PersistInstance,       'audisa/pipes/integration/persist_instance'
+  autoload :PersistName,           'audisa/pipes/integration/persist_name'
+
 end

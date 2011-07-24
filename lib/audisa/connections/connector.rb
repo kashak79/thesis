@@ -24,6 +24,7 @@ class Connections::Connector
   # notify new data
   # if something changes, execute again
   def touch
+    @pipe.touched = self
     @pipe.execute
   end
 end

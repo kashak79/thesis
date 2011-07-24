@@ -1,5 +1,3 @@
-require 'resque'
-
 module Connections
   autoload :Connection,       'audisa/connections/connection'
   autoload :Connector,        'audisa/connections/connector'

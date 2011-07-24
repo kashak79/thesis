@@ -1,4 +1,6 @@
 class Pipes::Pipe
+  attr_accessor :touched
+
   # initialize pipe
   def initialize(inbound = [:in], outbound = [:out])
     # map of named inbound connectors
@@ -23,6 +25,16 @@ class Pipes::Pipe
   # get all outbound connectors
   def outs
     @out
+  end
+
+  # get all inbound connectors
+  def ins
+    @ins
+  end
+
+  # enrich the input and push
+  def enrich(inbound, outbound, data)
+    out(outbound).push(self.in(inbound).get.merge(data))
   end
 
   # fallback
