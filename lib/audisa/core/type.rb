@@ -5,12 +5,16 @@ class Core::Type
     @name = name
   end
 
+  def eq? klass, name
+    @klass == klass && @name == name
+  end
+
   def is? klass
     @klass == klass
   end
 
-  def instantiate(properties)
-    @klass.new(@name, properties)
+  def of? name
+    @name == name
   end
 
   def to_s

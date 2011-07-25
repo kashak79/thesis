@@ -15,18 +15,9 @@ class Helpers::Rexster
     #p response.body
     result = Yajl::Parser.parse(response.body)["results"]
     if result && result.kind_of?(Array)
-      hashed = []
-      result.each_index { |i|
-        hashed[i] = Hash.new
-        result[i].each { |k,v|
-          hashed[i][k.to_sym] = v
-        }
-      }
-      hashed
+      result.map { |h| h.symbolize! }
     elsif result
-      hashed = Hash.new
-      result.each { |k,v| hashed[k.to_sym] = v }
-      hashed
+      result.symbolize!
     end
   end
 

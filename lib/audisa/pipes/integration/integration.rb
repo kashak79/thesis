@@ -3,7 +3,7 @@ class Pipes::Integration < Pipes::Pipe
   # define the composite pipe
   def initialize(graph)
     super()
-    @persist_instance = (Pipes::PersistInstance.pipe(graph))
+    @persist_instance = Pipes::PersistInstance.pipe(graph)
 
     family_merge = Pipes::Merge.pipe(2)
 
