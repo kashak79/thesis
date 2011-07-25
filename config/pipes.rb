@@ -1,4 +1,4 @@
-graph = Helpers::Rexster.new('http://192.168.179.128:8182/testgraph')
+graph = Helpers::Rexster.new('http://192.168.179.128:8182/thesis')
 dependency = Pipes::Dependency.pipe
 
 $pipe = (Connections::Local).connection
@@ -7,6 +7,8 @@ depmerge = Pipes::Merge.pipe(2)
 depmerge.out.connect.to(dependency, :resolve)
 
 dblp = $pipe.to(Pipes::Network).
+  out.connect.to(Parsers::DblpAuthorParser).
+  out.connect(Connections::Async.connection(:publication, :urgent)).to(Pipes::Network).
   out.connect.to(Parsers::DblpBibtexParser)
 
 # connect all parsers to the dependency store
@@ -30,8 +32,7 @@ discovery_filter.out(true).connect.to(Pipes::PersistDiscovery.pipe(graph, :publi
   out.connect.to(depmerge, 2)
 
 # save published facts
-discovery_filter.out(false).connect.to(Pipes::PersistFact.pipe(graph, :instance, :publication, :published)).
-  out.connect.to(Pipes::Stdout)
+discovery_filter.out(false).connect.to(Pipes::PersistFact.pipe(graph, :instance, :publication, :published))
 
 # connect the dependency resolver
 #dependency.out.connect.to(Pipes::Stdout)
