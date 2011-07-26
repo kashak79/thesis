@@ -2,6 +2,7 @@ class Parsers::DblpBibtexParser < Pipes::Pipe
 
   def initialize
     super()
+    @reference = Helpers::DistributedIdProvider.new
   end
 
   def execute
@@ -10,11 +11,28 @@ class Parsers::DblpBibtexParser < Pipes::Pipe
     # get the root
     root = document.root
     # first push the publication itself
-    publication = out.push(:type => Core::Discovery::PUBLICATION, :title => (root % 'title').text)
+    out.push(
+      :type => Core::Type.new(:discovery, :publication),
+      :reference => pub_ref=@reference.get,
+      :publication => {
+        :title => (root % 'title').text
+      }
+    )
     # push the authors
     (root / 'author').each do |author_node|
       # report discovery of a new instance
-      author = out.push(:type => Core::Discovery::INSTANCE, :name => author_node.text)
+      out.push(
+        :type => Core::Type.new(:discovery, :instance),
+        :reference => auth_ref=@reference.get,
+        :instance => {
+          :name => author_node.text
+        }
+      )
+      # report the fact that this author published the publication
+      out.push(
+        :type => Core::Type.new(:fact, :published),
+        :dependencies => [pub_ref, auth_ref]
+      )
     end
   end
 

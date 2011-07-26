@@ -1,33 +1,38 @@
+graph = Helpers::Rexster.new('http://192.168.179.128:8182/thesis')
+dependency = Pipes::Dependency.pipe
 
+$pipe = (Connections::Local).connection
 
+depmerge = Pipes::Merge.pipe(2)
+depmerge.out.connect.to(dependency, :resolve)
 
+dblp = $pipe.to(Pipes::Network).
+  out.connect.to(Parsers::DblpAuthorParser).
+  out.connect(Connections::Async.connection(:publication, :urgent)).to(Pipes::Network).
+  out.connect.to(Parsers::DblpBibtexParser)
 
-# begin with network pipe
-$pipe   = (Connections::Local).connection.to(Pipes::Network)
+# connect all parsers to the dependency store
+dblp.out.connect.to(dependency, :store)
 
-# connect network to bibtex parser
-parser  = $pipe.out.connect.to(Parsers::DblpBibtexParser)
-
-# take discoveries apart (and filter the type)
-dfilter = parser.out.connect.to(Pipes::Filter.pipe(lambda { |d|
-  d if d[:type].is? Core::Discovery
+# filter out the instance discoveries and integrate them in the graph
+# then connect to the dependency resolver
+instance_filter = dependency.out.connect.to(Pipes::Filter.pipe(lambda { |flow|
+  flow.reject_keys(:type) if flow[:type].eq?(:discovery, :instance)
 }))
+# integrate and resolve
+instance_filter.out(true).connect.to(Pipes::Integration.pipe(graph)).
+  out.connect.to(depmerge, 1)
 
-# give them an id
-#add_id  = dfilter.out(true).connect(Connections::Async.connection(:persist, :urgent)).to(
-#  Pipes::UniqueDiscovery.pipe(Helpers::DistributedIdProvider.new)
-#)
-add_id  = dfilter.out(true).connect.to(
-  Pipes::UniqueDiscovery.pipe(Helpers::DistributedIdProvider.new)
-)
-
-# now persist all discoveries
-persist = add_id.out.connect.to(
-  Pipes::Persist.pipe('http://192.168.179.128:8182/thesis')
-)
-
-# place the instance discoveries
-placement = persist.out.connect.to(Pipes::Filter.pipe(lambda { |d|
-  d if d[:type] == Core::Discovery::INSTANCE
+# filter the discoveries and persist them
+# then connect to the dependency resolver
+discovery_filter = instance_filter.out(false).connect.to(Pipes::Filter.pipe(lambda { |flow|
+  flow.reject_keys(:type) if flow[:type].is? :discovery
 }))
+discovery_filter.out(true).connect.to(Pipes::PersistDiscovery.pipe(graph, :publication)).
+  out.connect.to(depmerge, 2)
 
+# save published facts
+discovery_filter.out(false).connect.to(Pipes::PersistFact.pipe(graph, :instance, :publication, :published))
+
+# connect the dependency resolver
+#dependency.out.connect.to(Pipes::Stdout)

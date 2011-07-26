@@ -9,6 +9,7 @@ describe Pipes::Integration do
     graph.create_index(:family)
     graph.create_index(:name)
 
+    $redis.flushdb
     sink.stub(:push) { |d| @data = d}
     @pipe = (Connections::Local).connection
     # test the integration pipe by binding it to a sink

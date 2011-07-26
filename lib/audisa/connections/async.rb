@@ -13,7 +13,7 @@ class Connections::Async < Connections::Connection
   end
 
   def to(pipe, name = :in)
-    super(pipe, name)
+    pipe = super(pipe, name)
     # to pipe is established, get it into the runtime class
     @klass.to = @to
     pipe
@@ -29,7 +29,7 @@ class Connections::Async < Connections::Connection
   # this means the pipe continues in another process,
   # make the data stateful now (over the entire class)
   def self.perform(data)
-    self.data = data
+    self.data = data.symbolize!
     self.to.touch
   end
 

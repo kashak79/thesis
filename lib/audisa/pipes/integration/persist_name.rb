@@ -25,10 +25,11 @@ class Pipes::PersistName < Pipes::Pipe
         name = @graph.create_vertex(:name => instance[:name])
         # put in the index
         @graph.put_index(:name, name[:name], name[:_id])
+        # connect
+        @graph.create_edge(:family, name[:_id], family[:_id])
       end
     end
-    # connect (both sides)
-    @graph.create_edge(:family, name[:_id], family[:_id])
+    # connect
     @graph.create_edge(:name, instance[:_id], name[:_id])
     # enrich
     enrich(:in, dyn_out, :name => name)
