@@ -19,7 +19,7 @@ We will use the following steps to build such a platform:
 			\item Looking up publications, extracting title, co-authors and affiliation. The co-authors can be used as new input for further information extraction.
 			\item Categorize publications by subject
 		\end{itemize}
-	\item \textbf{Disambiguation} Decide if there are different authors with the same name or different spellings of the same author's name which should be mapped to one author.
+	\item \textbf{Disambiguation} Each name is represented as a single entity. In this step we search for similarities between these entities to decide what publications belong to the same author.
 \end{itemize}
 
 A simplified representation of these steps can be seen on \ref{fig:db-gegevens}. It shows the steps that are responsible for finding the data that we will store in our database and which will be used to find experts.
@@ -35,7 +35,7 @@ A simplified representation of these steps can be seen on \ref{fig:db-gegevens}.
 
 \section{Features}
 
-Based on the main scenario, we can identify a few key features our framework will need. A short summarization of each follows, explaining the challenges we face with our thesis. Each of these features will be discussed more deeply throughout this chapter.
+Based on the main scenario, we can identify a few key features our framework will need. A short summarization of each follows, explaining the challenges we face with our thesis.
 
 %Beter verwijzen waar ze meer informatie per feature kunnen doornemen?
 
@@ -47,21 +47,19 @@ We need to extract information from multiple sources, which we will accomplish b
 
 In order to decide who is an expert regarding a certain subject, we will have to decide the subject of expertise of each author. A very important part of this will be in deciding the subject of the publications. The challenge is to decide this using as few information as possible, preferably by just inspecting the title, as getting access to the text of the publication itself is a whole lot more time- and resource-consuming.
 
-\ref{categorybuilder} describes this more in-depth.
-
 \subsection{Disambiguation}
 
 A challenging feature is the disambiguation. There are two reasons. The first is the fact that an author's name is not a unique reference for a person. There might be multiple authors with the same name, which means we have to take this into account when deciding who is an expert. Secondly, a name might be spelled differently or changed throughout time. Examples are abbreviations, an extra family name because of a marriage or simply spelling errors.
 
-More on disambiguation can be found in \ref{disambiguator}, describing the component responsible for the disambiguation.
-
 \subsection{Dynamic}
 
-There is a big dynamic concept tied to our thesis. People who are experts on a certain subject a decade ago, may not be as important anymore now or may have changed their subject of expertise. An interesting point of view would be to enable users to scroll through a timeline so they could see the changes themselves. This is however out of the scope of our thesis.
+There is a big dynamic concept tied to our thesis. People who are experts on a certain subject a decade ago, may not be as important anymore now or may have changed their subject of expertise. The framework should allow new information to be processed at any time and update the expertise of authors on the flow.
 
 \section{Architecture}
 
-Based on the scenario, we came up with the necessary components our framework needs. \ref{fig:architectuur} shows a simplistic version of how the architecture will look like. The different components of the framework and their connection toward eachother is displayed. In the next sections, the most important components will be explained at large.
+% TODO make a comparison between the first architecture we came up with and the final architecture?
+
+Based on the scenario and the described features, we came up with the necessary components our framework needs. \ref{fig:architectuur} shows a simplistic version of how the architecture will look like. The different components of the framework and their connection toward eachother is displayed. In the next sections, the most important components will be explained at large.
 
 % TODO : say something about the seed data and scoperfu.rb ?
 
@@ -150,5 +148,3 @@ The Data Merger is responsible for merging the names together so they would refe
 %The former is used to collect all information about the possible experts and their work. 
 %
 %\subsection{Ruby}
-
-\input{disambiguationrules}

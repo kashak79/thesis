@@ -15,6 +15,7 @@ module Pipes
   autoload :PersistFamily,         'audisa/pipes/integration/persist_family'
   autoload :PersistInstance,       'audisa/pipes/integration/persist_instance'
   autoload :PersistName,           'audisa/pipes/integration/persist_name'
+	autoload :PublicationSearch,		 'audisa/pipes/integration/publication_search'
 
   autoload :PersistDiscovery,      'audisa/pipes/persist_discovery'
   autoload :PersistFact,           'audisa/pipes/persist_fact'

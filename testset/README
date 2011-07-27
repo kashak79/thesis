@@ -1,0 +1,19 @@
+Each file is a collection of ambiguous names and associtated citations, e.g. AGupta.txt is the citation files of 26 "A. Gupta"s.
+
+All citations are in the format of
+
+clusterid_citationid authors;authors;... <>paper title <>publication venue title
+
+Clusterid indicates the canonical author id.
+
+Below is an example of a citation of "A. Gupta 10".
+
+10_1 A Gupta; Bjorn Kvande ; Irwin B Levinstein ; Kurt Maly ; Margrethe H Olson ; Ravi Mukkamala ; Rita Chambers ; Roy Whitney ; S Nanjangud<>PMES: privilege mangagement and enforcement system for secure distributed resource sharing <>IFIP International Federation for Information Processing World Conference IT Tools
+
+I added the full name of the publication venue title abbreviation, for example, the above IFIP.
+The full names of publication venue titles can be found at:
+http://www.informatik.uni-trier.de/~ley/db/conf/indexa.html
+http://www.informatik.uni-trier.de/~ley/db/journals/index.html
+
+Publication dates are eliminate from citations.
+

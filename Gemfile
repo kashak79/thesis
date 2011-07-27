@@ -7,6 +7,8 @@ gem 'yajl-ruby'
 gem 'resque'
 gem 'redis-lock'
 gem 'amatch'
+gem 'docsplit'
+gem 'rbing'
 
 group :development do
   gem 'rake'
