@@ -9,6 +9,7 @@ depmerge.out.connect.to(dependency, :resolve)
 dblp = $pipe.to(Pipes::Network).
   out.connect.to(Parsers::DblpAuthorParser).
   out.connect(Connections::Async.connection(:publication, :urgent)).to(Pipes::Network).
+  #out.connect.to(Pipes::Network).
   out.connect.to(Parsers::DblpBibtexParser)
 
 # connect all parsers to the dependency store
@@ -32,7 +33,10 @@ discovery_filter.out(true).connect.to(Pipes::PersistDiscovery.pipe(graph, :publi
   out.connect.to(depmerge, 2)
 
 # save published facts
-discovery_filter.out(false).connect.to(Pipes::PersistFact.pipe(graph, :instance, :publication, :published))
+discovery_filter.out(false).connect.to(Pipes::PersistFact.pipe(graph, :instance, :publication, :published)).
+# execute co-author rule stage 1
+  out.connect.to(Pipes::CoAuthorRule.pipe(graph)).
+  out.connect.to(Pipes::Stdout)
 
 # connect the dependency resolver
 #dependency.out.connect.to(Pipes::Stdout)

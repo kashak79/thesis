@@ -12,10 +12,9 @@ class Helpers::Rexster
 
   def request(method, url = '', options = {})
     response = Typhoeus::Request.send(method, @base + url, options)
-    #p response.body
     result = Yajl::Parser.parse(response.body)["results"]
     if result && result.kind_of?(Array)
-      result.map { |h| h.symbolize! }
+      result.map { |h| h.kind_of?(Hash) ? h.symbolize! : h }
     elsif result
       result.symbolize!
     end
@@ -65,6 +64,12 @@ class Helpers::Rexster
   # perform a query on a vertex
   def query(vertex, query)
     request(:get, "/vertices/#{vertex}/tp/gremlin", :params => {:script => query})
+  end
+
+  def table(vertex, query)
+    a = request(:get, "/vertices/#{vertex}/tp/gremlin", :params => {:script => query})
+    # convert table string to ruby
+    Yajl::Parser.parse("[#{a[0][1..-2].gsub('[','{').gsub(']','}').gsub("'",'"')}]") if a && a[0]
   end
 
 end

@@ -19,4 +19,6 @@ module Pipes
   autoload :PersistDiscovery,      'audisa/pipes/persist_discovery'
   autoload :PersistFact,           'audisa/pipes/persist_fact'
 
+  # rules
+  autoload :CoAuthorRule,          'audisa/pipes/rules/co_author_rule.rb'
 end
