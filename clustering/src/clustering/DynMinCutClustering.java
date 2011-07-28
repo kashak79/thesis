@@ -1,6 +1,7 @@
 package clustering;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -131,7 +132,22 @@ public class DynMinCutClustering {
 	}
 	
 	private Set<Cluster<Vertex>> calculateComponents(Graph t) {
-		// TODO Auto-generated method stub
+		Set<Cluster<Vertex>> set = new HashSet<Cluster<Vertex>>();
+		List<Vertex> list = new ArrayList<Vertex>();
+		for (Vertex v : t.getVertices()) {
+			list.add(v);
+		}
+		while (list.size() > 0) {
+			Cluster<Vertex> cluster = findAllConnectedVertices(list.get(0));
+			for (Vertex v : cluster)
+				list.remove(v);
+			set.add(cluster);
+		}
+		return set;
+	}
+
+	private Cluster<Vertex> findAllConnectedVertices(Vertex vertex) {
+		// TODO calculate the cluster ... something like ClusteringUtility.calculateCluster ??
 		return null;
 	}
 
