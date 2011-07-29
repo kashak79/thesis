@@ -15,7 +15,7 @@ class Pipes::CoAuthorRule < Pipes::Pipe
     similarities = @graph.table(instance[:_id], query)
     similarities.each do |similarity|
       out.push(:similarity => similarity.merge({:weight => 1}))
-    end if res # filter
+    end if similarities # filter
   end
 
 end

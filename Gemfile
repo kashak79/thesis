@@ -12,6 +12,7 @@ gem 'rbing'
 
 group :development do
   gem 'rake'
+  gem 'choice'
 end
 
 group :testing do

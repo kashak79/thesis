@@ -1,7 +1,7 @@
 namespace :whitespace do
   desc 'Removes trailing whitespace'
   task :cleanup do
-    sh %{for f in `find lib spec testpipe.rb config -type f | grep -v -e '.git/' -e 'public/' -e '.png'`;
+    sh %{for f in `find truth lib spec testpipe.rb config -type f | grep -v -e '.git/' -e 'public/' -e '.png'`;
           do cat $f | sed 's/[ \t]*[\r]*$//' > tmp; cp tmp $f; rm tmp; echo -n .;
         done}
   end

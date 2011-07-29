@@ -17,6 +17,9 @@ module Pipes
   autoload :PersistName,           'audisa/pipes/integration/persist_name'
 	autoload :PublicationSearch,		 'audisa/pipes/integration/publication_search'
 
+	# clustering
+	autoload :PersistSimilarity,      'audisa/pipes/clustering/persist_similarity'
+
   autoload :PersistDiscovery,      'audisa/pipes/persist_discovery'
   autoload :PersistFact,           'audisa/pipes/persist_fact'
 

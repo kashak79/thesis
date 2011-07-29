@@ -40,11 +40,18 @@ end
 
 # source url's
 sources = []
+
+# load johnson
+john = Nokogiri::XML(File.open('johnson')).root
+john.xpath('//a').map { |j| j['href'] }.each do |s|
+  sources << s
+end
+
 # enter the source url's
 puts "Enter the source DBLP url's"
 urls.times do |i|
   print "#{i}: "
-  sources << STDIN.gets.strip
+  #sources << STDIN.gets.strip
 end
 
 separate
@@ -65,10 +72,13 @@ sources.each do |source|
     # separate
     separate
     # inform progress
-    puts "(#{sources.index(source)+1}/#{urls}) (#{nodes.index(node)+1}/#{nodes.size})"
+    puts "(#{sources.index(source)+1}/#{sources.size}) (#{nodes.index(node)+1}/#{nodes.size})"
     # show title
     title = bibtexdoc.at('title').text
     puts "Title: #{title}"
+    # year
+    year = bibtexdoc.at('year').text
+    puts "Year: #{year}"
     # show authors
     coauthors = []
     puts "Authors:"
@@ -122,4 +132,3 @@ sources.each do |source|
     end
   end
 end
-
