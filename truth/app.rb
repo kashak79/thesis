@@ -33,6 +33,8 @@ clusternames = []
 clusters = []
 # coauthors
 ccoauthors = []
+# emails
+emails = []
 
 def separate
   puts "#########################################################################################################"
@@ -42,7 +44,7 @@ end
 sources = []
 
 # load johnson
-john = Nokogiri::XML(File.open('johnson')).root
+john = Nokogiri::XML(File.open('john')).root
 john.xpath('//a').map { |j| j['href'] }.each do |s|
   sources << s
 end
@@ -91,6 +93,9 @@ sources.each do |source|
     # give url
     print "Url of publication: "
     url = STDIN.gets.strip
+    # email
+    print "Email: "
+    email = STDIN.gets.strip
     # cluster decision
     puts "Make your cluster decision! (number to assign to existing; name to make new)"
     puts "choices:"
@@ -102,7 +107,8 @@ sources.each do |source|
         max_common = common
         max_index = i
       end
-      puts "#{i+1}. #{clusternames[i]} (#{common} coauthors in common)"
+      etest = (emails[i] || []).include?(email) ? "(!)" : "   "
+      puts "(#{common}) #{etest} #{i+1}. #{clusternames[i]} (#{emails[i] * ','})"
     end
     puts "(no choices yet)" if clusternames.empty?
 
@@ -122,13 +128,21 @@ sources.each do |source|
     else
       cluster = decision.to_i-1
     end
+    # put email in right cluster
+    emails[cluster] ||= []
+    emails[cluster] << email
     # put decision in right cluster
     clusters[cluster] ||= []
-    clusters[cluster] << {:title => title, :url => url}
+    clusters[cluster] << {:title => title, :url => url, :email => email}
     ccoauthors[cluster] = ((ccoauthors[cluster] || []) + coauthors).uniq
     # save after each publication
     File.open(file, 'w') do |f|
-      f.write(Yajl::Encoder.encode(clusters))
+      f.write(Yajl::Encoder.encode({
+        :clusters =>clusters,
+        :emails => emails,
+        :names => clusternames,
+        :coauthors => ccoauthors
+      }))
     end
   end
 end
