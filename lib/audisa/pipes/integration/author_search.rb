@@ -1,32 +1,35 @@
-require 'nokogiri'
-require 'open-uri'
-require 'docsplit'
-require 'typhoeus'
-require 'yajl'
-
-class Pipes::PublicationSearch < Pipes::Pipe
+class Pipes::AuthorSearch < Pipes::Pipe
 
   def initialize()
-    super([:in],[:web,:full])
+    super()
 	end
 
   def execute
-		#get the title of the paper
-		paper = _in.get[:full][:path]
-		bing = Yajl::Parser.parse(open("http://api.search.live.net/json.aspx?Appid=5C0D48683B57FE18427D75AFD802CAB2D1EEA50E&query=#{title.gsub(' ','%20')}%20filetype:pdf&sources=web").read)
-		if (bing["SearchResponse"]["Web"]["Total"].to_i > 0 && bing["SearchResponse"]["Web"]["Results"].first["Title"].downcase == title.downcase) then
-			response = Typhoeus::Request.get(bing["SearchResponse"]["Web"]["Results"].first["Url"])
-			path = title.split.join[0..25]
-			file = File.new(path + ".pdf","w+")
-			file.puts(response.body)
-			file.close
-			Docsplit.extract_text(file.path, :pages => [1])
-			`rm #{file.path}`
-			enrich(:in, :full, :path => path + "_1.txt")
+		author = _in.get[:author][:name].downcase
+		pub = _in.get[:publication]
+		if (!$redis.exists(pub)) then
+			file = File.open(_in.get[:full][:path])
+			content = file.read
+			r = Regexp.new(/\b[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}\b/)
+			emails = content.scan(r).uniq
+			$redis.set pub, 1
+			emails.each { |e| $redis.sadd("#{pub}:emails", e) }
 		else
-			enrich(:in, :web, :web => _in.get[:publication][:web])
+			emails = $redis.smembers "#{pub}:emails"
 		end
-
+		email = emails.max_by do |email|
+			e = email.split('@').first
+			if (e.size < 4) then
+				if (author.split.last.size < 4) then
+					e.levenshtein_similar author.split.last
+				else
+					e.levenshtein_similar author.split.map { |a| a[0] }.join
+				end
+			else
+				e.levenshtein_similar author
+			end
+		end
+		$redis.srem("#{pub}:emails", email)
+		enrich(:in, :out, :email { :email => email })
   end
-
 end

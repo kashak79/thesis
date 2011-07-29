@@ -16,6 +16,8 @@ module Pipes
   autoload :PersistInstance,       'audisa/pipes/integration/persist_instance'
   autoload :PersistName,           'audisa/pipes/integration/persist_name'
 	autoload :PublicationSearch,		 'audisa/pipes/integration/publication_search'
+	autoload :PublicationText,			 'audisa/pipes/integration/publication_text'
+	autoload :AuthorSearch,					 'audisa/pipes/integration/author_search'
 
 	# clustering
 	autoload :PersistSimilarity,      'audisa/pipes/clustering/persist_similarity'
