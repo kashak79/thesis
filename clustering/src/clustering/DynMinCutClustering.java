@@ -124,7 +124,7 @@ public class DynMinCutClustering {
 		Graph T = ClusteringUtility.sequentialGusfieldAlgorithm(g);
 		
 		T.removeVertex(t);
-		Set<Set<Vertex>> clusters = calculateComponents(T);
+		Set<Set<Vertex>> clusters = ClusteringUtility.calculateComponents(T);
 		
 		// TODO make Cluster objects from Set ?
 		
@@ -132,34 +132,6 @@ public class DynMinCutClustering {
 			clustering.addCluster(cluster);
 		clustering.removeCluster(cluster1);
 		clustering.removeCluster(cluster2);
-	}
-	
-	private Set<Set<Vertex>> calculateComponents(Graph t) {
-		Set<Set<Vertex>> set = new HashSet<Set<Vertex>>();
-		List<Vertex> list = new ArrayList<Vertex>();
-		for (Vertex v : t.getVertices()) {
-			list.add(v);
-		}
-		while (list.size() > 0) {
-			Set<Vertex> cluster = findAllConnectedVertices(t, list.get(0), new HashSet<Vertex>());
-			for (Vertex v : cluster)
-				list.remove(v);
-			set.add(cluster);
-		}
-		return set;
-	}
-
-	private Set<Vertex> findAllConnectedVertices(Graph g, Vertex vertex, Set<Vertex> cluster) {
-		cluster.add(vertex);
-		for (Edge e : vertex.getInEdges())
-			if (!cluster.contains(e.getOutVertex()) && ClusteringUtility.getWeight(e) > 0) {
-				findAllConnectedVertices(g, e.getOutVertex(), cluster);
-			}
-		for (Edge e : vertex.getOutEdges())
-			if (!cluster.contains(e.getInVertex()) && ClusteringUtility.getWeight(e) > 0) {
-				findAllConnectedVertices(g, e.getInVertex(), cluster);
-			}
-		return cluster;
 	}
 
 	public Cluster<Vertex> getCluster(Vertex i) {

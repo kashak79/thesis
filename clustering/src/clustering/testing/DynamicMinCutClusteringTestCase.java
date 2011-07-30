@@ -264,6 +264,28 @@ public class DynamicMinCutClusteringTestCase extends TestCase {
 	}
 	
 	@Test
+	public void testCalculateComponents() {
+		Graph g = new TinkerGraph();
+		Vertex v1 = g.addVertex(1);
+		Vertex v2 = g.addVertex(2);
+		Vertex v3 = g.addVertex(3);
+		Vertex v4 = g.addVertex(4);
+		Vertex v5 = g.addVertex(5);
+		Vertex v6 = g.addVertex(6);
+		Vertex v7 = g.addVertex(7);
+		g.addEdge(null, v1, v2, "s").setProperty("weight", 1d);
+		g.addEdge(null, v2, v3, "s").setProperty("weight", 1d);
+		g.addEdge(null, v1, v3, "s").setProperty("weight", 1d);
+		g.addEdge(null, v1, v4, "s").setProperty("weight", 1d);
+		g.addEdge(null, v5, v6, "s").setProperty("weight", 1d);
+		g.addEdge(null, v6, v5, "s").setProperty("weight", 1d);
+		Set<Set<Vertex>> setset = ClusteringUtility.calculateComponents(g);
+		for (Set<Vertex> set : setset)
+			assertTrue((set.size() == 4 && set.contains(v1) && set.contains(v2) && set.contains(v3) && set.contains(v4)) 
+					|| (set.size() == 2 && set.contains(v5) && set.contains(v6)) || (set.size() == 1 &&set.contains(v7)));
+	}
+	
+	@Test
 	public void testSequentialGusfield() {
 		
 	}

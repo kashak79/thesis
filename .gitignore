@@ -6,6 +6,8 @@
 /boek/*.aux
 /boek/*.log
 
+/clustering/*.class
+
 /experiments/*
 
 /vendor/*

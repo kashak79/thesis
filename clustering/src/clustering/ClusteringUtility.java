@@ -1,8 +1,10 @@
 package clustering;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
@@ -160,6 +162,34 @@ public class ClusteringUtility {
 		for (Edge e : vertex.getOutEdges())
 			if (!cluster.contains(e.getInVertex()) && adj.getAdjacency(e.getInVertex(), e.getOutVertex()) > 0) {
 				calculateCluster(g, e.getInVertex(), adj, cluster);
+			}
+		return cluster;
+	}
+	
+	public static Set<Set<Vertex>> calculateComponents(Graph t) {
+		Set<Set<Vertex>> set = new HashSet<Set<Vertex>>();
+		List<Vertex> list = new ArrayList<Vertex>();
+		for (Vertex v : t.getVertices()) {
+			list.add(v);
+		}
+		while (list.size() > 0) {
+			Set<Vertex> cluster = findAllConnectedVertices(t, list.get(0), new HashSet<Vertex>());
+			for (Vertex v : cluster)
+				list.remove(v);
+			set.add(cluster);
+		}
+		return set;
+	}
+
+	public static Set<Vertex> findAllConnectedVertices(Graph g, Vertex vertex, Set<Vertex> cluster) {
+		cluster.add(vertex);
+		for (Edge e : vertex.getInEdges())
+			if (!cluster.contains(e.getOutVertex()) && ClusteringUtility.getWeight(e) > 0) {
+				findAllConnectedVertices(g, e.getOutVertex(), cluster);
+			}
+		for (Edge e : vertex.getOutEdges())
+			if (!cluster.contains(e.getInVertex()) && ClusteringUtility.getWeight(e) > 0) {
+				findAllConnectedVertices(g, e.getInVertex(), cluster);
 			}
 		return cluster;
 	}
