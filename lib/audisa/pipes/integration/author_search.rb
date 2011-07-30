@@ -30,6 +30,6 @@ class Pipes::AuthorSearch < Pipes::Pipe
 			end
 		end
 		$redis.srem("#{pub}:emails", email)
-		enrich(:in, :out, :email { :email => email })
+		enrich(:in, :out, :email => { :email => email })
   end
 end

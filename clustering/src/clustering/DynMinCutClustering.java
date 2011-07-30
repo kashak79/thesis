@@ -55,7 +55,10 @@ public class DynMinCutClustering {
 	}
 
 	private double cutValue(Cluster<Vertex> cluster1, Cluster<Vertex> cluster2) {
-		// TODO Auto-generated method stub
+		double sum = 0;
+		for (Vertex v : cluster1)
+			for (Vertex u : cluster2)
+				sum += clustering.getAdjacency(v, u);
 		return 0;
 	}
 
@@ -121,9 +124,9 @@ public class DynMinCutClustering {
 		Graph T = ClusteringUtility.sequentialGusfieldAlgorithm(g);
 		
 		T.removeVertex(t);
-		Set<Cluster<Vertex>> clusters = calculateComponents(T);
+		Set<Set<Vertex>> clusters = calculateComponents(T);
 		
-		// Do something with these components;
+		// TODO make Cluster objects from Set ?
 		
 		for (Cluster<Vertex> cluster : clusters)
 			clustering.addCluster(cluster);
@@ -131,14 +134,14 @@ public class DynMinCutClustering {
 		clustering.removeCluster(cluster2);
 	}
 	
-	private Set<Cluster<Vertex>> calculateComponents(Graph t) {
-		Set<Cluster<Vertex>> set = new HashSet<Cluster<Vertex>>();
+	private Set<Set<Vertex>> calculateComponents(Graph t) {
+		Set<Set<Vertex>> set = new HashSet<Set<Vertex>>();
 		List<Vertex> list = new ArrayList<Vertex>();
 		for (Vertex v : t.getVertices()) {
 			list.add(v);
 		}
 		while (list.size() > 0) {
-			Cluster<Vertex> cluster = findAllConnectedVertices(list.get(0));
+			Set<Vertex> cluster = findAllConnectedVertices(t, list.get(0), new HashSet<Vertex>());
 			for (Vertex v : cluster)
 				list.remove(v);
 			set.add(cluster);
@@ -146,9 +149,17 @@ public class DynMinCutClustering {
 		return set;
 	}
 
-	private Cluster<Vertex> findAllConnectedVertices(Vertex vertex) {
-		// TODO calculate the cluster ... something like ClusteringUtility.calculateCluster ??
-		return null;
+	private Set<Vertex> findAllConnectedVertices(Graph g, Vertex vertex, Set<Vertex> cluster) {
+		cluster.add(vertex);
+		for (Edge e : vertex.getInEdges())
+			if (!cluster.contains(e.getOutVertex()) && ClusteringUtility.getWeight(e) > 0) {
+				findAllConnectedVertices(g, e.getOutVertex(), cluster);
+			}
+		for (Edge e : vertex.getOutEdges())
+			if (!cluster.contains(e.getInVertex()) && ClusteringUtility.getWeight(e) > 0) {
+				findAllConnectedVertices(g, e.getInVertex(), cluster);
+			}
+		return cluster;
 	}
 
 	public Cluster<Vertex> getCluster(Vertex i) {
