@@ -15,7 +15,11 @@ class Helpers::QueryBuilder
     end
 
     def name_inst
-      append 'out("name").both("name")'
+      append 'out("name").both("name")' # both????
+    end
+
+    def match_inst
+      append 'out("name").both("matches").in("name")'
     end
 
     def co_inst

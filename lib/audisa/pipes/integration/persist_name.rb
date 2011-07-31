@@ -16,7 +16,7 @@ class Pipes::PersistName < Pipes::Pipe
     first_name = name_parts[0..-2] * ' '
     # avoid double names
     name = nil
-    @locking.lock(instance[:name]) do
+    @locking.locked(instance[:name]) do
       dyn_out = :new
       # does the name exist?
       name = @graph.index(:name, instance[:name]).first
