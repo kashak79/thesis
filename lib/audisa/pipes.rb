@@ -18,6 +18,10 @@ module Pipes
 	autoload :PublicationSearch,		 'audisa/pipes/integration/publication_search'
 	autoload :PublicationText,			 'audisa/pipes/integration/publication_text'
 	autoload :AuthorSearch,					 'audisa/pipes/integration/author_search'
+	autoload :AbstractSearch, 			 'audisa/pipes/integration/abstract_search'
+	autoload :PublicationTitlePosTagging,	'audisa/pipes/integration/publication_title_pos_tagging'
+	autoload :PublicationAbstractPosTagging,	'audisa/pipes/integration/publication_abstract_pos_tagging'
+	autoload :TagsToCategory, 			 'audisa/pipes/integration/tags_to_category'
 
 	# clustering
 	autoload :PersistSimilarity,      'audisa/pipes/clustering/persist_similarity'

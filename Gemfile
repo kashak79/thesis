@@ -9,6 +9,7 @@ gem 'redis-lock'
 gem 'amatch'
 gem 'docsplit'
 gem 'rbing'
+gem 'engtagger'
 
 group :development do
   gem 'rake'
