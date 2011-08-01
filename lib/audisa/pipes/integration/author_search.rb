@@ -10,8 +10,10 @@ class Pipes::AuthorSearch < Pipes::Pipe
 		if (!$redis.exists(pub)) then
 			file = File.open(_in.get[:full][:path])
 			content = file.read
-			r = Regexp.new(/\b[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}\b/)
-			emails = content.scan(r).uniq
+			emails = content.scan(/\{\b(\w+\b( \b\w+\b)*)\}(@\w+\.[a-zA-Z]{2,3})\b/)
+			emails.map! { |result| result[0].split.map{ |es| es + result[2]}}
+			emails += content.scan(/\b[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}\b/)
+			emails.flatten!.uniq!
 			$redis.set pub, 1
 			emails.each { |e| $redis.sadd("#{pub}:emails", e) }
 		else
