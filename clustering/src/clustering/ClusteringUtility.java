@@ -166,23 +166,23 @@ public class ClusteringUtility {
 		return cluster;
 	}
 	
-	public static Set<Set<Vertex>> calculateComponents(Graph t) {
-		Set<Set<Vertex>> set = new HashSet<Set<Vertex>>();
-		List<Vertex> list = new ArrayList<Vertex>();
+	public static Set<Set<Integer>> calculateComponents(Graph t) {
+		Set<Set<Integer>> set = new HashSet<Set<Integer>>();
+		List<Integer> list = new ArrayList<Integer>();
 		for (Vertex v : t.getVertices()) {
-			list.add(v);
+			list.add((Integer) v.getId());
 		}
 		while (list.size() > 0) {
-			Set<Vertex> cluster = findAllConnectedVertices(t, list.get(0), new HashSet<Vertex>());
-			for (Vertex v : cluster)
+			Set<Integer> cluster = findAllConnectedVertices(t, t.getVertex(list.get(0)), new HashSet<Integer>());
+			for (Integer v : cluster)
 				list.remove(v);
 			set.add(cluster);
 		}
 		return set;
 	}
 
-	public static Set<Vertex> findAllConnectedVertices(Graph g, Vertex vertex, Set<Vertex> cluster) {
-		cluster.add(vertex);
+	public static Set<Integer> findAllConnectedVertices(Graph g, Vertex vertex, Set<Integer> cluster) {
+		cluster.add((Integer) vertex.getId());
 		for (Edge e : vertex.getInEdges())
 			if (!cluster.contains(e.getOutVertex()) && ClusteringUtility.getWeight(e) > 0) {
 				findAllConnectedVertices(g, e.getOutVertex(), cluster);
@@ -234,41 +234,4 @@ class AdjacencyLocal implements AdjacencyInterface {
 		setAdjacency(v, u, weight + getAdjacency(v, u));
 	}
 	
-}
-
-class Couple<E> {
-	
-	E e;
-	E v;
-	
-	Couple(E e, E v) {
-		this.e = e;
-		this.v = v;
-	}
-	
-	void set(E e, E v) {
-		this.e = e;
-		this.v = v;
-	}
-	
-	E getSource() {
-		return e;
-	}
-	
-	E getSink() {
-		return v;
-	}
-	
-	@Override
-	public boolean equals(Object o) {
-		if (o == this)
-			return true;
-		if (!(o instanceof Couple))
-			return false;
-		if (((Couple)o).getSink() == e && ((Couple)o).getSource() == v)
-			return true;
-		if (((Couple)o).getSink() == v && ((Couple)o).getSource() == e)
-			return true;
-		return false;
-	}
 }

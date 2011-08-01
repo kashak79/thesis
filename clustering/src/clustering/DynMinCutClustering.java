@@ -124,12 +124,12 @@ public class DynMinCutClustering {
 		Graph T = ClusteringUtility.sequentialGusfieldAlgorithm(g);
 		
 		T.removeVertex(t);
-		Set<Set<Vertex>> clusters = ClusteringUtility.calculateComponents(T);
+		//Set<Set<Vertex>> clusters = ClusteringUtility.calculateComponents(T);
 		
 		// TODO make Cluster objects from Set ?
 		
-		for (Cluster<Vertex> cluster : clusters)
-			clustering.addCluster(cluster);
+		//for (Cluster<Vertex> cluster : clusters)
+		//	clustering.addCluster(cluster);
 		clustering.removeCluster(cluster1);
 		clustering.removeCluster(cluster2);
 	}
