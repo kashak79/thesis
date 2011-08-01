@@ -16,7 +16,7 @@ class Pipes::PersistFamily < Pipes::Pipe
     family_name = name_parts.last
     # first lock to avoid creating 2 equal families
     family = nil
-    @locking.lock(family_name) do
+    @locking.locked(family_name) do
       # does the family exist?
       family = @graph.index(:family, family_name).first
       if !family

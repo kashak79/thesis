@@ -30,7 +30,7 @@ class Pipes::PublicationSearch < Pipes::Pipe
 		else
 			enrich(:in, :web, :web => _in.get[:publication][:web])
 		end
-			
+
   end
 
 end

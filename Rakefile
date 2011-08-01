@@ -7,6 +7,7 @@ require 'tasks/whitespace'
 require 'tasks/graph'
 require 'tasks/resque'
 require 'tasks/rspec'
+require 'tasks/visualize'
 
 task :test => :environment do
   load 'testpipe.rb'

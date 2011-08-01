@@ -51,14 +51,30 @@ class Helpers::Rexster
     request(:post, '/edges', :params => {:_outV => from, :_inV => to, :_label => label})
   end
 
+  def delete_edge(id)
+    request(:delete, "/edges/#{id}")
+  end
+
+  def update_edge(id, properties)
+    request(:post, "/edges/#{id}", :params => properties)
+  end
+
   # query out edges
   def out(label, from)
     request(:get, "/vertices/#{from}/outE", :params => {:_label => label})
   end
 
+  def in(label, from)
+    request(:get, "/vertices/#{from}/inE", :params => {:_label => label})
+  end
+
   # query both edges
   def both(label, from)
     request(:get, "/vertices/#{from}/bothE", :params => {:_label => label})
+  end
+
+  def delete_vertex(id)
+    request(:delete, "/vertices/#{id}")
   end
 
   # perform a query on a vertex
@@ -69,7 +85,9 @@ class Helpers::Rexster
   def table(vertex, query)
     a = request(:get, "/vertices/#{vertex}/tp/gremlin", :params => {:script => query})
     # convert table string to ruby
-    Yajl::Parser.parse("[#{a[0][1..-2].gsub('[','{').gsub(']','}').gsub("'",'"')}]") if a && a[0]
+    Yajl::Parser.parse("[#{a[0][1..-2].gsub('[','{').gsub(']','}').gsub("'",'"')}]").map { |h|
+      h.kind_of?(Hash) ? h.symbolize! : h
+    } if a && a[0]
   end
 
 end

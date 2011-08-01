@@ -133,6 +133,18 @@ public class DynMinCutClustering {
 		clustering.removeCluster(cluster1);
 		clustering.removeCluster(cluster2);
 	}
+	
+	public void case3(Object v1, Object v2, Object idCluster1, Object idCluster2, double alpha) {
+		Vertex v = graph.getVertex(v1);
+		Vertex u = graph.getVertex(v2);
+		Set<Vertex> cluster1 = new HashSet<Vertex>();
+		for (Edge e : graph.getVertex(idCluster1).getInEdges("instance_of"))
+			cluster1.add(e.getOutVertex());
+		Set<Vertex> cluster2 = new HashSet<Vertex>();
+		for (Edge e : graph.getVertex(idCluster2).getInEdges("instance_of"))
+			cluster1.add(e.getOutVertex());
+		this.case3(v, u, cluster1, cluster2, alpha);
+	}
 
 	public Cluster<Vertex> getCluster(Vertex i) {
 		// TODO implement

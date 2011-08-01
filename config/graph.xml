@@ -17,7 +17,7 @@
             <graph-enabled>true</graph-enabled>
             <graph-name>thesis</graph-name>
             <graph-type>neo4jgraph</graph-type>
-            <graph-file>/tmp/thesis-graph</graph-file>
+            <graph-file>/tmp/thesis-graph2</graph-file>
             <extensions>
               <allows>
                 <allow>tp:gremlin</allow>
