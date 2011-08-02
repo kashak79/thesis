@@ -5,7 +5,6 @@ import java.util.Map;
 import java.util.Set;
 
 import com.tinkerpop.blueprints.pgm.Graph;
-import com.tinkerpop.blueprints.pgm.Vertex;
 import com.tinkerpop.blueprints.pgm.impls.tg.TinkerGraph;
 
 public class CaseThree {
@@ -66,7 +65,46 @@ public class CaseThree {
 		for (Set<Integer> set : result)
 			if (set.contains(x))
 				set.remove(x);
+		
+		Set<Integer> newFriends;
+		Set<Integer> exFriends;
+		for (int i : cluster1) {
+			newFriends = findCluster(i, result);
+			newFriends.removeAll(cluster1);
+			exFriends = cluster1;
+			exFriends.removeAll(newFriends);
+			sum = 0;
+			for (int ex : exFriends)
+				sum -= local.getAdjacency(i, ex);
+			for (int newF : newFriends)
+				sum += local.getAdjacency(i, newF);
+			data.increaseIcw(i, sum);
+			data.increaseOcw(i, -sum);
+		}
+
+		for (int i : cluster2) {
+			newFriends = findCluster(i, result);
+			newFriends.removeAll(cluster2);
+			exFriends = cluster2;
+			exFriends.removeAll(newFriends);
+			sum = 0;
+			for (int ex : exFriends)
+				sum -= local.getAdjacency(i, ex);
+			for (int newF : newFriends)
+				sum += local.getAdjacency(i, newF);
+			data.increaseIcw(i, sum);
+			data.increaseOcw(i, -sum);
+		}
+		
 		return ClusteringUtility.calculateComponents(tree);
+	}
+
+	private Set<Integer> findCluster(int i, Set<Set<Integer>> result) {
+		for (Set<Integer> set : result)
+			if (set.contains(i))
+				return set;
+		// This should never happen as every index should be in one cluster
+		throw new NullPointerException();
 	}
 
 }
