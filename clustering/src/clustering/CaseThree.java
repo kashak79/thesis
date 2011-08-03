@@ -1,10 +1,12 @@
 package clustering;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
 import com.tinkerpop.blueprints.pgm.Graph;
+import com.tinkerpop.blueprints.pgm.Vertex;
 import com.tinkerpop.blueprints.pgm.impls.tg.TinkerGraph;
 
 public class CaseThree {
@@ -24,17 +26,26 @@ public class CaseThree {
 		this.alpha = alpha;
 		x = -1;
 		t = -2;
+		this.data = data;
 	}
 	
 	public Set<Set<Integer>> run() {
-		MagicDataRetrieval local = new LocalDataRetrieval();
+		LocalDataRetrieval local = new LocalDataRetrieval();
 		// CONTRACT(cluster1, cluster2)
 		Graph g = new TinkerGraph();
 		g.addVertex(t);
 		g.addVertex(x);
 		double sum;
+		double temp;
+		// Copying entries of A to A' and calculating the weight of the edges going to outside clusters
+		// First for all vertices in cluster1
 		for (int i : cluster1) {
 			sum = 0;
+			for (int i1 : cluster1) {
+				temp = data.getAdjacency(i, i1);
+				local.setAdjacency(i, i1, temp);
+				sum += temp;
+			}
 			for (int j : cluster2) {
 				local.setAdjacency(i, j, data.getAdjacency(i, j));
 				sum += local.getAdjacency(i, j);
@@ -43,6 +54,22 @@ public class CaseThree {
 			local.setAdjacency(i, x, sum);
 			local.setAdjacency(x, i, sum);
 		}
+		// Then for all vertices in cluster2
+		for (int i : cluster2) {
+			sum = 0;
+			for (int i1 : cluster2) {
+				local.setAdjacency(i, i1, data.getAdjacency(i, i1));
+				sum += local.getAdjacency(i, i1);
+			}
+			for (int j : cluster1) {
+				local.setAdjacency(i, j, data.getAdjacency(i, j));
+				sum += local.getAdjacency(i, j);
+			}
+			sum = data.getIcw(i) + data.getOcw(i) - sum;
+			local.setAdjacency(i, x, sum);
+			local.setAdjacency(x, i, sum);
+		}
+		// Adding the new vertices to a temporary graph g and adding an artificial sink t
 		for (int i : cluster1) {
 			g.addVertex(i);
 			local.setAdjacency(i, t, alpha);
@@ -53,11 +80,18 @@ public class CaseThree {
 			local.setAdjacency(j, t, alpha);
 			local.setAdjacency(t, j, alpha);
 		}
+		// Connecting the sink t with the contracted clusters, represented by the single vertex x
 		local.setAdjacency(t, x, v - cluster1.size() - cluster2.size());
 		local.setAdjacency(x, t, v - cluster1.size() - cluster2.size());
 		
+		// Little hack because sequentialGusFieldAlgorithm uses the edges in the graph AND the adjacencymatrix ...
+		for (Vertex i : g.getVertices())
+			for (Vertex j : g.getVertices())
+				if (local.getAdjacency(i, j) > 0)
+					g.addEdge(null, i, j, "s").setProperty("weight", local.getAdjacency(i, j));
+		
 		// Calculate min-cut tree
-		Graph tree = ClusteringUtility.sequentialGusfieldAlgorithm(g, null);
+		Graph tree = ClusteringUtility.sequentialGusfieldAlgorithm(g, local);
 		
 		tree.removeVertex(tree.getVertex(t));
 		
@@ -96,20 +130,23 @@ public class CaseThree {
 			data.increaseOcw(i, -sum);
 		}
 		
-		return ClusteringUtility.calculateComponents(tree);
+		return result;
 	}
 
 	private Set<Integer> findCluster(int i, Set<Set<Integer>> result) {
+		Set<Integer> r = new HashSet<Integer>();
 		for (Set<Integer> set : result)
 			if (set.contains(i))
-				return set;
+				r.addAll(set);
+		if (r.size() > 0)
+			return r;
 		// This should never happen as every index should be in one cluster
 		throw new NullPointerException();
 	}
 
 }
 
-class LocalDataRetrieval implements MagicDataRetrieval {
+class LocalDataRetrieval implements MagicDataRetrieval, AdjacencyInterface {
 	
 	Map<Integer, Map<Integer, Double>> adjacency;
 	Map<Integer, Double> icw;
@@ -167,11 +204,29 @@ class LocalDataRetrieval implements MagicDataRetrieval {
 		if (!adjacency.containsKey(v))
 			adjacency.put(v, new HashMap<Integer, Double>());
 		adjacency.get(v).put(u, weight);
+		if (!adjacency.containsKey(u))
+			adjacency.put(u, new HashMap<Integer, Double>());
+		adjacency.get(u).put(v, weight);
 	}
 
 	@Override
 	public void increaseAdjacency(int v, int u, double weight) {
 		setAdjacency(v, u, weight + getAdjacency(v, u));
+	}
+
+	@Override
+	public double getAdjacency(Vertex v, Vertex u) {
+		return this.getAdjacency(Integer.parseInt((String)v.getId()), Integer.parseInt((String)u.getId()));
+	}
+
+	@Override
+	public void setAdjacency(Vertex v, Vertex u, double weight) {
+		this.setAdjacency(Integer.parseInt((String)v.getId()), Integer.parseInt((String)u.getId()), weight);
+	}
+
+	@Override
+	public void increaseAdjacency(Vertex v, Vertex u, double weight) {
+		this.increaseAdjacency(Integer.parseInt((String)v.getId()), Integer.parseInt((String)u.getId()), weight);
 	}
 	
 }

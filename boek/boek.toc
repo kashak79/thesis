@@ -1,4 +1,4 @@
-\select@language {dutch}
+\select@language {english}
 \contentsline {chapter}{\numberline {1}Introduction}{1}{chapter.1}
 \contentsline {section}{\numberline {1.1}Idea}{1}{section.1.1}
 \contentsline {chapter}{\numberline {2}State of the art}{2}{chapter.2}
@@ -39,23 +39,3 @@
 \contentsline {subsection}{\numberline {3.3.4}Category Builder}{13}{subsection.3.3.4}
 \contentsline {subsection}{\numberline {3.3.5}Disambiguator}{14}{subsection.3.3.5}
 \contentsline {subsection}{\numberline {3.3.6}Data Merger}{14}{subsection.3.3.6}
-\contentsline {chapter}{\numberline {4}Important components}{15}{chapter.4}
-\contentsline {section}{\numberline {4.1}Disambiguator}{15}{section.4.1}
-\contentsline {section}{\numberline {4.2}Disambiguation rules}{15}{section.4.2}
-\contentsline {subsection}{\numberline {4.2.1}Prequel - Doc split}{15}{subsection.4.2.1}
-\contentsline {subsection}{\numberline {4.2.2}Place of publication rule*}{16}{subsection.4.2.2}
-\contentsline {subsection}{\numberline {4.2.3}Co-author clustering}{16}{subsection.4.2.3}
-\contentsline {subsection}{\numberline {4.2.4}Name notation rule}{16}{subsection.4.2.4}
-\contentsline {subsection}{\numberline {4.2.5}Affiliation rule*}{16}{subsection.4.2.5}
-\contentsline {subsection}{\numberline {4.2.6}Interest rule}{16}{subsection.4.2.6}
-\contentsline {section}{\numberline {4.3}Clustering algorithm}{17}{section.4.3}
-\contentsline {subsection}{\numberline {4.3.1}Introduction}{17}{subsection.4.3.1}
-\contentsline {subsection}{\numberline {4.3.2}Minimum-cut tree algorithm}{17}{subsection.4.3.2}
-\contentsline {subsection}{\numberline {4.3.3}Cut clustering}{19}{subsection.4.3.3}
-\contentsline {paragraph}{Intra-cluster edge addition}{20}{section*.2}
-\contentsline {paragraph}{Inter-cluster edge addition}{20}{section*.3}
-\contentsline {subparagraph}{Merging of clusters}{21}{section*.4}
-\contentsline {subparagraph}{Contraction of clusters}{21}{section*.5}
-\contentsline {chapter}{\numberline {5}Setup and Results}{24}{chapter.5}
-\contentsline {section}{\numberline {5.1}Setup}{24}{section.5.1}
-\contentsline {chapter}{\numberline {6}Future work}{25}{chapter.6}

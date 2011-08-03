@@ -20,8 +20,10 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import clustering.CaseThree;
 import clustering.ClusteringUtility;
 import clustering.DynamicMinCutClustering;
+import clustering.MagicDataRetrieval;
 
 import com.tinkerpop.blueprints.pgm.Edge;
 import com.tinkerpop.blueprints.pgm.Graph;
@@ -116,11 +118,11 @@ public class DynamicMinCutClusteringTestCase extends TestCase {
 		g.addEdge(1, v1, v2, "s").setProperty("weight", 1d);
 		g.addEdge(2, v2, v3, "s").setProperty("weight", 2d);
 		g.addEdge(3, v3, v4, "s").setProperty("weight", 2d);
-		g.addEdge(4, v2, v4, "s").setProperty("weight", 1d);
+		g.addEdge(4, v2, v4, "s").setProperty("weight", 3d);
 		g.addEdge(null, v2, v1, "s").setProperty("weight", 1d);
 		g.addEdge(null, v3, v2, "s").setProperty("weight", 2d);
 		g.addEdge(null, v4, v3, "s").setProperty("weight", 2d);
-		g.addEdge(null, v4, v2, "s").setProperty("weight", 1d);
+		g.addEdge(null, v4, v2, "s").setProperty("weight", 3d);
 		
 		Graph t = ClusteringUtility.sequentialGusfieldAlgorithm(g);
 		// TODO is this graph unique ? I don't think so... What can we test ?
@@ -283,6 +285,161 @@ public class DynamicMinCutClusteringTestCase extends TestCase {
 		for (Set<Vertex> set : setset)
 			assertTrue((set.size() == 4 && set.contains(v1) && set.contains(v2) && set.contains(v3) && set.contains(v4)) 
 					|| (set.size() == 2 && set.contains(v5) && set.contains(v6)) || (set.size() == 1 &&set.contains(v7)));*/
+	}
+	
+	@Test
+	public void testCaseThree() {
+		Set<Integer> c2 = new HashSet<Integer>();
+		int numberVertices = 5;
+		Set<Integer> c1 = new HashSet<Integer>();
+		c1.add(1);
+		c1.add(2);
+		c1.add(0);
+		c2.add(3);
+		c2.add(4);
+
+		final double [] icw = new double[] {0.3d,0.7d,0.8d,0.4d,0.4d};
+		final double [] ocw = new double[] {0.0d,0.3d,0.8d,1.1d,0.0d};
+		double adj[][] = new double [5][5];
+		adj[0][1] = 0.1d;
+		adj[0][2] = 0.2d;
+		adj[1][2] = 0.6d;
+		adj[1][3] = 0.3d;
+		adj[2][3] = 0.8d;
+		adj[3][4] = 0.4d;
+		adj[1][0] = 0.1d;
+		adj[2][0] = 0.2d;
+		adj[2][1] = 0.6d;
+		adj[3][1] = 0.3d;
+		adj[3][2] = 0.8d;
+		adj[4][3] = 0.4d;
+		final double a[][] = adj.clone();
+		MagicDataRetrieval mdr = new MagicDataRetrieval() {
+
+			
+			@Override
+			public double getIcw(int v) {
+				return icw[v];
+			}
+
+			@Override
+			public double getOcw(int v) {
+				return ocw[v];
+			}
+
+			@Override
+			public void setIcw(int v, double value) {
+				icw[v] = value;
+			}
+
+			@Override
+			public void setOcw(int v, double value) {
+				ocw[v] = value;
+			}
+
+			@Override
+			public void increaseIcw(int v, double amount) {
+				icw[v] += amount;
+			}
+
+			@Override
+			public void increaseOcw(int v, double amount) {
+				ocw[v] += amount;				
+			}
+
+			@Override
+			public double getAdjacency(int v, int u) {
+				return a[v][u];
+			}
+
+			@Override
+			public void setAdjacency(int v, int u, double weight) {
+				a[v][u] = weight;
+			}
+
+			@Override
+			public void increaseAdjacency(int v, int u, double weight) {
+				a[v][u] += weight;
+			}
+			
+		};
+		CaseThree c3 = new CaseThree(c1, c2, numberVertices, 0.3, mdr);
+		Set<Set<Integer>> result = c3.run();
+		assertNotNull(result);
+	}
+	
+	@Test
+	public void testCaseThreeMinProblem() {
+		Set<Integer> c2 = new HashSet<Integer>();
+		int numberVertices = 2;
+		Set<Integer> c1 = new HashSet<Integer>();
+		c1.add(1);
+		c2.add(0);
+
+		final double [] icw = new double[] {0,0};
+		final double [] ocw = new double[] {0.1,0.1};
+		double adj[][] = new double [2][2];
+		adj[0][1] = 0.1d;
+		adj[1][0] = 0.1d;
+		final double a[][] = adj.clone();
+		MagicDataRetrieval mdr = new MagicDataRetrieval() {
+
+			
+			@Override
+			public double getIcw(int v) {
+				return icw[v];
+			}
+
+			@Override
+			public double getOcw(int v) {
+				return ocw[v];
+			}
+
+			@Override
+			public void setIcw(int v, double value) {
+				icw[v] = value;
+			}
+
+			@Override
+			public void setOcw(int v, double value) {
+				ocw[v] = value;
+			}
+
+			@Override
+			public void increaseIcw(int v, double amount) {
+				icw[v] += amount;
+			}
+
+			@Override
+			public void increaseOcw(int v, double amount) {
+				ocw[v] += amount;				
+			}
+
+			@Override
+			public double getAdjacency(int v, int u) {
+				return a[v][u];
+			}
+
+			@Override
+			public void setAdjacency(int v, int u, double weight) {
+				a[v][u] = weight;
+				a[u][v] = weight;
+			}
+
+			@Override
+			public void increaseAdjacency(int v, int u, double weight) {
+				a[v][u] += weight;
+				a[u][v] += weight;
+			}
+			
+		};
+		CaseThree c3 = new CaseThree(c1, c2, numberVertices, 0.3, mdr);
+		Set<Set<Integer>> result = c3.run();
+		// 3 as there is also an empty set
+		assertTrue(result.size() == 3);
+		c3 = new CaseThree(c1, c2, numberVertices, 0.03, mdr);
+		result = c3.run();
+		assertTrue(result.size() == 2);
 	}
 	
 	@Test
