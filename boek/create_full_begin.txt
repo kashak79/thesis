@@ -8,7 +8,7 @@
 %
 
 \documentclass[11pt,a4paper,oneside,notitlepage]{book}
-\usepackage[english,dutch]{babel}
+\usepackage[english]{babel}
 \usepackage{algorithmic}
 \usepackage{algorithm}
 \usepackage{amsthm}

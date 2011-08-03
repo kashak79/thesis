@@ -1,0 +1,13 @@
+\BOOKMARK [0][-]{chapter.1}{Important\040components}{}% 1
+\BOOKMARK [1][-]{section.1.1}{Disambiguator}{chapter.1}% 2
+\BOOKMARK [1][-]{section.1.2}{Disambiguation\040rules}{chapter.1}% 3
+\BOOKMARK [2][-]{subsection.1.2.1}{Prequel\040-\040Doc\040split}{section.1.2}% 4
+\BOOKMARK [2][-]{subsection.1.2.2}{Place\040of\040publication\040rule*}{section.1.2}% 5
+\BOOKMARK [2][-]{subsection.1.2.3}{Co-author\040clustering}{section.1.2}% 6
+\BOOKMARK [2][-]{subsection.1.2.4}{Name\040notation\040rule}{section.1.2}% 7
+\BOOKMARK [2][-]{subsection.1.2.5}{Affiliation\040rule*}{section.1.2}% 8
+\BOOKMARK [2][-]{subsection.1.2.6}{Interest\040rule}{section.1.2}% 9
+\BOOKMARK [1][-]{section.1.3}{Clustering\040algorithm}{chapter.1}% 10
+\BOOKMARK [2][-]{subsection.1.3.1}{Introduction}{section.1.3}% 11
+\BOOKMARK [2][-]{subsection.1.3.2}{Minimum-cut\040tree\040algorithm}{section.1.3}% 12
+\BOOKMARK [2][-]{subsection.1.3.3}{Cut\040clustering}{section.1.3}% 13
