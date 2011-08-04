@@ -1,5 +1,6 @@
 package clustering;
 
+
 import com.tinkerpop.blueprints.pgm.Vertex;
 
 public interface AdjacencyInterface {

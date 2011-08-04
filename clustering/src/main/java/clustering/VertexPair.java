@@ -1,5 +1,6 @@
 package clustering;
 
+
 public class VertexPair<V> {
 	
 	private V source;

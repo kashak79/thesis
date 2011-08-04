@@ -1,5 +1,6 @@
 package clustering;
 
+
 public interface MagicDataRetrieval {	
 	
 	double getIcw(int v);
