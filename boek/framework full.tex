@@ -8,11 +8,12 @@
 %
 
 \documentclass[11pt,a4paper,oneside,notitlepage]{book}
-\usepackage[english,dutch]{babel}
+\usepackage[english]{babel}
 \usepackage{algorithmic}
 \usepackage{algorithm}
 \usepackage{amsthm}
 \usepackage{hyperref}
+\usepackage{array}
 %\usepackage[nottoc]{tocbibind} % Bibliografie in ToC; zie tocbibind.dvi
 
 % marges aanpassen
@@ -84,6 +85,7 @@
 % hoofdstukken
 \mainmatter
 
-\include{components}
+\include{framework}
+\bibliography{collection}
 \backmatter
 \end{document}

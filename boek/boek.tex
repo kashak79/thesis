@@ -8,11 +8,12 @@
 %
 
 \documentclass[11pt,a4paper,oneside,notitlepage]{book}
-\usepackage[english,dutch]{babel}
+\usepackage[english]{babel}
 \usepackage{algorithmic}
 \usepackage{algorithm}
 \usepackage{amsthm}
 \usepackage{hyperref}
+\usepackage{array}
 %\usepackage[nottoc]{tocbibind} % Bibliografie in ToC; zie tocbibind.dvi
 
 % marges aanpassen
@@ -95,7 +96,7 @@
 \frontmatter
 
 % inhoudstafel
-%\tableofcontents
+\tableofcontents
 
 % opmaak voor het eigenlijke boek; onderstaande lijnen
 % weglaten als de eerste regel van een nieuwe alinea moet
@@ -108,11 +109,11 @@
 \mainmatter
 
 % hier worden de hoofdstukken ingevoegd (\includes)
-%\include{inleiding}
+\include{inleiding}
 
-%\include{sota}
+\include{sota}
 
-%\include{framework}
+\include{framework}
 
 %\include{components}
 
@@ -133,12 +134,12 @@
 %\include{referenties}
 
 % De bibliografie en de index
-%\bibliography{collection}
+\bibliography{collection}
 \backmatter
 
 % eventueel: lijst van figuren en tabellen
-%\listoffigures
-%\listoftables
+\listoffigures
+\listoftables
 
 % lege pagina (!!)
 

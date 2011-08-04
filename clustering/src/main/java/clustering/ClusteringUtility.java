@@ -1,9 +1,9 @@
 package clustering;
 
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -127,6 +127,7 @@ public class ClusteringUtility {
 				adj.setAdjacency(e.getInVertex(), e.getOutVertex(), 0);
 			Set<Vertex> cluster1 = calculateCluster(g, vertex[i], adj, new HashSet<Vertex>());
 			for (int j = 1; j < n; j++) {
+				// Don't change the sink and the source
 				if (j == i || j == tree[i])
 					continue;
 				// If the vertex and the parent are currently not in the same cluster (actually components divided by the cut)
@@ -144,7 +145,7 @@ public class ClusteringUtility {
 		// Generate the graph
 		for (i=0; i < n; i++) {
 			if (flow[i] != 0)
-				t.addEdge(null, vertex[i], vertex[tree[i]], "similarity").setProperty("weight", flow[i]);
+				t.addEdge(null, t.getVertex(Integer.parseInt((String)vertex[i].getId())), t.getVertex(Integer.parseInt((String)vertex[tree[i]].getId())), "similarity").setProperty("weight", flow[i]);
 		}
 		return t;
 	}
@@ -170,7 +171,7 @@ public class ClusteringUtility {
 		Set<Set<Integer>> set = new HashSet<Set<Integer>>();
 		List<Integer> list = new ArrayList<Integer>();
 		for (Vertex v : t.getVertices()) {
-			list.add(Integer.valueOf((String) v.getId()));
+			list.add(Integer.parseInt((String) v.getId()));
 		}
 		while (list.size() > 0) {
 			Set<Integer> cluster = findAllConnectedVertices(t, t.getVertex(list.get(0)), new HashSet<Integer>());
@@ -182,13 +183,13 @@ public class ClusteringUtility {
 	}
 
 	public static Set<Integer> findAllConnectedVertices(Graph g, Vertex vertex, Set<Integer> cluster) {
-		cluster.add(Integer.valueOf((String) vertex.getId()));
+		cluster.add(Integer.parseInt((String)vertex.getId()));
 		for (Edge e : vertex.getInEdges())
-			if (!cluster.contains(e.getOutVertex()) && ClusteringUtility.getWeight(e) > 0) {
+			if (!cluster.contains(Integer.parseInt((String)e.getOutVertex().getId())) && ClusteringUtility.getWeight(e) > 0) {
 				findAllConnectedVertices(g, e.getOutVertex(), cluster);
 			}
 		for (Edge e : vertex.getOutEdges())
-			if (!cluster.contains(e.getInVertex()) && ClusteringUtility.getWeight(e) > 0) {
+			if (!cluster.contains(Integer.parseInt((String)e.getInVertex().getId())) && ClusteringUtility.getWeight(e) > 0) {
 				findAllConnectedVertices(g, e.getInVertex(), cluster);
 			}
 		return cluster;
