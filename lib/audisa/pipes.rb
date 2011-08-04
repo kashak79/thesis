@@ -8,7 +8,7 @@ module Pipes
   autoload :Split,                 'audisa/pipes/split'
   autoload :Merge,                 'audisa/pipes/merge'
   autoload :Dependency,            'audisa/pipes/dependency'
-
+	autoload :MagicFacts,						 'audisa/pipes/magic_facts'
   # integration pipes
   autoload :Integration,           'audisa/pipes/integration/integration'
   autoload :NameMatching,          'audisa/pipes/integration/name_matching'

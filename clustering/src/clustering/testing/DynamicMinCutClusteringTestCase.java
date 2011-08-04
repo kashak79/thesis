@@ -378,9 +378,11 @@ public class DynamicMinCutClusteringTestCase extends TestCase {
 
 		final double [] icw = new double[] {0,0};
 		final double [] ocw = new double[] {0.1,0.1};
-		double adj[][] = new double [2][2];
+		double adj[][] = new double [3][3];
 		adj[0][1] = 0.1d;
 		adj[1][0] = 0.1d;
+		adj[0][2] = 0.01;
+		adj[2][0] = 0.01;
 		final double a[][] = adj.clone();
 		MagicDataRetrieval mdr = new MagicDataRetrieval() {
 
@@ -433,7 +435,7 @@ public class DynamicMinCutClusteringTestCase extends TestCase {
 			}
 			
 		};
-		CaseThree c3 = new CaseThree(c1, c2, numberVertices, 0.3, mdr);
+		CaseThree c3 = new CaseThree(c1, c2, numberVertices, 0.03, mdr);
 		Set<Set<Integer>> result = c3.run();
 		// 3 as there is also an empty set
 		assertTrue(result.size() == 3);
