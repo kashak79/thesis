@@ -1,5 +1,6 @@
 class Pipes::PersistSimilarity < Pipes::Pipe
 
+  CLUSTERING = File.expand_path("clustering")
   ALPHA = 0.1
 
   def initialize(graph)
@@ -21,20 +22,13 @@ class Pipes::PersistSimilarity < Pipes::Pipe
     from   = similarity[:from]
     to     = similarity[:to]
     weight = similarity[:weight]
-
-    p @graph.query(from, @b.v.out('"published"')).first[:title]
-    p @graph.query(from, @b.v).first[:name]
-    p @graph.query(to, @b.v.out('"published"')).first[:title]
-    p @graph.query(to, @b.v).first[:name]
-
     # lock the 2 instances so that clusters are
     # not changed during the asking and watching/locking the clusters!
-    @locking.lock(:instance, from, to)
+    @locking.lock(:graph, 1)
+    #@locking.lock(:instance, from, to)
     # now get cluster nodes
     fromcluster = @graph.out(:instance_of, from).first[:_inV]
     tocluster   = @graph.out(:instance_of, to).first[:_inV]
-    p fromcluster
-    p tocluster
     # now start watching the clusters for lock changes
     # (when a reclustering begins) -> optimistic locking
     # will not occur alot
@@ -44,110 +38,144 @@ class Pipes::PersistSimilarity < Pipes::Pipe
     if fromcluster == tocluster
       puts "INTRA CLUSTER SIMILARITY"
       # intra-cluster similarity addition -> just watch the locks!
-      $redis.watch(fromcluster)
-      $redis.watch(tocluster)
+      # $redis.watch("lock:cluster#{fromcluster}")
+      # $redis.watch("lock:cluster#{tocluster}")
+      # $redis.lock(:cluster, fromcluster, tocluster)
       # now the instances can be unlocked (watching the clusters now)
-      @locking.unlock(:instance, from, to)
       # do the processing
-      intra_add(from, to, weight)
+      $redis.multi do
+        # update adjacency matrix
+        $redis.incrby(a(from, to), weight)
+        # update ICW and OCW
+        $redis.incrby("icw:#{from}", weight)
+        $redis.incrby("icw:#{to}", weight)
+      end
+      # $redis.unlock(:cluster, fromcluster, tocluster)
+      #@locking.unlock(:instance, from, to)
     else
       puts "INTER CLUSTER SIMILARITY"
       # inter-cluster similarity addition -> take locks on the clusters
       # nothing (similarity plane) in the clusters can change now!
       # (triggers watches of intra-cluster adds)
-      @locking.lock(:cluster, fromcluster, tocluster)
+      #@locking.unlock(:instance, from, to)
+      #@locking.lock(:cluster, fromcluster, tocluster)
       # now the instances can be unlocked (watching the clusters now)
-      @locking.unlock(:instance, from, to)
+      # @locking.unlock(:instance, from, to)
       # do the processing
       inter_add(from, to, fromcluster, tocluster, weight)
+      #@locking.unlock(:cluster, fromcluster, tocluster)
     end
-  end
-
-  def intra_add(from, to, weight)
-    # update adjacency matrix
-    $redis.incrby("A:#{from}:#{to}", weight)
-    # update ICW and OCW
-    $redis.incrby("icw:#{from}", weight)
-    $redis.incrby("icw:#{to}", weight)
+    @locking.unlock(:graph, 1)
   end
 
   def inter_add(from, to, fromcluster, tocluster, weight)
     # get the size of the graph (family) |V|
     nV = @graph.query(fromcluster, @b.v.out('"author_of"').in('"author_of"').in('"instance_of"').count()).first
-    p "|V|=#{nV}"
     # calculate the cluster qualities
     # ids of the instances
-    fromids = @graph.query(fromcluster, @b.v.in('"instance_of"')).map { |i| i[:_id] }
-    toids   = @graph.query(tocluster, @b.v.in('"instance_of"')).map { |i| i[:_id] }
-    p fromids
-    p toids
+    query = @b.v.in('"instance_of"')
+    fromids = @graph.query(fromcluster, query).map { |i| i[:_id] }
+    toids   = @graph.query(tocluster, query).map { |i| i[:_id] }
+    # lock all the instances
+    #@locking.lock(:instance, fromids+toids)
     # calculate qualities
-    fromquality = (($redis.mget(*fromids.map { |id| "ocw:#{id}" })).inject(0) { |n,i|
-      n+(i.to_i||0)
-    }+weight).to_f/(nV-fromids.size)
-    toquality   = (($redis.mget(*toids.map { |id| "ocw:#{id}" })).inject(0) { |n,i|
-      n+(i.to_i||0)
-    }+weight).to_f/(nV-toids.size)
-    p fromquality
-    p toquality
-    puts "cutvalue #{cut_value(fromids, toids)}"
+    fromquality = (sum(fromids) { |id| "ocw:#{id}" }+weight).to_f/(nV-fromids.size)
+    toquality   = (sum(fromids) { |id| "icw:#{id}" }+weight).to_f/(nV-toids.size)
     # check the quality
     if fromquality <= ALPHA && toquality <= ALPHA
-      # we are in case 1, handle like an intra_cluster addition
       puts "CASE 1"
-      intra_add(from, to, weight)
+      $redis.incrby(a(from, to), weight)
+      # update ICW and OCW
+      $redis.incrby("ocw:#{from}", weight)
+      $redis.incrby("ocw:#{to}", weight)
+      
     elsif 2*(cut_value(fromids, toids)+weight).to_f/nV >= ALPHA
       puts "CASE 2"
-      intra_add(from, to, weight) # JA?
+      $redis.multi do
+        # update adjacency matrix
+        $redis.incrby(a(from, to), weight)
+        # update ICW and OCW
+        $redis.incrby("icw:#{from}", weight)
+        $redis.incrby("icw:#{to}", weight)
+      end
       merge(fromids, fromcluster, toids, tocluster)
+      
     else
       puts "CASE 3 ############################################"
+      #deps = ["blueprints-core-0.8.jar","commons-pool-1.5.6.jar","gson-1.7.1.jar","jedis-2.0.0.jar","jung-3d-2.0.1.jar","jung-algorithms-2.0.1.jar","jung-graph-impl-2.0.1.jar"]
+      #cp = deps.map { |dep| "#{CLUSTERING}/lib/#{dep}"} * ':'
+      #p "java -cp #{cp};#{CLUSTERING}/bin clustering.CaseThree #{fromids} #{toids} #{nV} #{ALPHA}"
+      #result = `java -cp #{cp}:#{CLUSTERING}/bin clustering.CaseThree #{Yajl::Encoder.encode(fromids)} #{Yajl::Encoder.encode(toids)} #{nV} #{ALPHA}`
+      #result = Yajl::Parser.parse(result)
+      #relocate(fromids+toids, [fromcluster, tocluster], result)
     end
-    # unlock the clusters
-    @locking.unlock(:cluster, fromcluster, tocluster)
+    # lock all the instances
+    #@locking.unlock(:instance, fromids+toids)
   end
 
   def merge(ids1, cluster1, ids2, cluster2)
-    # relocate edges
-    puts "relocating"
-    puts "instances"
-    p @graph.query(cluster2, @b.v.in('"instance_of"'))
-    @graph.query(cluster2, @b.v.in('"instance_of"')).each do |instance|
-      @graph.create_edge(:instance_of, instance[:_id], cluster1)
+  # relocate edges
+    ids2.each do |id|
+      @graph.create_edge(:instance_of, id, cluster1)
     end
-
+    # delete edges / cluster
     @graph.in(:instance_of, cluster2).each do |edge|
       @graph.delete_edge(edge[:_id])
     end
-    puts "deleting cluster"
-    #@graph.delete_vertex(cluster2)
-    puts "relocated"
+    @graph.delete_vertex(cluster2)
     # update icw/ocw
     ids1.each do |fid|
-      total = weights(ids2.map { |tid| [fid,tid] })
+      total = sum(ids2.map { |tid| [fid,tid] }) { |pair| a(*pair) }
       $redis.incrby("icw:#{fid}", total)
       $redis.decrby("ocw:#{fid}", total)
-    end
+    end 
     ids2.each do |tid|
-      total = weights(ids1.map { |fid| [fid,tid] })
+      total = sum(ids1.map { |fid| [fid,tid] }) { |pair| a(*pair) }
       $redis.incrby("icw:#{tid}", total)
       $redis.decrby("ocw:#{tid}", total)
     end
-    puts "merged"
-    #STDIN.gets
+  end
+  
+  def relocate(ids, clusters, toclusters)
+    # get the family
+    family = @graph.query(clusters.first, @b.v.out('"author_of"')).first[:_id]
+    # delete all instance of edges
+    clusters.each do |c|
+      @graph.in(:instance_of, c).each do |edge|
+        @graph.delete_edge(edge[:_id])
+      end
+    end
+    # first make new clusters if necessary
+    (toclusters.size-2).times do
+      clusters << new_cluster(family)
+    end
+    # now relocate every instance
+    ids.each do |id|
+      cluster_index = toclusters.index { |c| c.include? id }
+      cluster = clusters[cluster_index]
+      @graph.create_edge(:instance_of, id, cluster)
+    end
+  end
+  
+  def new_cluster(family)
+    author = @graph.create_vertex({})[:_id]
+    @graph.create_edge(:author_of, author, family)
+    author
   end
 
   def cut_value(ids1, ids2)
     # combinations
-    weights(ids1.product(ids2))
+    sum(ids1.product(ids2)) { |pair| a(*pair) }
   end
 
-  def weights(pairs)
-    $redis.mget(pairs.map { |pair|
-      ["A:#{pair[0]}:#{pair[1]}", "A:#{pair[1]}:#{pair[0]}"] # both sides
-    }.flatten).inject(0) { |n,i|
+  def sum(parts)
+    $redis.mget(*parts.map { |part| yield(part) }).inject(0) { |n,i|
       n+(i.to_i||0)
     }
+  end
+
+  def a(id1, id2)
+    (id1 < id2) ? "A:#{id1}:#{id2}" : "A:#{id2}:#{id1}"
   end
 
 end

@@ -42,14 +42,12 @@ public class RedisDataRetrieval implements MagicDataRetrieval {
 
 	@Override
 	public void increaseIcw(int v, double amount) {
-		// TODO Auto-generated method stub
-		
+		jedis.incrBy("icw:"+v, (long) amount);
 	}
 
 	@Override
 	public void increaseOcw(int v, double amount) {
-		// TODO Auto-generated method stub
-		
+		jedis.incrBy("ocw:"+v, (long) amount);
 	}
 
 	@Override

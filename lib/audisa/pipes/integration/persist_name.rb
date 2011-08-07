@@ -16,11 +16,11 @@ class Pipes::PersistName < Pipes::Pipe
     first_name = name_parts[0..-2] * ' '
     # avoid double names
     name = nil
-    @locking.locked(instance[:name]) do
-      dyn_out = :new
+    @locking.locked("instance:#{instance[:_id]}") do
       # does the name exist?
       name = @graph.index(:name, instance[:name]).first
       if !name
+        dyn_out = :new
         # create the name
         name = @graph.create_vertex(:name => instance[:name])
         # put in the index

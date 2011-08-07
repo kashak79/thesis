@@ -127,8 +127,8 @@ public class CaseThree {
 				sum -= local.getAdjacency(i, ex);
 			for (int newF : newFriends)
 				sum += local.getAdjacency(i, newF);
-			//data.increaseIcw(i, sum);
-			//data.increaseOcw(i, -sum);
+			data.increaseIcw(i, sum);
+			data.increaseOcw(i, -sum);
 		}
 
 		for (int i : cluster2) {
@@ -141,8 +141,8 @@ public class CaseThree {
 				sum -= local.getAdjacency(i, ex);
 			for (int newF : newFriends)
 				sum += local.getAdjacency(i, newF);
-			//data.increaseIcw(i, sum);
-			//data.increaseOcw(i, -sum);
+			data.increaseIcw(i, sum);
+			data.increaseOcw(i, -sum);
 		}
 		
 		return result;

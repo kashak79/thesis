@@ -4,24 +4,26 @@ class Helpers::Locker
 
   def locked(entity)
     #puts "locking #{entity}"
-    $redis.lock(entity)
+    #$redis.lock(entity)
     yield
     #puts "unlocking #{entity}"
-    $redis.unlock(entity)
+    #$redis.unlock(entity)
   end
 
   def lock(type, *entities)
-    entities.each do |entity|
-      $redis.lock("#{type}:#{entity}")
-      puts "locked #{type}:#{entity}"
-    end
+    #$redis.multi do
+    #  entities.each do |entity|
+    #    $redis.lock("#{type}:#{entity}")
+    #  end
+    #end
   end
 
   def unlock(type, *entities)
-    entities.each do |entity|
-      $redis.unlock("#{type}:#{entity}")
-      puts "unlocked #{type}:#{entity}"
-    end
+    #$redis.multi do
+    #  entities.each do |entity|
+    #    $redis.unlock("#{type}:#{entity}")
+    #  end
+    #end
   end
 
 end

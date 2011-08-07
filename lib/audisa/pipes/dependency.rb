@@ -18,10 +18,6 @@ class Pipes::Dependency < Pipes::Pipe
     dependencies.each do |dep|
       ref_flow = Yajl::Parser.parse($redis.get("flow:#{dep}") || "")
       if ref_flow
-        #puts "found dependency"
-        #puts "dep: #{ref_flow}"
-        #puts "for: #{flow}"
-        #puts "-----------------------------------"
         found << dep
         flow.merge!(ref_flow.symbolize!)
       end
