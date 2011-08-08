@@ -15,7 +15,7 @@ dblp = $pipe.to(Pipes::Network).
 # connect all parsers to the dependency store
 dblp.out.connect.to(dependency, :store)
 
-# filter out the instance discoveries and integrate them in the graph
+# filter out the instance  discoveries and integrate them in the graph
 # then connect to the dependency resolver
 instance_filter = dependency.out.connect.to(Pipes::Filter.pipe(lambda { |flow|
   flow.reject_keys(:type) if flow[:type].eq?(:discovery, :instance)
@@ -32,11 +32,13 @@ discovery_filter = instance_filter.out(false).connect.to(Pipes::Filter.pipe(lamb
 discovery_filter.out(true).connect.to(Pipes::PersistDiscovery.pipe(graph, :publication)).
   out.connect.to(depmerge, 2)
 
-# save published facts
 discovery_filter.out(false).connect.to(Pipes::PersistFact.pipe(graph, :instance, :publication, :published)).
+  out.connect.to(Pipes::MagicFacts.pipe(graph, File.open('turck_parsed.json','r'))).
+# save published facts
+out.connect.to(Pipes::PersistFact.pipe(graph, :instance, :email, :email)).
 # execute co-author rule stage 1
-  out.connect.to(Pipes::CoAuthorRule.pipe(graph)).
-  out.connect.to(Pipes::PersistSimilarity.pipe(graph)).
+  out.connect.to(Pipes::EmailRule.pipe(graph)).
+  #out.connect.to(Pipes::PersistSimilarity.pipe(graph)).
   out.connect.to(Pipes::Stdout)
 
 # connect the dependency resolver
