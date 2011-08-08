@@ -11,10 +11,11 @@ class Pipes::PersistDiscovery < Pipes::Pipe
     discoveries = [_in.get[@entity] || []].flatten
 
     discoveries = discoveries.map do |discovery|
-      index = @graph.index(@entity, discovery[@index]).first if @index
+      index = @graph.index(@index, discovery[@index]).first if @index
       if !index
         discovery = @graph.create_vertex(discovery)
-        @graph.put_index(@entity, discovery[@index], discovery[:_id]) if @index
+     
+        @graph.put_index(@index, discovery[@index], discovery[:_id]) if @index
       end
       index || discovery
     end

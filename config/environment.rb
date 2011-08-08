@@ -33,7 +33,13 @@ class Hash
       self.delete(k)
     end
     adding.each do |k,v|
-      self[k] = v.kind_of?(Hash) ? v.symbolize! : v
+      self[k] = if v.kind_of?(Hash)
+        v.symbolize!
+      elsif v.kind_of?(Array)
+        v.map { |h| h.kind_of?(Hash) ? h.symbolize! : h }
+      else
+        v
+      end
     end
   end
 
