@@ -1,5 +1,10 @@
 \begin{thebibliography}{10}
 
+\bibitem{dblp}
+Michael Ley.
+\newblock The dblp computer science bibliography.
+\newblock \url{http://dblp.uni-trier.de/}.
+
 \bibitem{porter1980algorithm}
 M.F. Porter.
 \newblock An algorithm for suffix stripping.
@@ -145,5 +150,11 @@ H.~Jung, M.~Lee, I.S. Kang, S.W. Lee, and W.K. Sung.
 Luiz~Antonio Rodrigues.
 \newblock A mpi implementation of gusfield’s algorithm to generate cut trees.
 \newblock 2011.
+
+\bibitem{han2004two}
+H.~Han, L.~Giles, H.~Zha, C.~Li, and K.~Tsioutsiouliklis.
+\newblock Two supervised learning approaches for name disambiguation in author
+  citations.
+\newblock 2004.
 
 \end{thebibliography}

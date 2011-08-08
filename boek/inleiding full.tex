@@ -8,7 +8,12 @@
 %
 
 \documentclass[11pt,a4paper,oneside,notitlepage]{book}
-\usepackage[english,dutch]{babel}
+\usepackage[english]{babel}
+\usepackage{algorithmic}
+\usepackage{algorithm}
+\usepackage{amsthm}
+\usepackage{hyperref}
+\usepackage{array}
 %\usepackage[nottoc]{tocbibind} % Bibliografie in ToC; zie tocbibind.dvi
 
 % marges aanpassen
@@ -31,6 +36,8 @@
 \bibliographystyle{unsrt}
 %\bibliographystyle{bibliodutch}
 %\bibpunct{[}{]}{,}{n}{,}{,}
+
+\newtheorem{mydef}{Definition}
 
 \pagestyle{fancy}
 
@@ -75,9 +82,14 @@
 \pagestyle{fancy}
 \frontmatter
 
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.5\baselineskip plus 0.5ex minus 0.2ex}
+\setlength{\parskip}{1ex plus 0.5ex minus 0.2ex}
+
 % hoofdstukken
 \mainmatter
 
 \include{inleiding}
+\bibliography{collection}
 \backmatter
 \end{document}

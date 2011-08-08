@@ -6,7 +6,23 @@ Leading search engines mainly provide keyword-based results in response of a sea
 
 % Doelstelling
 
-We want to help in this upcoming research by creating a framework that can retrieve experts for any given subject matter. The end result should allow anyone to query the framework with a set of keywords defining the subject area they want to investigate. The outcome of this query is a list of authors, ranked by decreasing level of expertise defined by the dictated keywords, together with a list of papers, highly touted co-authors and any other information the user might find useful.
+\section{Thesis objective and approach}
+
+We want to help in this upcoming research by creating a framework that can retrieve experts for any given subject matter. The end result should allow anyone to query the framework with a set of keywords defining the subject area they want to investigate. The outcome of this query is a list of authors, ranked by decreasing level of expertise defined by the dictated keywords. Each author is accompanied by a profile, containing a list of papers, highly touted co-authors and any other information the user might find useful.
+
+We split the internal functioning of this framework in three main components: retrieving information from various online sources (ie. publications, author profiles and presentations), analyzing the information and linking it to a specific author (a proces we call clustering) and defining the areas of interest of each author and their level of expertise for each of these areas.
+
+For the first component, we limited ourselves to using DBLP \cite{dblp} as online source. This is a server providing bibliographic information on major computer science journals and proceedings. We limit ourselves to this one source as the information is comparable to other listings, while they provide an XML overview for each publication allowing us to parse it with ease. We considered adding author profiles from LinkedIn, but this often complicated it as profiles were often inaccessible, incomplete or outdated.
+
+Each publication we retrieve from DBLP is saved as a unique instance and each author is initially considered different from any previous ones. Clustering consists of linking authornames to distinct authors. This is the key component from this thesis and is what we focused on the most. We have composed various rules based on name similarity, recurring co-authors, publication subjects, affiliation and email address. Based on these similarities, the framework creates clusters containing publications from the same author.
+
+To define the area of interest of an author, a category tree is created. Each publication is then mapped onto this tree and the combination of all the publications form a subtree which is linked to his interests. To decide the level of expertise, the number of subject references, the number of publication citations and the level of expertise of co-authors should be combined. However, this is beyond the scope of our thesis and we have simplified this by comparing the subject of the publications extracted from the title and the abstract and the number of publications for each subject.
+
+%To tackly this problem, we split it in two main parts. The first consists of retrieving and analyzing information about authors from various online sources. This includes defining what publications map to what authors, a proces we call clustering and which is the key component of this thesis, and retrieving the subjects of each publication. 
+%
+%The proces of clustering is the main point of interest of this thesis. Linking publications to authors is a lot harder than just comparing names. Authors may have the exact same name, names can be misspelled and names can be shortened or altered. In \autoref{} we define a set of rules combining attributes of authors and relationships between them. In \autoref{} we test combinations of these rules to find the best outcome.
+%
+\section{Chapter outline}
 
 % TODO bespreek onze werkmethode op een zodanige manier dat een 'expert' (bv. medestudent) door de beschrijving verstaat waarom we deze bepaalde aanpak gekozen hebben
 
