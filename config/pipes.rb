@@ -1,4 +1,4 @@
-graph = Helpers::Rexster.new('http://192.168.16.128:8182/thesis')
+graph = Helpers::Rexster.new('http://192.168.179.128:8182/thesis')
 dependency = Pipes::Dependency.pipe
 
 $pipe = (Connections::Local).connection
@@ -39,12 +39,14 @@ discovery_filter.out(true).connect.to(Pipes::PersistDiscovery.pipe(graph, :publi
 
 discovery_filter.out(false).connect.to(Pipes::PersistFact.pipe(graph, :instance, :publication, :published)).
 	out.connect.to(Pipes::MagicFacts.pipe(graph, File.open('turck_parsed.json','r'))).
+	out.connect.to(Pipes::PersistDiscovery.pipe(graph, :email, :index => :email)).
+	#out.connect.to(Pipes::Stdout).
 # execute co-author rule stage 1
   # out.connect.to(Pipes::CoAuthorRule.pipe(graph)).
   # out.connect.to(Pipes::PersistSimilarity.pipe(graph)).
 	out.connect.to(Pipes::PersistFact.pipe(graph, :instance, :email, :email)).
-	out.connect.to(Pipes::EmailRule.pipe(graph)).
-  out.connect.to(Pipes::PersistSimilarity.pipe(graph)).
+	#out.connect.to(Pipes::EmailRule.pipe(graph)).
+  #out.connect.to(Pipes::PersistSimilarity.pipe(graph)).
   out.connect.to(Pipes::Stdout)
 
 # connect the dependency resolver
