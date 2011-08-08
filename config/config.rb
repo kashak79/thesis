@@ -1,0 +1,10 @@
+module Configuration
+
+	ALPHA = 10
+	AFFILIATION_WEIGHT = 10
+	AFFILIATION_THRESHOLD = 90
+	EMAIL_WEIGHT = 100
+	COAUTHOR_WEIGHT = 1
+	DEBUG = false
+	
+end

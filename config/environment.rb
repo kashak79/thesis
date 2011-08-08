@@ -21,6 +21,7 @@ require 'audisa/connections'
 require 'audisa/helpers'
 require 'audisa/parsers'
 
+load 'config.rb'
 load 'pipes.rb'
 
 # hash symbolize

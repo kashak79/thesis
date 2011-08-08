@@ -9,6 +9,7 @@ module Pipes
   autoload :Merge,                 'audisa/pipes/merge'
   autoload :Dependency,            'audisa/pipes/dependency'
 	autoload :MagicFacts,						 'audisa/pipes/magic_facts'
+	
   # integration pipes
   autoload :Integration,           'audisa/pipes/integration/integration'
   autoload :NameMatching,          'audisa/pipes/integration/name_matching'
@@ -31,4 +32,6 @@ module Pipes
 
   # rules
   autoload :CoAuthorRule,          'audisa/pipes/rules/co_author_rule.rb'
+	autoload :EmailRule, 						 'audisa/pipes/rules/email_rule.rb'
+	autoload :AffiliationRule,			 'audisa/pipes/rules/affiliation_rule.rb'
 end
