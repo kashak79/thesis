@@ -1,41 +1,38 @@
 \select@language {english}
 \contentsline {chapter}{\numberline {1}Introduction}{1}{chapter.1}
-\contentsline {section}{\numberline {1.1}Idea}{1}{section.1.1}
 \contentsline {chapter}{\numberline {2}State of the art}{2}{chapter.2}
 \contentsline {section}{\numberline {2.1}Technologies}{2}{section.2.1}
-\contentsline {subsection}{\numberline {2.1.1}Web scraping}{2}{subsection.2.1.1}
-\contentsline {subsection}{\numberline {2.1.2}OWL}{3}{subsection.2.1.2}
-\contentsline {subsection}{\numberline {2.1.3}FOAF}{3}{subsection.2.1.3}
-\contentsline {subsection}{\numberline {2.1.4}Stemming}{3}{subsection.2.1.4}
-\contentsline {subsection}{\numberline {2.1.5}Clustering}{4}{subsection.2.1.5}
-\contentsline {subsection}{\numberline {2.1.6}Machine learning}{4}{subsection.2.1.6}
-\contentsline {subsection}{\numberline {2.1.7}Forward Chaining}{4}{subsection.2.1.7}
-\contentsline {subsection}{\numberline {2.1.8}String matching}{4}{subsection.2.1.8}
-\contentsline {subsection}{\numberline {2.1.9}Part-Of-Speech Tagger}{4}{subsection.2.1.9}
-\contentsline {subsection}{\numberline {2.1.10}Graph representation}{5}{subsection.2.1.10}
+\contentsline {subsection}{\numberline {2.1.1}API}{2}{subsection.2.1.1}
+\contentsline {subsection}{\numberline {2.1.2}Web scraping}{2}{subsection.2.1.2}
+\contentsline {subsection}{\numberline {2.1.3}OWL}{3}{subsection.2.1.3}
+\contentsline {subsection}{\numberline {2.1.4}FOAF}{3}{subsection.2.1.4}
+\contentsline {subsection}{\numberline {2.1.5}Stemming}{3}{subsection.2.1.5}
+\contentsline {subsection}{\numberline {2.1.6}Clustering}{3}{subsection.2.1.6}
+\contentsline {subsection}{\numberline {2.1.7}Machine learning}{4}{subsection.2.1.7}
+\contentsline {subsection}{\numberline {2.1.8}Forward Chaining}{4}{subsection.2.1.8}
+\contentsline {subsection}{\numberline {2.1.9}String matching}{4}{subsection.2.1.9}
+\contentsline {subsection}{\numberline {2.1.10}Part-Of-Speech Tagger}{4}{subsection.2.1.10}
+\contentsline {subsection}{\numberline {2.1.11}Graph representation}{5}{subsection.2.1.11}
 \contentsline {section}{\numberline {2.2}Opinion mining}{5}{section.2.2}
-\contentsline {subsection}{\numberline {2.2.1}Introduction}{5}{subsection.2.2.1}
-\contentsline {subsection}{\numberline {2.2.2}Current situation}{5}{subsection.2.2.2}
-\contentsline {subsection}{\numberline {2.2.3}Improvements and additions}{6}{subsection.2.2.3}
+\contentsline {subsection}{\numberline {2.2.1}Current situation}{5}{subsection.2.2.1}
+\contentsline {subsection}{\numberline {2.2.2}Improvements and additions}{6}{subsection.2.2.2}
 \contentsline {section}{\numberline {2.3}Twitter influencers}{6}{section.2.3}
-\contentsline {subsection}{\numberline {2.3.1}Introduction}{6}{subsection.2.3.1}
-\contentsline {subsection}{\numberline {2.3.2}Current situation}{7}{subsection.2.3.2}
-\contentsline {subsection}{\numberline {2.3.3}Improvements and additions}{7}{subsection.2.3.3}
+\contentsline {subsection}{\numberline {2.3.1}Current situation}{7}{subsection.2.3.1}
+\contentsline {subsection}{\numberline {2.3.2}Improvements and additions}{8}{subsection.2.3.2}
 \contentsline {section}{\numberline {2.4}Expert Finding}{8}{section.2.4}
-\contentsline {subsection}{\numberline {2.4.1}Introduction}{8}{subsection.2.4.1}
-\contentsline {subsection}{\numberline {2.4.2}Current situation}{8}{subsection.2.4.2}
-\contentsline {subsection}{\numberline {2.4.3}Improvements and additions}{9}{subsection.2.4.3}
-\contentsline {chapter}{\numberline {3}The framework}{10}{chapter.3}
-\contentsline {section}{\numberline {3.1}Main Scenario}{10}{section.3.1}
-\contentsline {section}{\numberline {3.2}Features}{11}{section.3.2}
-\contentsline {subsection}{\numberline {3.2.1}Information extraction}{11}{subsection.3.2.1}
-\contentsline {subsection}{\numberline {3.2.2}Categorization}{11}{subsection.3.2.2}
-\contentsline {subsection}{\numberline {3.2.3}Disambiguation}{11}{subsection.3.2.3}
-\contentsline {subsection}{\numberline {3.2.4}Dynamic}{12}{subsection.3.2.4}
-\contentsline {section}{\numberline {3.3}Architecture}{12}{section.3.3}
-\contentsline {subsection}{\numberline {3.3.1}Iteration Manager}{12}{subsection.3.3.1}
-\contentsline {subsection}{\numberline {3.3.2}Data Collector}{13}{subsection.3.3.2}
-\contentsline {subsection}{\numberline {3.3.3}Source Generator}{13}{subsection.3.3.3}
-\contentsline {subsection}{\numberline {3.3.4}Category Builder}{13}{subsection.3.3.4}
-\contentsline {subsection}{\numberline {3.3.5}Disambiguator}{14}{subsection.3.3.5}
-\contentsline {subsection}{\numberline {3.3.6}Data Merger}{14}{subsection.3.3.6}
+\contentsline {subsection}{\numberline {2.4.1}Current situation}{8}{subsection.2.4.1}
+\contentsline {subsection}{\numberline {2.4.2}Improvements and additions}{9}{subsection.2.4.2}
+\contentsline {chapter}{\numberline {3}The framework}{11}{chapter.3}
+\contentsline {section}{\numberline {3.1}Main Scenario}{11}{section.3.1}
+\contentsline {section}{\numberline {3.2}Features}{12}{section.3.2}
+\contentsline {subsection}{\numberline {3.2.1}Information extraction}{12}{subsection.3.2.1}
+\contentsline {subsection}{\numberline {3.2.2}Categorization}{12}{subsection.3.2.2}
+\contentsline {subsection}{\numberline {3.2.3}Disambiguation}{12}{subsection.3.2.3}
+\contentsline {subsection}{\numberline {3.2.4}Dynamic}{13}{subsection.3.2.4}
+\contentsline {section}{\numberline {3.3}Architecture}{13}{section.3.3}
+\contentsline {subsection}{\numberline {3.3.1}Iteration Manager}{13}{subsection.3.3.1}
+\contentsline {subsection}{\numberline {3.3.2}Data Collector}{14}{subsection.3.3.2}
+\contentsline {subsection}{\numberline {3.3.3}Source Generator}{14}{subsection.3.3.3}
+\contentsline {subsection}{\numberline {3.3.4}Category Builder}{14}{subsection.3.3.4}
+\contentsline {subsection}{\numberline {3.3.5}Disambiguator}{15}{subsection.3.3.5}
+\contentsline {subsection}{\numberline {3.3.6}Data Merger}{15}{subsection.3.3.6}
