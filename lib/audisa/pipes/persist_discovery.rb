@@ -9,6 +9,7 @@ class Pipes::PersistDiscovery < Pipes::Pipe
 
   def execute
     discoveries = [_in.get[@entity] || []].flatten
+
     discoveries = discoveries.map do |discovery|
       index = @graph.index(@entity, discovery[@index]).first if @index
       if !index
@@ -17,11 +18,10 @@ class Pipes::PersistDiscovery < Pipes::Pipe
       end
       index || discovery
     end
-    
-		p discoveries
+
     discoveries = discoveries.size == 1 ? discoveries.first : discoveries
     
-    enrich(:in, :out, @entity => discoveries)
+    enrich(:in, :out, ((discoveries.empty?) ? {} : {@entity => discoveries}))
   end
 
 end
