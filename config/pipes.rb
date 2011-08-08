@@ -1,6 +1,6 @@
 require 'engtagger'
 
-graph = Helpers::Rexster.new('http://192.168.16.128:8182/thesis')
+graph = Helpers::Rexster.new('http://192.168.179.128:8182/thesis')
 dependency = Pipes::Dependency.pipe
 
 $pipe = (Connections::Local).connection
@@ -39,6 +39,7 @@ discovery_filter = instance_filter.out(false).connect.to(Pipes::Filter.pipe(lamb
 discovery_filter.out(true).connect.to(Pipes::PersistDiscovery.pipe(graph, :publication)).
 	# out.connect.to(Pipes::PublicationTitlePosTagging.pipe(EngTagger.new)).
 	# out.connect.to(Pipes::PersistDiscovery.pipe(graph, :keywords, :index => :keyword)).
+	# out.connect.to(Pipes::PersistFact.pipe(graph, :publication, :keywords, :keyword)).
   out.connect.to(depmerge, 2)
 
 discovery_filter.out(false).connect.to(Pipes::PersistFact.pipe(graph, :instance, :publication, :published)).
