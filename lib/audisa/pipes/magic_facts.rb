@@ -17,16 +17,6 @@ class Pipes::MagicFacts < Pipes::Pipe
 		fact = @facts[instance[:name]][publication[:title]]
 		# first lock to avoid creating 2 equal emails
     email = nil
-    @locking.locked(fact["email"]) do
-      # does the email exist?
-      email = @graph.index(:email, fact["email"]).first
-      if !email
-        # create the email
-        email = @graph.create_vertex(:email => fact["email"])
-        # put in the index
-        @graph.put_index(:email, fact["email"], email[:_id])
-      end
-    end if !fact["email"].nil?
 		# Add affiliation as an attribute, not a vertex ?
 		output = {}
 		output[:email] = email if !email.nil? && !email.empty?
