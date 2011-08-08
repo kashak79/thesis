@@ -9,7 +9,7 @@ class Pipes::PersistFact < Pipes::Pipe
   end
 
   def execute
-    @graph.create_edge(@label, _in.get[@from][:_id], _in.get[@to][:_id])
+    @graph.create_edge(@label, _in.get[@from][:_id], _in.get[@to][:_id]) if _in.get[@from] && _in.get[@to]
     enrich(:in, :out, {})
   end
 
