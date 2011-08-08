@@ -10,7 +10,7 @@ hash['names'].count.times do |index|
 	output[name] = output[name] || {}
 	hash['clusters'][index].each do |publication|
 		details = {:affiliation => publication['aff'], :url => publication['url']}
-		details[:email] = publication['email'] if !publication['email'].empty?
+		details[:email] = publication['email'].downcase if !publication['email'].empty?
 		output[name][publication['title']] = details
 	end
 end

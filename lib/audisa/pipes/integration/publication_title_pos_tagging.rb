@@ -7,8 +7,8 @@ class Pipes::PublicationTitlePosTagging < Pipes::Pipe
 
   def execute
 		publication = _in.get[:publication]
-		nps = @tagger.get_noun_phrases(@tagger.add_tags(publication[:title]))
-		publication[:nps] = nps
-		enrich(:in, :out, :publication => publication)
+		nps = _in.get[:keywords] || []
+		nps << @tagger.get_noun_phrases(@tagger.add_tags(publication[:title])).map { |tag| {:keyword => tag[0]} }
+		enrich(:in, :out, :keywords => nps.flatten)
   end
 end

@@ -1,4 +1,4 @@
-graph = Helpers::Rexster.new('http://192.168.179.128:8182/thesis')
+graph = Helpers::Rexster.new('http://192.168.16.128:8182/thesis')
 dependency = Pipes::Dependency.pipe
 
 $pipe = (Connections::Local).connection
@@ -10,6 +10,11 @@ dblp = $pipe.to(Pipes::Network).
   out.connect.to(Parsers::DblpAuthorParser).
   #out.connect(Connections::Async.connection(:publication, :urgent)).to(Pipes::Network).
   out.connect.to(Pipes::Network).
+	# out.connect.to(Pipes::Filter.pipe(lambda { |flow|
+		# $count ||= 0
+		# $count += 1
+		# $count < 50 ? flow : false
+	# })).
   out.connect.to(Parsers::DblpBibtexParser)
 
 # connect all parsers to the dependency store
@@ -34,8 +39,12 @@ discovery_filter.out(true).connect.to(Pipes::PersistDiscovery.pipe(graph, :publi
 
 # save published facts
 discovery_filter.out(false).connect.to(Pipes::PersistFact.pipe(graph, :instance, :publication, :published)).
+	out.connect.to(Pipes::MagicFacts.pipe(graph, File.open('turck_parsed.json','r'))).
 # execute co-author rule stage 1
-  out.connect.to(Pipes::CoAuthorRule.pipe(graph)).
+  # out.connect.to(Pipes::CoAuthorRule.pipe(graph)).
+  # out.connect.to(Pipes::PersistSimilarity.pipe(graph)).
+	out.connect.to(Pipes::PersistFact.pipe(graph, :instance, :email, :email)).
+	out.connect.to(Pipes::EmailRule.pipe(graph)).
   out.connect.to(Pipes::PersistSimilarity.pipe(graph)).
   out.connect.to(Pipes::Stdout)
 
