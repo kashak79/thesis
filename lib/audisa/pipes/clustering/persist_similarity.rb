@@ -2,6 +2,16 @@ class Pipes::PersistSimilarity < Pipes::Pipe
 
   CLUSTERING = File.expand_path("clustering")
 
+  STAT_MAPPING = {
+    "email equality" => "email",
+    "coauthor doubleeq" => "co-2e",
+    "coauthor doublematch" => "co-2m",
+    "coauthor name-eq+match" => "co-em",
+    "coauthor name-match+eq" => "co-me",
+    "keyword equality" => "keyword",
+    "affiliation match" => "aff"
+  }
+
   def initialize(graph)
     @graph = graph
     @locking = Helpers::Locker.new
@@ -17,6 +27,7 @@ class Pipes::PersistSimilarity < Pipes::Pipe
   # persisting a similarity is saving it
   def execute
     similarity = _in.get[:similarity]
+    $redis.incr("stat:#{STAT_MAPPING[similarity[:type]]}")
     p similarity
     from   = similarity[:from]
     to     = similarity[:to]
@@ -106,13 +117,13 @@ class Pipes::PersistSimilarity < Pipes::Pipe
         $redis.incrby("ocw:#{from}", weight)
         $redis.incrby("ocw:#{to}", weight)
       end
-      #puts "CASE 3 ############################################"
-      #deps = ["blueprints-core-0.8.jar","commons-pool-1.5.6.jar","gson-1.7.1.jar","jedis-2.0.0.jar","jung-3d-2.0.1.jar","jung-algorithms-2.0.1.jar","jung-graph-impl-2.0.1.jar"]
-      #cp = deps.map { |dep| "#{CLUSTERING}/lib/#{dep}"} * ':'
-      #p "java -cp #{cp};#{CLUSTERING}/bin clustering.CaseThree #{fromids} #{toids} #{nV} #{Configuration::ALPHA}"
-      #result = `java -cp #{cp}:#{CLUSTERING}/bin clustering.CaseThree #{Yajl::Encoder.encode(fromids)} #{Yajl::Encoder.encode(toids)} #{nV} #{Configuration::ALPHA}`
-      #result = Yajl::Parser.parse(result)
-      #relocate(fromids+toids, [fromcluster, tocluster], result)
+      puts "CASE 3 ############################################"
+      deps = ["blueprints-core-0.8.jar","commons-pool-1.5.6.jar","gson-1.7.1.jar","jedis-2.0.0.jar","jung-3d-2.0.1.jar","jung-algorithms-2.0.1.jar","jung-graph-impl-2.0.1.jar"]
+      cp = deps.map { |dep| "#{CLUSTERING}/lib/#{dep}"} * ':'
+      p "java -cp #{cp};#{CLUSTERING}/bin clustering.CaseThree #{fromids} #{toids} #{nV} #{Configuration::ALPHA}"
+      result = `java -cp #{cp}:#{CLUSTERING}/bin clustering.CaseThree #{Yajl::Encoder.encode(fromids)} #{Yajl::Encoder.encode(toids)} #{nV} #{Configuration::ALPHA}`
+      result = Yajl::Parser.parse(result)
+      relocate(fromids+toids, [fromcluster, tocluster], result)
     end
     # lock all the instances
     #@locking.unlock(:instance, fromids+toids)

@@ -8,7 +8,7 @@ class Pipes::KeywordsRule < Pipes::Pipe
 
   def execute
     instance = _in.get[:instance]
-    query = @b.v.out('"published"').out('"keyword"').in('"keyword"').except(@b.v.out('"published"').to_a).in('"published"')
+    query = @b.v.out('"published"').out('"keyword"').in('"keyword"').except(@b.v.out('"published"').to_a).in('"published"').retain(@b.v.name_inst.to_a)
     keyword_instances = @graph.query(instance[:_id], query)
     keyword_instances.each do |keyword_instance|
 			# p "found keyword equality between #{instance[:_id]} and #{keyword_instance[:_id]}" #if Configuration::DEBUG

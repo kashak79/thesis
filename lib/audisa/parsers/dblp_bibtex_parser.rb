@@ -6,6 +6,7 @@ class Parsers::DblpBibtexParser < Pipes::Pipe
   end
 
   def execute
+    $redis.incr("stat:pub")
     # parse page as xml
     document = Nokogiri::XML(_in.get)
     # get the root
