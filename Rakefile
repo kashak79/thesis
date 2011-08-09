@@ -9,11 +9,16 @@ require 'tasks/resque'
 require 'tasks/rspec'
 require 'tasks/visualize'
 
+require 'audisa/pipes'
+
+require 'redis'
+
 task :test => :environment do
   load 'testpipe.rb'
 end
 
-task :stat => :environment do
+task :stat do
+	$redis = Redis.new
   puts "publications: #{$redis.get("stat:pub")}"
   puts ""
   start = $redis.get("stat:start").to_i

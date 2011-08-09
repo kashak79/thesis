@@ -19,6 +19,13 @@ namespace :graph do
     sh %{mvn -f rules/pom.xml install}
     sh %{cp rules/target/rules-1.0.jar vendor/rexster-0.4.1/target/rexster-0.4.1-standalone/ext}
   end
+	
+	task :export => :environment do
+		graph = Helpers::Rexster.new('http://192.168.16.128:8182/thesis')
+		id = graph.index("family","Turck").first[:_id]
+		clusters = graph.table(id, Helpers::QueryBuilder.new.v.in('"author_of"').as('"\'cluster\'"').in('"instance_of"').as('"\'name\'"').out('"published"').as('"\'publication\'"').table(:id, :name, :title))
+		p clusters
+	end
 
   task :reload => [:stop, :extensions, :start]
 end
