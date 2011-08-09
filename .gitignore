@@ -5,6 +5,8 @@
 /boek/*~
 /boek/*.aux
 /boek/*.log
+/boek/fig/*.vsd
+/boek/fig/*.~vsd
 
 /clustering/*.class
 

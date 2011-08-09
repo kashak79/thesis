@@ -18,7 +18,7 @@ A \textbf{Discovery} is a fact that proofs the existence of a certain entity (an
 A \textbf{Relation} is a fact that denotes a relation between two entities \ldots
 \end{mydef}
 
-\section{Three layer model: structural layer}
+\section{Three Layer Model: Structural Layer}
 
 % introductie
 
@@ -27,11 +27,11 @@ A \textbf{Relation} is a fact that denotes a relation between two entities \ldot
 % welke decision, definieer!
 One of the main responsibilities of the structural layer is reflecting a decision through a change in structure. It is clear that this is very important. Deciding which physical author some information belongs to is the main issue of our thesis. This part focusses on how the model adapt to such a decision. We first explain the first solution that would probably come to mind and the shortcoming of it. Then we provide a solution that deals with these shortcomings.
 
-\paragraph{Merging} Assume that we have a source of information that has two occurences of the same name X. Along each of these occurrences, we find some extra information on the person(s) with this name. At first we do not know if this is just one person or two persons who share the same name. Now suppose that we have an algorithm that claims the latter. Therefore we have made a decision that the two pieces of information depict the same actual person. The idea is now to simply merge these two chunks of information, representing exactly one person. The situation together with its outcome is illustrated in \autoref{clusteringsimple}.
+\paragraph{Merging} Assume that we have a source of information that has two occurences of the same name X. Along each of these occurrences, we find some extra information on the person(s) with this name. At first we do not know if this is just one person or two persons who share the same name. Now suppose that we have an algorithm that claims the latter. Therefore we have made a decision that the two pieces of information depict the same actual person. The idea is now to simply merge these two chunks of information, representing exactly one person. The situation together with its outcome is illustrated in \autoref{fig:clusteringsimple}.
 
 The main problem with this solution is that it does not take all of the foundation acknowledgements into account. Merging two authors is a definitive operation, it can not be undone. We operate in a very dynamic environment, our system is subject to constant change. Therefore it is wise to not base a decision only on past information. Future information can provide new motives to make another decision.
 
-\begin{figure}[htbp]
+\begin{figure}[htb]
 	\centering
 		\includegraphics[width=0.6\textwidth]{fig/clusteringsimple}
 	\caption{Merging of two authors}
@@ -44,9 +44,9 @@ The main problem with this solution is that it does not take all of the foundati
 An \textbf{Instance} is a collection of (partial) information that describes an author at a particular moment in time, it is a "snapshot" of an author.
 \end{mydef}
 
-Our goal is to try and link these chunks of information and thereby making a complete, correct image of an author. We reduced our problem to finding an optimal partioning of instances so that each of the instance-groups represent a unique author. This is a process called clustering. From now on we will use the clustering terminology. This means that an instance-group will be called a cluster and an author will by consequence be equivalent with a cluster. An any moment in time, when new information becomes available, a reclustering can take place. This means that the grouping of instances can change over time. An instance part of an author A can later be part of an author B. This method gives us the flexibility to cope with a changing environment. Applying this method to the situation described earlier leads to the result in \autoref{clusteringinstances}.
+Our goal is to try and link these chunks of information and thereby making a complete, correct image of an author. We reduced our problem to finding an optimal partioning of instances so that each of the instance-groups represent a unique author. This is a process called clustering. From now on we will use the clustering terminology. This means that an instance-group will be called a cluster and an author will by consequence be equivalent with a cluster. An any moment in time, when new information becomes available, a reclustering can take place. This means that the grouping of instances can change over time. An instance part of an author A can later be part of an author B. This method gives us the flexibility to cope with a changing environment. Applying this method to the situation described earlier leads to the result in \autoref{fig:clusteringinstances}.
 
-\begin{figure}[htbp]
+\begin{figure}[htb]
 	\centering
 		\includegraphics[width=0.6\textwidth]{fig/clusteringinstances}
 	\caption{Grouping of instances under the same author}
@@ -75,13 +75,13 @@ Narrowing down the problem space using names is done using two rules. Two instan
 
 The formal definition of a "family name" and the exact meaning of "too different" will be explained in more detail in .... REF. The structural represenation of name notations will be further explained in the next section.
 
-\subsection{Name notations}
+\subsection{Name Notations}
 
 Concerning the structure of name notations in our model we have also walked two different paths. Again, we will first explain the most obvious one. 
 
 \paragraph{Instance-Author} Every instance belongs to a certain author (due to clustering), but it also has a number of authors it could belong to. These authors are called match-authors. If similar instances are found that are part of a match-author, it would be possible for an instance to become part of this author as well (reclustering). The problem with this approach is that an author is completely defined by its instances which change over time. The decision if an author should be a match-author therefore changes along. The problem is illustrated in \autoref{fig:namematchproblem}. Information on J. and Jake Anderson has lead us to the conclusion that they are probably the same person, the instances are clustered. Before, it was considered possible that instance John Anderson belonged to the author J. Anderson. Because of earlier clustering, J. Anderson is now actually Jake Anderson. It comprises information of both J. and Jake Anderson. This means that John Anderson will also be compared to the instance with Jake Anderson. If we would re-match John Anderson, it would never have been considered to be a part of Jake Anderson (different names). This is an inconsistency.
 
-\begin{figure}[htbp]
+\begin{figure}[htb]
 	\centering
 		\includegraphics[width=0.6\textwidth]{fig/namematchproblem}
 	\caption{Problem with instance-author matching}
@@ -90,7 +90,7 @@ Concerning the structure of name notations in our model we have also walked two 
 
 \paragraph{Name-Name} It is better practice to keep authors and names more isolated. This new approach is illustrated in \autoref{fig:namematchsolution}. In this situation, instances associated with the name Jake Anderson will never be compared with instances with name John Anderson.
 
-\begin{figure}[htbp]
+\begin{figure}[htb]
 	\centering
 		\includegraphics[width=0.6\textwidth]{fig/namematchsolution}
 	\caption{Solution of instance-author matching: pure name matching}
@@ -101,18 +101,18 @@ Concerning the structure of name notations in our model we have also walked two 
 
 We have addressed all the main issues that arose during the design of a structure that can stisfy the efficiency and flexibility needed according to the foundation acknowledgements (REF). We will finish with a final example of the typical structure of the graph as a theorethical model. This overview can be found in \autoref{fig:graphstructureoverview}.
 
-\begin{figure}[htbp]
+\begin{figure}[htb]
 	\centering
 		\includegraphics[width=0.75\textwidth]{fig/graphstructureoverview}
 	\caption{Overview of the structure layer of the graph model}
 	\label{fig:graphstructureoverview}
 \end{figure}
 
-\section{Three layer model: information layer}
+\section{Three Layer Model: Information Layer}
 
 % TODO
 
-\section{Three layer model: similarity layer}
+\section{Three Layer Model: Similarity Layer}
 
 As we have stated several times, the goal is to link instances together to form an author. Until now, linking was just an action of an algorithm. If an algorithm decides that two instances represent the same author, the algorithm links them together (by actually changing the "instance of" edges in the graph). But what about the links itself? Should these links also represent a "physical" concept in our model? This is a question answered by the similarity layer.
 
@@ -121,7 +121,7 @@ As we have stated several times, the goal is to link instances together to form 
 
 \paragraph{Stateful Similarities} There is a reasons why similarities have to actually be persisted. According to the foundation acknowledgements [REF] we are in need of a constantly changing output. This means that the system will incrementally build towards a solution. If we only want to calculate as few as necessary similarities when new information is found, all other similarities must already be present. With the similarity layer (plane) enabled, \autoref{fig:graphstructureoverview} could become \autoref{fig:graphstructureoverviewsim} (We left out the family node).
 
-\begin{figure}[htbp]
+\begin{figure}[htb]
 	\centering
 		\includegraphics[width=0.75\textwidth]{fig/graphstructureoverviewsim}
 	\caption{Overview of the structure layer of the graph model with the similarity layer}
@@ -137,6 +137,8 @@ As we have stated several times, the goal is to link instances together to form 
 %- equal-name instances
 %- shared-cluster instances
 
+% standard rules do matching-name and equal-name
+
 \begin{mydef}
 \label{def:rule}
 A \textbf{Rule} is a mechanism that issues a complex query on the graph-model in order to find similarities between instances.
@@ -144,32 +146,85 @@ A \textbf{Rule} is a mechanism that issues a complex query on the graph-model in
 
 \subsection{Community Rule}
 
-Authors often work together with the same people, writing multiple publications together. Instances that are linked (due to co-authoring) to instances belonging to the same author or with a similar name are more similar themselves because of these links. This is a property that will be exploited by the community rule. We can distinguish several situations, some yielding a stronger similarity than others. We list them below ordered by increasing similarity, each of them is illustrated with an example.
+Authors often work together with the same people, writing multiple publications together. Instances that are linked (due to co-authoring) to instances belonging to the same author or with a similar name are more similar themselves because of these links. This is a property that will be exploited by the community rule. 
 
-Before going through each situation, let us sketch the common situation. There exists an instance X with a matched instance Y
+\subsubsection{Three variants}
 
-\paragraph{Name Equality} 
+We can distinguish three situations, some yielding a stronger similarity than others. We list them below ordered by increasing similarity. Before going through each situation, let us sketch the common situation. There exists an instance V with a matched instance W (any scope). Instance Y is a co-instance of instance W and we just discovered that instance V is a co-instance of instance Y (a co-instance is the same as a co-author except it is on the instance level). It depends on the situation in which match scope Y is located with respect to X.
 
-\paragraph{Name Matching}
+\paragraph{Name Matching} Consider that Y is a matching-name instance of X. This means that V and W have co-instances with similar names. Because of this, V and W are similar with weight $w_m$.
 
-\paragraph{Shared Cluster}
+\paragraph{Name Equality} Consider that Y is a equal-name instance of X. This means that V and W both have a co-instance with the same name. We can now say that instance V and W are similar with weight $w_e$.
 
-\begin{figure}[htbp]
+An example of these two rules combined is illustrated in \autoref{fig:coauthorrulenameeq}. The family nodes are not shown to maintain clarity. Here, the two instances with names "James" represent X and Y in the "Name Equality" case and the V and W in the "Name Matching" case. The "Yu" and "Yu C." instances then represent the complementary instances.
+
+\begin{figure}[htb]
 	\centering
 		\includegraphics[width=0.75\textwidth]{fig/coauthorrulenameeq}
 	\caption{}
 	\label{fig:coauthorrulenameeq}
 \end{figure}
 
-\begin{figure}[htbp]
+\paragraph{Shared Cluster} A more complex case is where two instances are in the same cluster (bound to the same author). Assume that instances X and Y have been clusters (belong to the same author). Because it is now proven that X and Y are the same author, we add an extra similarity between V and W. This is justified because V and W now collaborate with the same author, this deservers and extra similarity with weight $w_c$. Note that this similarity can be combined with a "Name Matching" or "Name Equality" similarity. Also note that this rule is triggered by an extra event than the first two rules. All three rules are executed when it is discovered that two instances are co-instances. Here, the rule must be triggered there has been a reclustering as well. This includes the following two cases:
+
+\begin{enumerate}
+\item Instances that belonged to the same author are now instances of different authors.
+\item Instances that belonged to different authors are now instances of the same author.
+\end{enumerate}
+
+In each of the two cases, it is possible for similarities to be added and to be removed. The precise execution of this is explained later. Consider \autoref{fig:coauthorrulenameeq} the starting point for the following example. Assume that the similarity between cluster C and D increases their attraction so that they are merged. Because of this action, the shared cluster rule is triggered. After querying the graph, the rule decides that the two instances with name "James" qualify for a second co-author similarity. The result is shown in \autoref{fig:coauthorrulecluster}. After this, cluster A and B will be merged as well.
+
+\begin{figure}[htb]
+	\centering
+		\includegraphics[width=0.75\textwidth]{fig/coauthorrulecluster}
+	\caption{}
+	\label{fig:coauthorrulecluster}
+\end{figure}
+
+\paragraph{Combinations} Different combinations of these three rules result in six rules. Variant D, E and F are invertible, yielding another three rules. An overview of the six main combinations is given in \autoref{fig:coauthorrulecases}. We use a simplified view where scopes and relations are directly indicated as an edge between the instances.
+
+\begin{figure}[htb]
 	\centering
 		\includegraphics[width=0.9\textwidth]{fig/coauthorrulecases}
 	\caption{}
 	\label{fig:coauthorrulecases}
 \end{figure}
 
+\subsubsection{Execution Details}
+
+\paragraph{Adding Similarities} Finding co-author similarities in the graph requires complex querying. To illustrate this, the query for the case in \autoref{fig:coauthorrulenameeq} is explained in more detail below. As already said, the execution of this rule was triggered by the fact that the instance in cluster B published publication B (bolder edge). We will refer to instance "James" in cluster B as vertex v. From vertex v we follow the edges labeled "name". From this name node, every instance with this name can be reached (this is by definition the equal-name scope). We then query the co-instances via the publications and the instances that match with these co-instances via the name-nodes (by definition the matching-name scope). Consider every instance on the query-path, these are exactly the V,W and X,Y pairs. There is one condition that is not yet satisfied: instance X must also be a co-instance of instance V. We only take into account the paths where this condition is satisfied. The remaining pairs can be linked with the appropriate similarities and weights.
+
+\paragraph{Removing Similarities} Sometimes similarities have to be removed. Our model accepts that decisions are not permanent. If the algorithm decides that two instances that were present in the same cluster should be separated, some similarities will be broken. If this is the case, all rules triggered by the merge of these two instances should be re-evaluated and the according similarities should be removed. Then the reclustering operation can take place.
+
 \subsection{Interest Rule}
+
+This is an important rule and it can define a lot of the precision of our whole framework. It states that different authors with the same name are unlikely to work on the same topic or have the same area of expertise. We can achieve this rule by adding keywords to every publication. These keyword could for example be noun phrases extracted from the title of the publication. Matched instances that published a publication containing the same keyword are linked with a similarity with weight $w_k$.
+
+\paragraph{Time-Dependency} A feature to increase the precision of this rule is to deteriorate the weight of the similarities produced by this rule as the publication dates are further removed. For example, two instances with publications published in 2010 and with similar affiliations yield a stronger similarity than if the publications would have been published in 2006 and 2010.
+
+\begin{figure}[htb]
+	\centering
+		\includegraphics[width=0.9\textwidth]{fig/interestrule}
+	\caption{}
+	\label{fig:interestrule}
+\end{figure}
 
 \subsection{Email Rule}
 
+This rule is based on the fact that it is very unlik
+
+\begin{figure}[htb]
+	\centering
+		\includegraphics[width=0.9\textwidth]{fig/emailrule}
+	\caption{}
+	\label{fig:emailrule}
+\end{figure}
+
 \subsection{Affiliation Rule}
+
+\begin{figure}[htb]
+	\centering
+		\includegraphics[width=0.9\textwidth]{fig/affiliationrule}
+	\caption{}
+	\label{fig:affiliationrule}
+\end{figure}
