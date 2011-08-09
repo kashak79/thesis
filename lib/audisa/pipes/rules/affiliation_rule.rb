@@ -10,8 +10,8 @@ class Pipes::AffiliationRule < Pipes::Pipe
   def execute
     instance = _in.get[:instance]
     affiliation = _in.get[:affiliation] # ja?
-    query = @b.v.match_inst.as('"\'instance\'"').out('"affiliation"').as('"\'affiliation\'"').except('[v]').table(:id, :affiliation)
-		query2 = @b.v.name_inst.as('"\'instance\'"').out('"affiliation"').as('"\'affiliation\'"').except('[v]').table(:id, :affiliation)
+    query = @b.v.match_inst.except('[v]').as('"\'instance\'"').out('"affiliation"').as('"\'affiliation\'"').table(:id, :affiliation)
+		query2 = @b.v.name_inst.except('[v]').as('"\'instance\'"').out('"affiliation"').as('"\'affiliation\'"').table(:id, :affiliation)
     pairs = (@graph.table(instance[:_id], query) || []) + (@graph.table(instance[:_id], query2) || [])
     pairs.each do |pair|
       affiliation_match = pair[:affiliation]

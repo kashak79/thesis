@@ -76,6 +76,10 @@ class Helpers::Rexster
   def delete_vertex(id)
     request(:delete, "/vertices/#{id}")
   end
+  
+  def global_query(query)
+    request(:get, "/tp/gremlin", :params => {:script => query})
+  end
 
   # perform a query on a vertex
   def query(vertex, query)
