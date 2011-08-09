@@ -36,25 +36,37 @@ instance_filter.out(true).connect.to(Pipes::Integration.pipe(graph)).
 discovery_filter = instance_filter.out(false).connect.to(Pipes::Filter.pipe(lambda { |flow|
   flow.reject_keys(:type) if flow[:type].is? :discovery
 }))
+
 discovery_filter.out(true).connect.to(Pipes::PersistDiscovery.pipe(graph, :publication)).
 	out.connect.to(Pipes::PublicationTitlePosTagging.pipe(EngTagger.new)).
 	out.connect.to(Pipes::PersistDiscovery.pipe(graph, :keywords, :index => :keyword)).
 	out.connect.to(Pipes::PersistFact.pipe(graph, :publication, :keywords, :keyword)).
   out.connect.to(depmerge, 2)
 
-discovery_filter.out(false).connect.to(Pipes::PersistFact.pipe(graph, :instance, :publication, :published)).
+rule_split = discovery_filter.out(false).connect.to(Pipes::PersistFact.pipe(graph, :instance, :publication, :published)).
 	out.connect.to(Pipes::MagicFacts.pipe(graph, File.open('turck_parsed.json','r'))).
-	out.connect.to(Pipes::KeywordsRule.pipe(graph)).
-	# out.connect.to(Pipes::PersistDiscovery.pipe(graph, :email, :index => :email)).
-	# out.connect.to(Pipes::PersistFact.pipe(graph, :instance, :affiliation, :affiliation)).
-	# out.connect.to(Pipes::AffiliationRule.pipe(graph, Helpers::AffiliationMatcher.new)).
-# execute co-author rule stage 1
-  # out.connect.to(Pipes::CoAuthorRule.pipe(graph)).
-  # out.connect.to(Pipes::PersistSimilarity.pipe(graph)).
-	# out.connect.to(Pipes::PersistFact.pipe(graph, :instance, :email, :email)).
-	#out.connect.to(Pipes::EmailRule.pipe(graph)).
-  #out.connect.to(Pipes::PersistSimilarity.pipe(graph)).
-  out.connect.to(Pipes::Stdout)
+	out.connect.to(Pipes::Split.pipe(4))
+	
+# clustering
+clusterer = Pipes::Merge.pipe(4)
+clusterer.out.connect.to(Pipes::PersistSimilarity.pipe(graph))
+# clusterer.out.connect.to(Pipes::Stdout)
+	
+# keywords rule
+rule_split.out(1).connect.to(Pipes::KeywordsRule.pipe(graph)).
+  out.connect.to(clusterer, 1)
+	
+# email rule
+rule_split.out(2).connect.to(Pipes::PersistDiscovery.pipe(graph, :email, :index => :email)).
+	out.connect.to(Pipes::PersistFact.pipe(graph, :instance, :email, :email)).
+	out.connect.to(Pipes::EmailRule.pipe(graph)).
+	out.connect.to(clusterer, 2)
 
-# connect the dependency resolver
-#dependency.out.connect.to(Pipes::Stdout)
+# affiliation rule
+rule_split.out(3).connect.to(Pipes::PersistFact.pipe(graph, :instance, :affiliation, :affiliation)).
+	out.connect.to(Pipes::AffiliationRule.pipe(graph, Helpers::AffiliationMatcher.new)).
+	out.connect.to(clusterer, 3)
+	
+# co-author rule
+rule_split.out(4).connect.to(Pipes::CoAuthorRule.pipe(graph)).
+	out.connect.to(clusterer,4)
