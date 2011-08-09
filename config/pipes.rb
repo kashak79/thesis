@@ -1,6 +1,6 @@
 require 'engtagger'
 
-graph = Helpers::Rexster.new('http://192.168.179.128:8182/thesis')
+graph = Helpers::Rexster.new('http://192.168.16.128:8182/thesis')
 dependency = Pipes::Dependency.pipe
 
 $pipe = (Connections::Local).connection
@@ -37,16 +37,17 @@ discovery_filter = instance_filter.out(false).connect.to(Pipes::Filter.pipe(lamb
   flow.reject_keys(:type) if flow[:type].is? :discovery
 }))
 discovery_filter.out(true).connect.to(Pipes::PersistDiscovery.pipe(graph, :publication)).
-	# out.connect.to(Pipes::PublicationTitlePosTagging.pipe(EngTagger.new)).
-	# out.connect.to(Pipes::PersistDiscovery.pipe(graph, :keywords, :index => :keyword)).
-	# out.connect.to(Pipes::PersistFact.pipe(graph, :publication, :keywords, :keyword)).
+	out.connect.to(Pipes::PublicationTitlePosTagging.pipe(EngTagger.new)).
+	out.connect.to(Pipes::PersistDiscovery.pipe(graph, :keywords, :index => :keyword)).
+	out.connect.to(Pipes::PersistFact.pipe(graph, :publication, :keywords, :keyword)).
   out.connect.to(depmerge, 2)
 
 discovery_filter.out(false).connect.to(Pipes::PersistFact.pipe(graph, :instance, :publication, :published)).
 	out.connect.to(Pipes::MagicFacts.pipe(graph, File.open('turck_parsed.json','r'))).
+	out.connect.to(Pipes::KeywordsRule.pipe(graph)).
 	# out.connect.to(Pipes::PersistDiscovery.pipe(graph, :email, :index => :email)).
-	out.connect.to(Pipes::PersistFact.pipe(graph, :instance, :affiliation, :affiliation)).
-	out.connect.to(Pipes::AffiliationRule.pipe(graph, Helpers::AffiliationMatcher.new)).
+	# out.connect.to(Pipes::PersistFact.pipe(graph, :instance, :affiliation, :affiliation)).
+	# out.connect.to(Pipes::AffiliationRule.pipe(graph, Helpers::AffiliationMatcher.new)).
 # execute co-author rule stage 1
   # out.connect.to(Pipes::CoAuthorRule.pipe(graph)).
   # out.connect.to(Pipes::PersistSimilarity.pipe(graph)).

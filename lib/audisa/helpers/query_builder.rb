@@ -27,7 +27,7 @@ class Helpers::QueryBuilder
     end
 
     def to_a
-      @query = @query + ">>(#{@query}.count().toInteger())"
+      @query = "(#{@query}.count().toInteger())==1 ? [#{@query} >>1] : (#{@query}>>(#{@query}.count().toInteger()))"
     end
 
     def table(*clos)

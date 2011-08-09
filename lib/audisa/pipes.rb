@@ -31,7 +31,8 @@ module Pipes
   autoload :PersistFact,           'audisa/pipes/persist_fact'
 
   # rules
-  autoload :CoAuthorRule,          'audisa/pipes/rules/co_author_rule.rb'
-	autoload :EmailRule, 						 'audisa/pipes/rules/email_rule.rb'
-	autoload :AffiliationRule,			 'audisa/pipes/rules/affiliation_rule.rb'
+  autoload :CoAuthorRule,          'audisa/pipes/rules/co_author_rule'
+	autoload :EmailRule, 						 'audisa/pipes/rules/email_rule'
+	autoload :AffiliationRule,			 'audisa/pipes/rules/affiliation_rule'
+	autoload :KeywordsRule,				 	 'audisa/pipes/rules/keywords_rule'
 end
