@@ -9,7 +9,7 @@ class Pipes::AffiliationRule < Pipes::Pipe
 
   def execute
     instance = _in.get[:instance]
-    affiliation = _in.get[:affiliation] # ja?
+    affiliation = _in.get[:affiliation]
     query = @b.v.match_inst.except('[v]').as('"\'instance\'"').out('"affiliation"').as('"\'affiliation\'"').table(:id, :affiliation)
 		query2 = @b.v.name_inst.except('[v]').as('"\'instance\'"').out('"affiliation"').as('"\'affiliation\'"').table(:id, :affiliation)
     pairs = (@graph.table(instance[:_id], query) || []) + (@graph.table(instance[:_id], query2) || [])
@@ -21,7 +21,7 @@ class Pipes::AffiliationRule < Pipes::Pipe
 			probability = @matcher.match(affiliation[:affiliation], affiliation_match)
 			# p "######################## Probability is #{probability} between #{affiliation_match} and #{instance}"
       out.push(:similarity => {:from => instance[:_id], :to => instance_match, :weight => Configuration::AFFILIATION_WEIGHT, :type => "affiliation match"}) if probability >= Configuration::AFFILIATION_THRESHOLD
-    end if pairs # filter
+    end if pairs && affiliation # filter
   end
 
 end

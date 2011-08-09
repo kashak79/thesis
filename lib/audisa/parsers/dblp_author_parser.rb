@@ -5,13 +5,9 @@ class Parsers::DblpAuthorParser < Pipes::Pipe
   end
 
   def execute
-    # parse page as xml
-    document = Nokogiri::XML(_in.get)
-    # get the root
-    root = document.root
     # get the links
-    root.xpath('//img[@alt="bibliographical record in XML"]').each do |node|
-      out.push(:url => node.parent[:href])
+    _in.get.scan(/href="([^"]*\.xml)"/).flatten.each do |url|
+      out.push(:url => url)
     end
   end
 
