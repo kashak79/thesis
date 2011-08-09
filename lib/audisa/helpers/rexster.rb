@@ -85,7 +85,8 @@ class Helpers::Rexster
   def table(vertex, query)
     a = request(:get, "/vertices/#{vertex}/tp/gremlin", :params => {:script => query})
     # convert table string to ruby
-    Yajl::Parser.parse("[#{a[0][1..-2].gsub('[','{').gsub(']','}').gsub("'",'"')}]").map { |h|
+		p a[0][1..-2]
+    Yajl::Parser.parse("[#{a[0][1..-2].gsub(/affiliation':([^\]]*)/,"affiliation':'\\1'").gsub('[','{').gsub(']','}').gsub("'",'"')}]").map { |h|
       h.kind_of?(Hash) ? h.symbolize! : h
     } if a && a[0]
   end

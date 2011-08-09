@@ -5,4 +5,5 @@ module Helpers
   autoload :Locker,                'audisa/helpers/locker'
   autoload :Dtw,                   'audisa/helpers/dtw'
   autoload :QueryBuilder,          'audisa/helpers/query_builder'
+	autoload :AffiliationMatcher, 	 'audisa/helpers/affiliation_matcher'
 end
