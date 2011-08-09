@@ -8,7 +8,7 @@ We need an efficient algorithm for clustering and it has to be able to handle a 
 
 For the algorithm we based ourselves largely on the algorithm described in \cite{saha2006dynamic}. An efficient dynamic algorithm is described for clustering graphs for handling insertion and deletion of edges, maintaining high quality clusters as defined by the quality requirement given in \cite{flake2004graph}. The algorithm makes heavy use of the minimum-cut tree. We implemented Gusfield's algorithm, based on \cite{rodrigues2011mpi}, and will explain this first.
 
-The main feature of this dynamic algorithm is that it only builds part of the minimum-cut tree as and when necessary. The tree is computed over a subset of nodes, limited to a number of clusters. In our graph there might be an immense number of authors, and thus clusters. However, the amount of authors involved with one change is limited. By just computing the clusters of this coarsened graph we can obtain the clusters of the original graph. These two properties are the reason the algorithm is efficient while maintaining an identical cluster quality as the static version described in \ref{staticcutclustering}. Formal proof for this quality can be found in \cite{saha2006dynamic}.
+The main feature of this dynamic algorithm is that it only builds part of the minimum-cut tree as and when necessary. The tree is computed over a subset of nodes, limited to a number of clusters. In our graph there might be an immense number of authors, and thus clusters. However, the amount of authors involved with one change is limited. By just computing the clusters of this coarsened graph we can obtain the clusters of the original graph. These two properties are the reason the algorithm is efficient while maintaining an identical cluster quality as the static version described in \autoref{staticcutclustering}. Formal proof for this quality can be found in \cite{saha2006dynamic}.
 
 \subsection{Minimum-cut tree algorithm}
 \label{minimumcuttree}
@@ -55,7 +55,7 @@ Let $G = (V,E,w)$ denote a weighted undirected graph with $n = |V|$ nodes or ver
 
 The minimum cut tree is a tree on $V$ such that inspecting the path between $s$ and $t$ in the tree, the minimum-cut of $G$ with respect of $s$ and $t$ can be obtained. Removal of the minimum weight edge in the path yields the two partitions and the weight of the corresponding edge gives the cut-value.
 
-We implemented a sequential version of Gusfield's algorithm which calculates the minimum cut tree of any given graph. The pseudocode is given by \ref{mincutgusfield}. In the pseudocode we use numbers to point to nodes or vertices. These numbers can be choosen randomly.
+We implemented a sequential version of Gusfield's algorithm which calculates the minimum cut tree of any given graph. The pseudocode is given by \autoref{mincutgusfield}. In the pseudocode we use numbers to point to nodes or vertices. These numbers can be choosen randomly.
 
 The algorithm consists of $n-1$ iterations of a Maximum Flow algorithm and for every iteration a different vertex is chosen as source. The destination vertex is determined by previous iterations and is saved in the tree. Initially all vertices of the output tree point to node 1, but this can be adjusted after each iteration. This adjustment depends on the minimum-cut between the current source and destination. We split all the nodes in two collections, using this minimum-cut. We adjust the parent of each node if it is on another side as its current parent, which is stored in the tree.
 
@@ -63,7 +63,7 @@ We choose an implementation of the Edmonds-Karp algorithm to find the maximum fl
 
 \subsection{Cut clustering}
 
-\cite{flake2004graph} defines a static algorithm for clustering based on minimum cut trees. \ref{staticcutclustering} gives the pseudocode of the basic cut clustering algorithm. It adds an artificial sink $t$ to all the vertices of the graph with weight $\alpha > 0$. The minimum cut tree is computed using this new graph and the disjoint components obtained after removing the artificial vertex $t$, are the required clusters.
+\cite{flake2004graph} defines a static algorithm for clustering based on minimum cut trees. \autoref{staticcutclustering} gives the pseudocode of the basic cut clustering algorithm. It adds an artificial sink $t$ to all the vertices of the graph with weight $\alpha > 0$. The minimum cut tree is computed using this new graph and the disjoint components obtained after removing the artificial vertex $t$, are the required clusters.
 
 \begin{algorithm}
 \caption{Static Cut Clustering Algorithm of \cite{flake2004graph}}
@@ -96,9 +96,9 @@ Receiving new information is represented as a new edge between two nodes with a 
 
 We assume we have $C = {C_1,C_2...C_s}$ as the clusters of the graph $G(V,E)$ which have been calculated in previous steps. We denote $A$ as the adjacency matrix of $G$.
 
-\paragraph{Intra-cluster edge addition}
+\subsubsection{Intra-cluster edge addition}
 
-Intra-cluster edge addition means that both the nodes of the added edge belong to the same cluster. The result is that the cluster becomes better connected. We only have to update the $ICW$ and the adjacency matrix $A$ while the nodes remain unchanged. \ref{intracluster} shows the pseudocode.
+Intra-cluster edge addition means that both the nodes of the added edge belong to the same cluster. The result is that the cluster becomes better connected. We only have to update the $ICW$ and the adjacency matrix $A$ while the nodes remain unchanged. \autoref{intracluster} shows the pseudocode.
 
 \begin{algorithm}
 \caption{Intra-cluster edge addition between nodes $i$ and $j$ with weight $w(i,j)$}
@@ -113,24 +113,35 @@ Intra-cluster edge addition means that both the nodes of the added edge belong t
 \end{algorithmic}
 \end{algorithm}
 
-\paragraph{Inter-cluster edge addition}
+\subsubsection{Inter-cluster edge addition}
 
 Addition of an edge whose end nodes belong to different clusters is more challenging as it increases the connectivity across different clusters. This means the cluster quality of the clusters involved is lowered and as a result reclustering might be necessary when the cluster quality is no longer maintained. 
 
 There are three identifiable cases:
 
 \begin{enumerate}
-	\item \textbf{CASE 1} The addition of the edge does not break the clusters involved
-	\item \textbf{CASE 2} The addition of the edge causes the clusters to be so well connected that they are merged into one
-	\item \textbf{CASE 3} The new edge deteriorates the cluster quality and the nodes in both the clusters have to be reclustered
+	\item \textbf{CASE 1} The addition of the edge does not break the clusters involved.
+	\item \textbf{CASE 2} The addition of the edge causes the clusters to be so well connected that they are merged into one.
+	\item \textbf{CASE 3} The new edge deteriorates the cluster quality and the nodes in both the clusters have to be reclustered.
 \end{enumerate}
 
-In order to understand the complete algorithm shown in \ref{intercluster} for inter-cluster edge addition which also uses the minimum-cut tree algorithm discussed in \ref{minimumcuttree}, we have to explain two new processes: merging and contraction of clusters.
-
-\subparagraph{Merging of clusters} occurs in CASE 2 and is described in \ref{merging}. Two clusters $C_u$ and $C_v$ are merged into one new cluster containing the nodes of the two original clusters. This causes the ICW of all the nodes involved to increase and the OCW to decrease as all the nodes are now more connected.
+In each of these three cases, the addition of the new edge results in updating the adjacency matrix $A$ and the Outer Cluster Weight of the nodes involved. This is described in \autoref{updateValues}. In order to understand the complete algorithm, we first need to explain two new processes which are used: merging and contracting of clusters.
 
 \begin{algorithm}
-\caption{Merging of clusters $C_u$ and $C_v$}
+\caption{Updating the adjacency matrix $A$ and the Outer Cluster Weight: UPDATE($(i,j),w(i,j)$)}
+\label{merging}
+\begin{algorithmic}
+\STATE \textbf{Input:} Edge $(i,j)$ and weight $w(i,j)$
+\STATE $A(i,j) \leftarrow A(i,j) + w(i,j)$
+\STATE $OCW(i) \leftarrow OCW(i) + w(i,j)$
+\STATE $OCW(j) \leftarrow OCW(j) + w(i,j)$
+\end{algorithmic}
+\end{algorithm}
+
+\paragraph{Merging of clusters} occurs in CASE 2 and is described in \autoref{merging}. Two clusters $C_u$ and $C_v$ are merged into one new cluster containing the nodes of the two original clusters. This causes the ICW of all the nodes involved to increase and the OCW to decrease as all the nodes are now more connected.
+
+\begin{algorithm}
+\caption{Merging of clusters $C_u$ and $C_v$: MERGE($C_u,C_v$)}
 \label{merging}
 \begin{algorithmic}
 \STATE \textbf{Input:} $C_u$ and $C_v$ 
@@ -148,10 +159,10 @@ In order to understand the complete algorithm shown in \ref{intercluster} for in
 \end{algorithmic}
 \end{algorithm}
 
-\subparagraph{Contraction of clusters} occurs in CASE 3 as part of the reclustering process and is shown in \ref{contracting}. All the nodes outside the set of clusters $S$ are replaced by a single new node $x$. Self loops that are created in this process are removed and parallel edges are replaced by a single edge with weight equal to the sum of the parallel edges. The reason we consider the clusters outside $S$ is because $S$ will generally be small while the other clusters will contain a lot of nodes.
+\paragraph{Contraction of clusters} occurs in CASE 3 as part of the reclustering process and is shown in \autoref{contracting}. All the nodes outside the set of clusters $S$ are replaced by a single new node $x$. Self loops that are created in this process are removed and parallel edges are replaced by a single edge with weight equal to the sum of the parallel edges. The reason we consider the clusters outside $S$ is because $S$ will generally be small while the other clusters will contain a lot of nodes.
 
 \begin{algorithm}
-\caption{Contraction of clusters outside the set of clusters $S$}
+\caption{Contraction of clusters outside the set of clusters $S$: CONTRACT($G(V,E),S)$)}
 \label{contracting}
 \begin{algorithmic}
 \STATE \textbf{Input:} $G(V,E)$ and set of clusters $S$ 
@@ -167,6 +178,11 @@ In order to understand the complete algorithm shown in \ref{intercluster} for in
 \end{algorithmic}
 \end{algorithm}
 
+The complete algorithm for the addition of an edge between nodes that are contained in different clusters, is shown in \autoref{intercluster}. If the addition of the new edge does not deteriorate the clustering quality (CASE 1), the clusters are maintained and we only have to update the adjacency matrix $A$ and the Outer Cluster Weight of the nodes involved. 
+
+If the hypothetical cluster quality of the cluster created by the combination of the two current clusters exceeds the threshold $\alpha$ (CASE 2), the clusters can be merged. 
+
+Otherwise (CASE 3), we create a new, coarsened graph by contracting all the clusters except $C_u$ and $C_v$ to a node $x$. The resulting graph is significantly smaller than the original graph, resulting in lower execution times. Similarly as in \autoref{staticcutclustering}, we add an artificial sink $t$ to the coarsened graph. After adding edges between $t$ and the other nodes, we calculate the minimum-cut tree, as described in \autoref{minimumcuttree}. The connected components are computed from the resulting tree, after removing $t$. The components containing vertices of $C_u$ and $C_v$ along with the clusters $C-\left\{C_v,C_u\right\}$ are returned as the new clusters of the original graph. As a result of the reclustering, we have to recalculate the ICW and OCW of the nodes involved. This can easily be done by comparing the nodes in the old cluster and the nodes in the new cluster for each node.
 
 \begin{algorithm}
 \caption{Inter-cluster edge addition between nodes $i$ and $j$ with weight $w(i,j)$}
@@ -177,27 +193,34 @@ In order to understand the complete algorithm shown in \ref{intercluster} for in
 \STATE $i \in C_u$ and $j \in C_v$
 \IF{$\frac{\sum_{u \in C_u}{OCW(u) + w(i,j)}}{\left|V - C_u\right|} \leq \alpha \wedge \frac{\sum_{v \in C_v}{OCW(v) + w(i,j)}}{\left|V - C_v\right|} \leq \alpha$}
 	\STATE // CASE 1
-	\STATE $A(i,j) \leftarrow A(i,j) + w(i,j)$
-	\STATE $OCW(i) \leftarrow OCW(i) + w(i,j)$
-	\STATE $OCW(j) \leftarrow OCW(j) + w(i,j)$
+	\STATE $UPDATE((i,j),w(i,j))$
 	\RETURN $C$
 \ELSIF{$\frac{2 * c(C_u,C_v)}{V} \geq \alpha$}
 	\STATE // CASE 2
+	\STATE $UPDATE((i,j),w(i,j))$
 	\STATE $D \leftarrow MERGE(C_u,C_v)$
 	\RETURN $C + D - \left\{C_u,C_v\right\}$
 \ELSE
 	\STATE // CASE 3
+	\STATE $UPDATE((i,j),w(i,j))$
 	\STATE $G'(V',E') \leftarrow CONTRACT(G(V,E),\left\{C_u,C_v\right\} )$
 	\STATE Connect $t$ to $v, \forall v \in C_u,C_v$ with edge of weight $\alpha$
-	\STATE Connect $t$ to $V' - \left\{C_u, C_v\right\}$ with edge of weight $\alpha * \left\| V - C_u - C_v \right\|$
+	\STATE Connect $t$ to $V' - \left\{C_u, C_v\right\}$ with edge of weight $\alpha * \left| V - C_u - C_v \right|$
 	\STATE G''(V'',E'') is the graph resulting in connecting $t$
 	\STATE Calculate minimum-cut tree $T''$ of $G''(V'',E'')$
 	\STATE Remove $t$
 	\STATE // $\left\{D_1,D_2...D_k\right\}, k > 0$, are the connected components of $T''$ after removing $t$
 	\STATE $C \leftarrow \left\{D_1,D_2...D_k,C_1,C_2...C_s\right\} - \left\{ C_u,C_v \right\}$
+	\STATE // Update OCW and ICW using the new clusters
+	\FOR{$\forall i \in C_u \cup C_v$}
+		\STATE $sum \leftarrow \sum_{j \in old~neighbours}{A(i,j)}$
+		\STATE $sum \leftarrow sum - \sum_{j \in new~neighbours}{A(i,j)}$
+		\STATE $ICW(i) \leftarrow ICW(i) + sum$
+		\STATE $OCW(i) \leftarrow OCW(i) - sum$
+	\ENDFOR
 	\RETURN $C$
 \ENDIF
 \end{algorithmic}
 \end{algorithm}
 
-% TODO : bij merge, moet A, OCW en ICW updaten en bij CASE 3 hetzelfde, dit wordt niet vermeld in de paper en ook nog niet in onze pseudocode
+% TODO moeten we hier nog vermelden hoe we dit precies geimplementeerd hebben ? Namelijk combinatie van Ruby, Java en Resque ? Misschien ook de voordelen aanhalen van deze aanpak tov andere mogelijke manieren of toch uitleggen waarom we hiervoor gekozen hebben ..
