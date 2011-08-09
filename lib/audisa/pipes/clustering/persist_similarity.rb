@@ -90,7 +90,7 @@ class Pipes::PersistSimilarity < Pipes::Pipe
     #@locking.lock(:instance, fromids+toids)
     # calculate qualities
     fromquality = (sum(fromids) { |id| "ocw:#{id}" }+weight).to_f/(nV-fromids.size)
-    toquality   = (sum(fromids) { |id| "icw:#{id}" }+weight).to_f/(nV-toids.size)
+    toquality   = (sum(toids) { |id| "ocw:#{id}" }+weight).to_f/(nV-toids.size)
     # check the quality
     if fromquality <= Configuration::ALPHA && toquality <= Configuration::ALPHA
       puts "CASE 1"
@@ -165,6 +165,8 @@ class Pipes::PersistSimilarity < Pipes::Pipe
     (toclusters.size-2).times do
       clusters << new_cluster(family)
     end
+    # delete a cluster if necessary
+    @graph.delete_vertex(clusters[1]) if toclusters.size == 1
     # now relocate every instance
     ids.each do |id|
       cluster_index = toclusters.index { |c| c.include? id }
