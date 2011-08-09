@@ -69,6 +69,11 @@ The Web Ontology Language or OWL is a family of knowledge representation languag
 
 FOAF, or Friend of a Friend, is a descriptive vocabulary expressed using the Resource Description Framework (RDF) and the Web Ontology Language (OWL). It is an ontology used for describing persons, their activities and relationships to other people and objects. Each profile has a unique identifier, used for defining these relationships.
 
+\subsection{Freebase}
+\label{freebase}
+
+Freebase is a publicly available, collaborative entity graph describing people, places and objects and relationships between these entities. It is an online collection of structured, cross-linked data providing an interface to access common information more effectively. One way this could be used is to find relationships between words. As synonyms and alternative spelling are also included, it allows to determine a central subject in messages where the same word is written differently.
+
 \subsection{Stemming}
 \label{stemming}
 
@@ -203,10 +208,20 @@ The amount of applications focusing on calculating social media influence, as th
 
 We want to create a platform that identifies key influencers on Twitter and that allows users to search influencers using topic keywords. The platform should also maintain up-to-date user profiles.
 
-The main features are based on the Semantic Web. It should allow the framework to understand certain semantics and make connections between information. The usage of the Web Ontology Language (OWL, see \autoref{owl}) for representing the knowledge we have on one influencer together with the Resource Description Framework (RDF, see \autoref{rdf}). To describe the relations with other influencers and their activities we would us Friend of a Friend (FOAF) \autoref{foaf}, which uses RDF to do so.
+The main features are based on the Semantic Web. It should allow the framework to understand certain semantics and make connections between information. The usage of the Web Ontology Language (OWL, see \autoref{owl}), for representing the knowledge we have on an influencer, together with Friend of a Friend (FOAF) \autoref{foaf}, for describing the relations with other influencers and their activities, should allow us to create a meaningful layer on top of Twitter.
 
-To find the main subjects of a person we would parse their tweets using a part-of-speech tagger (\autoref{postagger}) to find the important words and search what they talk about the most. We would have to make connections between subjects (as people often talk about some feature of a product or a specific product without referencing the general topic). This means we would have to use some kind of machine learning algorithm (\autoref{machinelearning}) such as a clustering algorithm (\autoref{clustering}) to correctly make connections between tweets and subjects. We would also use some external datasets such as Freebase to help us in this quest.
+\autoref{fig:makingsenseoftwitter} shows a draft of how this could be represented internally. We are reviewing the Twitter user Daniel, which has relationships to entities contained in two different groups. The first, depicted by FOAF, contains the Twitter accounts Daniel is following. These are seperate entities with relationships to subjects and other entities which have been determined in previous iterations. The second group, depicted by Twitter Analysis, contains the subjects Daniel talks about or is interested in. These subjects are determined by analyzing Daniel's messages and extracting the most important words using a part-of-speech tagger (\autoref{postagger}). These words have to be linked to subjects, a task where Wikipedia and Freebase can help us.
 
+\begin{figure}[h]
+	\centering
+		\includegraphics[width=1.0\textwidth]{./fig/makingsenseoftwitter.pdf}
+	\caption{The internal representation of the entity Daniel, his relationships to other entities and the conclusions we can draw from analyzing these relationships.}
+	\label{fig:makingsenseoftwitter}
+\end{figure}
+
+By analyzing the available entities and their relationships, we would like to be able to conclude that Daniel is a Ruby on Rails developer. This is depicted in \autoref{fig:makingsenseoftwitter} by linking the subjects Daniel talks about to Ruby on Rails and the added knowledge that the entities Heroku and Github which Daniel follows, are both talking about development or to developers.
+
+Using this information, we can create a mesh with links between entities. The number of usefull links could then be part of the algorithm to determine the most influential Twitter users with regard to a specific topic.
 
 \section{Expert Finding}
 \label{expertfinding}
@@ -217,7 +232,6 @@ Finding experts is useful for seeking consultants, collaborators or speakers. It
 %Expert finding is a difficult task requiring a multitude of different steps in order to find results bearing certain value. There are databases containing records of people matched with their area of expertise, which can be queried for a nominal fee, mostly used by reporters. The data has been gathered manually over time. To receive a more up-to-date or specific result, one will have to send a separate request which will come with a higher price and take its time.\\
 %Another option is to do it manually. There are several steps which can be undertaken and they can be executed in fashionable order, repeated as often as necessary. One can search for conference sites about the topic and look up the names of the speakers. Current and past working experience can possibly be found on LinkedIn. Publications and co-authors can be retrieved from online databases with dedicated research publications or from more general databases such as Google Scholar. The authors and papers can be interlinked in order to see who works with who and who is most often cited or referenced. Influence can be measured on social media.\\
 %It is clearly a lengthy process.
-
 \subsection{Current situation}
 
 % Say something about using OWL, FOAF, RDF, triplestores ... Generally saying more about the 2 month we needed to actually get to our problem ...
