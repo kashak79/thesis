@@ -46,12 +46,12 @@ discovery_filter.out(false).connect.to(Pipes::PersistFact.pipe(graph, :instance,
 	out.connect.to(Pipes::MagicFacts.pipe(graph, File.open('turck_parsed.json','r'))).
 	out.connect.to(Pipes::PersistDiscovery.pipe(graph, :email, :index => :email)).
 # execute co-author rule stage 1
-  # out.connect.to(Pipes::CoAuthorRule.pipe(graph)).
+  out.connect.to(Pipes::CoAuthorRule.pipe(graph)).
   # out.connect.to(Pipes::PersistSimilarity.pipe(graph)).
-	out.connect.to(Pipes::PersistFact.pipe(graph, :instance, :email, :email)).
+	#out.connect.to(Pipes::PersistFact.pipe(graph, :instance, :email, :email)).
 	#out.connect.to(Pipes::EmailRule.pipe(graph)).
-  #out.connect.to(Pipes::PersistSimilarity.pipe(graph)).
-  out.connect.to(Pipes::Stdout)
+  out.connect.to(Pipes::PersistSimilarity.pipe(graph))
+  #out.connect.to(Pipes::Stdout)
 
 # connect the dependency resolver
 #dependency.out.connect.to(Pipes::Stdout)
