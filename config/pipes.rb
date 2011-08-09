@@ -1,6 +1,6 @@
 require 'engtagger'
 
-graph = Helpers::Rexster.new('http://192.168.16.128:8182/thesis')
+graph = Helpers::Rexster.new('http://192.168.179.128:8182/thesis')
 dependency = Pipes::Dependency.pipe
 
 $pipe = (Connections::Local).connection

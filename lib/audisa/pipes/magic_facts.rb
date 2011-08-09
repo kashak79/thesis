@@ -21,7 +21,7 @@ class Pipes::MagicFacts < Pipes::Pipe
 		output = {}
 		output[:email] = { :email => email } if !email.nil? && !email.empty?
 		output[:affiliation] = affiliation = @graph.create_vertex(:affiliation => fact["affiliation"]) if !fact["affiliation"].nil? && !fact["affiliation"].empty?
-		p output if Configuration::DEBUG && !output.empty?
+		# p output if Configuration::DEBUG && !output.empty?
 		# Enrich the output with this new information
 		enrich(:in, :out, output) if !output.empty?
   end

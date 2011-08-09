@@ -11,7 +11,7 @@ class Pipes::PublicationText < Pipes::Pipe
 
   def execute
 		#get the title of the paper
-		p path = _in.get[:path] || DEFAULT_PATH+"/#{_in.get[:publication][:title].gsub(' ','-')}"
+		path = _in.get[:path] || DEFAULT_PATH+"/#{_in.get[:publication][:title].gsub(' ','-')}"
 		Docsplit.extract_text(path, :pages => [1])
 		# remove the pdf ?
 		#`rm #{path}`
