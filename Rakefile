@@ -12,3 +12,16 @@ require 'tasks/visualize'
 task :test => :environment do
   load 'testpipe.rb'
 end
+
+task :stat => :environment do
+  puts "publications: #{$redis.get("stat:pub")}"
+  puts ""
+  start = $redis.get("stat:start").to_i
+  time = (Time.now.to_i-start).to_f/60
+  puts "running time: #{time.floor}m #{(time*60)%60}s"
+  puts ""
+  Pipes::PersistSimilarity::STAT_MAPPING.each do |k,v|
+    puts "#{k}: #{$redis.get("stat:#{v}") || 0}"
+  end
+end
+
