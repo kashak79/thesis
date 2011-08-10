@@ -109,9 +109,10 @@ class Pipes::PersistSimilarity < Pipes::Pipe
 			puts "cutvalue: #{cut_value(fromids, toids)}"
       deps = ["blueprints-core-0.8.jar","commons-pool-1.5.6.jar","gson-1.7.1.jar","jedis-2.0.0.jar","jung-3d-2.0.1.jar","jung-algorithms-2.0.1.jar","jung-graph-impl-2.0.1.jar"]
       cp = deps.map { |dep| "#{CLUSTERING}/lib/#{dep}"} * ':'
-      # p "java -cp #{cp};#{CLUSTERING}/bin clustering.CaseThree #{fromids} #{toids} #{nV} #{Configuration::ALPHA}"
+      p "#{fromids} #{toids} #{nV} #{Configuration::ALPHA}"
       result = `java -cp #{cp}:#{CLUSTERING}/bin clustering.CaseThree #{Yajl::Encoder.encode(fromids)} #{Yajl::Encoder.encode(toids)} #{nV} #{Configuration::ALPHA}`
       result = Yajl::Parser.parse(result)
+      p result
       relocate(fromids+toids, [fromcluster, tocluster], result)
     end
     # lock all the instances

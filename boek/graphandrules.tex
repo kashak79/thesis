@@ -1,31 +1,32 @@
 % better title
-\chapter{Graph and Rules}
+\chapter{Theoretical Model}
 % nog niet goed
 
-First, a theorethical model is defined. This model allows us to illustrate the information, problems and respective solutions concerning our challenge to disambiguate people around the web. We introduce a three-layer graph model that will integrate structural, informational and algorithmic aspects while respecting the foundation acknowledgements we established earlier (REF). In the next chapter, we show how this model can be practically realised.
+First, a theoretical model is defined. This model allows us to illustrate and argue about the information, problems and respective solutions concerning our challenge to disambiguate people around the web. We introduce a three-layer graph model that will integrate structural, informational and algorithmic aspects while respecting the foundation acknowledgements we established earlier (\autoref{foundation}). In the next chapter, we show how this model can be practically realised.
 
 \section{Graph as a model}
 
-\begin{mydef}
-A \textbf{Fact} is a certainty derived from a piece of information.
-\end{mydef}
 
-\begin{mydef}
-A \textbf{Discovery} is a fact that proofs the existence of a certain entity (an address, a publication, \ldots)
-\end{mydef}
 
-\begin{mydef}
-A \textbf{Relation} is a fact that denotes a relation between two entities \ldots
-\end{mydef}
+% \begin{mydef}
+% A \textbf{Fact} is a certainty derived from a piece of information.
+% \end{mydef}
+
+% \begin{mydef}
+% A \textbf{Discovery} is a fact that proofs the existence of a certain entity (an address, a publication, \ldots)
+% \end{mydef}
+
+% \begin{mydef}
+% A \textbf{Relation} is a fact that denotes a relation between two entities \ldots
+% \end{mydef}
 
 \section{Three Layer Model: Structural Layer}
 
-% introductie
+
 
 \subsection{Instances and Authors}
 
-% welke decision, definieer!
-One of the main responsibilities of the structural layer is reflecting a decision through a change in structure. It is clear that this is very important. Deciding which physical author some information belongs to is the main issue of our thesis. This part focusses on how the model adapt to such a decision. We first explain the first solution that would probably come to mind and the shortcoming of it. Then we provide a solution that deals with these shortcomings.
+One of the main responsibilities of the structural layer is reflecting a decision through a change in structure. It is clear that this is very important. Deciding to which physical author some information belongs, is the main issue of our thesis. This part focusses on how the model adapts to such a decision. We first explain the first solution that would probably come to mind and the shortcomings of it. Then we provide a solution that deals with these shortcomings.
 
 \paragraph{Merging} Assume that we have a source of information that has two occurences of the same name X. Along each of these occurrences, we find some extra information on the person(s) with this name. At first we do not know if this is just one person or two persons who share the same name. Now suppose that we have an algorithm that claims the latter. Therefore we have made a decision that the two pieces of information depict the same actual person. The idea is now to simply merge these two chunks of information, representing exactly one person. The situation together with its outcome is illustrated in \autoref{fig:clusteringsimple}.
 
@@ -99,7 +100,7 @@ Concerning the structure of name notations in our model we have also walked two 
 
 \subsection{Conclusion and Overview}
 
-We have addressed all the main issues that arose during the design of a structure that can stisfy the efficiency and flexibility needed according to the foundation acknowledgements (REF). We will finish with a final example of the typical structure of the graph as a theorethical model. This overview can be found in \autoref{fig:graphstructureoverview}.
+We have addressed all the main issues that arose during the design of a structure that can stisfy the efficiency and flexibility needed according to the foundation acknowledgements (REF). We will finish with a final example of the typical structure of the graph as a theoretical model. This overview can be found in \autoref{fig:graphstructureoverview}.
 
 \begin{figure}[htb]
 	\centering
@@ -114,7 +115,7 @@ We have addressed all the main issues that arose during the design of a structur
 
 \section{Three Layer Model: Similarity Layer}
 
-As we have stated several times, the goal is to link instances together to form an author. Until now, linking was just an action of an algorithm. If an algorithm decides that two instances represent the same author, the algorithm links them together (by actually changing the "instance of" edges in the graph). But what about the links itself? Should these links also represent a "physical" concept in our model? This is a question answered by the similarity layer.
+As we have stated several times, the goal is to link instances together to form an author (cluster). Until now, linking was just an action of an algorithm. If an algorithm decides that two instances represent the same author, the algorithm links them together (by actually changing the "instance of" edges in the graph). But what about the links itself? Should these links also represent a "physical" concept in our model? This is a question answered by the similarity layer.
 
 \paragraph{Weighted Similarities} When two instances are compared, we need to compare their properties. Properties could be email addresses, locations, people we work with, \ldots When compared instances have the location "Belgium" in common, but their email addresses are different, it would be doubtful that these two are the same. In the opposite situation (the same email address and a different location) it would be alot more probable for these instances to represent the same person. We can conclude that some properties are more distinctive than others. When the value of two properties is (partially) the same (degree of equality), we speak of a similarity. These similarities are assigned a normalized weight proportional to the distinctiveness of the property and the degree of equality.
 % misschien ook nog een formele definitie hier
@@ -129,6 +130,7 @@ As we have stated several times, the goal is to link instances together to form 
 \end{figure}
 
 \section{Rules}
+\label{rules}
 
 %introductie
 
@@ -183,7 +185,7 @@ In each of the two cases, it is possible for similarities to be added and to be 
 
 \paragraph{Combinations} Different combinations of these three rules result in six rules. Variant D, E and F are invertible, yielding another three rules. An overview of the six main combinations is given in \autoref{fig:coauthorrulecases}. We use a simplified view where scopes and relations are directly indicated as an edge between the instances.
 
-\begin{figure}[htb]
+\begin{figure}[h!]
 	\centering
 		\includegraphics[width=0.9\textwidth]{fig/coauthorrulecases}
 	\caption{}
@@ -202,7 +204,9 @@ This is an important rule and it can define a lot of the precision of our whole 
 
 \paragraph{Time-Dependency} A feature to increase the precision of this rule is to deteriorate the weight of the similarities produced by this rule as the publication dates are further removed. For example, two instances with publications published in 2010 and with similar affiliations yield a stronger similarity than if the publications would have been published in 2006 and 2010.
 
-\begin{figure}[htb]
+An example of this rule can be found in \autoref{fig:interestrule}. Both publication share the keyword "Security". This causes the associated instances to be coupledby a similarity with weight $w_k$.
+
+\begin{figure}[h!]
 	\centering
 		\includegraphics[width=0.9\textwidth]{fig/interestrule}
 	\caption{}
@@ -211,9 +215,9 @@ This is an important rule and it can define a lot of the precision of our whole 
 
 \subsection{Email Rule}
 
-This rule is based on the fact that it is very unlik
+This rule is based on the fact that it is very likely for two instances with the same email address to represent the same author. Time-Dependency is not used in combination with this rule, as emails are normally not interchanged between people. An example is illustrated in \autoref{fig:emailrule}
 
-\begin{figure}[htb]
+\begin{figure}[h!]
 	\centering
 		\includegraphics[width=0.9\textwidth]{fig/emailrule}
 	\caption{}
@@ -222,9 +226,15 @@ This rule is based on the fact that it is very unlik
 
 \subsection{Affiliation Rule}
 
-\begin{figure}[htb]
+The affiliation rule exploits the affiliations of the authors. It is unlikely for an author to be tied towards multiple affiliations at the same time. This rule can benefit of the time-dependency concept. Authors sometimes change from one affiliation to another. Having the same affilation ten years later yields less of a similarity that having the same one right now. Again, an example can be found in \autoref{fig:affiliationrule}.
+
+\begin{figure}[h!]
 	\centering
 		\includegraphics[width=0.9\textwidth]{fig/affiliationrule}
 	\caption{}
 	\label{fig:affiliationrule}
 \end{figure}
+
+\section{Conclusion}
+
+% dissimilarities

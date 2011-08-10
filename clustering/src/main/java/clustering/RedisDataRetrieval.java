@@ -10,6 +10,7 @@ public class RedisDataRetrieval implements MagicDataRetrieval {
 	public RedisDataRetrieval() {
 		JedisPool pool = new JedisPool(new JedisPoolConfig(), "localhost");
 		this.jedis = pool.getResource();
+		jedis.select(1);
 	}
 	
 	private String a(int v1, int v2) {

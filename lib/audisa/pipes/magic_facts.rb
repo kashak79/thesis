@@ -14,7 +14,7 @@ class Pipes::MagicFacts < Pipes::Pipe
 			out.push(_in.get) 
 			return
 		end
-		fact = @facts[instance[:name]][publication[:title]]
+		fact = @facts[instance[:name]][publication[:title].gsub("'", "")]
 		# first lock to avoid creating 2 equal emails
     email = fact["email"]
 		# Add affiliation as an attribute, not a vertex ?

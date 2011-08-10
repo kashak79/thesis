@@ -19,6 +19,7 @@ end
 
 task :stat do
 	$redis = Redis.new
+	$redis.select 1
   puts "publications: #{$redis.get("stat:pub")}"
   puts ""
   start = $redis.get("stat:start").to_i
