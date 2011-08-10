@@ -1,0 +1,31 @@
+TURCK::ALL-CASE3SPECIAL
+
+module Configuration
+
+	ALPHA = 5
+	AFFILIATION_WEIGHT = 10
+	AFFILIATION_THRESHOLD = 0.8
+	EMAIL_WEIGHT = 100
+	KEYWORD_WEIGHT = 4
+	COAUTHOR_EQNAME_WEIGHT = 8
+	COAUTHOR_MATCHINGNAME_WEIGHT = 6
+	DEBUG = true
+	
+end
+
+elsif cut_value_formula <= Configuration::ALPHA/2
+			puts "CASE 3 ::: special"
+      add_similarity(from, to, weight)
+			
+			
+publications: 165
+
+running time: 286m 4.0s
+
+email equality: 102
+coauthor doubleeq: 13076
+coauthor doublematch: 0
+coauthor name-eq+match: 0
+coauthor name-match+eq: 0
+keyword equality: 5903
+affiliation match: 5026

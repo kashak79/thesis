@@ -9,4 +9,6 @@ module Configuration
 	COAUTHOR_MATCHINGNAME_WEIGHT = 6
 	DEBUG = true
 	
+	CASE3_SPECIAL = nil
+	
 end

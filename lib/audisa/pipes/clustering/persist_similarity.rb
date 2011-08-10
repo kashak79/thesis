@@ -96,7 +96,7 @@ class Pipes::PersistSimilarity < Pipes::Pipe
     if fromquality <= Configuration::ALPHA && toquality <= Configuration::ALPHA
       puts "CASE 1"
       add_similarity(from, to, weight)
-    elsif cut_value_formula <= Configuration::ALPHA/2
+    elsif Configuration::CASE3_SPECIAL && cut_value_formula <= Configuration::ALPHA * Configuration::CASE3_SPECIAL
 			puts "CASE 3 ::: special"
       add_similarity(from, to, weight)
     elsif cut_value_formula >= Configuration::ALPHA

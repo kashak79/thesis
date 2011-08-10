@@ -16,7 +16,7 @@ class Parsers::DblpBibtexParser < Pipes::Pipe
       :type => Core::Type.new(:discovery, :publication),
       :reference => pub_ref=@reference.get,
       :publication => {
-        :title => (root % 'title').text
+        :title => (root % 'title').text.gsub(/[',]/,'')
       }
     )
     # push the authors
@@ -26,7 +26,7 @@ class Parsers::DblpBibtexParser < Pipes::Pipe
         :type => Core::Type.new(:discovery, :instance),
         :reference => auth_ref=@reference.get,
         :instance => {
-          :name => author_node.text
+          :name => author_node.text.gsub(/'/,'')
         }
       )
       # report the fact that this author published the publication
