@@ -1,28 +1,17 @@
 % better title
 \chapter{Theoretical Model}
-% nog niet goed
 
-First, a theoretical model is defined. This model allows us to illustrate and argue about the information, problems and respective solutions concerning our challenge to disambiguate people around the web. We introduce a three-layer graph model that will integrate structural, informational and algorithmic aspects while respecting the foundation acknowledgements we established earlier (\autoref{foundation}). In the next chapter, we show how this model can be practically realised.
+First, a theoretical model is defined. This model allows us to illustrate and reason about the information, problems and respective solutions concerning our challenge to disambiguate people around the web. We introduce a three-layer graph model that will integrate structural, informational and algorithmic aspects while respecting the foundation acknowledgements we established earlier (\autoref{foundation}). In the next chapter, we show how we realised this model practically.
 
 \section{Graph as a model}
 
+The information we collect comprise entities and relations between. We want to study this information in a very general way. Creating an ontology with this information allows us to represent it and reason about it. Ontologies are especially well representable within a graph structure. This is why we chose for a model based on a graph.
 
-
-% \begin{mydef}
-% A \textbf{Fact} is a certainty derived from a piece of information.
-% \end{mydef}
-
-% \begin{mydef}
-% A \textbf{Discovery} is a fact that proofs the existence of a certain entity (an address, a publication, \ldots)
-% \end{mydef}
-
-% \begin{mydef}
-% A \textbf{Relation} is a fact that denotes a relation between two entities \ldots
-% \end{mydef}
+The model we built exists of three layers, each with their respnsibilities. Each of these layers is explained in detail below.
 
 \section{Three Layer Model: Structural Layer}
 
-
+A lot of data will constantly be streaming into our system. We need to structure our model in a way that it permits us reaching our goals efficiently. The first part of this section introduces a structuring that allows us to disambiguate. The second part mainly concentrates on reducing the size of the problem domain with as few compromises as possible.
 
 \subsection{Instances and Authors}
 
@@ -55,6 +44,7 @@ Our goal is to try and link these chunks of information and thereby making a com
 \end{figure}
 
 \subsection{Problem Domain}
+\label{problemdomain}
 
 As already said, our goal is to link different instances of an author. Therefore the properties of those instances have to be compared. In the case of the discovery of a new instance, it is infeasible to compare it with all the instances that were already found before. That would make the problem more and more complex over time. This forces us to narrow down the problem space. For a certain instance $I_i$, we want to minimize the compared instances that do not represent the same author as this instance ("real" instances), while still trying to compare all instances that are real ones. This is formulated in equation \autoref{eq:problemspace}.
 
@@ -67,14 +57,14 @@ Names are still an important property for person identification. If we find two 
 
 Note that in the example used in the previous section, we sidestepped an extra difficulty. It assumed that our source contained two instances associated with the same name. When people have totally different names, they are not the same. When they have the same name, they could be the same. But what about those names that are almost the same? If the names are not too different, the instances must certainly be compared. The definition of "too different" needs to comply with equation \autoref{eq:problemspace}.
 
-Narrowing down the problem space using names is done using two rules. Two instance will never be compared if any of the following two conditions are satisfied:
+Narrowing down the problem space using names is done using two rules. Two instances will never be compared if any of the following two conditions are satisfied:
 
 \begin{enumerate}
 \item Their family names are different.
 \item The notation of their names is too different.
 \end{enumerate}
 
-The formal definition of a "family name" and the exact meaning of "too different" will be explained in more detail in .... REF. The structural represenation of name notations will be further explained in the next section.
+The formal definition of a "family name" and the exact meaning of "too different" will be explained in more detail in \autoref{fuzzynamematching}. The structural represenation of name notations will be further explained in the next section.
 
 \subsection{Name Notations}
 
@@ -100,7 +90,7 @@ Concerning the structure of name notations in our model we have also walked two 
 
 \subsection{Conclusion and Overview}
 
-We have addressed all the main issues that arose during the design of a structure that can stisfy the efficiency and flexibility needed according to the foundation acknowledgements (REF). We will finish with a final example of the typical structure of the graph as a theoretical model. This overview can be found in \autoref{fig:graphstructureoverview}.
+We have addressed all the main issues that arose during the design of a structure that can stisfy the efficiency and flexibility needed according to the foundation acknowledgements (\autoref{foundation}). We will finish with a final example of the typical structure of the graph as a theoretical model. This overview can be found in \autoref{fig:graphstructureoverview}.
 
 \begin{figure}[htb]
 	\centering
@@ -111,16 +101,19 @@ We have addressed all the main issues that arose during the design of a structur
 
 \section{Three Layer Model: Information Layer}
 
-% TODO
+The second layer in the three layer model comprises the data itself. We defined that an instance is a collection of (partial) information that describes an author. The task of this layer is to structure that partial information. In the model this is simply done by coupling the information with the instance node, as already shown in previous illustrations.
+
+In theory, there is no limit on the amount of data. Every addition of an aspect of the life of an author (publications, locations, events) can be used to produce similarities increasing the precision of the framework. This flow should constantly be improved. First search for more information, then make new rules (\autoref{rules}).
 
 \section{Three Layer Model: Similarity Layer}
 
 As we have stated several times, the goal is to link instances together to form an author (cluster). Until now, linking was just an action of an algorithm. If an algorithm decides that two instances represent the same author, the algorithm links them together (by actually changing the "instance of" edges in the graph). But what about the links itself? Should these links also represent a "physical" concept in our model? This is a question answered by the similarity layer.
 
 \paragraph{Weighted Similarities} When two instances are compared, we need to compare their properties. Properties could be email addresses, locations, people we work with, \ldots When compared instances have the location "Belgium" in common, but their email addresses are different, it would be doubtful that these two are the same. In the opposite situation (the same email address and a different location) it would be alot more probable for these instances to represent the same person. We can conclude that some properties are more distinctive than others. When the value of two properties is (partially) the same (degree of equality), we speak of a similarity. These similarities are assigned a normalized weight proportional to the distinctiveness of the property and the degree of equality.
+
 % misschien ook nog een formele definitie hier
 
-\paragraph{Stateful Similarities} There is a reasons why similarities have to actually be persisted. According to the foundation acknowledgements [REF] we are in need of a constantly changing output. This means that the system will incrementally build towards a solution. If we only want to calculate as few as necessary similarities when new information is found, all other similarities must already be present. With the similarity layer (plane) enabled, \autoref{fig:graphstructureoverview} could become \autoref{fig:graphstructureoverviewsim} (We left out the family node).
+\paragraph{Stateful Similarities} There is a reasons why similarities have to actually be persisted. According to the foundation acknowledgements (\autoref{foundation}) we are in need of a constantly changing output. This means that the system will incrementally build towards a solution. If we only want to calculate as few as necessary similarities when new information is found, all other similarities must already be present. With the similarity layer (plane) enabled, \autoref{fig:graphstructureoverview} could become \autoref{fig:graphstructureoverviewsim} (We left out the family node).
 
 \begin{figure}[htb]
 	\centering
@@ -132,19 +125,24 @@ As we have stated several times, the goal is to link instances together to form 
 \section{Rules}
 \label{rules}
 
-%introductie
-
-%3 scopes: umbrella: matched instances
-%- matching-name instances
-%- equal-name instances
-%- shared-cluster instances
-
-% standard rules do matching-name and equal-name
+Rules drive the entire flow in our framework. Rules turn newfound facts into similarities that group instances with authors through clustering. Rules are thus a very important link in the data processing chain. A more formal definition is formulated in \autoref{def:rule}.
 
 \begin{mydef}
 \label{def:rule}
 A \textbf{Rule} is a mechanism that issues a complex query on the graph-model in order to find similarities between instances.
 \end{mydef}
+
+Most rules are triggered when a piece of information is discovered and added to an instance. Then, we need to compare this information with other instances. In the case of similar information, a simmilarity arises. The question of which instances to compare with has already been aswered in \autoref{problemdomain}. In the rules-domain, we call these instances "matched instances".
+
+These matched instances categorized into three scopes. The union of al the instances in the three scopes form all the matched instances. In some rules we don't need all the matched instances but only one or two scopes. The scopes are listed below.
+
+\begin{enumerate}
+\item \textbf{Matching-Name Instances}: Instances with a similar name.
+\item \textbf{Equal-Name Instances}: Instances with the same name.
+\item \textbf{Shared-Cluster Instances}: Instances in the same cluster (bound to the same author).
+\end{enumerate}
+
+In the secionts that follow, we dig deeper on the basic rules our system will make use of.
 
 \subsection{Community Rule}
 
@@ -237,4 +235,7 @@ The affiliation rule exploits the affiliations of the authors. It is unlikely fo
 
 \section{Conclusion}
 
-% dissimilarities
+We first want to already suggest a future development. Our model does currently not have the possibility to express dissimilarities. Although these can in some case be more powerful than simmilarities, they are not further researched. The affiiation rule, for example, would be more powerful if we would be able to express that two instances with the same name are probably not the same if they work with different affiliation at the same time. This is subtly different from expressing that two instances with the same that work with the same instance are probably the same.
+
+We successfully built a model that deals with the main difficulties of author disambiguation. The model shows us a way to structure the multitude of incoming information. It shows us how to process it so that similarities between this data can be found. Finally, it explains that continuously clustering this data with respect to these similarities will structure it so that it evolves to a representation of the actual physical authors.
+
