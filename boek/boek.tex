@@ -9,11 +9,17 @@
 
 \documentclass[11pt,a4paper,oneside,notitlepage]{book}
 \usepackage[english]{babel}
+
+
 \usepackage{algorithmic}
 \usepackage{algorithm}
 \usepackage{amsthm}
 \usepackage{hyperref}
 \usepackage{array}
+
+\usepackage{pdfpages}  % pdf pagina's importeren
+
+
 %\usepackage[nottoc]{tocbibind} % Bibliografie in ToC; zie tocbibind.dvi
 
 % marges aanpassen
@@ -72,16 +78,6 @@
 
 \begin{document}
 
-% titelblad (voor kaft)
-\include{titel}
-
-% lege pagina (!!)
-
-% titelblad (!!)
-
-% geen paginanummering tot we aan de inhoudsopgave komen
-\pagestyle{empty}
-
 % voorwoord met dankwoord en toelating tot bruikleen (ondertekend)
 %\include{voorwoord}
 
@@ -92,11 +88,66 @@
 % overzicht/samenvatting
 %\include{overzicht}
 
-\pagestyle{fancy}
 \frontmatter
 
-% inhoudstafel
+
+% titelblad (voor kaft)
+\setlength{\hoffset}{0in}
+\setlength{\voffset}{0in}
+%\addcontentsline{toc}{chapter}{Extended abstract}
+\includepdf[pages=-]{voorblad.pdf}
+\setlength{\hoffset}{-1in}
+\setlength{\voffset}{-1in}
+
+% lege pagina (!!)
+\newpage
+\thispagestyle{empty}
+\mbox{}
+
+% titelblad (!!)
+\setlength{\hoffset}{0in}
+\setlength{\voffset}{0in}
+%\addcontentsline{toc}{chapter}{Extended abstract}
+\includepdf[pages=-]{voorblad.pdf}
+\setlength{\hoffset}{-1in}
+\setlength{\voffset}{-1in}
+
+%% geen paginanummering tot we aan de inhoudsopgave komen
+\pagestyle{empty}
+%
+%% voorwoord met dankwoord en toelating tot bruikleen (ondertekend)
+\include{voorwoord}
+
+% overzicht
+%\include{overzicht}
+
+\pagestyle{empty}
+\newpage
+
+
+%%\setlength{\hoffset}{0in}
+%%\setlength{\voffset}{0in}
+%%%\addcontentsline{toc}{chapter}{Extended abstract}
+%%\includepdf[pages=-]{abstract/abstract.pdf}
+%%\setlength{\hoffset}{-1in}
+%%\setlength{\voffset}{-1in}
+%
+%%\newpage
+%
+%
+%% inhoudstafel
+%\renewcommand{\baselinestretch}{1.08} 	% De interlinie afstand wat verkleinen.
+%\small\normalsize                       % Nodig om de baselinestretch goed te krijgen.
+%%\addcontentsline{toc}{chapter}{Inhoudsopgave}
+%%\setcounter{page}{1}
 \tableofcontents
+%\renewcommand{\baselinestretch}{1.2} 	% De interlinie afstand wat vergroten.
+%\small\normalsize                       % Nodig om de baselinestretch goed te krijgen.
+
+
+\pagestyle{fancy}
+
+% inhoudstafel
 
 % opmaak voor het eigenlijke boek; onderstaande lijnen
 % weglaten als de eerste regel van een nieuwe alinea moet
