@@ -1,47 +1,5 @@
 \chapter{New Framework}
 
-\section{Assuming chaos (ergens anders)}
-
-One of the most important features about our framework is that it assumes chaos. The meaning of this is three-fold:
-
-FOUNDATION
-
-\begin{itemize}
-
-\item All instances are considered different authors until proven otherwise. ...
-
-\item No decision is made permanent
-
-\item Any information is considered partial information. ...
-
-\item A constantly changing input asks for a constantly changing output. ... % meer aan de kant van de omgeving, het leven gaat door :p
-
-\item The stream of informaton is endless. ... % meer aan de kant van het framework, nieuwe plugins
-
-\end{itemize}
-
-\section{Why the first approach needed a complete overhaul}
-
-%The first approach was all about trying to solve a complex problem with a simple solution. We sticked with this approach as long as we could. As we started to see more and more flaws, we decided that the framework needed a complete overhaul. The following paragraphs try to explain these flaws in short.
-
-% verwijs naar waar de problemen worden opgelost, en zeg dat je de problemen nog zal "recapituleren"
-
-% in afkortingen vermelden van verwezen wordt naar eerste versie framework als Fv1
-
-\paragraph{The flow of data} %A logical flow of data in a system with this much data to process is of primary importance. In Fv1, several components (that are part of building the solution) did not comunicate directly with each other. All communication is "relayed" through the database. This puts enormous unnecessary load on out database.
-
-\paragraph{Scalability} %The more instances in the cluster, the more queries to the dabase to retreive the information to do the job ... Not easy to have data flow dependencies (also communicate via database?)
-
-\paragraph{The right tool for the job} %Mysql vs Graphdb
-
-\paragraph{Static system in a dynamic environment} %The academic world is a very dynamic one. Researchers are constantly publishing, moving from one location to another and putting new information about themselves on the internet. The increasing amount of places on the web to find this information only makes our environment more sensitive to change in the real world. It is clear that a static solution does not satisfy our needs. Fv1
-
-\paragraph{Performance} %snapshot vs incremental. In a dynamic env snapshot is constantly intensive. Incremental is only once intensive. (combine with static)
-
-\section{New foundation: Distributed Pipes and Filters}
-
-introduction
-
 \subsection{Small and Simple Core}
 
 \paragraph{Pipes and Connectors} +figuur

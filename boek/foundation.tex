@@ -1,0 +1,60 @@
+\chapter{New Foundation}
+
+In the first framework, many properties of our environment were not taken into account. We did not think enough about the consequences of the characteristics of the disambiguation problem. Therefore, we went back on our steps and formulated five basic foundation acknowledgement. This new foundation has a lot of contradictions with the design of our first framework. We decided to abandon the framework. In the next chapter we build an entire theoretical model based on this foundation. The chapter after that discusses the practical realisation of this model.
+
+\section{Foundation Acknowledgements}
+
+Below, we list the five foundation acknowledgement that drive the development of a theoretical model.
+
+\begin{foundation}
+\label{foundation:different}
+All instances are considered different authors until proven otherwise.
+\end{foundation}
+
+First, we want a solution that provides precision. The most existing services do simple grouping on equal names. This causes the service to return all the publications for the person that we are searching, but also a lot of papers that belong elsewhere. In other words, they have a high recall, but a low precision. Reaching a high recall is much less difficult than obtaining a high precision while still having a relatively high recall. To obtain this high precision, we only decide that two authors are actually the same if enough evidence is available. When a piece of information on an author with a certain name is collected (we call this an instance of an author), we always consider this information to be an author on its own. This way, we do not unsupported decisions.
+
+\begin{foundation}
+\label{foundation:decision}
+No decision is made permanent.
+\end{foundation}
+
+We operate in a highly dynamic environment, subject to constant change. This change is controlled from two sides. The first is the one of information itself. As time goes on, more and more information is produced (authors write new publications) and more of this information becomes available on the web. The second is the one of our framework. Its capabilities will constantly improve, making it possible to collect information that was not collectable before. The decision to which physical author information belongs to can change as new information becomes available. Therefore it is wise to not base a decision only on past information. Future information can provide new motives to make another decision. It has to be possible to change our minds though time.
+
+\begin{foundation}
+\label{foundation:partial}
+Any information is considered partial information.
+\end{foundation}
+
+No information can be considered complete and correct. We will substantiate this rule with an example. Suppose that a publication document is scanned for author names. Two things can go wrong here. Fist, the information in the paper can either be incomplete or plain wrong. The publication could accidentally not mention a writer or his name could be misspelled. Secondly, a case that is not recognized by the framework could result is an incomplete extraction of the information. Assuming that the information would be complete would not leave room to add the missing author later or straighten the spelling mistake.
+
+\begin{foundation}
+\label{foundation:incremental}
+A constantly changing input asks for a constantly changing output.
+\end{foundation}
+
+This foundation is based on the same observations as Foundation \autoref{foundation:decision}. In this highly dynamic environment, there is constant change. We want our output, disambiguated authors, to adapt to this constant change. This means that, ideally, for every change of information in the input, a changed output would be precieved almost instantaneous. To achieve this, changes in decisions must be processed efficiently.
+
+\begin{foundation}
+\label{foundation:endless}
+The stream of informaton is endless.
+\end{foundation}
+
+Last but not least, do not forget that the stream is almost endless. Information that would be relevant to the process of disambiguating authors is immense. Processing information of some sources can also be very intensive (ex. OCR scanning PDF documents). If the framework plans to cope with this endless growing stream, it needs to scale.
+
+\section{Why the first approach needed a complete overhaul}
+
+Now we can check if the measures taken in the first framework suffice to cope with the challenges posed in the foundation acknowledgements. Different aspects of the framework will be treated seperately to determine to what degree they meet the requirements.
+
+\paragraph{The flow of data} A logical flow of data in a system with this much data to process is of primary importance. In the framework, several components do not comunicate directly with each other. All communication is "relayed" through the database. This puts enormous unnecessary load on our database. When we would scale the framework out to several servers, all communication would still pass the database nodes (over the network).
+
+\paragraph{Scalability} We have more than one concern about the scalability of the first framework. First, the more instances in the cluster, the more queries to the dabase to retreive the information about a task. Secondly, the data merger would put an enormous load on the data merger from time to time (see next paragraph). Thirdly, a task dependency control component would also relay all its control messages through the database, increasing load in this point.
+
+\paragraph{Performance} At certain intervals, the data merger would take a snapshot of the entire system in order to execute a cluster algorithm on it (grouping publications in physical author clusters). This is a very intensive process. As we deal with a very dynamic environment, it is preferrable that this algorithm would be run timely to keep the output up to date. The drawback with this approach is that "snapshot"-clustering is be a very time consuming operation every time it is executed. If we had an incremental clustering algorithm that modifies the clusters when new information is found, it would only be intensive the first time. Afterwards it would just have to make a small modification to the clusters. This kind of approach would be more suitable in this dynamic situation.
+
+\paragraph{Static system in a dynamic environment} The academic world is a very dynamic one. Researchers are constantly publishing, moving from one location to another and putting new information about themselves on the internet. The increasing amount of places on the web to find this information only makes our environment more sensitive to change in the real world. It is clear that a static solution does not satisfy our needs. Fv1
+
+\paragraph{The right tool for the job} Mysql vs Graphdb
+
+\paragraph{Testing}
+
+\paragraph{Conclusion}
