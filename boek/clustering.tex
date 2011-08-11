@@ -1,12 +1,12 @@
 \chapter{Clustering algorithm}
 
-In this chapter we describe the clustering process, one of the core components of our framework. This process is responsible for deciding what nodes match to the same author, based on similarities between these nodes. These similarities are calculated by the different rules (see \autoref{rules}) that are implemented in our framework. Everytime a new similarity is available, it is possible we will have to recluster, meaning the grouping of the authors will be altered.
+In this chapter we describe the clustering process, one of the core components of our framework. This process is responsible for deciding which nodes match to the same author, based on similarities between these nodes. These similarities are calculated by the different rules (see \autoref{rules}) that are implemented in our framework. Every time a new similarity is available, it is possible we have to recluster, meaning the grouping of the authors will be altered.
 
 We need an efficient algorithm for clustering as it has to be able to handle a steady stream of new information while maintaining an optimal solution. The quality of this algorithm will make or break the quality of the output of our framework.
 
 The algorithm we clarify in this chapter, is largely based on the algorithm described in \cite{saha2006dynamic}. It is an efficient, dynamic algorithm for clustering graphs handling insertion and deletion of edges while maintaining high quality clusters as defined by the quality requirement given in \cite{flake2004graph}. The algorithm makes heavy use of the minimum-cut tree. We implemented Gusfield's algorithm, based on \cite{rodrigues2011mpi}, and will explain this first.
 
-The main feature of this dynamic algorithm is that it only builds part of the minimum-cut tree as and when necessary. The tree is computed over a subset of nodes, limited to a number of clusters. In our graph there might be an immense number of authors, and thus clusters. However, the amount of authors involved with one change is limited. By just computing the clusters of this coarsened graph we can obtain the clusters of the original graph. These two properties are the reason the algorithm is efficient while maintaining an identical cluster quality as the static version described in \autoref{staticcutclustering}. Formal proof for the efficiency of this algorithm and the quality of the clusters can be found in \cite{saha2006dynamic}.
+The main feature of this dynamic algorithm is that it only builds part of the minimum-cut tree as and when necessary. The tree is computed over a subset of nodes, limited to a number of clusters. In our graph there might be an immense amount of authors, and thus clusters. However, the amount of authors involved with one change is limited. By just computing the clusters of this coarsened graph we can obtain the clusters of the original graph. These two properties are the reason the algorithm is efficient while maintaining an identical cluster quality as the static version described in \autoref{staticcutclustering}. Formal proof for the efficiency of this algorithm and the quality of the clusters can be found in \cite{saha2006dynamic}.
 
 \section{Minimum-cut tree algorithm}
 \label{minimumcuttree}
@@ -90,13 +90,13 @@ In \cite{saha2006dynamic}, they have extended this basic algorithm allowing it t
 \textbf{Out Cluster Weight (OCW)} of a vertex $v \in V$ is defined as the total weight of the edges linking the vertex $v$ to all the vertices which do not belong to the same cluster as $v$. That is, if $v \in C_i$, $0 \leq i \leq s$ then $OCW(v) = \sum_{u \in C_j, j \neq i}{w(v,u)}$
 \end{mydef}
 
-Receiving new information is represented as a new edge between two nodes with a given weight. The weight represents the amount the two nodes are connected, this is calculated by the rules in the disambiguator. There are two different possibilities that have to be treated separatly, named inter- and intra-cluster edge addition.
+A similarity between two instances is represented as a new edge between two nodes with a given weight. Using this weight, the probability that two instances belong to the same author can be derived. This weight is calculated by the rules in the disambiguator. There are two different possibilities that have to be treated seperately: inter- and intra-cluster edge addition.
 
 We assume we have $C = {C_1,C_2...C_s}$ as the clusters of the graph $G(V,E)$ which have been calculated in previous steps. We denote $A$ as the adjacency matrix of $G$.
 
 \subsection{Intra-cluster edge addition}
 
-Intra-cluster edge addition means that both the nodes of the added edge belong to the same cluster. The result is that the cluster becomes better connected. We only have to update the $ICW$ and the adjacency matrix $A$ while the nodes remain unchanged. \autoref{intracluster} shows the pseudocode.
+Intra-cluster edge addition means that both the nodes of the added edge belong to the same cluster. The result is that the cluster becomes stronger connected. We only have to update the $ICW$ and the adjacency matrix $A$ while the nodes remain unchanged. \autoref{intracluster} shows the pseudocode.
 
 \begin{algorithm}
 \caption{Intra-cluster edge addition between nodes $i$ and $j$ with weight $w(i,j)$}
@@ -113,7 +113,7 @@ Intra-cluster edge addition means that both the nodes of the added edge belong t
 
 \subsection{Inter-cluster edge addition}
 
-Addition of an edge whose end nodes belong to different clusters is more challenging as it increases the connectivity across different clusters. This means the cluster quality of the clusters involved is lowered and as a result reclustering might be necessary when the cluster quality is no longer maintained. 
+Addition of an edge whose end nodes belong to different clusters is more challenging as it increases the connectivity across different clusters. This means the cluster quality of the clusters involved is lowered and as a result reclustering might be necessary when the quality is no longer maintained. 
 
 There are three identifiable cases:
 
@@ -123,7 +123,7 @@ There are three identifiable cases:
 	\item \textbf{CASE 3} The new edge deteriorates the cluster quality and the nodes in both the clusters have to be reclustered.
 \end{enumerate}
 
-In each of these three cases, the addition of the new edge results in updating the adjacency matrix $A$ and the Outer Cluster Weight of the nodes involved. This is described in \autoref{updateValues}. In order to understand the complete algorithm, we first need to explain two new processes which are used: merging and contracting of clusters.
+In each of these three cases, the addition of the new edge results in updating the adjacency matrix $A$ and the Outer Cluster Weight of the nodes involved. This is described in \autoref{updateValues}. In order to understand the complete algorithm, we first need to explain two used processes: merging and contracting of clusters.
 
 \begin{algorithm}
 \caption{Updating the adjacency matrix $A$ and the Outer Cluster Weight: UPDATE($(i,j),w(i,j)$)}

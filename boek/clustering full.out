@@ -1,4 +1,5 @@
-\BOOKMARK [1][-]{section.0.1}{Clustering\040algorithm}{}% 1
-\BOOKMARK [2][-]{subsection.0.1.1}{Introduction}{section.0.1}% 2
-\BOOKMARK [2][-]{subsection.0.1.2}{Minimum-cut\040tree\040algorithm}{section.0.1}% 3
-\BOOKMARK [2][-]{subsection.0.1.3}{Cut\040clustering}{section.0.1}% 4
+\BOOKMARK [0][-]{chapter.1}{Clustering\040algorithm}{}% 1
+\BOOKMARK [1][-]{section.1.1}{Minimum-cut\040tree\040algorithm}{chapter.1}% 2
+\BOOKMARK [1][-]{section.1.2}{Cut\040clustering}{chapter.1}% 3
+\BOOKMARK [2][-]{subsection.1.2.1}{Intra-cluster\040edge\040addition}{section.1.2}% 4
+\BOOKMARK [2][-]{subsection.1.2.2}{Inter-cluster\040edge\040addition}{section.1.2}% 5

@@ -1,23 +1,23 @@
 \select@language {english}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {2.1}{\ignorespaces The internal representation of the entity Daniel, his relationships to other entities and the conclusions we can draw from analyzing these relationships.}}{12}{figure.2.1}
+\contentsline {figure}{\numberline {2.1}{\ignorespaces The internal representation of the entity Daniel, his relationships to other entities and the conclusions we can draw from analyzing these relationships.}}{14}{figure.2.1}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {3.1}{\ignorespaces A simplified representation of the different steps our framework takes to find data about experts.}}{16}{figure.3.1}
-\contentsline {figure}{\numberline {3.2}{\ignorespaces First attempt at the architecture based on the necessary components}}{17}{figure.3.2}
+\contentsline {figure}{\numberline {3.1}{\ignorespaces A simplified representation of the different steps our framework takes to find data about experts.}}{18}{figure.3.1}
+\contentsline {figure}{\numberline {3.2}{\ignorespaces First attempt at the architecture based on the necessary components}}{18}{figure.3.2}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {4.1}{\ignorespaces Merging of two authors}}{22}{figure.4.1}
-\contentsline {figure}{\numberline {4.2}{\ignorespaces Grouping of instances under the same author}}{23}{figure.4.2}
-\contentsline {figure}{\numberline {4.3}{\ignorespaces Problem with instance-author matching}}{25}{figure.4.3}
-\contentsline {figure}{\numberline {4.4}{\ignorespaces Solution of instance-author matching: pure name matching}}{26}{figure.4.4}
-\contentsline {figure}{\numberline {4.5}{\ignorespaces Overview of the structure layer of the graph model}}{27}{figure.4.5}
-\contentsline {figure}{\numberline {4.6}{\ignorespaces Overview of the structure layer of the graph model with the similarity layer}}{28}{figure.4.6}
-\contentsline {figure}{\numberline {4.7}{\ignorespaces Community Rule combining the "Name Matching" and "Name Equality" variant.}}{30}{figure.4.7}
-\contentsline {figure}{\numberline {4.8}{\ignorespaces All three variants of the Community Rule combined.}}{31}{figure.4.8}
-\contentsline {figure}{\numberline {4.9}{\ignorespaces Main combinations of the variants of the Community Rule.}}{32}{figure.4.9}
-\contentsline {figure}{\numberline {4.10}{\ignorespaces Interest Rule.}}{34}{figure.4.10}
-\contentsline {figure}{\numberline {4.11}{\ignorespaces Email Rule.}}{35}{figure.4.11}
-\contentsline {figure}{\numberline {4.12}{\ignorespaces Affiliation Rule.}}{36}{figure.4.12}
+\contentsline {figure}{\numberline {4.1}{\ignorespaces Merging of two authors}}{31}{figure.4.1}
+\contentsline {figure}{\numberline {4.2}{\ignorespaces Grouping of instances under the same author}}{31}{figure.4.2}
+\contentsline {figure}{\numberline {4.3}{\ignorespaces Problem with instance-author matching}}{32}{figure.4.3}
+\contentsline {figure}{\numberline {4.4}{\ignorespaces Solution of instance-author matching: pure name matching}}{33}{figure.4.4}
+\contentsline {figure}{\numberline {4.5}{\ignorespaces Overview of the structure layer of the graph model}}{34}{figure.4.5}
+\contentsline {figure}{\numberline {4.6}{\ignorespaces Overview of the structure layer of the graph model with the similarity layer}}{35}{figure.4.6}
+\contentsline {figure}{\numberline {4.7}{\ignorespaces Community Rule combining the "Name Matching" and "Name Equality" variant.}}{36}{figure.4.7}
+\contentsline {figure}{\numberline {4.8}{\ignorespaces All three variants of the Community Rule combined.}}{37}{figure.4.8}
+\contentsline {figure}{\numberline {4.9}{\ignorespaces Main combinations of the variants of the Community Rule.}}{38}{figure.4.9}
+\contentsline {figure}{\numberline {4.10}{\ignorespaces Interest Rule.}}{39}{figure.4.10}
+\contentsline {figure}{\numberline {4.11}{\ignorespaces Email Rule.}}{40}{figure.4.11}
+\contentsline {figure}{\numberline {4.12}{\ignorespaces Affiliation Rule.}}{41}{figure.4.12}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
