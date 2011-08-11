@@ -39,9 +39,9 @@
 \contentsline {chapter}{\numberline {5}Theoretical Model}{20}{chapter.5}
 \contentsline {section}{\numberline {5.1}Graph as a model}{20}{section.5.1}
 \contentsline {section}{\numberline {5.2}Three Layer Model: Structural Layer}{20}{section.5.2}
-\contentsline {subsection}{\numberline {5.2.1}Instances and Authors}{20}{subsection.5.2.1}
+\contentsline {subsection}{\numberline {5.2.1}Instances and Authors}{21}{subsection.5.2.1}
 \contentsline {paragraph}{Merging}{21}{section*.19}
-\contentsline {paragraph}{Grouping}{21}{section*.20}
+\contentsline {paragraph}{Grouping}{22}{section*.20}
 \contentsline {subsection}{\numberline {5.2.2}Problem Domain}{22}{subsection.5.2.2}
 \contentsline {subsection}{\numberline {5.2.3}Name Notations}{23}{subsection.5.2.3}
 \contentsline {paragraph}{Instance-Author}{23}{section*.21}
