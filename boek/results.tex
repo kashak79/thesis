@@ -1,5 +1,7 @@
 \chapter{Framework evaluation and results}
 
+
+
 We need to evaluate the performance of the framework. We will mainly focus our tests on the clustering of authors and the influence of different combinations of rules and parameters on the results. Proper clustering results in a collection of publications related to one author, allowing to define specialties and the level of expertise. 
 
 In order to accomplish realistic and useful results, it's important the tests resemble realistic use-cases. This means testing against both general and borderline queries. Parameters making it easier in disambiguation are rare and country specific author names, a multitude of publications which are written with the same co-authors or the inclusion of the same email address. A combination of these parameters allows for easier manual checking of results, but is consequently less challenging. 
@@ -47,7 +49,7 @@ Borderline cases make more defiant evalutations. Author names containing foreign
 			\hline
 		\end{tabular}
 	\caption{The nine DBLP datasets. Each row contains the base name, the number of recorded variations and the total amount of examined publications of this name.}
-	\label{tab:TheNineDBLPDatasetsOfDifferentNamesAndTheDataSize}
+	\label{tab:auth-dblp-dataset}
 \end{table}
 
 We have mailed the authors of the paper \cite{han2004two} and have received the DBLP datasets, already ordered by cluster. However, as the datasets are this huge, manual checking is very labor-intensive. The clusters are solely based on the division of the authors in DBLP. The quality of the disambiguation from DBLP, however, sometimes falls short. As we would still have to check the results manually to gain a proper insight into the disambiguation quality, we choose to compose our own dataset.
