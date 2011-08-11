@@ -54,19 +54,19 @@ clusterer.out.connect.to(Pipes::PersistSimilarity.pipe(graph))
 	
 # keywords rule
 rule_split.out(1).connect.to(Pipes::KeywordsRule.pipe(graph)).
-  out.connect.to(clusterer, 1)
+  out.connect.to(clusterer, 1) if Configuration::KEYWORD
 	
 # email rule
 rule_split.out(2).connect.to(Pipes::PersistDiscovery.pipe(graph, :email, :index => :email)).
 	out.connect.to(Pipes::PersistFact.pipe(graph, :instance, :email, :email)).
 	out.connect.to(Pipes::EmailRule.pipe(graph)).
-	out.connect.to(clusterer, 2)
+	out.connect.to(clusterer, 2) if Configuration::EMAIL
 
 # affiliation rule
 rule_split.out(3).connect.to(Pipes::PersistFact.pipe(graph, :instance, :affiliation, :affiliation)).
 	out.connect.to(Pipes::AffiliationRule.pipe(graph, Helpers::AffiliationMatcher.new)).
-	out.connect.to(clusterer, 3)
+	out.connect.to(clusterer, 3) if Configuration::AFFILIATION
 	
 # co-author rule
 rule_split.out(4).connect.to(Pipes::CoAuthorRule.pipe(graph)).
-	out.connect.to(clusterer,4)
+	out.connect.to(clusterer,4) if Configuration::COMMUNITY
