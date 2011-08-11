@@ -1,6 +1,25 @@
-\chapter{New Framework}
+\chapter{Framework: Pipes and Filters}
+
+In this chapter, we design a framework based on the theoretical model from previous chapter. We start by establishing a small and general core architecture and continue with how we extended and used this core to build a flexible author-disambiguation tool. Implementation details of the framework and used algorithms and technologies in this framework will be discussed as well. Throughout the design, the requirements set in the foundation \autoref{foundation} and theoretical model were taken into account. At the end of the chapter we will discuss the strengts and weaknesses of the framework.
+
+% aspect, flow, identifier, enrich, filter
 
 \subsection{Small and Simple Core}
+
+We opted for a small and simple core framework. It is based on Pipes and Filters with a few extension. We chose to use this design pattern for the following reasons:
+
+\begin{enumerate}
+\item \textbf{S
+\end{enumerate}
+
+\paragraph{Architecture}
+
+\begin{figure}[htbp]
+	\centering
+		\includegraphics[width=0.65\textwidth]{fig/architecturev2}
+	\caption{Pipes and Filters based Architecture.}
+	\label{fig:architecturev2}
+\end{figure}
 
 \paragraph{Pipes and Connectors} +figuur
 
@@ -8,9 +27,29 @@
 
 \subsection{Some useful pipes}
 
-\paragraph{Merge and Split}
+With these small and simple Pipes and Filters core we built some useful pipes along the way. Clearly the filter pipe is important to have in a Pipes and Filters architecture, so we explain this one first. Merging and Splitting flows, both extensively used pipes, are mentioned second. Last, we discuss two pipes more specific for our case but as yhey are used troughout the entire pipe system, we mention them here.
 
-\paragraph{Filter}
+\paragraph{Filter} The Filter pipe allows us to filter flow in two ways, as you can also see on \autoref{fig:filter}. First, it is possible to test a condition for each arriving flow. Depending on this condition, the flow is forwarded to either the connector with identifier "true" or identifier "false". On top of that we are able to filter aspects of the flow itself. This Filter pipe gives us the possibility to control the flow in our pipe configuration. The flows should be small and contain only aspects that are necessary.
+
+\begin{figure}[htbp]
+	\centering
+		\includegraphics[width=0.65\textwidth]{fig/filter}
+	\caption{Filter pipe.}
+	\label{fig:filter}
+\end{figure}
+
+\paragraph{Merge and Split} In the case we want to forward the result from one pipe to multiple pipes or from multiple pipes to one, we need a Split or Merge pipe. Split pipes have the default ":in" connector and split their input over $n$ output connectors identified by $1,\ldots,n$. A Merge pipe does the inverse by merging input connections $1,\ldots,n$ into one connector identified by the default ":out".
+
+\begin{figure}[htbp]
+	\centering
+		\includegraphics[width=0.65\textwidth]{fig/mergeandsplit}
+	\caption{Merge and Split pipes.}
+	\label{fig:mergeandsplit}
+\end{figure}
+
+\paragraph{Persist Discovery}
+
+\paragraph{Persist Fact}
 
 \subsection{Extending to fit our needs}
 
