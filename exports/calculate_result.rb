@@ -30,7 +30,7 @@ results = truth["clusters"].map {  |tr| tr.map {|c| c["title"].gsub(/[',]/,'')} 
   rc = 1.0 * (pair[0] & pair[1]).size / pair[1].size
   #pr = 1.0 * (pair[1] & pair[0]).size / pair[1].size
   #rc = 1.0 * (pair[0] & pair[1]).size / pair[0].size
-  ((pr == 0 && rc == 0) || pair[1].size < 5) ? nil : [pr, rc, 2 * pr * rc / (pr + rc), pair[0].size]
+  ((pr == 0 && rc == 0) || pair[0].size < 1) ? nil : [pr, rc, 2 * pr * rc / (pr + rc), pair[0].size]
 end
 
 p results.compact.map{|r| r[2]}.reduce(:+) / results.compact.size * 100

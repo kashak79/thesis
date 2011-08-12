@@ -159,6 +159,13 @@ Luiz~Antonio Rodrigues.
 \newblock A mpi implementation of gusfield’s algorithm to generate cut trees.
 \newblock 2011.
 
+\bibitem{vicknair2010comparison}
+C.~Vicknair, M.~Macias, Z.~Zhao, X.~Nan, Y.~Chen, and D.~Wilkins.
+\newblock A comparison of a graph database and a relational database: a data
+  provenance perspective.
+\newblock In {\em Proceedings of the 48th Annual Southeast Regional
+  Conference}, page~42. ACM, 2010.
+
 \bibitem{han2004two}
 H.~Han, L.~Giles, H.~Zha, C.~Li, and K.~Tsioutsiouliklis.
 \newblock Two supervised learning approaches for name disambiguation in author

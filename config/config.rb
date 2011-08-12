@@ -4,21 +4,21 @@ $config = :custom
 if $config == :custom
   module Configuration
   
-    ALPHA = 5
+    ALPHA = 25
     AFFILIATION_WEIGHT = 50
-    AFFILIATION_THRESHOLD = 0.6
+    AFFILIATION_THRESHOLD = 0.85
     EMAIL_WEIGHT = 1000
-    KEYWORD_WEIGHT = 0
-    COAUTHOR_EQNAME_WEIGHT = 50
-    COAUTHOR_MATCHINGNAME_WEIGHT = 30
+    KEYWORD_WEIGHT = 1
+    COAUTHOR_EQNAME_WEIGHT = 10
+    COAUTHOR_MATCHINGNAME_WEIGHT = 7
     DEBUG = true
     
     COMMUNITY = true
     EMAIL = true
     AFFILIATION = true
-    KEYWORD = false
+    KEYWORD = true
     
-    CASE3_SPECIAL = ALPHA/2
+    CASE3_SPECIAL = false
     
   end
 elsif $config == :lowkey

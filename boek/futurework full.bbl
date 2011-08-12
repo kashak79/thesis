@@ -1,3 +1,8 @@
-\begin{thebibliography}{}
+\begin{thebibliography}{1}
+
+\bibitem{saha2006dynamic}
+B.~Saha and P.~Mitra.
+\newblock Dynamic algorithm for graph clustering using minimum cut tree.
+\newblock 2006.
 
 \end{thebibliography}
