@@ -53,11 +53,11 @@ Let $G = (V,E,w)$ denote a weighted undirected graph with $n = |V|$ nodes or ver
 
 The minimum cut tree is a tree on $V$ such that inspecting the path between $s$ and $t$ in the tree, the minimum-cut of $G$ with respect of $s$ and $t$ can be obtained. Removal of the minimum weight edge in the path yields the two partitions and the weight of the corresponding edge gives the cut-value.
 
-We implemented a sequential version of Gusfield's algorithm which calculates the minimum cut tree of any given graph. The pseudocode is given by \autoref{mincutgusfield}. In the pseudocode we use numbers to point to nodes or vertices. These numbers can be choosen randomly.
+We implemented a sequential version of Gusfield's algorithm which calculates the minimum cut tree of any given graph. The pseudocode is given by \autoref{mincutgusfield}. In the pseudocode we use numbers to point to nodes or vertices. These numbers can be chosen randomly.
 
 The algorithm consists of $n-1$ iterations of a Maximum Flow algorithm and for every iteration a different vertex is chosen as source. The destination vertex is determined by previous iterations and is saved in the tree. Initially all vertices of the output tree point to node 1, but this can be adjusted after each iteration. This adjustment depends on the minimum-cut between the current source and destination. We split all the nodes in two collections, using this minimum-cut. We adjust the parent of each node if it is on another side as its current parent, which is stored in the tree.
 
-We choose an implementation of the Edmonds-Karp algorithm to find the maximum flow and the minimum-cut. This algorithm is an implementation of the Ford-Fulkerson method for computing the maximum flow and is provided to us through the java library JUNG.
+We choose an implementation of the Edmonds-Karp algorithm to find the maximum flow and the minimum-cut. This algorithm is an implementation of the Ford-Fulkerson method for computing the maximum flow and is provided to us through the Java library JUNG.
 
 \section{Cut clustering}
 
@@ -90,7 +90,7 @@ In \cite{saha2006dynamic}, they have extended this basic algorithm allowing it t
 \textbf{Out Cluster Weight (OCW)} of a vertex $v \in V$ is defined as the total weight of the edges linking the vertex $v$ to all the vertices which do not belong to the same cluster as $v$. That is, if $v \in C_i$, $0 \leq i \leq s$ then $OCW(v) = \sum_{u \in C_j, j \neq i}{w(v,u)}$
 \end{mydef}
 
-A similarity between two instances is represented as a new edge between two nodes with a given weight. Using this weight, the probability that two instances belong to the same author can be derived. This weight is calculated by the rules in the disambiguator. There are two different possibilities that have to be treated seperately: inter- and intra-cluster edge addition.
+A similarity between two instances is represented as a new edge between two nodes with a given weight. Using this weight, the probability that two instances belong to the same author can be derived. This weight is calculated by the rules in the disambiguator. There are two different possibilities that have to be treated separately: inter- and intra-cluster edge addition.
 
 We assume we have $C = {C_1,C_2...C_s}$ as the clusters of the graph $G(V,E)$ which have been calculated in previous steps. We denote $A$ as the adjacency matrix of $G$.
 
@@ -221,6 +221,6 @@ Otherwise (CASE 3), we create a new, coarsened graph by contracting all the clus
 \end{algorithmic}
 \end{algorithm}
 
-We have a lot of rules resulting in small similarities, often following up on eachother. This means we often will add edges will low weights. When testing the framework, we noticed that the clustering process often had to evaluate case 3 repeatedly, while the output did not result in reclustering. As case 3 is very time-intensive, especially when the clusters are getting bigger, we added an extra case in between case 1 and 2 based on the formula used to evaluate case 2. If $\frac{2 * c(C_u,C_v)}{V} \leq \alpha / 2$, we essentially fall back to case 1. This does not deteriorate the cluster quality.
+We have a lot of rules resulting in small similarities, often following up on each other. This means we often will add edges will low weights. When testing the framework, we noticed that the clustering process often had to evaluate case 3 repeatedly, while the output did not result in reclustering. As case 3 is very time-intensive, especially when the clusters are getting bigger, we added an extra case in between case 1 and 2 based on the formula used to evaluate case 2. If $\frac{2 * c(C_u,C_v)}{V} \leq \alpha / 2$, we essentially fall back to case 1. This does not deteriorate the cluster quality.
 
 % TODO moeten we hier nog vermelden hoe we dit precies geimplementeerd hebben ? Namelijk combinatie van Ruby, Java en Resque ? Misschien ook de voordelen aanhalen van deze aanpak tov andere mogelijke manieren of toch uitleggen waarom we hiervoor gekozen hebben ..

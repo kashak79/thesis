@@ -6,7 +6,7 @@ We need to evaluate the performance of the framework. We will mainly focus our t
 
 In order to accomplish realistic and useful results, it's important the tests resemble realistic use-cases. This means testing against both general and borderline queries. Parameters making it easier in disambiguation are rare and country specific author names, a multitude of publications which are written with the same co-authors or the inclusion of the same email address. A combination of these parameters allows for easier manual checking of results, but is consequently less challenging. 
 
-Borderline cases make more defiant evalutations. Author names containing foreign characters or accents make it easier to be misspelled. In contrast, common last names also make it harder to differentiate between different authors. Examples are Anderson or Smith in United States, Chen or Lee in East Asian countries or Peters in Belgium.
+Borderline cases make more defiant evaluations. Author names containing foreign characters or accents make it easier to be misspelled. In contrast, common last names also make it harder to differentiate between different authors. Examples are Anderson or Smith in United States, Chen or Lee in East Asian countries or Peters in Belgium.
 
 % Wat moeten we bespreken in dit hoofdstuk:
 
@@ -61,10 +61,10 @@ The authors of \cite{han2004two} focus on disambiguating between authors having 
 
 It is important to note that the division of the clusters is solely based on the division of the authors in DBLP. As this division on DBLP is often wrong, we find that this makes a poor benchmark. Getting very high accuracy when comparing to DBLP does not mean the result is good. In order to get a proper insight into the disambiguation quality, we would still have to check the results manually. This is the main reason we choose to compose our own dataset.
 
-\subsection{Testset}
+\subsection{Test set}
 \label{sec:testset}
 
-As stated before, we want to resemble a realistic combination of easier and harder use-cases for our own dataset. As \autoref{tab:testset} shows, we have chosen five base names, each with a number of variations and have manually disambiguated these variations and combined the authors into clusters using the information on DBLP and the actual papers, if they were available. In total our testset contains just over a 1000 publications. An overview of the names that correspond to each of these base names, can be found in \ref{appendix:testset}, together with links to DBLP. In order to make it easier, we will use the following definition in the rest of the text:
+As stated before, we want to resemble a realistic combination of easier and harder use-cases for our own dataset. As \autoref{tab:testset} shows, we have chosen five base names, each with a number of variations and have manually disambiguated these variations and combined the authors into clusters using the information on DBLP and the actual papers, if they were available. In total our test set contains just over a 1000 publications. An overview of the names that correspond to each of these base names, can be found in \ref{appendix:testset}, together with links to DBLP. In order to make it easier, we will use the following definition in the rest of the text:
 
 \begin{mydef}
 	\bfseries{Family} With the term family, we refer to one of the five base names.
@@ -97,16 +97,16 @@ In order to be able to test the affiliation and the email rule, we had to get af
 
 \subsection{Setup}
 
-A simplified overview of the testsetup is shown in \autoref{fig:testsetup}. We start with the links of the author of a family we want to add. This is the input for the framework. The framework will search publications on DBLP for each of this link and combine them with the email and affiliation information that have been composed manually. The result is a graph containing clusters with the different authors. We extract the clusters from the graph and pass them to the result calculator. This is a script that calculates the precision, recall and $F_{1}$ measure by comparing the calculated clusters with the manually composed dataset, as explained in \autoref{sec:testset}, which is called the "groundtruth" in \autoref{fig:testsetup}.
+A simplified overview of the test setup is shown in \autoref{fig:testsetup}. We start with the links of the author of a family we want to add. This is the input for the framework. The framework will search publications on DBLP for each of this link and combine them with the email and affiliation information that have been composed manually. The result is a graph containing clusters with the different authors. We extract the clusters from the graph and pass them to the result calculator. This is a script that calculates the precision, recall and $F_{1}$ measure by comparing the calculated clusters with the manually composed dataset, as explained in \autoref{sec:testset}, which is called the "ground truth" in \autoref{fig:testsetup}.
 
 \begin{figure}[htb]
 	\centering
 		\includegraphics{./fig/testsetup.pdf}
 	\label{fig:testsetup}
-	\caption{A simplified overview of the testsetup starting with the author name and ending with the accuracy results.}
+	\caption{A simplified overview of the test setup starting with the author name and ending with the accuracy results.}
 \end{figure}
 
-The result calculator calculates the precision, recall and F measure as defined in \autoref{eq:prf}. Unless explicitly stated otherwise, when we refer to F measure, we mean the $F_{1}$ measure where recall and precision are equally important. These statistical values are calculated for each of the clusters from the groundtruth. 
+The result calculator calculates the precision, recall and F measure as defined in \autoref{eq:prf}. Unless explicitly stated otherwise, when we refer to F measure, we mean the $F_{1}$ measure where recall and precision are equally important. These statistical values are calculated for each of the clusters from the ground truth. 
 
 \begin{equation}
 	\label{eq:prf}
@@ -117,7 +117,7 @@ The result calculator calculates the precision, recall and F measure as defined 
 	\end{array}
 \end{equation}
 
-If we denote the cluster of the groundtruth as $C_g$, then the calculated cluster from the graph the result calculator will $C_g$ compare with is given by 
+If we denote the cluster of the ground truth as $C_g$, then the calculated cluster from the graph the result calculator will $C_g$ compare with is given by 
 
 \begin{equation}
 	\label{eq:calccluster}
@@ -127,14 +127,14 @@ If we denote the cluster of the groundtruth as $C_g$, then the calculated cluste
 In \autoref{eq:prf}, we use the terms relevant and retrieved documents. The explanations of these terms are given by the following definitions.
 
 \begin{mydef}
-	\textbf{Relevant documents} The publications from the cluster in the groundtruth
+	\textbf{Relevant documents} The publications from the cluster in the ground truth.
 \end{mydef}
 
 \begin{mydef}
-	\textbf{Retrieved documents} The publications from the cluster calculated by the framework belonging to the cluster in the groundtruth, calculated in \autoref{eq:calccluster}
+	\textbf{Retrieved documents} The publications from the cluster calculated by the framework belonging to the cluster in the ground truth, calculated in \autoref{eq:calccluster}.
 \end{mydef}
 
-After calculating these statistical values for all the clusters in the groundtruth, the mean F measure is calculated to give us an idea of the accuracy for a given test.
+After calculating these statistical values for all the clusters in the ground truth, the mean F measure is calculated to give us an idea of the accuracy for a given test.
 
 \section{Results}
 
