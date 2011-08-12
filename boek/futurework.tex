@@ -20,7 +20,7 @@ We started with a naive approach for the framework. We focused on what we knew a
 
 % Iets over graaf en regels
 
-With these foundations in mind, we first created a theoretical model. This model consists of three layers that integrate structural, informational and algorithmic aspects. It deals with the main difficulties of author disambiguation, while minimizing the problem domain and we explained how to process the (partial) information in order for similarities to be found. 
+With these foundations in mind, we first created a theoretical model. This model consists of three layers that integrate structural, informational and algorithmic aspects. It deals with the main difficulties of author disambiguation, while minimizing the problem domain. We also explain how to process the (partial) information in order for similarities to be found. 
 
 Rules drive the entire flow in our framework by converting novel facts into similarities that group instances with authors through clustering. The four rules we defined for our framework are:
 
@@ -31,7 +31,7 @@ Rules drive the entire flow in our framework by converting novel facts into simi
 	\item \textit{Affiliation Rule} Authors are more likely to work at one affiliation at a given time.
 \end{enumerate}
 
-We implemented this theoretical model with pipes and filters using Ruby, Java, a key-value store Redis, Resque for scaling and the Tinkerpop stack for the graph representation. The usage of pipes and filters allows for modifiability. New pipes can easily be plugged into the flow which enables the convenient addition of extra information sources or new rules while the performance and scalability remain intact.
+We implemented this theoretical model with pipes and filters using Ruby, Java, key-value store Redis, Resque for scaling and the Tinkerpop stack for the graph representation. The usage of pipes and filters allows for modifiability. New pipes can easily be plugged into the flow which enables the convenient addition of extra information sources or new rules while the performance and scalability remain intact.
 
 Clustering is the process that is responsible for grouping of authors based on the calculated similarities, a key component of our framework. We implemented the dynamic clustering algorithm proposed in \cite{saha2006dynamic} which is based on minimum-cut trees. The quality of the clusters is guaranteed to be the same as its static counterpart, while it is a lot faster as it considers much smaller subgraphs. We added an extra case to the proposed algorithm, exploiting the fact that our framework often has a succession of small similarities connecting the same clusters. This extra case permits the most resource-intensive case to be postponed and executed less frequently.
 
