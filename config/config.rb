@@ -61,4 +61,24 @@ elsif $config == :highco
     CASE3_SPECIAL = ALPHA/2
     
   end
+elsif $config == :highcoaff
+  module Configuration
+  
+    ALPHA = 25
+    AFFILIATION_WEIGHT = 25
+    AFFILIATION_THRESHOLD = 0.8
+    EMAIL_WEIGHT = 1000
+    KEYWORD_WEIGHT = 1
+    COAUTHOR_EQNAME_WEIGHT = 50
+    COAUTHOR_MATCHINGNAME_WEIGHT = 30
+    DEBUG = true
+    
+    COMMUNITY = true
+    EMAIL = true
+    AFFILIATION = true
+    KEYWORD = true
+    
+    CASE3_SPECIAL = ALPHA/2
+    
+  end
 end

@@ -44,7 +44,7 @@ discovery_filter.out(true).connect.to(Pipes::PersistDiscovery.pipe(graph, :publi
   out.connect.to(depmerge, 2)
 
 rule_split = discovery_filter.out(false).connect.to(Pipes::PersistFact.pipe(graph, :instance, :publication, :published)).
-	out.connect.to(Pipes::MagicFacts.pipe(graph, File.open('truth/mens2_parsed.json','r'))).
+	out.connect.to(Pipes::MagicFacts.pipe(graph, File.open('truth/johnson_parsed.json','r'))).
 	out.connect.to(Pipes::Split.pipe(4))
 	
 # clustering
