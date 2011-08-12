@@ -123,11 +123,11 @@ There are three identifiable cases:
 	\item \textbf{CASE 3} The new edge deteriorates the cluster quality and the nodes in both the clusters have to be reclustered.
 \end{enumerate}
 
-In each of these three cases, the addition of the new edge results in updating the adjacency matrix $A$ and the Outer Cluster Weight of the nodes involved. This is described in \autoref{updateValues}. In order to understand the complete algorithm, we first need to explain two used processes: merging and contracting of clusters.
+In each of these three cases, the addition of the new edge results in updating the adjacency matrix $A$ and the Outer Cluster Weight of the nodes involved. This is described in \autoref{updatevalues}. In order to understand the complete algorithm, we first need to explain two used processes: merging and contracting of clusters.
 
 \begin{algorithm}
 \caption{Updating the adjacency matrix $A$ and the Outer Cluster Weight: UPDATE($(i,j),w(i,j)$)}
-\label{merging}
+\label{updatevalues}
 \begin{algorithmic}
 \STATE \textbf{Input:} Edge $(i,j)$ and weight $w(i,j)$
 \STATE $A(i,j) \leftarrow A(i,j) + w(i,j)$

@@ -1,4 +1,5 @@
 \chapter{Theoretical Model}
+\label{model}
 
 First, a theoretical model is defined. This model allows us to illustrate and reason about the information, problems and respective solutions concerning our challenge to disambiguate people around the web. We introduce a three-layer graph model that will integrate structural, informational and algorithmic aspects while respecting the foundation acknowledgments we established earlier (\autoref{foundation}). In the next chapter, we show how we realized this model practically.
 
@@ -9,7 +10,7 @@ The information we collect comprises entities and relations between them. We wan
 The model we built exists of three layers, each with their responsibilities. Each of these layers is explained in detail below.
 
 \section{Three Layer Model: Structural Layer}
-\label{structural layer}
+\label{structurallayer}
 
 A lot of data will be streaming into our system at a constant pace. We need to structure our model in a way that it permits us reaching our goals efficiently. The first part of this section introduces a structuring that allows us to disambiguate. The second part mainly concentrates on reducing the size of the problem domain with as few compromises as possible.
 
@@ -64,7 +65,7 @@ Narrowing down the problem space using names is done using two rules. Two instan
 \item The notation of their names is too different.
 \end{enumerate}
 
-The formal definition of a "family name" and the exact meaning of "too different" will be explained in more detail in \autoref{fuzzynamematching}. The structural representation of name notations will be further explained in the next section.
+The formal definition of a "family name" and the exact meaning of "too different" will be explained in more detail in \autoref{stringmatching}. The structural representation of name notations will be further explained in the next section.
 
 \subsection{Name Notations}
 
