@@ -64,9 +64,13 @@ It is important to note that the division of the clusters is solely based on the
 \subsection{Testset}
 \label{sec:testset}
 
-As stated before, we want to resemble a realistic combination of easier and harder use-cases for our own dataset. As \autoref{tab:testset} shows, we have chosen five base names, each with a number of variations and have manually disambiguated these variations and combined the authors into clusters using the information on DBLP and the actual papers, if they were available. In total our testset contains just over a 1000 publications. 
+As stated before, we want to resemble a realistic combination of easier and harder use-cases for our own dataset. As \autoref{tab:testset} shows, we have chosen five base names, each with a number of variations and have manually disambiguated these variations and combined the authors into clusters using the information on DBLP and the actual papers, if they were available. In total our testset contains just over a 1000 publications. An overview of the names that correspond to each of these base names, can be found in \ref{appendix:testset}, together with links to DBLP. In order to make it easier, we will use the following definition in the rest of the text:
 
-Nevertheless we composed the clusters manually, there are no guarantees that this is completely accurate. Especially for the base names "Yu Chen" and "D. Johnson", there might be small mistakes as the amount of different authors is overwhelming. However, the dataset we composed is a lot more accurate than DBLP. The comparison between the number of authors represented by DBLP and the number of authors we disambiguated, is also shown on \autoref{tab:testset}.
+\begin{mydef}
+	\bfseries{Family} With the term family, we refer to one of the five base names.
+\end{mydef}
+
+Nevertheless we composed the clusters manually, there are no guarantees that this is completely accurate. Especially for the families "Chen" and "Johnson", there might be small mistakes as the amount of different authors is overwhelming. However, the dataset we composed is a lot more accurate than DBLP. The comparison between the number of authors represented by DBLP and the number of authors we disambiguated, is also shown on \autoref{tab:testset}.
 
 \begin{table}
 	\centering
@@ -74,26 +78,26 @@ Nevertheless we composed the clusters manually, there are no guarantees that thi
 			\hline
 			\bfseries{Name Set} & \bfseries{Authors} & \bfseries{Publications} & \bfseries{DBLP} \\
 			\hline
-			De Turck & 4 & 172 & 4 \\
+			Turck & 4 & 172 & 4 \\
 			\hline
-			Yu Chen & 70 & 221 & 1 \\
+			Chen & 70 & 221 & 1 \\
 			\hline
-			Chong Woo & 1 & 9 & 3 \\
+			Woo & 1 & 9 & 3 \\
 			\hline
-			Kim/Tom Mens & 2 & 153 & 2 \\
+			Mens & 2 & 153 & 2 \\
 			\hline
-			D. Johnson & 107 & 460 & 64 \\
+			Johnson & 107 & 460 & 64 \\
 			\hline
 		\end{tabular}
-	\caption{The classification of our manually composed dataset. The first column contains the base name. This is the name we used to find the authors on DBLP. The second column gives the number of clusters we defined manually for this base name. The third column gives the number of publications we found on DBLP and the last column gives the number of different authors DBLP gives for this base name.}
+	\caption{The classification of our manually composed dataset. The first column contains the family. This is the name we used to find the authors on DBLP. The second column gives the number of clusters we defined manually for this family. The third column gives the number of publications we found on DBLP and the last column gives the number of different authors DBLP gives for this base name.}
 	\label{tab:testset}
 \end{table}
 
-In order to be able to test the affiliation and the email rule, we had to get affiliations and email addresses for each of the authors of each publication. We started with writing a new pipe that would be able to search the publication on Bing \cite{bing}. The amount of papers that are actually available on Bing is abysmal, rendering this pipe useless. As the focus of our thesis is information processing, rather than retrieval, we manually added the affiliation and the email address of the author we are examining to each of the publications, if we could find them.
+In order to be able to test the affiliation and the email rule, we had to get affiliations and email addresses for each of the authors of each publication. We started with writing a new pipe that would be able to search the publication on Bing \cite{bing}. The amount of papers that are actually available on Bing is abysmal, rendering this pipe useless. As the focus of our thesis is information processing, rather than retrieval, we manually added the affiliation and the email address of the author we are examining to each of the publications, if we could find them. This allows us to still test the rules.
 
 \subsection{Setup}
 
-A simplified overview of the testsetup is shown in \autoref{fig:testsetup}. We start with the base name of the author we want to add. This is the input for the framework. The framework will search publications on DBLP for this name and combine them with the email and affiliation information that have been composed manually. The result is a graph containing clusters with the different authors. We extract the clusters from the graph and pass them to the result calculator. This is a script that calculates the precision, recall and $F_{1}$ measure by comparing the calculated clusters with the manually composed dataset, as explained in \autoref{sec:testset}, which is called the "groundtruth" in \autoref{fig:testsetup}.
+A simplified overview of the testsetup is shown in \autoref{fig:testsetup}. We start with the links of the author of a family we want to add. This is the input for the framework. The framework will search publications on DBLP for each of this link and combine them with the email and affiliation information that have been composed manually. The result is a graph containing clusters with the different authors. We extract the clusters from the graph and pass them to the result calculator. This is a script that calculates the precision, recall and $F_{1}$ measure by comparing the calculated clusters with the manually composed dataset, as explained in \autoref{sec:testset}, which is called the "groundtruth" in \autoref{fig:testsetup}.
 
 \begin{figure}[htb]
 	\centering
@@ -134,11 +138,30 @@ After calculating these statistical values for all the clusters in the groundtru
 
 \section{Results}
 
-
-
 \subsection{Rules}
+
+We have tested the influence of the different rules on the accuracy. For each of the families, we tested the same combination of rules in succession. The F measure for each of these combinations can be seen on \ref{fig:diff-rules}.
+
+% bespreek figuur
 
 \subsection{Weights}
 
+We have tested different values for the weights allocated to each of the rules and also the value of \alpha which is used to determine if reclustering should occur. 
+
 \subsection{Comparing to DBLP}
 
+We have calculated the F measure for each of the families as they are divided on DBLP. They are depicted on \ref{table:f-dblp}. The divisions for "Turck" and "Mens" are completely correct, the other three are far less accurate with "Chen" having an astonishingly low F measure of $2.73\%$.
+
+\begin{table}
+	\centering
+		\begin{tabular}{|c|c|c|c|c|c|c|c|}
+			\hline
+			& \bfseries{Turck} & \bfseries{Chen} & \bfseries{Woo} & \bfseries{Mens} & \bfseries{Johnson} & \bfseries{Mean} & \bfseries{Weighted} \\
+			\hline
+			\bfseries{DBLP} & 100.0\% & 87.5\% & 100.0\% & 2.7\% & 62.8\% & 70.6\% & 61.8\%\\
+			\hline
+			\bfseries{Framework} & & & & & & \\
+		\end{tabular}
+	\caption{Comparison of the F measures for the different families as they are divided on DBLP and as calculated by our framework. The last columns give the mean F measure and a weighted distribution based on the number of papers in each family.}
+	\label{tab:f-dblp}
+\end{table}

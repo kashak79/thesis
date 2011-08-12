@@ -77,10 +77,10 @@
 \contentsline {subsection}{\numberline {7.1.1}Comparative Research}{44}{subsection.7.1.1}
 \contentsline {subsection}{\numberline {7.1.2}Testset}{45}{subsection.7.1.2}
 \contentsline {subsection}{\numberline {7.1.3}Setup}{46}{subsection.7.1.3}
-\contentsline {section}{\numberline {7.2}Results}{47}{section.7.2}
-\contentsline {subsection}{\numberline {7.2.1}Rules}{47}{subsection.7.2.1}
-\contentsline {subsection}{\numberline {7.2.2}Weights}{47}{subsection.7.2.2}
-\contentsline {subsection}{\numberline {7.2.3}Comparing to DBLP}{47}{subsection.7.2.3}
-\contentsline {chapter}{\numberline {8}Conclusion and future work}{48}{chapter.8}
-\contentsline {chapter}{\numberline {A}Dataset}{49}{appendix.A}
-\contentsline {chapter}{\numberline {B}DVD Content}{53}{appendix.B}
+\contentsline {section}{\numberline {7.2}Results}{48}{section.7.2}
+\contentsline {subsection}{\numberline {7.2.1}Rules}{48}{subsection.7.2.1}
+\contentsline {subsection}{\numberline {7.2.2}Weights}{48}{subsection.7.2.2}
+\contentsline {subsection}{\numberline {7.2.3}Comparing to DBLP}{48}{subsection.7.2.3}
+\contentsline {chapter}{\numberline {8}Conclusion and future work}{49}{chapter.8}
+\contentsline {chapter}{\numberline {A}Dataset}{50}{appendix.A}
+\contentsline {chapter}{\numberline {B}DVD Content}{54}{appendix.B}

@@ -74,9 +74,9 @@ elsif $config == :highkey
     DEBUG = true
     
     COMMUNITY = false
-    EMAIL = true
-    AFFILIATION = true
-    KEYWORD = true
+    EMAIL = false
+    AFFILIATION = false
+    KEYWORD = false
     
     CASE3_SPECIAL = ALPHA/2
     
