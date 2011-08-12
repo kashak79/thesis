@@ -1,21 +1,21 @@
 \chapter{Framework: Pipes and Filters}
 \label{newframework}
 
-In this chapter, we design a framework based on the theoretical model from previous chapter. We start by establishing a small and general core architecture and continue with how we extended and used this core to build a flexible author-disambiguation tool. Implementation details of the framework and used algorithms and technologies in this framework will be discussed as well. Throughout the design, the requirements set in the foundation \autoref{foundation} and theoretical model were taken into account. At the end of the chapter we will discuss the strengths and weaknesses of the framework.
+In this chapter, we design a framework based on the theoretical model from previous chapter. We start by establishing a small and general core architecture and continue with how we extended and used this core to build a flexible author-disambiguation tool. Implementation details of the framework and used algorithms and technologies in this framework will be discussed as well. Throughout the design, the requirements set in the foundation (\autoref{foundation}) and theoretical model were taken into account.
 
 \section{Small and Simple Core}
 
-We opted for a small and simple core framework. It is based on Pipes and Filters with a few extension. We chose to use this design pattern for the following reasons:
+We opted for a small and simple core. It is based on Pipes and Filters with a few extension. We chose to use this design pattern for the following reasons:
 
 \begin{enumerate}
-\item \textbf{Scalability} As said in Foundation \autoref{foundation:endless}, our algorithm needs to scale. Pipes and Filters makes this easy as all component are treated equally, can run independent from others and have a common interface.
-\item \textbf{Modifiability} The Foundation (\autoref{foundation}) points to the highly dynamic environment several times. The framework will thus constantly be subject to new developments. These new developments will be in the form of new pipes, which can be plugged into the framework at any place.
+\item \textbf{Scalability} As said in Foundation \autoref{foundation:endless}, our algorithm needs to scale. Pipes and Filters makes this easy as all components are treated equally, can run independently from others and have a common interface.
+\item \textbf{Modifiability} The Foundation (\autoref{foundation}) mentions the highly dynamic environment several times. The framework will thus constantly be subject to new developments. These new developments will be in the form of new pipes, which can be plugged into the framework at any place.
 \item \textbf{Maintainability} Using Pipes and Filters will reduce the complexity added by constantly modifying the framework. Pipes can always simply be replaced, moved and reconfigured in any way.
 \end{enumerate}
 
 \subsection{Architecture}
 
-In figure \autoref{fig:architecturev2}, the architecture for the small Pipes and Filters core is shown. Each pipe has a number of input and output connectors. These connectors can be coupled to connectors of other pipes with a connection. When a pipe has executed it pushed its processed flow into the appropriate connector. This connector then pushes it to the connection that again pushes the flow into the connector of the next pipe. This pipe is then executed on the flow.
+In figure \autoref{fig:architecturev2}, the architecture for the small Pipes and Filters core is shown. Each pipe has a number of input and output connectors. These connectors can be coupled to connectors of other pipes with a connection. When a pipe has executed it pushes its processed flow into the appropriate connector. This connector then pushes it to the connection that again pushes the flow into the connector of the next pipe. This pipe is then executed on the flow.
 
 \begin{figure}[htp]
 	\centering
@@ -28,13 +28,13 @@ The three classes Pipe, Connector and Connection are the real core of the archit
 
 \subsection{Concepts, Terminology and Notations}
 
-Together with this architecture we developed a few concepts that we use in combination with the core framework. These concepts allow us to build pipe configurations more easily and give us flexible control over the data flowing to the system. These concepts and associated terminology are explained in the following paragraphs.
+Together with this architecture we developed a few concepts that we use in combination with the core framework. These concepts allow us to build pipe configurations more easily and give us flexible control over the data flowing through the system. These concepts and associated terminology are explained in the following paragraphs.
 
-\paragraph{Flows and Aspects} The information flowing through the pipes and connections are flows. Flows exist of different aspects. Every pipe is only interested in a few aspects of a flow. Other aspects can travel along too feed pipes later on the path. The choice of which aspect we process or send is completely free. An example of aspects are instance, publication or dependencies (see \autoref{dependencies}).
+\paragraph{Flows and Aspects} The information flowing through the pipes and connections are flows. Flows exist of different aspects. Every pipe is only interested in a few aspects of a flow. Other aspects can travel along to feed pipes later on the path. The choice of which aspect we process or send is completely free. Examples of aspects are instance, publication and dependencies (see \autoref{dependencies}).
 
 \paragraph{Connector Identifiers} Connectors need to be identified to allow us to connect a specific input or output to the right connection. The identifiers of the connectors can be any object. This makes configuring the pipes more expressive as identifiers suiting the context of the pipe can be used. For example, the output connector identifiers of the Filter pipe (\autoref{par:filterpipe}) are the booleans "true" and "false". We denote a input-connector with identifier $x$ as $Cn^i_x$ and an output-connector with identifier $y$ as $Cn^o_y$. The output ports of the Filter pipe would thus be denoted as $Cn^o_{true}$ and $Cn^o_{false}$.
 
-\paragraph{Flow enrichment and filtering} In every pipe, we can push out whatever we want. However, a much used situation is where the pipe outputs the input flow with an extra aspect or a modified aspect. We call this flow enrichment. The other way around is also a possibility, any aspect or part of an aspect can be filtered in any pipe. However, this is not used in regular pipes but in a dedicated Filter pipe (\autoref{par:filterpipe}). Enriching and Filtering are denoted with plus and minus signs on the flow. An enriched flow A can be indicated with $A^+$ and a filtered flow A with $A^-$. The aspect that has been filtered or added can be indicated between brackets.
+\paragraph{Flow enrichment and filtering} In every pipe, we can push out whatever we want. However, a much used situation is where the pipe outputs the input flow with an extra aspect or a modified aspect. This is called flow enrichment. The other way around is also possible, any aspect or part of an aspect can be filtered in any pipe. However, this is not used in regular pipes but in a dedicated Filter pipe (\autoref{par:filterpipe}). Enriching and Filtering are denoted with plus and minus signs on the flow. An enriched flow A can be indicated with $A^+$ and a filtered flow A with $A^-$. The aspect that has been filtered or added can be indicated between brackets.
 
 \paragraph{Flow Rate} Some pipes can increase or decrease the flow rate. A Filter for example will decrease the flow rate on both output connections. A Rule on the other hand will probably output multiple similarities for one input. Increasing the flow rate is denoted by adding a star (*) to the flow notation at the output. Decreasing the rate is indicated by a star on an input flow.
 
@@ -228,7 +228,7 @@ All similarities produces by these rules are merged into one stream which is fed
 
 Clustering is a very important step in building towards a solution. Each new flow of information indirectly leads to a clustering operation. Acquiring new information triggers rules which on their turn yield similarities. These similarities change the balance between clusters. In the worst case, an expensive rebalancing procedure is necessary.
 
-It is obvious that processing similarities is something that will be executed very frequently. The combination of the enormous amount of similarities and their expensive processing requires us to make this process as streamlined and efficient as possible. The clustering algorithm as explained in \autoref{clustering} leads to a first, naive implementation approach. Rethinking the absolute needs of the clustering algorithm then leads to a second approach that benifits greatly of the foundations of our framework.
+It is obvious that processing similarities is something that will be executed very frequently. The combination of the enormous amount of similarities and their expensive processing requires us to make this process as streamlined and efficient as possible. The clustering algorithm as explained in \autoref{clustering} leads to a first, naive implementation approach. Rethinking the absolute needs of the clustering algorithm then leads to a second approach that benefits greatly of the foundations of our framework.
 
 \paragraph{In-graph implementation} The most simple solution one can think of is to maintain the ICW and OCW for every vertex in the vertex itself. The adjacency matrix would implicitly be defined by the edges between two nodes in the similarity plane. This technique has two main drawbacks:
 
@@ -269,7 +269,7 @@ In case of an intra-cluster addition, we could watch the locks of both involved 
 \subsection{Dependency Resolution}
 \label{dependencies}
 
-Another difficulty turning up in our framework is the dependency of certain flow onto others. In this case, a flow can not be executed untill its dependencies are resolved. An example is the published fact: we are not able to process this until the associated instance is integrated in the graph. To solve this we designed a stateful pipe that manages these dependencies. A dependent flow then waits in this pipe until all its dependencies are resolved.
+Another difficulty turning up in our framework is the dependency of certain flow onto others. In this case, a flow can not be executed until its dependencies are resolved. An example is the published fact: we are not able to process this until the associated instance is integrated in the graph. To solve this we designed a stateful pipe that manages these dependencies. A dependent flow then waits in this pipe until all its dependencies are resolved.
 
 \subsection{Overview}
 

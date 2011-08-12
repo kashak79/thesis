@@ -1,6 +1,6 @@
 \chapter{Theoretical Model}
 
-First, a theoretical model is defined. This model allows us to illustrate and reason about the information, problems and respective solutions concerning our challenge to disambiguate people around the web. We introduce a three-layer graph model that will integrate structural, informational and algorithmic aspects while respecting the foundation acknowledgements we established earlier (\autoref{foundation}). In the next chapter, we show how we realised this model practically.
+First, a theoretical model is defined. This model allows us to illustrate and reason about the information, problems and respective solutions concerning our challenge to disambiguate people around the web. We introduce a three-layer graph model that will integrate structural, informational and algorithmic aspects while respecting the foundation acknowledgments we established earlier (\autoref{foundation}). In the next chapter, we show how we realized this model practically.
 
 \section{Graph as a model}
 
@@ -17,9 +17,9 @@ A lot of data will be streaming into our system at a constant pace. We need to s
 
 One of the main responsibilities of the structural layer is reflecting a decision through a change in structure. It is clear that this is very important. Deciding to which physical author some information belongs, is the main issue of our thesis. This part focuses on how the model adapts to such a decision. We start by explaining the first solution that would probably come to mind and the shortcomings of it. Then we provide a solution that deals with these shortcomings.
 
-\paragraph{Merging} Assume that we have a source of information that has two occurences of the same name X. Along each of these occurrences, we find some extra information on the person(s) with this name. At first we do not know if this is just one person or two persons who share the same name. Now suppose that we have an algorithm that claims the latter. Therefore we have made a decision that the two pieces of information depict the same actual person. The idea is now to simply merge these two chunks of information, representing exactly one person. The situation together with its outcome is illustrated in \autoref{fig:clusteringsimple}.
+\paragraph{Merging} Assume that we have a source of information that has two occurrences of the same name X. Along each of these occurrences, we find some extra information on the person(s) with this name. At first we do not know if this is just one person or two persons who share the same name. Now suppose that we have an algorithm that claims the latter. Therefore we have made a decision that the two pieces of information depict the same actual person. The idea is now to simply merge these two chunks of information, representing exactly one person. The situation together with its outcome is illustrated in \autoref{fig:clusteringsimple}.
 
-The main problem with this solution is that it does not take all of the foundation acknowledgements into account. Merging two authors is a definitive operation, it can not be undone. We operate in a very dynamic environment, our system is subject to constant change. Therefore it is wise to not base a decision only on past information. Future information can provide new motives to make another decision.
+The main problem with this solution is that it does not take all of the foundation acknowledgments into account. Merging two authors is a definitive operation, it can not be undone. We operate in a very dynamic environment, our system is subject to constant change. Therefore it is wise to not base a decision only on past information. Future information can provide new motives to make another decision.
 
 \begin{figure}[htb]
 	\centering
@@ -53,7 +53,7 @@ As stated before, our goal is to link different instances of an author. Therefor
 \label{eq:problemspace}
 \end{equation}
 
-Names are still an important property for person identification. If we find two totally different names, we can say with confidence that they are not the same person. We let the case where the person in question would have undergone a change of name slip, this rare incident would lead us too far. Additionaly, people almost always refer to people by using their name. When information is found, we can be almost sure that it will be accompanied by a name. These properties make names an excellent candidate for narrowing down our problem space.
+Names are still an important property for person identification. If we find two totally different names, we can say with confidence that they are not the same person. We let the case where the person in question would have undergone a change of name slip, this rare incident would lead us too far. Additionally, people almost always refer to people by using their name. When information is found, we can be almost sure that it will be accompanied by a name. These properties make names an excellent candidate for narrowing down our problem space.
 
 Note that in the example used in the previous section, we sidestepped an extra difficulty. It assumed that our source contained two instances associated with the same name. When people have totally different names, they are not the same. When they have the same name, they could be the same. But what about those names that are almost the same? If the names are not too different, the instances must certainly be compared. The definition of "too different" needs to comply with \autoref{eq:problemspace}.
 
@@ -64,7 +64,7 @@ Narrowing down the problem space using names is done using two rules. Two instan
 \item The notation of their names is too different.
 \end{enumerate}
 
-The formal definition of a "family name" and the exact meaning of "too different" will be explained in more detail in \autoref{fuzzynamematching}. The structural represenation of name notations will be further explained in the next section.
+The formal definition of a "family name" and the exact meaning of "too different" will be explained in more detail in \autoref{fuzzynamematching}. The structural representation of name notations will be further explained in the next section.
 
 \subsection{Name Notations}
 
@@ -90,7 +90,7 @@ Concerning the structure of name notations in our model, we pursued two differen
 
 \subsection{Conclusion and Overview}
 	
-We have addressed all the main issues that ascended during the design of a structure that can satisfy the efficiency and flexibility needed according to the foundation acknowledgements (\autoref{foundation}). We will finish with a final example of the typical structure of the graph as a theoretical model. This overview can be found in \autoref{fig:graphstructureoverview}.
+We have addressed all the main issues that ascended during the design of a structure that can satisfy the efficiency and flexibility needed according to the foundation acknowledgments (\autoref{foundation}). We will finish with a final example of the typical structure of the graph as a theoretical model. This overview can be found in \autoref{fig:graphstructureoverview}.
 
 \begin{figure}[htb]
 	\centering
@@ -111,11 +111,11 @@ In theory, there is no limit on the amount of data. Every addition of an aspect 
 
 As we have stated several times, the goal is to link instances together to form an author (cluster). Until now, linking was just an action of an algorithm. If an algorithm decides that two instances represent the same author, the algorithm links them together (by actually changing the "instance of" edges in the graph). But what about the links itself? Should these links also represent a "physical" concept in our model? This is a question answered by the similarity layer.
 
-\paragraph{Weighted Similarities} When two instances are compared, we need to compare their properties. Properties could be email addresses, locations, people we work with~\ldots When compared instances have the location "Belgium" in common, but their email addresses are different, it would be doubtful that these two are the same. In the opposite situation (the same email address and a different location) it would be alot more probable for these instances to represent the same person. We can conclude that some properties are more distinctive than others. When the value of two properties is (partially) the same, we speak of a similarity. These similarities are assigned a normalized weight proportional to the distinctiveness of the property and the degree of equality.
+\paragraph{Weighted Similarities} When two instances are compared, we need to compare their properties. Properties could be email addresses, locations, people we work with~\ldots When compared instances have the location "Belgium" in common, but their email addresses are different, it would be doubtful that these two are the same. In the opposite situation (the same email address and a different location) it would be a lot more probable for these instances to represent the same person. We can conclude that some properties are more distinctive than others. When the value of two properties is (partially) the same, we speak of a similarity. These similarities are assigned a normalized weight proportional to the distinctiveness of the property and the degree of equality.
 
 % misschien ook nog een formele definitie hier
 
-\paragraph{Stateful Similarities} There is a reason why similarities have to actually be persisted. According to the foundation acknowledgements (\autoref{foundation}), we are in need of a constantly changing output. This means that the system will incrementally build towards a solution. If we want to minimize calculating similarities when new information is found, all other similarities must already be present. With the similarity layer enabled, \autoref{fig:graphstructureoverview} could become \autoref{fig:graphstructureoverviewsim}.
+\paragraph{Stateful Similarities} There is a reason why similarities have to actually be persisted. According to the foundation acknowledgments (\autoref{foundation}), we are in need of a constantly changing output. This means that the system will incrementally build towards a solution. If we want to minimize calculating similarities when new information is found, all other similarities must already be present. With the similarity layer enabled, \autoref{fig:graphstructureoverview} could become \autoref{fig:graphstructureoverviewsim}.
 
 \begin{figure}[htb]
 	\centering
@@ -134,7 +134,7 @@ Rules drive the entire flow in our framework. Rules turn novel facts into simila
 A \textbf{Rule} is a mechanism that issues a complex query on the graph-model in order to find similarities between instances.
 \end{mydef}
 
-Most rules are triggered when a piece of information is discovered and added to an instance. Then, we need to compare this information with other instances. In case of similar information, a similarity arises. The question of which instances to compare with, has already been aswered in \autoref{problemdomain}. In the rules-domain, we call these instances "matched instances".
+Most rules are triggered when a piece of information is discovered and added to an instance. Then, we need to compare this information with other instances. In case of similar information, a similarity arises. The question of which instances to compare with, has already been answered in \autoref{problemdomain}. In the rules-domain, we call these instances "matched instances".
 
 These matched instances are categorized into three scopes. The union of all the instances in the three scopes form all the matched instances. In some rules we do not need all the matched instances but only one or two scopes. The scopes are listed below.
 
@@ -229,7 +229,7 @@ This rule is based on the fact that it is very likely for two instances with the
 
 \subsection{Affiliation Rule}
 
-The affiliation rule exploits the affiliations of the authors. It is unlikely for an author to be tied towards multiple affiliations at the same time. This rule can benefit of the time-dependency concept. Authors sometimes change from one affiliation to another. Having the same affilation ten years later yields less of a similarity that having the same one right now. Again, an example can be found in \autoref{fig:affiliationrule}.
+The affiliation rule exploits the affiliations of the authors. It is unlikely for an author to be tied towards multiple affiliations at the same time. This rule can benefit of the time-dependency concept. Authors sometimes change from one affiliation to another. Having the same affiliation ten years later yields less of a similarity that having the same one right now. Again, an example can be found in \autoref{fig:affiliationrule}.
 
 \begin{figure}[h!]
 	\centering

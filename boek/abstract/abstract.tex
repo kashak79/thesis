@@ -89,7 +89,7 @@ The core of the implementation of the framework is the simplicity achieved by pi
 
 \section{Clustering}
 
-The article focuses a lot on the clustering process. This process is responsible for calculating what instances match to the same author, based on similarities between the instances. Everytime a rule computes a new similarity, it is possible reclustering has to occur. As there is a constant influx of information, there is a need for a dynamic approach that maintains the cluster quality. 
+The article focuses a lot on the clustering process. This process is responsible for calculating what instances match to the same author, based on similarities between the instances. Every time a rule computes a new similarity, it is possible reclustering has to occur. As there is a constant influx of information, there is a need for a dynamic approach that maintains the cluster quality. 
 
 The article gives an in-depth explanation of the dynamic clustering algorithm described in \cite{dyncluster}. The algorithm itself depends on the minimum cut tree algorithm. The sequential Gusfield's algorithm described in \cite{gusfield} is implemented. 
 
@@ -101,7 +101,7 @@ The clustering process itself is also a pipe and as noted before, in \autoref{pi
 
 The proposed framework is tested against a manually annoted dataset containing over 1000 publications. The impact of each of the rules on the accuracy is tested and the combination of the four rules is concluded as having the highest overall accuracy. The co-author rule has the biggest positive impact on the correctness. The F measure is also calculated for different distributions of the weights for each of the rules. The distribution giving favor to a lot of clustering by setting all the values high and the alpha value just a little higher, renders the best results. 
 
-In the article, there is also a compirason between the results the proposed framework gets and the accuracy of DBLP. The conclusion is that the proposed framework overcomes DBLP by $14\%$ or $17\%$, depending on how the mean accuracy is calculated.
+In the article, there is also a comparison between the results the proposed framework gets and the accuracy of DBLP. The conclusion is that the proposed framework overcomes DBLP by $14\%$ or $17\%$, depending on how the mean accuracy is calculated.
 
 
 \begin{figure}[htpb!]

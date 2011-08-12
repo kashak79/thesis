@@ -17,7 +17,7 @@ This chapter is subdivided into two main parts. The first part (\autoref{technol
 \subsection*{API}
 \label{api}
 
-API stands for Application Programming Interface and is a particular set of rules defined in code allowing software programs to communicate with eachother. It facilitates the interaction by providing an interface for all the allowable actions.
+API stands for Application Programming Interface and is a particular set of rules defined in code allowing software programs to communicate with each other. It facilitates the interaction by providing an interface for all the allowable actions.
 
 We will use API's when they are available for obtaining information from online sources.
 
@@ -96,7 +96,7 @@ More recently there has been a new direction to graph clustering, modeling the m
 \subsection*{Machine learning}
 \label{machinelearning}
 
-Machine learning, part of artificial intelligence, focusses on the development of algorithm that allow computer programs to learn from experience (ie. predicting the next event given a list of previous ones). This can be obtained by constructing rules and constraints, starting from some training data.
+Machine learning, part of artificial intelligence, focuses on the development of algorithm that allow computer programs to learn from experience (ie. predicting the next event given a list of previous ones). This can be obtained by constructing rules and constraints, starting from some training data.
 
 There are many different approaches with different computational performances. With regard to Opinion Mining, described in \autoref{opinionmining}, the most interesting is probably support vector machines which uses a set of related supervised learning methods for classification and regression. Clustering is also a form of machine learning and has already been explained in more detail in \autoref{clustering}.
 
@@ -121,11 +121,11 @@ There is also a Ruby port of the Lingua::EN::Tagger, called EngTagger, available
 \subsection*{Graph pattern-matching and Gremlin}
 \label{graphs}
 
-Gremlin is a domain specific language for traversing property graphs. Gremlin makes use of Groovy and Pipes to perform complex graph traversals. This language has application in the areas of graph query, analysis, and manipulation. One of the techniques used in Gemlin is graph pattern matching. Many graph applications have to do with identifying patterns in the graph. That is, identifying sub-graphs that match a particular topology and/or feature set. In single-relational graphs, usually a topology is only considered. An interesting article about pattern matching can be found at \cite{markopatterns}.
+Gremlin is a domain specific language for traversing property graphs. Gremlin makes use of Groovy and Pipes to perform complex graph traversals. This language has application in the areas of graph query, analysis, and manipulation. One of the techniques used in Gremlin is graph pattern matching. Many graph applications have to do with identifying patterns in the graph. That is, identifying sub-graphs that match a particular topology and/or feature set. In single-relational graphs, usually a topology is only considered. An interesting article about pattern matching can be found at \cite{markopatterns}.
 
 \subsection{JUNG}
 
-JUNG (the Java Universal Network/Graph Framework) is a software library that provides a common and extendible language for the modeling, analysis, and visualization of data that can be represented as a graph or network. It is written in Java, which allows JUNG-based applications to make use of the extensive built-in capabilities of the Java API, as well as those of other existing third-party Java libraries.
+JUNG (the Java Universal Network/Graph Framework) is a software library that provides a common and extensible language for the modeling, analysis, and visualization of data that can be represented as a graph or network. It is written in Java, which allows JUNG-based applications to make use of the extensive built-in capabilities of the Java API, as well as those of other existing third-party Java libraries.
 
 The JUNG architecture is designed to support a variety of representations of entities and their relations, such as directed and undirected graphs, multi-modal graphs, graphs with parallel edges, and hypergraphs. It provides a mechanism for annotating graphs, entities, and relations with metadata. This facilitates the creation of analytic tools for complex data sets that can examine the relations between entities as well as the metadata attached to each entity and relation.
 
@@ -145,9 +145,9 @@ An example is a large company who wants to follow up on customer feedback. Large
 
 Opinion mining has been a hot topic the last 10 years due to the rise of social media such as blogs and social networks. Businesses have a need to know what people are saying about them and opinion mining can help them toward accomplishing this goal \cite{wright2009mining}.
 
-Several universities around the world have research teams focussing on the dynamics of sentiment. There is research focused on creating sentiment summaries to capture an author's opinion about a subject based on a publication \cite{beineke2003exploration}, predicting the semantic orientation of adjectectives and combinations of adjectives \cite{hatzivassiloglou1997predicting}, identifying the sources of the opinions rather than the actual sentiment itself \cite{choi2005identifying} and so on.
+Several universities around the world have research teams focusing on the dynamics of sentiment. There is research focused on creating sentiment summaries to capture an author's opinion about a subject based on a publication \cite{beineke2003exploration}, predicting the semantic orientation of adjectectives and combinations of adjectives \cite{hatzivassiloglou1997predicting}, identifying the sources of the opinions rather than the actual sentiment itself \cite{choi2005identifying} and so on.
 
-An interesting ongoing project is \cite{liu2004sentiment} at the University of Illinois, Chicago, backed by Google and Microsoft Corporation. It is a project focussing on three areas: 
+An interesting ongoing project is \cite{liu2004sentiment} at the University of Illinois, Chicago, backed by Google and Microsoft Corporation. It is a project focusing on three areas: 
 
 \begin{itemize}
 	\item Mining direct (or regular) opinions. Example: after taking the drug, I got stomach pain.
@@ -163,7 +163,7 @@ It is particularly interesting as others can follow the status of and updates on
 
 It could be interesting to work out previous research experiments with a focus on Twitter. The short and typically cryptic messages exchanged by users on this service form a new challenge where existing solutions may fall short as users often use shorthand codes, acronyms and abbreviations which are not part of the official language. A new approach or combination of existing solutions could be tested and compared to existing results.
 
-There are many possible approaches. We could focus on the use of a log-linear regression model to predict the semantic orientation of adjectives and conjunctions \cite{hatzivassiloglou1997predicting}. Another possibility is a holistic lexicon-based approach which exploits external evidences and linguistic conventions of natural language expressions allowing to handle opinion words that are context dependant \cite{ding2008holistic}. In \cite{mei2007topic} a specifically designed Hidden Markov Model structure is utilized to track opinions in weblogs. In \cite{beineke2003exploration} a Naive Bayes and regularized logistic regression models are composed in order to capture opinions from online reviews.
+There are many possible approaches. We could focus on the use of a log-linear regression model to predict the semantic orientation of adjectives and conjunctions \cite{hatzivassiloglou1997predicting}. Another possibility is a holistic lexicon-based approach which exploits external evidences and linguistic conventions of natural language expressions allowing to handle opinion words that are context dependent \cite{ding2008holistic}. In \cite{mei2007topic} a specifically designed Hidden Markov Model structure is utilized to track opinions in weblogs. In \cite{beineke2003exploration} a Naive Bayes and regularized logistic regression models are composed in order to capture opinions from online reviews.
 
 Most of the approaches use some sort of classification algorithm or machine learning technique (\autoref{machinelearning}) in order to correctly predict opinions in a new context. In order to only consider interesting words, we would use a part-of-speech tagger (see \autoref{postagger}). This allows us to strip all the words that do not influence an opinion. On the remaining words, we would use a Stemming algorithm or a Lemmatizer (\autoref{stemming}).
 
@@ -191,11 +191,11 @@ The amount of applications focusing on calculating social media influence, as th
 	\centering
 		\begin{tabular}[ht] {| m{3.5cm} | p{10cm}|}
 			\hline
-			\includegraphics[width=3cm]{./fig/klout-logo-1.png}	& Probably the best-known online tool focusing on ranking Twitter profiles (and recently also Facebook profiles) using over 35 variables. These rankings are, though fun, not particularly useful as finding influencers based on topic is very limited. However there are interesting third-party applications providing this feature.\\ 
+			\includegraphics[width=3cm]{./fig/klout-logo-1.png} \cite{klout}	& Probably the best-known online tool focusing on ranking Twitter profiles (and recently also Facebook profiles) using over 35 variables. These rankings are, though fun, not particularly useful as finding influencers based on topic is very limited. However there are interesting third-party applications providing this feature.\\ 
 			\hline
-			\includegraphics[width=3cm]{./fig/peerindex_logo.png} & This applicatioin focuses on identifying topics which Twitter users talk about. Starting in 2011 they also have a commercial program which allows users to identify 'opinion formers and authorities', which comes down to identifying Twitter influencers.\\
+			\includegraphics[width=3cm]{./fig/peerindex_logo.png} \cite{peerindex} & This application focuses on identifying topics which Twitter users talk about. Starting in 2011 they also have a commercial program which allows users to identify 'opinion formers and authorities', which comes down to identifying Twitter influencers.\\
 			\hline
-			\includegraphics[width=3cm]{./fig/traackr_logo.png} & Traackr doesn't limit itself to Twitter. It uses data from multiple online sources, such as a user's blog, LinkedIn profile or YouTube channel. It combines the results and calculates a three-way score (reach, relevance and resonance) based on a certain topic.\\
+			\includegraphics[width=3cm]{./fig/traackr_logo.png} \cite{traackr} & Traackr does not limit itself to Twitter. It uses data from multiple online sources, such as a user's blog, LinkedIn profile or YouTube channel. It combines the results and calculates a three-way score (reach, relevance and resonance) based on a certain topic.\\
 			\hline
 		\end{tabular}
 	\caption{Applications focusing on calculating social media influence}
@@ -211,18 +211,18 @@ We want to create a platform that identifies key influencers on Twitter and that
 
 The main features are based on the Semantic Web. It should allow the framework to understand certain semantics and make connections between information. The usage of the Web Ontology Language (OWL, see \autoref{owl}), for representing the knowledge we have on an influencer, together with Friend of a Friend (FOAF) \autoref{foaf}, for describing the relations with other influencers and their activities, should allow us to create a meaningful layer on top of Twitter.
 
-\autoref{fig:makingsenseoftwitter} shows a draft of how this could be represented internally. We are reviewing the Twitter user Daniel, which has relationships to entities contained in two different groups. The first, depicted by FOAF, contains the Twitter accounts Daniel is following. These are seperate entities with relationships to subjects and other entities which have been determined in previous iterations. The second group, depicted by Twitter Analysis, contains the subjects Daniel talks about or is interested in. These subjects are determined by analyzing Daniel's messages and extracting the most important words using a part-of-speech tagger (\autoref{postagger}). These words have to be linked to subjects, a task where Wikipedia and Freebase can help us.
+\autoref{fig:makingsenseoftwitter} shows a draft of how this could be represented internally. We are reviewing the Twitter user Daniel, which has relationships to entities contained in two different groups. The first, depicted by FOAF, contains the Twitter accounts Daniel is following. These are separate entities with relationships to subjects and other entities which have been determined in previous iterations. The second group, depicted by Twitter Analysis, contains the subjects Daniel talks about or is interested in. These subjects are determined by analyzing Daniel's messages and extracting the most important words using a part-of-speech tagger (\autoref{postagger}). These words have to be linked to subjects, a task where Wikipedia and Freebase can help us.
 
 \begin{figure}[h]
 	\centering
 		\includegraphics[width=1.0\textwidth]{./fig/makingsenseoftwitter.pdf}
-	\caption{The internal representation of the entity Daniel, his relationships to other entities and the conclusions we can draw from analyzing these relationships.}
+	\caption{The internal representation of the entity Daniel, his relationships to other entities and the conclusions we can draw from analyzing these relationships: Daniel is a Ruby on Rails developer.}
 	\label{fig:makingsenseoftwitter}
 \end{figure}
 
 By analyzing the available entities and their relationships, we would like to be able to conclude that Daniel is a Ruby on Rails developer. This is depicted in \autoref{fig:makingsenseoftwitter} by linking the subjects Daniel talks about to Ruby on Rails and the added knowledge that the entities Heroku and Github which Daniel follows, are both talking about development or to developers.
 
-Using this information, we can create a mesh with links between entities. The number of usefull links could then be part of the algorithm to determine the most influential Twitter users with regard to a specific topic.
+Using this information, we can create a mesh with links between entities. The number of useful links could then be part of the algorithm to determine the most influential Twitter users with regard to a specific topic.
 
 \section{Expert Finding}
 \label{expertfinding}
@@ -243,7 +243,7 @@ In research circles, \cite{balog2006finding} proposes four simple binary associa
 
 \cite{mattox1999enterprise} retrieves experts based on the amount of documents persons have for a given topic. As input a keyword phrase is used in order to find relevant documents. The results are however unsatisfactory caused by its slow response time and incorrect relationship between persons and documents. \cite{zhu2006open} gets better results using an algorithm based on a PageRank for document authority, a co-occurrence model for authors and multiple levels of associations between experts and topics. It succeeds to map variants of experts' names on the same author, but fails to identify different authors with the same name.
 
-\cite{jung2007finding} proposes OntoFrame. It is an information service platforum using Semantic Web technologies and is based on an extensive ontology of 16 classes using RDF triples. Identity resolution and full text analysis forms the basis of their expert-finding method. The framework looks promising, however the prototype does not function  \cite{ontoframe}.
+\cite{jung2007finding} proposes OntoFrame. It is an information service platform using Semantic Web technologies and is based on an extensive ontology of 16 classes using RDF triples. Identity resolution and full text analysis forms the basis of their expert-finding method. The framework looks promising, however the prototype does not function  \cite{ontoframe}.
 
 \subsection{Improvements and additions}
 
@@ -253,11 +253,11 @@ We want to continue the research proposed in \cite{balog2006finding}, but less f
 
 % TODO We looked into the usage of a triplestore in order to use OWL \autoref{owl} ... or sth like that ?
 
-We will need to write a web scraper (see \autoref{scraping}) in order te retrieve information from online sources that do not provide a public API. This information will have to be stored and this storage should allow us to make and change connections between different entities and adding and combining them graciously. We choose to use the TinkerPop Graph, using the graph databases. For more information about graphs, see \autoref{graphs}.
+We will need to write a web scraper (see \autoref{scraping}) in order to retrieve information from online sources that do not provide a public API. This information will have to be stored and this storage should allow us to make and change connections between different entities and adding and combining them graciously. We choose to use the TinkerPop Graph, using the graph databases. For more information about graphs, see \autoref{graphs}.
 
 In order to differentiate between authors with the same name and find similarities between publications that are written by the same author, we will use a clustering algorithm (as described in \autoref{clustering}). The nodes will be names we found in publications or on profiles and clusters will represent one author, mapping one or more names to the same author. This allows us to define rules which calculate the probability that names match the same author and using this new information in the clustering algorithm will lead to reformations in the graph space.
 
-For the clustering algorithm, we focussed on the algorithm proposed in \cite{saha2006dynamic}. This is an efficient, dynamic algorithm which can handle the flow of new information in the form of new nodes and new edges connecting these nodes. For the required minimum-cut tree algorithm, we based ourselves on the sequential Gusfield's algorithm explained in \cite{rodrigues2011mpi}. A very detailed elaboration of everything related to this clustering algorithm can be found in \autoref{clustering}.
+For the clustering algorithm, we focused on the algorithm proposed in \cite{saha2006dynamic}. This is an efficient, dynamic algorithm which can handle the flow of new information in the form of new nodes and new edges connecting these nodes. For the required minimum-cut tree algorithm, we based ourselves on the sequential Gusfield's algorithm explained in \cite{rodrigues2011mpi}. A very detailed elaboration of everything related to this clustering algorithm can be found in \autoref{clustering}.
 
 We want to find experts about certain subjects. This means we have to find keywords related to publications. We will discuss different possibilities, but one is parsing the most important words from the title. We will do this by using a part-of-speech tagger, see \autoref{postagger}.
 

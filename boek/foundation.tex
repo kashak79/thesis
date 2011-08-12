@@ -1,11 +1,11 @@
 \chapter{Problem Insights and Foundation}
 
-In the first framework, many properties of our environment were not taken into account. We did not think enough about the consequences of the characteristics of the disambiguation problem. Therefore, we went back on our steps and formulated five basic foundation acknowledgement. This new foundation has a lot of contradictions with the design of our first framework. We decided to abandon the framework. In the next chapter we build an entire theoretical model based on this foundation. The chapter after that discusses the practical realisation of this model.
+In the first framework, many properties of our environment were not taken into account. We did not think enough about the consequences of the characteristics of the disambiguation problem. Therefore, we went back on our steps and formulated five basic foundation acknowledgment. This new foundation has a lot of contradictions with the design of our first framework. We decided to abandon the framework. In the next chapter we build an entire theoretical model based on this foundation. The chapter after that discusses the practical realization of this model.
 
-\section{Foundation Acknowledgements}
+\section{Foundation Acknowledgments}
 \label{foundation}
 
-Below, we list the five foundation acknowledgements that drive the development of a theoretical model.
+Below, we list the five foundation acknowledgments that drive the development of a theoretical model.
 
 \begin{foundation}
 \label{foundation:different}
@@ -19,7 +19,7 @@ First, we want a solution that provides precision. The most existing services do
 No decision is made permanent.
 \end{foundation}
 
-We operate in a highly dynamic environment, subject to constant change. This change is controlled from two sides. The first is the one of information itself. As time goes on, more and more information is produced (authors write new publications) and more of this information becomes available on the web. The second is the one of our framework. Its capabilities will constantly improve, making it possible to collect information that was not collectable before. The decision to which physical author information belongs to can change as new information becomes available. Therefore it is wise to not base a decision only on past information. Future information can provide new motives to make another decision. It has to be possible to change our minds though time.
+We operate in a highly dynamic environment, subject to constant change. This change is controlled from two sides. The first is the one of information itself. As time goes on, more and more information is produced (authors write new publications) and more of this information becomes available on the web. The second is the one of our framework. Its capabilities will constantly improve, making it possible to collect information that was not collectible before. The decision to which physical author information belongs to can change as new information becomes available. Therefore it is wise to not base a decision only on past information. Future information can provide new motives to make another decision. It has to be possible to change our minds through time.
 
 \begin{foundation}
 \label{foundation:partial}
@@ -33,7 +33,7 @@ No information can be considered complete and correct. We will substantiate this
 A constantly changing input asks for a constantly changing output.
 \end{foundation}
 
-This foundation is based on the same observations as Foundation \autoref{foundation:decision}. In this highly dynamic environment, there is constant change. We want our output, disambiguated authors, to adapt to this constant change. This means that, ideally, for every change of information in the input, a changed output would be precieved almost instantaneous. To achieve this, changes in decisions must be processed efficiently.
+This foundation is based on the same observations as Foundation \autoref{foundation:decision}. In this highly dynamic environment, there is constant change. We want our output, disambiguated authors, to adapt to this constant change. This means that, ideally, for every change of information in the input, a changed output would be perceived almost instantaneous. To achieve this, changes in decisions must be processed efficiently.
 
 \begin{foundation}
 \label{foundation:endless}
@@ -44,14 +44,14 @@ Last but not least, do not forget that the stream is almost endless. Information
 
 \section{Why the first approach needed a complete overhaul}
 
-Now we can check if the measures taken in the first framework suffice to cope with the challenges posed in the foundation acknowledgements. Different aspects of the framework will be treated seperately to determine to what degree they meet the requirements.
+Now we can check if the measures taken in the first framework suffice to cope with the challenges posed in the foundation acknowledgments. Different aspects of the framework will be treated separately to determine to what degree they meet the requirements.
 
-\paragraph{The flow of data} A logical flow of data in a system with this much data to process is of primary importance. In the framework, several components do not comunicate directly with each other. All communication is "relayed" through the database. This puts an enormous and unnecessary load on our database. When we would scale the framework out to several servers, all communication would still pass the database nodes (over the network).
+\paragraph{The flow of data} A logical flow of data in a system with this much data to process is of primary importance. In the framework, several components do not communicate directly with each other. All communication is "relayed" through the database. This puts an enormous and unnecessary load on our database. When we would scale the framework out to several servers, all communication would still pass the database nodes (over the network).
 
-\paragraph{Scalability} We have more than one concern about the scalability of the first framework. First, the more instances in the cluster, the more queries to the database to retreive the information about a task. Secondly, the data merger would put an enormous load on the database from time to time (see next paragraph). Thirdly, a task dependency control component would also relay all its control messages through the database, increasing load in this point.
+\paragraph{Scalability} We have more than one concern about the scalability of the first framework. First, the more instances in the cluster, the more queries to the database to retrieve the information about a task. Secondly, the data merger would put an enormous load on the database from time to time (see next paragraph). Thirdly, a task dependency control component would also relay all its control messages through the database, increasing load in this point.
 
-\paragraph{Performance} At certain intervals, the data merger would take a snapshot of the entire system in order to execute a cluster algorithm on it (grouping publications in physical author clusters). This is a very intensive process. As we deal with a very dynamic environment, it is preferrable that this algorithm would be run timely to keep the output up to date. The drawback with this approach is that "snapshot"-clustering is a very time consuming operation every time it is executed. If we had an incremental clustering algorithm that modifies the clusters when new information is found, it would only be intensive the first time. Afterwards it would just have to make a small modification to the clusters. This kind of approach would be more suitable in this dynamic situation.
+\paragraph{Performance} At certain intervals, the data merger would take a snapshot of the entire system in order to execute a cluster algorithm on it (grouping publications in physical author clusters). This is a very intensive process. As we deal with a very dynamic environment, it is preferable that this algorithm would be run timely to keep the output up to date. The drawback with this approach is that "snapshot"-clustering is a very time consuming operation every time it is executed. If we had an incremental clustering algorithm that modifies the clusters when new information is found, it would only be intensive the first time. Afterwards it would just have to make a small modification to the clusters. This kind of approach would be more suitable in this dynamic situation.
 
-\paragraph{The right tool for the job} In the first framework, we chose MySql as our database technology. We used it because it is familiar and widely supported. In practice, the complex queries that needed to be made were very impractical and slow due to the many joins. It occured to us that a graph database would be a better tool for the job. In \cite{vicknair2010comparison}, we find a comparison between Mysql and Neo4j, a leading graph database technology. When querying with a large depth, Neo4j is the clear winner.
+\paragraph{The right tool for the job} In the first framework, we chose MySql as our database technology. We used it because it is familiar and widely supported. In practice, the complex queries that needed to be made were very impractical and slow due to the many joins. It occurred to us that a graph database would be a better tool for the job. In \cite{vicknair2010comparison}, we find a comparison between Mysql and Neo4j, a leading graph database technology. When querying with a large depth, Neo4j is the clear winner.
 
-\paragraph{Conclusion} Out of these experiences we learn that our new model and framework must meet some new requirements and avoid some pitfalls. In short, we need to improve the communication between the components of the framework, use a graph-database instead of a relational database and replace the data merger with a more dynamic solution. It would also be preferrable if the new framework was more scalable than the first version. We elaborate on this better framework in \autoref{newframework}.
+\paragraph{Conclusion} Out of these experiences we learn that our new model and framework must meet some new requirements and avoid some pitfalls. In short, we need to improve the communication between the components of the framework, use a graph-database instead of a relational database and replace the data merger with a more dynamic solution. It would also be preferable if the new framework was more scalable than the first version. We elaborate on this better framework in \autoref{newframework}.
