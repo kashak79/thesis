@@ -1,27 +1,27 @@
 
 $config = :custom
 
+if $config == :custom
   module Configuration
   
-    ALPHA = 5
+    ALPHA = 25
     AFFILIATION_WEIGHT = 50
-    AFFILIATION_THRESHOLD = 0.6
+    AFFILIATION_THRESHOLD = 0.85
     EMAIL_WEIGHT = 1000
-    KEYWORD_WEIGHT = 0
-    COAUTHOR_EQNAME_WEIGHT = 50
-    COAUTHOR_MATCHINGNAME_WEIGHT = 30
+    KEYWORD_WEIGHT = 1
+    COAUTHOR_EQNAME_WEIGHT = 10
+    COAUTHOR_MATCHINGNAME_WEIGHT = 7
     DEBUG = true
     
     COMMUNITY = true
     EMAIL = true
     AFFILIATION = true
-    KEYWORD = false
+    KEYWORD = true
     
-    CASE3_SPECIAL = ALPHA/2
+    CASE3_SPECIAL = false
     
   end
-
-if $config == :lowkey
+elsif $config == :lowkey
   module Configuration
   
     ALPHA = 25
@@ -53,7 +53,7 @@ elsif $config == :basic
     COAUTHOR_MATCHINGNAME_WEIGHT = 6
     DEBUG = true
     
-    COMMUNITY = true
+    COMMUNITY = false
     EMAIL = true
     AFFILIATION = true
     KEYWORD = false
@@ -105,7 +105,7 @@ elsif $config == :highcoaff
   module Configuration
   
     ALPHA = 25
-    AFFILIATION_WEIGHT = 25
+    AFFILIATION_WEIGHT = 50
     AFFILIATION_THRESHOLD = 0.8
     EMAIL_WEIGHT = 1000
     KEYWORD_WEIGHT = 1

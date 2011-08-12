@@ -1,6 +1,6 @@
 \chapter{Introduction}
 
-Researchers are spending more than half of their total research and development hours on the hunt for information, acccording to the US NSF (National Science Foundation). If we could limit the time necessary for the search for information, researchers would have more time to spend on their research and development, the main point of focus.
+Researchers are spending a lot of their total research and development hours searching for information. If we could speed up the process of finding the correct information, researchers would have more time to spend on their research and development, the main point of focus.
 
 Leading search engines mainly provide keyword-based results in response of a search query. This is both limited in terms of accuracy and efficiency of information comprehension. Researchers still have to bend over backwards in order to find more information about authors, their level of expertise and their connections. A new type of information service is required which focuses on this problem. It should search the desired information and connect, combine and analyze it in the greater picture of the semantic available information on the internet in order to provide as much value to the user as possible.
 
@@ -18,16 +18,18 @@ In the second component, each publication we retrieve from DBLP is saved as a un
 
 The last component is responsible for defining the area of interest of an author. In order to accomplish this, a category tree is created. Each publication is then mapped onto this tree and the combination of all the publications form a subtree which is linked an author's interests. To decide the level of expertise, the number of subject references, the number of publication citations and the level of expertise of co-authors should be combined. However, this is beyond the scope of our thesis and we have simplified this by comparing the subject of the publications extracted from the title and the abstract and the number of publications for each subject.
 
-%To tackly this problem, we split it in two main parts. The first consists of retrieving and analyzing information about authors from various online sources. This includes defining what publications map to what authors, a proces we call clustering and which is the key component of this thesis, and retrieving the subjects of each publication. 
-%
-%The proces of clustering is the main point of interest of this thesis. Linking publications to authors is a lot harder than just comparing names. Authors may have the exact same name, names can be misspelled and names can be shortened or altered. In \autoref{} we define a set of rules combining attributes of authors and relationships between them. In \autoref{} we test combinations of these rules to find the best outcome.
-%
 \section{Chapter outline}
 
-The first chapter is this introduction and describes the objective of our thesis and how we want to accomplish this.
+In \autoref{sota}, we start with a summary of existing technologies and techniques that we researched. Afterwards, we describe the different thesis topics we examined and how we could extend existing research. 
 
-In \autoref{sota}, we start with a summary of existing technologies and techniques that we researched. Afterwards, we describe the different thesis topics we examined. For each topic, we discuss the existing research and 
+\autoref{framework} contains a naive attempt to create the framework. Although the features are accurately construed, the proposed subdivisions and internal operations would never suffice for a real application. In \autoref{foundation}, we explain its shortcomings and clarify the five foundational acknowledgements.
 
-% TODO bespreek onze werkmethode op een zodanige manier dat een 'expert' (bv. medestudent) door de beschrijving verstaat waarom we deze bepaalde aanpak gekozen hebben
+Based on the foundations, a theoretical model is unveiled in \autoref{theoreticalmodel}. It is based on a three-layer structure and the four rules that calculate the similarities are also handled in this chapter.
 
-% TODO bespreek hoe de hoofdstukken in elkaar zitten (overzicht)
+The implementation details of the theoretical model can be found in \autoref{newframework}. The technologies we used to construct this implementation and the drafted pipes and filers are explained here.
+
+\autoref{clustering} contains an in-depth explanation of the clustering process, a key component of our framework, responsible for creating and reordering the collections of authors based on the similarities.
+
+In \autoref{results}, we present our evaluation setup and obtained results.
+
+\autoref{conclusion} contains the conclusion of our master's thesis and proposes future improvements.

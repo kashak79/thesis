@@ -57,6 +57,10 @@ K.~Toutanova, D.~Klein, C.D. Manning, and Y.~Singer.
   Technology-Volume 1}, pages 173--180. Association for Computational
   Linguistics, 2003.
 
+\bibitem{postagger}
+K.~Toutanova.
+\newblock \url{http://nlp.stanford.edu/software/tagger.shtml}.
+
 \bibitem{wright2009mining}
 A.~Wright.
 \newblock Mining the web for feelings, not facts.
@@ -146,15 +150,30 @@ H.~Jung, M.~Lee, I.S. Kang, S.W. Lee, and W.K. Sung.
 \newblock In {\em 2nd International ExpertFinder Workshop at ISWC}. Citeseer,
   2007.
 
+\bibitem{ontoframe}
+J.~Hanmin and Y.~Yeong.
+\newblock \url{http://ontoframe.kr/2008/2008_new/main.jsp}.
+
 \bibitem{rodrigues2011mpi}
 Luiz~Antonio Rodrigues.
 \newblock A mpi implementation of gusfield’s algorithm to generate cut trees.
 \newblock 2011.
+
+\bibitem{vicknair2010comparison}
+C.~Vicknair, M.~Macias, Z.~Zhao, X.~Nan, Y.~Chen, and D.~Wilkins.
+\newblock A comparison of a graph database and a relational database: a data
+  provenance perspective.
+\newblock In {\em Proceedings of the 48th Annual Southeast Regional
+  Conference}, page~42. ACM, 2010.
 
 \bibitem{han2004two}
 H.~Han, L.~Giles, H.~Zha, C.~Li, and K.~Tsioutsiouliklis.
 \newblock Two supervised learning approaches for name disambiguation in author
   citations.
 \newblock 2004.
+
+\bibitem{bing}
+"bing beta".
+\newblock \url{http://bing.com}.
 
 \end{thebibliography}

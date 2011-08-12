@@ -6,4 +6,8 @@ H.~Han, L.~Giles, H.~Zha, C.~Li, and K.~Tsioutsiouliklis.
   citations.
 \newblock 2004.
 
+\bibitem{bing}
+"bing beta".
+\newblock \url{http://bing.com}.
+
 \end{thebibliography}

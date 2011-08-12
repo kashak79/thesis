@@ -5,7 +5,7 @@ In the first framework, many properties of our environment were not taken into a
 \section{Foundation Acknowledgements}
 \label{foundation}
 
-Below, we list the five foundation acknowledgement that drive the development of a theoretical model.
+Below, we list the five foundation acknowledgements that drive the development of a theoretical model.
 
 \begin{foundation}
 \label{foundation:different}
@@ -46,7 +46,7 @@ Last but not least, do not forget that the stream is almost endless. Information
 
 Now we can check if the measures taken in the first framework suffice to cope with the challenges posed in the foundation acknowledgements. Different aspects of the framework will be treated seperately to determine to what degree they meet the requirements.
 
-\paragraph{The flow of data} A logical flow of data in a system with this much data to process is of primary importance. In the framework, several components do not comunicate directly with each other. All communication is "relayed" through the database. This puts enormous unnecessary load on our database. When we would scale the framework out to several servers, all communication would still pass the database nodes (over the network).
+\paragraph{The flow of data} A logical flow of data in a system with this much data to process is of primary importance. In the framework, several components do not comunicate directly with each other. All communication is "relayed" through the database. This puts an enormous and unnecessary load on our database. When we would scale the framework out to several servers, all communication would still pass the database nodes (over the network).
 
 \paragraph{Scalability} We have more than one concern about the scalability of the first framework. First, the more instances in the cluster, the more queries to the database to retreive the information about a task. Secondly, the data merger would put an enormous load on the database from time to time (see next paragraph). Thirdly, a task dependency control component would also relay all its control messages through the database, increasing load in this point.
 

@@ -1,3 +1,53 @@
-\chapter{Conclusion and future work}
+\chapter{Conclusion and Future Work}
 
 %Our system only provides a snapshot of the expertise on a given time, it should be better if we could provide an overview in time.
+
+\section{Conclusion}
+
+In this master's thesis we examined the opportunities using the semantic web and data processing. We found out that the possibilities within expert finding and author disambiguation are challenging and can contribute in solving a real-life problem. At the end of this informative investigation, the objective became clear: creating a framework that is able to disambiguate authors and allows users to find experts for a certain subject.
+
+% Wat is juist zo naief aan de eerste aanpak en waarop is deze precies gebaseerd, in 1 zin
+
+We started with a naive approach for the framework. We focused on what we knew and were comfortable with rather than the problem we had to solve. It lacked both in performance and scalability, while the usage of a relational database would render it unrealizable. Profound inspection of this first version of the framework, however, learned us that in order to create a good one, it would have to amplify the following five foundations:
+
+\begin{enumerate}
+	\item All instances are considered different authors until proven otherwise.
+	\item No decision is made permanent.
+	\item Any information is considered partial information.
+	\item A constantly changing input asks for a constantly changing output.
+	\item The stream of informaton is endless.
+\end{enumerate}
+
+% Iets over graaf en regels
+
+With these foundations in mind, we first created a theoretical model. This model consists of three layers that integrate structural, informational and algorithmic aspects. It deals with the main difficulties of author disambiguation, while minimizing the problem domain and we explained how to process the (partial) information in order for similarities to be found. 
+
+Rules drive the entire flow in our framework by converting novel facts into similarities that group instances with authors through clustering. The four rules we defined for our framework are:
+
+\begin{enumerate}
+	\item \textit{Community Rule} Exploiting the fact that authors often work together with the same co-author.
+	\item \textit{Interest Rule} The subjects of publications of the same author are usually located within the same field of research.
+	\item \textit{Email Rule} Authors with the same email address, are most likely the same person.
+	\item \textit{Affiliation Rule} Authors are more likely to work at one affiliation at a given time.
+\end{enumerate}
+
+We implemented this theoretical model with pipes and filters using Ruby, Java, a key-value store Redis, Resque for scaling and the Tinkerpop stack for the graph representation. The usage of pipes and filters allows for modifiability. New pipes can easily be plugged into the flow which enables the convenient addition of extra information sources or new rules while the performance and scalability remain intact.
+
+Clustering is the process that is responsible for grouping of authors based on the calculated similarities, a key component of our framework. We implemented the dynamic clustering algorithm proposed in \cite{saha2006dynamic} which is based on minimum-cut trees. The quality of the clusters is guaranteed to be the same as its static counterpart, while it is a lot faster as it considers much smaller subgraphs. We added an extra case to the proposed algorithm, exploiting the fact that our framework often has a succession of small similarities connecting the same clusters. This extra case permits the most resource-intensive case to be postponed and executed less frequently.
+
+% Expert finding ?
+
+% TODO precieze resultaat waarden invullen, gemiddelde waarde en vergelijking met dblp
+
+We tested the framework thoroughly using a manually annotated testset of just over 1000 publications. We showed the impact of each of the rules on the accuracy, clarifying that the combination of all four of them render the best results, although the increased accuracy from the addition of a rule is minimal in certain cases. We also compared the accuracy of our framework with the accuracy of DBLP for the tested authors and concluded that our framework transcends DBLP.
+
+\section{Future Work}
+
+% Rekening houden met negatieve gewichten
+% Absolute vaststellingen kunnen maken : deze 2 auteurs zijn ZEKER verschillend en moeten altijd zo blijven
+% Opstellen van categorie boom om betere keyword results te krijgen
+% Grotere gewichten toekennen voor woorden die meer subject specifiek zijn
+% Scalability fixen :o
+% Meer bronnen opnemen
+% Category bepaling niet enkel op basis van titel, maar ook abstract of zelfs volledige tekst => plugins schrijven voor verschillende paper aanbied sites (zijn er slechts een paar)
+% 
