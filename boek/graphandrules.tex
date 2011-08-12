@@ -9,6 +9,7 @@ The information we collect comprises entities and relations between them. We wan
 The model we built exists of three layers, each with their responsibilities. Each of these layers is explained in detail below.
 
 \section{Three Layer Model: Structural Layer}
+\label{structural layer}
 
 A lot of data will be streaming into our system at a constant pace. We need to structure our model in a way that it permits us reaching our goals efficiently. The first part of this section introduces a structuring that allows us to disambiguate. The second part mainly concentrates on reducing the size of the problem domain with as few compromises as possible.
 
@@ -48,7 +49,7 @@ Our goal is to try and link these chunks of information and thereby making a com
 As stated before, our goal is to link different instances of an author. Therefore the properties of those instances have to be compared. In the case of the discovery of a new instance, it is infeasible to compare it with all the instances that were already found before. That would make the problem more and more complex over time. This forces us to narrow down the problem space. For a certain instance $I_i$, we want to minimize the compared instances which do not represent the same author as this instance ("real" instances), while still trying to compare all instances that are real ones. This is formulated in equation \autoref{eq:problemspace}.
 
 \begin{equation}
-\min |I^\text{compared}_i\backslash I^\text{real}_i|,\ s.t.\ I^\text{real}_i \subseteq I^\text{compared}_i \subseteq I
+\min |I^{compared}_i\backslash I^{real}_i|,\ s.t.\ I^{real}_i \subseteq I^{compared}_i \subseteq I
 \label{eq:problemspace}
 \end{equation}
 
@@ -99,12 +100,14 @@ We have addressed all the main issues that ascended during the design of a struc
 \end{figure}
 
 \section{Three Layer Model: Information Layer}
+\label{informationallayer}
 
 The second layer in the three layer model comprises the data itself. We defined that an instance is a collection of (partial) information that describes an author. The task of this layer is to structure that partial information. In the model this is simply done by coupling the information with the instance node, as already shown in previous illustrations.
 
 In theory, there is no limit on the amount of data. Every addition of an aspect of the life of an author (publications, locations, events) can be used to produce similarities increasing the precision of the framework. This flow should constantly be improved. First search for more information, then make new rules (\autoref{rules}).
 
 \section{Three Layer Model: Similarity Layer}
+\label{similaritylayer}
 
 As we have stated several times, the goal is to link instances together to form an author (cluster). Until now, linking was just an action of an algorithm. If an algorithm decides that two instances represent the same author, the algorithm links them together (by actually changing the "instance of" edges in the graph). But what about the links itself? Should these links also represent a "physical" concept in our model? This is a question answered by the similarity layer.
 

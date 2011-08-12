@@ -65,6 +65,7 @@
 \contentsline {subsection}{\numberline {5.5.3}Email Rule}{32}{subsection.5.5.3}
 \contentsline {subsection}{\numberline {5.5.4}Affiliation Rule}{32}{subsection.5.5.4}
 \contentsline {section}{\numberline {5.6}Conclusion}{33}{section.5.6}
+<<<<<<< HEAD:boek/boek.toc
 \contentsline {chapter}{\numberline {6}Clustering algorithm}{36}{chapter.6}
 \contentsline {section}{\numberline {6.1}Minimum-cut tree algorithm}{36}{section.6.1}
 \contentsline {section}{\numberline {6.2}Cut clustering}{38}{section.6.2}
@@ -84,3 +85,42 @@
 \contentsline {chapter}{\numberline {8}Conclusion and future work}{49}{chapter.8}
 \contentsline {chapter}{\numberline {A}Dataset}{50}{appendix.A}
 \contentsline {chapter}{\numberline {B}DVD Content}{54}{appendix.B}
+=======
+\contentsline {chapter}{\numberline {6}Framework: Pipes and Filters}{36}{chapter.6}
+\contentsline {section}{\numberline {6.1}Small and Simple Core}{36}{section.6.1}
+\contentsline {subsection}{\numberline {6.1.1}Architecture}{37}{subsection.6.1.1}
+\contentsline {subsection}{\numberline {6.1.2}Concepts, Terminology and Notations}{37}{subsection.6.1.2}
+\contentsline {paragraph}{Flows and Aspects}{37}{section*.34}
+\contentsline {paragraph}{Flow enrichment and filtering}{38}{section*.35}
+\contentsline {paragraph}{Flow Rate}{38}{section*.36}
+\contentsline {subsection}{\numberline {6.1.3}Core Extensions}{39}{subsection.6.1.3}
+\contentsline {paragraph}{Local Connection}{39}{section*.37}
+\contentsline {paragraph}{Asynchronous Connection}{39}{section*.38}
+\contentsline {paragraph}{Stateful Pipe}{39}{section*.39}
+\contentsline {section}{\numberline {6.2}Implementation details and Technologies}{39}{section.6.2}
+\contentsline {section}{\numberline {6.3}Some useful pipes}{39}{section.6.3}
+\contentsline {paragraph}{Filter}{39}{section*.40}
+\contentsline {paragraph}{Merge and Split}{40}{section*.41}
+\contentsline {paragraph}{Network}{40}{section*.42}
+\contentsline {paragraph}{Persist Discovery}{40}{section*.43}
+\contentsline {paragraph}{Persist Fact}{40}{section*.44}
+\contentsline {subsection}{\numberline {6.3.1}Extending to fit our needs}{40}{subsection.6.3.1}
+\contentsline {paragraph}{Parsers}{40}{section*.45}
+\contentsline {paragraph}{Locking}{40}{section*.46}
+\contentsline {section}{\numberline {6.4}Practical applications}{41}{section.6.4}
+\contentsline {subsection}{\numberline {6.4.1}Dependency Resolution}{41}{subsection.6.4.1}
+\contentsline {subsection}{\numberline {6.4.2}Concurrent, incremental Clustering}{41}{subsection.6.4.2}
+\contentsline {paragraph}{In-graph implementation}{41}{section*.47}
+\contentsline {paragraph}{As a stateful pipe}{41}{figure.6.5}
+\contentsline {subsection}{\numberline {6.4.3}Assignment of e-mail addresses}{41}{subsection.6.4.3}
+\contentsline {chapter}{\numberline {7}Clustering algorithm}{43}{chapter.7}
+\contentsline {section}{\numberline {7.1}Minimum-cut tree algorithm}{43}{section.7.1}
+\contentsline {section}{\numberline {7.2}Cut clustering}{45}{section.7.2}
+\contentsline {subsection}{\numberline {7.2.1}Intra-cluster edge addition}{46}{subsection.7.2.1}
+\contentsline {subsection}{\numberline {7.2.2}Inter-cluster edge addition}{47}{subsection.7.2.2}
+\contentsline {paragraph}{Merging of clusters}{47}{section*.49}
+\contentsline {paragraph}{Contraction of clusters}{47}{section*.50}
+\contentsline {chapter}{\numberline {8}Framework evaluation and results}{51}{chapter.8}
+\contentsline {section}{\numberline {8.1}Evaluation setup}{51}{section.8.1}
+\contentsline {chapter}{\numberline {9}Conclusion and future work}{53}{chapter.9}
+>>>>>>> 07aa9ad33ad1682fb9b5bb1119c3a17854680cc1:boek/boek.toc

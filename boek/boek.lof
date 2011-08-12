@@ -20,6 +20,12 @@
 \contentsline {figure}{\numberline {5.11}{\ignorespaces Email Rule.}}{34}{figure.5.11}
 \contentsline {figure}{\numberline {5.12}{\ignorespaces Affiliation Rule.}}{35}{figure.5.12}
 \addvspace {10\p@ }
+\contentsline {figure}{\numberline {6.1}{\ignorespaces Pipes and Filters based Architecture.}}{37}{figure.6.1}
+\contentsline {figure}{\numberline {6.2}{\ignorespaces Pipe components, terminology and notations.}}{38}{figure.6.2}
+\contentsline {figure}{\numberline {6.3}{\ignorespaces Filter pipe.}}{39}{figure.6.3}
+\contentsline {figure}{\numberline {6.4}{\ignorespaces Merge and Split pipes.}}{40}{figure.6.4}
+\contentsline {figure}{\numberline {6.5}{\ignorespaces Clustering flow}}{42}{figure.6.5}
+\addvspace {10\p@ }
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {7.1}{\ignorespaces A simplified overview of the testsetup starting with the author name and ending with the accuracy results.}}{47}{figure.7.1}
 \addvspace {10\p@ }
