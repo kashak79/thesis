@@ -61,7 +61,7 @@ A more complex connection is the asynchronous connection. It allows us to run an
 
 \paragraph{Stateful Pipes}
 
-For some pipes, it is required to have a non-transient memory, a memory that survives between executions. This allows the pipe to process input differently based on what is present in its long-time memory. As Pipes can be run in a distributed fashion, it is possible for a pipe to be initialized on another physical machine for every execution. If the memory would be local, bound to a machine, the pipe would lose access to it if it was executed on another machine. To solve this, we use a distributed shared memory store (\autoref{redis}).
+For some pipes, it is required to have a non-transient memory, a memory that survives between executions. This allows the pipe to process input differently based on what is present in its long-time memory. As Pipes can be run in a distributed fashion, it is possible for a pipe to be initialized on another physical machine for every execution. If the memory would be local, bound to a machine, the pipe would lose access to it if it was executed on another machine. To solve this, we use the distributed shared memory store (\autoref{redis}).
 
 \subsection{Implementation details and Technologies}
 
@@ -81,7 +81,7 @@ Pipes can either be written in Ruby or Java. We have used Ruby for almost all of
 
 We chose Redis to serve as our distributed key-value store. It provides the functionality we need and has a great client for Ruby. It is also used by Resque (explained in the next paragraph), so choosing this as our distributed store prevents us from having to install two different solutions.
 
-Redis also has a much larger set of commands than just the get and set primitives. It has built-in atomic actions for almost anything. It can also act as a tool to provide synchronization. This is necessary as we plan to run our pipe configuration over multiple machines. It allows us to use bots pessimistic and optimistic locking.
+Redis also has a much broader set of commands than just the get and set primitives. It has built-in atomic actions for almost anything. It can also act as a tool to provide synchronization. This is necessary as we plan to run our pipe configuration over multiple machines. It allows us to use both pessimistic and optimistic locking.
 
 \paragraph{A Distributed Job Processing Framework: Resque}
 \label{resque}
@@ -90,9 +90,9 @@ Resque is a Redis-backed library for creating background jobs, placing those job
 
 \section{Generally Useful Pipes}
 
-With these small and simple Pipes and Filters core we built some useful pipes along the way. Clearly the filter pipe is important to have in a Pipes and Filters architecture, so we explain this one first. Merging and Splitting flows, both extensively used pipes, are mentioned second. Thirdly we introduce a pipe that allows us to do network operations. Last, we discuss two pipes more specific for our case but as they are used throughout the entire pipe system, we mention them here.
+With these small and simple Pipes and Filters core we built some useful pipes along the way. Clearly, the filter pipe is important to have in a Pipes and Filters architecture, so we explain this one first. Merging and Splitting flows, both extensively used pipes, are mentioned second. Thirdly we introduce a pipe that allows us to do network operations. Last, we discuss two pipes more specific to our case but as they are used throughout the entire pipe system, we mention them here.
 
-\paragraph{Filter} \label{par:filterpipe} The Filter pipe allows us to filter flow in two ways, as you can also see on \autoref{fig:filter}. First, it is possible to test a condition for each arriving flow. Depending on this condition, the flow is forwarded to either the connector with identifier "true" or identifier "false". On top of that we are able to filter aspects of the flow itself. This Filter pipe gives us the possibility to control the flow in our pipe configuration. The flows should be small and contain only aspects that are necessary.
+\paragraph{Filter} \label{par:filterpipe} The Filter pipe allows us to filter flows in two ways, as you can also see on \autoref{fig:filter}. First, it is possible to test a condition for each arriving flow. The flow is forwarded to either the connector with identifier "true" or identifier "false", depending on the outcome of the condition. On top of that we are able to filter aspects of the flow itself. This Filter pipe gives us the possibility to control the flow in our pipe configuration. The flows should be small and contain only aspects that are necessary.
 
 \begin{figure}[htp]
 	\centering
@@ -114,14 +114,14 @@ With these small and simple Pipes and Filters core we built some useful pipes al
 
 \section{Working Towards a Contextual System}
 
-We now apply these general concepts and designs in the context of our thesis problem. First we agree upon a set of flow types. A flow type marks a flow and is used to distinguish flow from each other. In short, the path of a flow through a pipe configuration will depend on its type.
+We now apply these general concepts and designs in the context of our thesis problem. First we agree upon a set of flow types. A flow type marks a flow and is used to distinguish flows from each other. In short, the path of a flow through a pipe network will depend on its type.
 
-\subsection{Flow Types} We divide flow into four types. Two of these types carry crawled information from the web. The flow associated with these types are "information flows. The other two accompany "control messages". We indicate the type of flow $A$ as $A_type$.
+\subsection{Flow Types} We divide flow into four types. Two of these types carry crawled information from the web. The flows associated with these types are "information flows". The other two types denote "control messages". We indicate the type of flow $A$ as $A_type$.
 
 \begin{enumerate}
-\item \textbf{Discovery}: The discovery of a new piece of information. The source can be anything but will be probably the web or a publication document. The most important discoveries are instances and publications.
-\item \textbf{Fact}: The finding of a relation between two entities is called a fact. The most important flow with this type the one with the fact that a certain instance published a publication (published fact).
-\item \textbf{Similarity} Rules (\autoref{rules}) process these two types and generate similarities. These similarities are again sent through as a flow message.
+\item \textbf{Discovery}: The discovery of a new piece of information. The source can be anything but will probably be the web or a publication document. The most important discoveries are instances and publications.
+\item \textbf{Fact}: The finding of a relation between two entities is called a fact. The most important flow with this type is the one that associates a certain instance with a publication (published fact).
+\item \textbf{Similarity} Rules (\autoref{rules}) process these two types and generate similarities. These similarities are again treated as flow messages.
 \item \textbf{Cluster} Similarity messages are intended for clustering pipes, these pipes interpret the similarities and make the appropriate changes in the author clusters.
 \end{enumerate}
 
@@ -129,9 +129,9 @@ After establishing these four main message types, we created another two general
 
 \subsection{A Graph Database: Neo4j in Combination With the Tinkerpop Stack}
 
-As already showed, Neo4j performs much better when it comes to querying with a large depth. This is the same as doing joins in MySQL which is slow. That is why we chose Neo4j to serve as our database. On top of Neo4j we use the Tinkerpop stack. This stack creates an abstract layer above several graph databases. It uses a general property graph model to persist and query data in the graph.
+As already shown, Neo4j performs much better when it comes to querying with a large depth. This is the same as doing joins in MySQL, which is slow. That is why we chose Neo4j to serve as our database. On top of Neo4j we use the Tinkerpop stack. This stack creates an abstract layer on top of several graph databases. It uses a general property graph model to persist and query data in the graph.
 
-We do not use SPARQL to issue our queries. We use Gremlin, part of the Tinkerpop stack. Gremlin also allows us to do pattern matching on the graph but provides us with much more flexibility in terms of controlling what is done while Gremlin traverses the graph.
+We do not use SPARQL to issue our queries. We use Gremlin, part of the Tinkerpop stack. Gremlin also allows us to do pattern matching on the graph but provides us with much more flexibility in terms of controlling what is collected while Gremlin traverses the graph.
 
 Communicating with Tinkerpop is done through a HTTP interface, causing a lot of I/O waiting, but as we distribute our work to different workers, the impact of this waiting decreases.
 
@@ -141,13 +141,13 @@ In this section we will give an overview of the entire pipe configuration of our
 
 \subsection{Parsers}
 
-Retrieving information from external sources is a task of the parsers. We currently only use DBLP as an external source. Each of the author pages we want to process is fed to the parser. The outflow exists out of publication discoveries, instances discoveries and "published"-facts. We achieve this by first creating a pipe that searches the contents of the author page for links to XML representations of each of the publications. Each of this links then flows through a Network pipe, again collecting its contents. The according XML representation is then parsed and the extracted flows are pushed.
+Retrieving information from external sources is a task of the parsers. We currently only use DBLP as an external source. Each of the author pages we want to process is fed to the parser. The outflow exists of publication discoveries, instance discoveries and "published"-facts. We achieve this by first creating a pipe that searches the contents of the author page for links to XML representations of each of the publications. Each of this links then flows through a Network pipe, again collecting its contents. The according XML representation is then parsed and the extracted flows are pushed.
 
 \subsection{Instance Integration}
 
 When a new instance is discovered, it has to be integrated in the graph. Later on, information can be attached to this instance to feed the rules. The different steps of this integration have been explained in \autoref{structurallayer}. An overview of the pipe configuration is found in \autoref{fig:integrationpipe}.
 
-First, the incoming instance discovery is lead to the "Persist Instance" pipe. This pipe persists the instance in the graph. As every new instance is assigned its very own author (cluster), the cluster is also persisted and the appropriate edges are added. The subsequent two pipes on the path deal with the persisting the family and the name nodes. If a name is already present in the system, the integration of the instance has finished. Otherwise, we must execute a name matching algorithm. This algorithm is explained in the next paragraph.
+First, the incoming instance discovery is lead to the "Persist Instance" pipe. This pipe persists the instance in the graph. As every new instance is assigned its very own author (cluster), the cluster is also persisted and the appropriate edges are added. The subsequent two pipes on the path deal with persisting the family and the name nodes. If a name is already present in the system, the integration of the instance has finished. Otherwise, we must execute a name matching algorithm. This algorithm is explained in the next paragraph.
 
 \begin{figure}[htb]
 	\centering
@@ -156,10 +156,10 @@ First, the incoming instance discovery is lead to the "Persist Instance" pipe. T
 	\label{fig:integrationpipe}
 \end{figure}
 
-\paragraph{Name Matching} Name Matching is the process of matching the name of a family with the names already present in the family. The goal is to reduce the problem domain size (\autoref{problemdomain}). When a new name is added, we query all the names in the family and compare them to the name that is being added. We do this using a fuzzy string matching algorithm based on Dynamic Time Warping. Taking properties of names into account lead to some modifications of the algorithm, making it especially suitable for name matching.
+\paragraph{Name Matching} Name Matching is the process of matching a name of a family with the names already present in this family. The goal is to reduce the problem domain size (\autoref{problemdomain}). When a new name is added, we query all the names in the family and compare them to the name that is being added. We do this using a fuzzy string matching algorithm based on Dynamic Time Warping. Taking properties of names into account lead to some modifications of the algorithm, making it especially suitable for name matching.
 
 \begin{enumerate}
-\item We use a token based approach (tokens between whitespace). The tokens themselves are compared using the Jaro Winkler fuzzy string matching algorithm.
+\item We use a token based approach (tokens between whitespace). The tokens themselves are compared using the Jaro-Winkler fuzzy string matching algorithm.
 \item The algorithm is always started from the viewpoint of the name with the least amount of tokens. An insertion has a cost of zero and a deletion is heavily penalized.
 \item In case of a short token (one symbol or one symbol followed by a dot), we do not use a fuzzy approach. If the first letter matches with the first letter of the token it is being compared with, we assign a minimum cost, otherwise we assign a maximum cost.
 \end{enumerate}
@@ -168,7 +168,7 @@ First, the incoming instance discovery is lead to the "Persist Instance" pipe. T
 
 As we also make use of email and affiliation rules, we needed to find a way to collect this data. We first attempted to retrieve publication documents via Microsoft Bing. Google scholar is not usable due to its security against programmatic access. The number of publications found by Bing was not enough to feed the rules. Although we created a pipe that can extract email addresses out of PDF documents and assign them to the correct author, we did not use it. We did this partly because information retrieval is not our main focus and not the real challenge. It is definitely possible to collect all this data with more effort. However, we thought it was more important to research the power of this information in the context of disambiguation.
 
-To still be able to use the data, we manually collected email addresses and affiliations out of the publications of the authors in our test set. As this information makes a magical appearance in our system, we called the pipe that provides it "Magic Facts". Magic Facts takes a published fact, giving us the publication and instance aspects, as its input and enriches it with the email and affiliation of the instance for that publication. The pipe is illustrated in \autoref{fig:magicfacts}.
+To still be able to use the data, we manually collected email addresses and affiliations of the authors out of the publications in our test set. As this information makes a magical appearance in our system, we called the pipe that provides it "Magic Facts". Magic Facts takes a published fact, giving us the publication and instance aspects, as its input and enriches it with the email and affiliation of the instance for that publication. The pipe is illustrated in \autoref{fig:magicfacts}.
 
 \begin{figure}[htb]
 	\centering
@@ -196,7 +196,7 @@ Rules are the essence of the framework, it is what fulfills the goal of this fra
 
 Most of the queries for these rules are not that difficult to implement with the help of Gremlin. However, the community rule variants require more complex queries. We explain the variant where we deal with an exact name match on the one side and a similar name on the other side. 
 
-We start in the instance V. We need to query all instances that share a name with V. This is done by following "name" to the name node and following it back out so all instances with this name are reached (except node V). The names found here are labeled W. To find the co-instances of each of these nodes we follow the edges labeled "published". These instances are labeled Y. Now, we again follow the "name" labeled edges but this time we follow "matches" in between to get all names that are similar with the names of Y. The instances of these names are labeled X. X is now an large collection of names, but most of them do not satisfy the last condition: Any instance in X must be a co-instance of V. We require this by adding a retain pipe. The id's of the four sets of instances (V,W,Y,X) are returned in a table. Now we can add the appropriate similarities between the instances. The implementation of this query is shown below.
+We start in the instance V. We need to query all instances that share a name with V. This is done by following "name" to the name node and following it back out so all instances with this name are reached (except node V). The names found here are labeled W. To find the co-instances of each of these nodes we follow the edges labeled "published". These instances are labeled Y. Now, we again follow the "name" labeled edges but this time we follow "matches" in between to get all names that are similar with the names of Y. The instances of these names are labeled X. X is now a large collection of names, but most of them do not satisfy the last condition: Any instance in X must be a co-instance of V. We require this by adding a retain pipe. The id's of the four sets of instances (V,W,Y,X) are returned in a table. Now we can add the appropriate similarities between the instances. The implementation of this query is shown below.
 
 \begin{verbatim}
 v.as("V")
@@ -208,7 +208,7 @@ v.as("V")
   .table(:id,:id,:id,:id)
 \end{verbatim}
 
-All similarities produces by these rules are merged into one stream which is fed to the clustering pipe. This is illustrated in \autoref{fig:clusteringpipe}. An overview of the pipe configuration of the several rules is shown in \autoref{fig:rulespipe}.
+All similarities produced by these rules are merged into one stream which is fed to the clustering pipe. This is illustrated in \autoref{fig:clusteringpipe}. An overview of the pipe configuration of the several rules is shown in \autoref{fig:rulespipe}.
 
 \begin{figure}[htb]
 	\centering
@@ -234,7 +234,7 @@ It is obvious that processing similarities is something that will be executed ve
 
 \begin{enumerate}
 \item A lot of load would be pushed to the database.
-\item There would be a need for several concurrency control mechanisms/
+\item There would be a need for several concurrency control mechanisms.
 \end{enumerate}
 
 If clustering could be executed without the use of the database in an efficient manner, it would be preferable. After all it is in our best interest to take as much load as possible away from the database because it is much more difficult to scale than our pipes and filters architecture. Besides, the similarity plane is not something that should be queried from our end-user application. The users are interested in the result of the clustering, not the way we got there.
@@ -243,9 +243,9 @@ If clustering could be executed without the use of the database in an efficient 
 
 Currently, the clustering algorithm is implemented as a stateful pipe. This means that all values of the adjacency matrix, the OCW's and ICW's  are maintained in our distributed key-value store. The id's of both involved clusters are provided and the graph is not needed anymore. This way, clustering is just a pipe like any other and therefore completely distributable.
 
-In the case of similarities being processed in parallel, we need to pay some extra attention. We do not want that the clustering mechanism inflicts race conditions and, by consequence, inconsistencies on the graph. In case of an intra-cluster similarity being added, we actually do not need locks as we can make use of a technique call optimistic locking. This technique assumes that multiple transactions can complete without affecting each other, and that therefore transactions can proceed without locking the data resources that they affect. Before committing, each transaction verifies that no other transaction has modified its data. Intra-cluster similarities can always be processed in parallel for any two instances. Inter-cluster similarities on the other hand require that no changes are made to the entire cluster.
+In the case of similarities being processed in parallel, we need to pay some extra attention. We do not want that the clustering mechanism inflicts race conditions and, by consequence, inconsistencies on the graph. In case of an intra-cluster similarity being added, we actually do not need locks as we can make use of a technique called optimistic locking. This technique assumes that multiple transactions can complete without affecting each other, and that therefore transactions can proceed without locking the data resources that they affect. Before committing, each transaction verifies that no other transaction has modified its data. Intra-cluster similarities can always be processed in parallel for any two instances. Inter-cluster similarities on the other hand require that no changes are made to the entire cluster.
 
-In case of an intra-cluster addition, we could watch the locks of both involved instances for modifications. If they are not set and do not change during the processing of the similarity, the transaction (intra\_add) succeeds. If the locks were modified the transaction will fail and we will retry to process the similarities. In case of an inter-cluster addition, the entire two clusters will be locked. This flow is shown in Algorithm \autoref{locking}. The cluster method locks all the instances of the clusters  of the provided instances in one transaction.
+In case of an intra-cluster addition, we could watch the locks of both involved instances for modifications. If they are not set and do not change during the processing of the similarity, the transaction (intra\_add) succeeds. If the locks were modified the transaction will fail and we will retry to process the similarities. In case of an inter-cluster addition, the entire two clusters will be locked. This flow is shown in Algorithm \autoref{locking}. The cluster method locks all the instances of the clusters of the provided instances in one transaction.
 
 \begin{algorithm}
 \caption{Locking mechanism to control concurrent similarity processing.}
@@ -269,11 +269,11 @@ In case of an intra-cluster addition, we could watch the locks of both involved 
 \subsection{Dependency Resolution}
 \label{dependencies}
 
-Another difficulty turning up in our framework is the dependency of certain flow onto others. In this case, a flow can not be executed until its dependencies are resolved. An example is the published fact: we are not able to process this until the associated instance is integrated in the graph. To solve this we designed a stateful pipe that manages these dependencies. A dependent flow then waits in this pipe until all its dependencies are resolved.
+Another difficulty turning up in our framework is the dependency of certain flows onto others. In this case, a flow can not be executed until its dependencies are resolved. An example is the published fact: we are not able to process it until the associated instance is integrated in the graph. To solve this we designed a stateful pipe that manages these dependencies. A dependent flow then waits in this pipe until all its dependencies are resolved.
 
 \subsection{Overview}
 
-The previous sections each described a component of our pipe network. All of this components and pipes need to word together. How this is done is illustrated in \autoref{completepipesmall}. We added a Message Distribution pipe with the responsibility of forwarding the messages with the right types to right pipes.
+The previous sections each described a component of our pipe network. All of these components and pipes need to work together. How this is done is illustrated in \autoref{completepipesmall}. We added a Message Distribution pipe with the responsibility of forwarding the messages with the right types to right pipes.
 
 \begin{figure}[htb]
 	\centering
