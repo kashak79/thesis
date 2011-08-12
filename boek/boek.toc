@@ -28,7 +28,7 @@
 \contentsline {subsection}{\numberline {3.3.4}Category Builder}{15}{subsection.3.3.4}
 \contentsline {subsection}{\numberline {3.3.5}Disambiguator}{15}{subsection.3.3.5}
 \contentsline {subsection}{\numberline {3.3.6}Data Merger}{16}{subsection.3.3.6}
-\contentsline {chapter}{\numberline {4}New Foundation}{17}{chapter.4}
+\contentsline {chapter}{\numberline {4}Problem Insights and Foundation}{17}{chapter.4}
 \contentsline {section}{\numberline {4.1}Foundation Acknowledgements}{17}{section.4.1}
 \contentsline {section}{\numberline {4.2}Why the first approach needed a complete overhaul}{18}{section.4.2}
 \contentsline {paragraph}{The flow of data}{18}{section*.14}
@@ -71,35 +71,46 @@
 \contentsline {subsection}{\numberline {6.1.1}Architecture}{37}{subsection.6.1.1}
 \contentsline {subsection}{\numberline {6.1.2}Concepts, Terminology and Notations}{37}{subsection.6.1.2}
 \contentsline {paragraph}{Flows and Aspects}{37}{section*.34}
-\contentsline {paragraph}{Flow enrichment and filtering}{38}{section*.35}
-\contentsline {paragraph}{Flow Rate}{38}{section*.36}
+\contentsline {paragraph}{Connector Identifiers}{38}{section*.35}
+\contentsline {paragraph}{Flow enrichment and filtering}{38}{section*.36}
+\contentsline {paragraph}{Flow Rate}{38}{section*.37}
 \contentsline {subsection}{\numberline {6.1.3}Core Extensions}{39}{subsection.6.1.3}
-\contentsline {paragraph}{Local Connection}{39}{section*.37}
-\contentsline {paragraph}{Asynchronous Connection}{39}{section*.38}
-\contentsline {paragraph}{Stateful Pipe}{39}{section*.39}
-\contentsline {section}{\numberline {6.2}Implementation details and Technologies}{39}{section.6.2}
-\contentsline {section}{\numberline {6.3}Some useful pipes}{39}{section.6.3}
-\contentsline {paragraph}{Filter}{39}{section*.40}
-\contentsline {paragraph}{Merge and Split}{40}{section*.41}
-\contentsline {paragraph}{Network}{40}{section*.42}
-\contentsline {paragraph}{Persist Discovery}{40}{section*.43}
-\contentsline {paragraph}{Persist Fact}{40}{section*.44}
-\contentsline {subsection}{\numberline {6.3.1}Extending to fit our needs}{40}{subsection.6.3.1}
-\contentsline {paragraph}{Parsers}{40}{section*.45}
-\contentsline {paragraph}{Locking}{40}{section*.46}
-\contentsline {section}{\numberline {6.4}Practical applications}{41}{section.6.4}
-\contentsline {subsection}{\numberline {6.4.1}Dependency Resolution}{41}{subsection.6.4.1}
-\contentsline {subsection}{\numberline {6.4.2}Concurrent, incremental Clustering}{41}{subsection.6.4.2}
-\contentsline {paragraph}{In-graph implementation}{41}{section*.47}
-\contentsline {paragraph}{As a stateful pipe}{41}{figure.6.5}
-\contentsline {subsection}{\numberline {6.4.3}Assignment of e-mail addresses}{41}{subsection.6.4.3}
-\contentsline {chapter}{\numberline {7}Clustering algorithm}{43}{chapter.7}
-\contentsline {section}{\numberline {7.1}Minimum-cut tree algorithm}{43}{section.7.1}
-\contentsline {section}{\numberline {7.2}Cut clustering}{45}{section.7.2}
-\contentsline {subsection}{\numberline {7.2.1}Intra-cluster edge addition}{46}{subsection.7.2.1}
-\contentsline {subsection}{\numberline {7.2.2}Inter-cluster edge addition}{47}{subsection.7.2.2}
-\contentsline {paragraph}{Merging of clusters}{47}{section*.49}
-\contentsline {paragraph}{Contraction of clusters}{47}{section*.50}
-\contentsline {chapter}{\numberline {8}Framework evaluation and results}{51}{chapter.8}
-\contentsline {section}{\numberline {8.1}Evaluation setup}{51}{section.8.1}
-\contentsline {chapter}{\numberline {9}Conclusion and future work}{53}{chapter.9}
+\contentsline {paragraph}{Local Connections}{39}{section*.38}
+\contentsline {paragraph}{Asynchronous Connections}{39}{section*.39}
+\contentsline {paragraph}{Stateful Pipes}{39}{section*.40}
+\contentsline {subsection}{\numberline {6.1.4}Implementation details and Technologies}{39}{subsection.6.1.4}
+\contentsline {paragraph}{The Use of Ruby and Java}{39}{section*.41}
+\contentsline {paragraph}{A Distrbuted Shared Key-Value Store: Redis}{40}{section*.42}
+\contentsline {paragraph}{A Distributed Job Processing Framework: Resque}{40}{section*.43}
+\contentsline {section}{\numberline {6.2}Generally Useful Pipes}{40}{section.6.2}
+\contentsline {paragraph}{Filter}{40}{section*.44}
+\contentsline {paragraph}{Merge and Split}{40}{section*.45}
+\contentsline {paragraph}{Network}{41}{section*.46}
+\contentsline {section}{\numberline {6.3}Working Towards a Contextual System}{41}{section.6.3}
+\contentsline {subsection}{\numberline {6.3.1}Flow Types}{41}{subsection.6.3.1}
+\contentsline {subsection}{\numberline {6.3.2}A Graph Database: Neo4j in Combination With the Tinkerpop Stack}{42}{subsection.6.3.2}
+\contentsline {section}{\numberline {6.4}Pipe Configuration}{42}{section.6.4}
+\contentsline {subsection}{\numberline {6.4.1}Parsers}{43}{subsection.6.4.1}
+\contentsline {subsection}{\numberline {6.4.2}Instance Integration}{43}{subsection.6.4.2}
+\contentsline {paragraph}{Name Matching}{43}{section*.47}
+\contentsline {subsection}{\numberline {6.4.3}Magic Facts}{44}{subsection.6.4.3}
+\contentsline {subsection}{\numberline {6.4.4}Publications}{45}{subsection.6.4.4}
+\contentsline {paragraph}{Keyword Extraction}{45}{section*.48}
+\contentsline {subsection}{\numberline {6.4.5}Rules}{45}{subsection.6.4.5}
+\contentsline {subsection}{\numberline {6.4.6}Clustering}{47}{subsection.6.4.6}
+\contentsline {subsection}{\numberline {6.4.7}Overview}{47}{subsection.6.4.7}
+\contentsline {section}{\numberline {6.5}Inside the Pipes}{47}{section.6.5}
+\contentsline {subsection}{\numberline {6.5.1}Dependency Resolution}{47}{subsection.6.5.1}
+\contentsline {subsection}{\numberline {6.5.2}Concurrent, incremental Clustering}{47}{subsection.6.5.2}
+\contentsline {paragraph}{In-graph implementation}{48}{section*.49}
+\contentsline {paragraph}{As a stateful pipe}{48}{ALC@unique.12}
+\contentsline {chapter}{\numberline {7}Clustering algorithm}{49}{chapter.7}
+\contentsline {section}{\numberline {7.1}Minimum-cut tree algorithm}{49}{section.7.1}
+\contentsline {section}{\numberline {7.2}Cut clustering}{51}{section.7.2}
+\contentsline {subsection}{\numberline {7.2.1}Intra-cluster edge addition}{52}{subsection.7.2.1}
+\contentsline {subsection}{\numberline {7.2.2}Inter-cluster edge addition}{53}{subsection.7.2.2}
+\contentsline {paragraph}{Merging of clusters}{53}{section*.51}
+\contentsline {paragraph}{Contraction of clusters}{53}{section*.52}
+\contentsline {chapter}{\numberline {8}Framework evaluation and results}{57}{chapter.8}
+\contentsline {section}{\numberline {8.1}Evaluation setup}{57}{section.8.1}
+\contentsline {chapter}{\numberline {9}Conclusion and future work}{59}{chapter.9}

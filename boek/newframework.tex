@@ -3,8 +3,6 @@
 
 In this chapter, we design a framework based on the theoretical model from previous chapter. We start by establishing a small and general core architecture and continue with how we extended and used this core to build a flexible author-disambiguation tool. Implementation details of the framework and used algorithms and technologies in this framework will be discussed as well. Throughout the design, the requirements set in the foundation \autoref{foundation} and theoretical model were taken into account. At the end of the chapter we will discuss the strengts and weaknesses of the framework.
 
-% aspect, flow, identifier, enrich, filter
-
 \section{Small and Simple Core}
 
 We opted for a small and simple core framework. It is based on Pipes and Filters with a few extension. We chose to use this design pattern for the following reasons:
@@ -69,9 +67,24 @@ For some pipes, it is required to have a non-transient memory, a memory that sur
 
 \paragraph{The Use of Ruby and Java}
 
+We implemented the entire framework in Ruby. We chose ruby because of the following reasons:
+
+\begin{enumerate}
+\item It is a concise and powerful language without many configuration which allows us to build something useful relatively fast.
+\item It has a great community, we benefit from this as we make use of several excellent software packages from the open source ruby community.
+\end{enumerate}
+
+Pipes can either be written in Ruby or Java. We have used Ruby for almost all of them, but the clustering Pipe uses Java. This is because we use a library (JUNG) to calculate the maximum flow in a graph.
+
 \paragraph{A Distrbuted Shared Key-Value Store: Redis}
 
+We chose Redis to serve as our distributed key-value store. It provides the functionality we need and has a great client for Ruby. It is also used by Resque (explained in the next paragraph), so choosing this as our distributed store prevents us from having to install two different solutions.
+
+Redis also has a much larger set of commands than just the get and set primitives. It has built-in atomic actions for almost anything. It can also act as a tool to provide synchronisation. This is necessary as we plan to run our pipe configuration over multiple machines. It allows us to use bots pessimistic and optimistic locking.
+
 \paragraph{A Distributed Job Processing Framework: Resque}
+
+Resque is a Redis-backed library for creating background jobs, placing those jobs on multiple queues, and processing them later. Resque is used at Github to process millions of jobs each day. It spawns a pool of workers that poll the queues for jobs. These jobs are then executed in seperate processes so that they can be terminated if things get out of hand (ex. memory leaks). It is very easy to set up and provides us with a Web-based user interface to inspect our jobs and workers.
 
 \section{Generally Useful Pipes}
 
@@ -95,7 +108,7 @@ With these small and simple Pipes and Filters core we built some useful pipes al
 	\label{fig:mergeandsplit}
 \end{figure}
 
-\paragraph{Network}
+\paragraph{Network} The network pipe has exactly one input and output. It expects an inflow of url's and provides an outflow of the contents of the web-pages found at these url's.
 
 \section{Working Towards a Contextual System}
 
@@ -105,28 +118,28 @@ We now apply these general concepts and designs in the context of our thesis pro
 
 \begin{enumerate}
 \item \textbf{Discovery}: The discovery of a new piece of information. The source can be anything but will be probably the web or a publication document. The most important discoveries are instances and publications.
-\item \textbf{Fact}: The finding of a relation between two entities is called a fact. The most important flow with this type the one with the fact that a certain instance published a publication.
+\item \textbf{Fact}: The finding of a relation between two entities is called a fact. The most important flow with this type the one with the fact that a certain instance published a publication (published fact).
 \item \textbf{Similarity} Rules (\autoref{rules}) process these two types and generate similarities. These similarities are again sent through as a flow message.
 \item \textbf{Cluster} Similarity messages are intended for clustering pipes, these pipes interpret the similarities and make the appropriate changes in the author clusters.
 \end{enumerate}
 
-After establishing these four main message types, we created another two generally usable pipes both further explained below.
+After establishing these four main message types, we created another two generally usable pipes. Persisting discoveries is done with the Persist Discovery pipe. It provides automatic persisting of sets, automatic indexing and avoidance of duplicate discoveries. The Persist Fact pipe takes care of the same tasks for facts.
 
-\paragraph{Persist Discovery}
+\subsection{A Graph Database: Neo4j in Combination With the Tinkerpop Stack}
 
-\paragraph{Persist Fact}
+As already showed, Neo4j performs much better when it comes to querying with a large depth. This is the same as doing joins in Mysql which is slow. That is why we chose Neo4j to serve as our database. On top of Neo4j we use the Tinkerpop stack. This stack creates an abstract layer above several graph databases. It uses a general property graph model to persist and query data in the graph.
 
-\subsection{Implementation details and Technologies}
+We do not use SPARQL to issue our queries. We use Gremlin, part of the Tinkerpop stack. Gremlin also allows us to do pattern matching on the graph but provides us with much more flexibility in terms of controlling what is done while Gremlin traverses the graph.
 
-\paragraph{A Graph Database: Neo4j in Combination With the Tinkerpop Stack}
-
-\section{Helper Modules}
-
-\subsection{Locking}
+Communicating with Tinkerpop is done through a HTTP interface, causing a lot of I/O waiting, but as we distribute our work to different workers, the impact of this waiting decreases.
 
 \section{Pipe Configuration}
 
-In this section we will give an overview of the entire pipe configuration of our program. We have devided this configuration into parts, each with their own responsibilities, difficulties and used technologies. We first discuss the parts that form the structural layer, followed by the informational layer and the similarity layer.
+In this section we will give an overview of the entire pipe configuration of our program. We have devided this configuration into parts, each with their own responsibilities, difficulties and used technologies. We first discuss the information retreival using parsers. Then we discuss the parts that form the structural layer, followed by the informational layer and the similarity layer.
+
+\subsection{Parsers}
+
+Retrieving information from external sources is a task of the parsers. We currently only use DBLP as an external source. Each of the author pages we want to process is fed to the parser. The outflow exists out of publication discoveries, instances discoveries and "published"-facts. We achieve this by first createing a pipe that searches the contents of the author page for links to XML representations of each of the publications. Each of this links then flows through a Network pipe, again collecting its contents. The according XML representation is then parsed and the extracted flows are pushed.
 
 \subsection{Instance Integration}
 
@@ -153,9 +166,18 @@ First, the incoming instance discovery is lead to the "Persist Instance" pipe. T
 
 As we also make use of email and affiliation rules, we needed to find a way to collect this data. We first attempted to retreive publication documentes via Microsoft Bing. Google scholar is not usable due to its security against programmatic access. The number of publications found by Bing was not enough to feed the rules. Although we created a pipe that can extract email addresses out of PDF documents and assign them to the correct author, we did not use it. We did this partly because information retrieval is not our main focus and not the real challenge. It is definitely possible to collect all this data with more effort. However, we thought it was more important to research the power of this information in the context of disambiguation.
 
-To still be able to use the data, we manually collected email addresses and affiliations out of the publications of the authors in our testset. As this information makes a magical appearance in our system, we called the pipe that provides it "Magic Facts".
+To still be able to use the data, we manually collected email addresses and affiliations out of the publications of the authors in our testset. As this information makes a magical appearance in our system, we called the pipe that provides it "Magic Facts". Magic Facts takes a published fact, giving us the publication and instance aspects, as its input and enriches it with the email and affiliation of the instance for that publication. The pipe is illustrated in \autoref{fig:magicfacts}.
+
+\begin{figure}[htb]
+	\centering
+		\includegraphics[width=0.75\textwidth]{fig/magicfacts}
+	\caption{Pipe Configuration for Magic Facts.}
+	\label{fig:magicfacts}
+\end{figure}
 
 \subsection{Publications}
+
+As a part of the informational layer (\autoref{informationallayer}), we need to persist publications in the graph along with extracted keywords. The configuration of this pipe is rather simple, it is shown in \autoref{fig:publicationpipe}. As you can see, we make good use of the PersistDiscovery and PersistFact pipes. The keyword extractor extracts keywords that define the domain of the publication. How we manage to extract this keywords is explained in the following paragraph.
 
 \begin{figure}[htb]
 	\centering
@@ -164,15 +186,45 @@ To still be able to use the data, we manually collected email addresses and affi
 	\label{fig:publicationpipe}
 \end{figure}
 
+\paragraph{Keyword Extraction} To extract the keywords out of the title of a publication we use a Part of Speech Tagger. This tagger is able to identify the types of the words present in the title. Using Engtagger, a simple PoS tagger for Ruby, we extract nouns and noun phrases. The more nouns in a noun phrase, the more specific this noun phrase is. This poperty is being exploited in the email rule (\autoref{emailrule}).
+
 \subsection{Rules}
 
-\subsubsection{Community Rule}
+Rules are the essention of the framework, it is what fullfils the goal of this framework: disambiguating authors. All the previous steps in building the framework were in order to manage the execution of these rules and getting the right information to them. A Rule basically insepects the incoming flow to initialize its context en subsequently issues a query on the graph to derive similarities. We refer to \autoref{rules} for an elaborate investigation on the working of these rules.
 
-\subsubsection{Interest Rule}
+Most of the queries for these rules are not that difficult to implement with the help of Gremlin. However, the community rule variants require more complex queries. We explain the variant where we deal with an exact name match on the one side and a similar name on the other side. 
 
-\subsubsection{Email Rule}
+We start in the instance V. We need to query all instances that share a name with V. This is done by following "name" to the name node and following it back out so all instances with this name are reached (except node V). The names found here are labeled W. To find the co-instances of each of these nodes we follow the edges labeled "published". These instances are labeled Y. Now, we again follow the "name" labeled edges but this time we follow "matches" in between to get all names that are similar with the names of Y. The instances of these names are labeled X. X is now an large collection of names, but most of them do not satisfy the last condition: Any instance in X must be a co-instance of V. We require this by adding a retain pipe. The id's of the four sets of instances (V,W,Y,X) are returned in a table. Now we can add the approriate similarities between the instances. The implementation of this query is shown below.
 
-\subsubsection{Affiliation Rule}
+\begin{verbatim}
+v.as("V")
+  .out("name").in("name")
+  .except(v).as("W")
+  .out("published").in("published").as("Y")
+  .out("name").both("matches").in("name").as("X")
+  .retain(v.out("published").in("published").except(v).to_a)
+  .table(:id,:id,:id,:id)
+\end{verbatim}
+
+All similarities produces by these rules are merged into one stream which is fed to the clustering pipe. This is illustrated in \autoref{fig:clusteringpipe}.
+
+\begin{figure}[htb]
+	\centering
+		\includegraphics[width=1\textwidth]{fig/clusteringpipe}
+	\caption{Clustering flow}
+	\label{fig:clusteringpipe}
+\end{figure}
+
+\subsection{Overview}
+
+
+
+\begin{figure}[htb]
+	\centering
+		\includegraphics[width=1\textwidth]{fig/completepipesmall}
+	\caption{Clustering flow}
+	\label{fig:completepipesmall}
+\end{figure}
 
 \section{Inside the Pipes}
 
@@ -182,7 +234,7 @@ To still be able to use the data, we manually collected email addresses and affi
 
 Clustering is a very important step in building towards a solution. Each new flow of information indirectly leads to a clustering operation. Acquiring new information triggers rules which on their turn yield similarities. These similarities change the balance between clusters. In the worst case, an expensive rebalancing procedure is necessary.
 
-It is obvious that processing similarities is something that will be executed very frequently (numbers?). The combination of the enormous amount of similarities and their expensive processing requires us to make this process as streamlined and efficient as possible. The clustering algorithm as explained in [REF] leads to a first, na\"ive implementation approach. Rethinking the absolute needs of the clustering algorithm then leads to a second approach that benifits greatly of the foundations of our framework.
+It is obvious that processing similarities is something that will be executed very frequently (numbers?). The combination of the enormous amount of similarities and their expensive processing requires us to make this process as streamlined and efficient as possible. The clustering algorithm as explained in \autoref{clustering} leads to a first, na\"ive implementation approach. Rethinking the absolute needs of the clustering algorithm then leads to a second approach that benifits greatly of the foundations of our framework.
 
 \paragraph{In-graph implementation} The most simple solution one can think of is to maintain the ICW and OCW for every vertex in the vertex itself. The adjacency matrix would implicitly be defined by the edges between two nodes in the similarity plane. This technique has two main drawbacks:
 
@@ -191,7 +243,7 @@ It is obvious that processing similarities is something that will be executed ve
 \item There would be a need for several concurrency control mechanisms/
 \end{enumerate}
 
-If clustering could be executed without the use of the database in an efficient manner, it would be preferrable. After all it is in our best interest to take as much load as possible away from the database because it is much more difficult to scale than our pipes and filters architecture. Besides, the similarity ``meta''-plane is not something that should be queried from our end-user application. The users are interested in the result of the clustering, not the way it got there.
+If clustering could be executed without the use of the database in an efficient manner, it would be preferrable. After all it is in our best interest to take as much load as possible away from the database because it is much more difficult to scale than our pipes and filters architecture. Besides, the similarity plane is not something that should be queried from our end-user application. The users are interested in the result of the clustering, not the way we got there.
 
 In the case of similarities being processed in parallel, we need to pay some extra attention. We do not want that the clustering mechanism inflicts race conditions and, by consequence, inconsistencies on the graph.
 
@@ -216,12 +268,3 @@ In the case of similarities being processed in parallel, we need to pay some ext
 \ENDIF
 \end{algorithmic}
 \end{algorithm}
-
-\begin{figure}[htb]
-	\centering
-		\includegraphics[width=1\textwidth]{fig/clusteringpipe}
-	\caption{Clustering flow}
-	\label{fig:clusteringpipe}
-\end{figure}
-
-\subsection{Assignment of e-mail addresses}
