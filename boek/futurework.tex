@@ -35,9 +35,7 @@ We implemented this theoretical model with pipes and filters using Ruby, Java, k
 
 Clustering is the process that is responsible for grouping of authors based on the calculated similarities, a key component of our framework. We implemented the dynamic clustering algorithm proposed in \cite{saha2006dynamic} which is based on minimum-cut trees. The quality of the clusters is guaranteed to be the same as its static counterpart, while it is a lot faster as it considers much smaller subgraphs. We added an extra case to the proposed algorithm, exploiting the fact that our framework often has a succession of small similarities connecting the same clusters. This extra case permits the most resource-intensive case to be postponed and executed less frequently.
 
-% Expert finding ?
-
-% TODO precieze resultaat waarden invullen, gemiddelde waarde en vergelijking met dblp
+Finding experts using a set of keywords is easily attainable within our framework, though we do not provide a user-friendly interface for inspecting these experts. However, the graph can be directly queried for these keywords and the corresponding authors, ordered by decreasing relevance, can be obtained with a simple traversal.
 
 We tested the framework thoroughly using a manually annotated testset of just over 1000 publications. We showed the impact of each of the rules on the accuracy, clarifying that the combination of all four of them render the best average results, although the increased accuracy from the addition of a rule is minimal in certain cases. We also examined the accuracy using different distributions for the rules and we noticed that the community rule had the biggest impact. Finally, we also compared the accuracy of our framework with the accuracy of DBLP for the tested authors and concluded that our framework transcends DBLP by $14\%$ or $17\%$, depending on how the mean accuracy is calculated.
 
@@ -45,7 +43,7 @@ We tested the framework thoroughly using a manually annotated testset of just ov
 
 There are many possible additions to be made to the framework. Adding extra online sources by writing new pipes can help us in the search for more information about each author and give us a better view for disambiguation. Additional, extra rules could be written to translate the newly acquired information to similarities between authors which were previously unknown.
 
-Another improvement is enabling the usage of negative weights for similarities. This could undo previously calculated results, when there is reason to believe two instances are not connected. Connected with these negative weights, would be the possibility to have immutable decisions. Especially if this decision is that two authors can never be the same. A simple reason that comes to mind is that they are both co-authors of the same publication.
+Another improvement is enabling the usage of negative weights for similarities. This could undo previously calculated results, when there is reason to believe two instances are not connected. Related to the addition of using negative weights, would be the possibility to have immutable decisions. Especially if this decision is that two authors can never be the same. A simple reason that comes to mind is that they are both co-authors of the same publication.
 
 Using an actual category tree containing a large overview of categories, could help in calculating more accurate similarities between keywords that are not the same, but are bound to the same area of expertise. This could also enable giving higher weights to keywords that are more specific for a certain subject.
 

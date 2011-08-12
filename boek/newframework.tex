@@ -76,12 +76,8 @@ We implemented the entire framework in Ruby. We chose ruby because of the follow
 
 Pipes can either be written in Ruby or Java. We have used Ruby for almost all of them, but the clustering Pipe uses Java. This is because we use a library (JUNG) to calculate the maximum flow in a graph.
 
-<<<<<<< HEAD:boek/newframework.tex
-\paragraph{A Distrbuted Shared Key-Value Store: Redis}
-\label{redis}
-=======
 \paragraph{A Distributed Shared Key-Value Store: Redis}
->>>>>>> ada8a6047328b60dd37ec99e92660f9205588a3c:boek/newframework.tex
+\label{redis}
 
 We chose Redis to serve as our distributed key-value store. It provides the functionality we need and has a great client for Ruby. It is also used by Resque (explained in the next paragraph), so choosing this as our distributed store prevents us from having to install two different solutions.
 
@@ -232,11 +228,7 @@ All similarities produces by these rules are merged into one stream which is fed
 
 Clustering is a very important step in building towards a solution. Each new flow of information indirectly leads to a clustering operation. Acquiring new information triggers rules which on their turn yield similarities. These similarities change the balance between clusters. In the worst case, an expensive rebalancing procedure is necessary.
 
-<<<<<<< HEAD:boek/newframework.tex
-It is obvious that processing similarities is something that will be executed very frequently (numbers?). The combination of the enormous amount of similarities and their expensive processing requires us to make this process as streamlined and efficient as possible. The clustering algorithm as explained in \autoref{clustering} leads to a first, naive implementation approach. Rethinking the absolute needs of the clustering algorithm then leads to a second approach that benifits greatly of the foundations of our framework.
-=======
-It is obvious that processing similarities is something that will be executed very frequently (numbers?). The combination of the enormous amount of similarities and their expensive processing requires us to make this process as streamlined and efficient as possible. The clustering algorithm as explained in \autoref{clustering} leads to a first, naive implementation approach. Rethinking the absolute needs of the clustering algorithm then leads to a second approach that benefits greatly of the foundations of our framework.
->>>>>>> ada8a6047328b60dd37ec99e92660f9205588a3c:boek/newframework.tex
+It is obvious that processing similarities is something that will be executed very frequently. The combination of the enormous amount of similarities and their expensive processing requires us to make this process as streamlined and efficient as possible. The clustering algorithm as explained in \autoref{clustering} leads to a first, naive implementation approach. Rethinking the absolute needs of the clustering algorithm then leads to a second approach that benifits greatly of the foundations of our framework.
 
 \paragraph{In-graph implementation} The most simple solution one can think of is to maintain the ICW and OCW for every vertex in the vertex itself. The adjacency matrix would implicitly be defined by the edges between two nodes in the similarity plane. This technique has two main drawbacks:
 
