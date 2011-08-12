@@ -30,7 +30,7 @@ The three classes Pipe, Connector and Connection are the real core of the archit
 
 Together with this architecture we developed a few concepts that we use in combination with the core framework. These concepts allow us to build pipe configurations more easily and give us flexible control over the data flowing to the system. These concepts and associated terminology are explained in the following paragraphs.
 
-\paragraph{Flows and Aspects} The information flowing through the pipes and connections are flows. Flows exist of different aspects. Every pipe is only interested in a few aspects of a flow. Other aspects can travel along too feed pipes later on the path. The choice of which aspect we process or send is completely free. An example of aspects are instance, publication or dependencies (see ... REF).
+\paragraph{Flows and Aspects} The information flowing through the pipes and connections are flows. Flows exist of different aspects. Every pipe is only interested in a few aspects of a flow. Other aspects can travel along too feed pipes later on the path. The choice of which aspect we process or send is completely free. An example of aspects are instance, publication or dependencies (see \autoref{dependencies}).
 
 \paragraph{Connector Identifiers} Connectors need to be identified to allow us to connect a specific input or output to the right connection. The identifiers of the connectors can be any object. This makes configuring the pipes more expressive as identifiers suiting the context of the pipe can be used. For example, the output connector identifiers of the Filter pipe (\autoref{par:filterpipe}) are the booleans "true" and "false". We denote a input-connector with identifier $x$ as $Cn^i_x$ and an output-connector with identifier $y$ as $Cn^o_y$. The output ports of the Filter pipe would thus be denoted as $Cn^o_{true}$ and $Cn^o_{false}$.
 
@@ -61,7 +61,7 @@ A more complex connection is the asynchronous connection. It allows us to run an
 
 \paragraph{Stateful Pipes}
 
-For some pipes, it is required to have a non-transient memory, a memory that survives between executions. This allows the pipe to process input differently based on what is present in its long-time memory. As Pipes can be run in a distributed fashion, it is possible for a pipe to be initialized on another physical machine for every execution. If the memory would be local, bound to a machine, the pipe would lose access to it if it was executed on another machine. To solve this, we use a distributed shared memory store (\autoref{redis}.
+For some pipes, it is required to have a non-transient memory, a memory that survives between executions. This allows the pipe to process input differently based on what is present in its long-time memory. As Pipes can be run in a distributed fashion, it is possible for a pipe to be initialized on another physical machine for every execution. If the memory would be local, bound to a machine, the pipe would lose access to it if it was executed on another machine. To solve this, we use a distributed shared memory store (\autoref{redis}).
 
 \subsection{Implementation details and Technologies}
 
@@ -77,12 +77,14 @@ We implemented the entire framework in Ruby. We chose ruby because of the follow
 Pipes can either be written in Ruby or Java. We have used Ruby for almost all of them, but the clustering Pipe uses Java. This is because we use a library (JUNG) to calculate the maximum flow in a graph.
 
 \paragraph{A Distrbuted Shared Key-Value Store: Redis}
+\label{redis}
 
 We chose Redis to serve as our distributed key-value store. It provides the functionality we need and has a great client for Ruby. It is also used by Resque (explained in the next paragraph), so choosing this as our distributed store prevents us from having to install two different solutions.
 
 Redis also has a much larger set of commands than just the get and set primitives. It has built-in atomic actions for almost anything. It can also act as a tool to provide synchronisation. This is necessary as we plan to run our pipe configuration over multiple machines. It allows us to use bots pessimistic and optimistic locking.
 
 \paragraph{A Distributed Job Processing Framework: Resque}
+\label{resque}
 
 Resque is a Redis-backed library for creating background jobs, placing those jobs on multiple queues, and processing them later. Resque is used at Github to process millions of jobs each day. It spawns a pool of workers that poll the queues for jobs. These jobs are then executed in seperate processes so that they can be terminated if things get out of hand (ex. memory leaks). It is very easy to set up and provides us with a Web-based user interface to inspect our jobs and workers.
 
@@ -154,7 +156,7 @@ First, the incoming instance discovery is lead to the "Persist Instance" pipe. T
 	\label{fig:integrationpipe}
 \end{figure}
 
-\paragraph{Name Matching} Name Matching is the process of matching the name of a family with the names already present in the family. The goal is to reduce the problem domain size (\autoref{problemdomain}. When a new name is added, we query all the names in the family and compare them to the name that is being added. We do this using a fuzzy string matching algorithm based on Dynamic Time Warping. Taking properties of names into account lead to some modifications of the algorithm, making it especially suitable for name matching.
+\paragraph{Name Matching} Name Matching is the process of matching the name of a family with the names already present in the family. The goal is to reduce the problem domain size (\autoref{problemdomain}). When a new name is added, we query all the names in the family and compare them to the name that is being added. We do this using a fuzzy string matching algorithm based on Dynamic Time Warping. Taking properties of names into account lead to some modifications of the algorithm, making it especially suitable for name matching.
 
 \begin{enumerate}
 \item We use a token based approach (tokens between whitespace). The tokens themselves are compared using the Jaro Winkler fuzzy string matching algorithm.
@@ -170,7 +172,7 @@ To still be able to use the data, we manually collected email addresses and affi
 
 \begin{figure}[htb]
 	\centering
-		\includegraphics[width=0.75\textwidth]{fig/magicfacts}
+		\includegraphics[width=0.75\textwidth]{fig/magicfactspip}
 	\caption{Pipe Configuration for Magic Facts.}
 	\label{fig:magicfacts}
 \end{figure}
@@ -206,7 +208,7 @@ v.as("V")
   .table(:id,:id,:id,:id)
 \end{verbatim}
 
-All similarities produces by these rules are merged into one stream which is fed to the clustering pipe. This is illustrated in \autoref{fig:clusteringpipe}.
+All similarities produces by these rules are merged into one stream which is fed to the clustering pipe. This is illustrated in \autoref{fig:clusteringpipe}. An overview of the pipe configuration of the several rules is shown in \autoref{fig:rulespipe}.
 
 \begin{figure}[htb]
 	\centering
@@ -215,26 +217,18 @@ All similarities produces by these rules are merged into one stream which is fed
 	\label{fig:clusteringpipe}
 \end{figure}
 
-\subsection{Overview}
-
-
-
 \begin{figure}[htb]
 	\centering
-		\includegraphics[width=1\textwidth]{fig/completepipesmall}
-	\caption{Clustering flow}
-	\label{fig:completepipesmall}
+		\includegraphics[width=1\textwidth]{fig/rulespipe}
+	\caption{Pipe Configuration of the Rules Network}
+	\label{fig:rulespipe}
 \end{figure}
-
-\section{Inside the Pipes}
-
-\subsection{Dependency Resolution}
 
 \subsection{Concurrent, incremental Clustering}
 
 Clustering is a very important step in building towards a solution. Each new flow of information indirectly leads to a clustering operation. Acquiring new information triggers rules which on their turn yield similarities. These similarities change the balance between clusters. In the worst case, an expensive rebalancing procedure is necessary.
 
-It is obvious that processing similarities is something that will be executed very frequently (numbers?). The combination of the enormous amount of similarities and their expensive processing requires us to make this process as streamlined and efficient as possible. The clustering algorithm as explained in \autoref{clustering} leads to a first, na\"ive implementation approach. Rethinking the absolute needs of the clustering algorithm then leads to a second approach that benifits greatly of the foundations of our framework.
+It is obvious that processing similarities is something that will be executed very frequently (numbers?). The combination of the enormous amount of similarities and their expensive processing requires us to make this process as streamlined and efficient as possible. The clustering algorithm as explained in \autoref{clustering} leads to a first, naive implementation approach. Rethinking the absolute needs of the clustering algorithm then leads to a second approach that benifits greatly of the foundations of our framework.
 
 \paragraph{In-graph implementation} The most simple solution one can think of is to maintain the ICW and OCW for every vertex in the vertex itself. The adjacency matrix would implicitly be defined by the edges between two nodes in the similarity plane. This technique has two main drawbacks:
 
@@ -245,26 +239,47 @@ It is obvious that processing similarities is something that will be executed ve
 
 If clustering could be executed without the use of the database in an efficient manner, it would be preferrable. After all it is in our best interest to take as much load as possible away from the database because it is much more difficult to scale than our pipes and filters architecture. Besides, the similarity plane is not something that should be queried from our end-user application. The users are interested in the result of the clustering, not the way we got there.
 
-In the case of similarities being processed in parallel, we need to pay some extra attention. We do not want that the clustering mechanism inflicts race conditions and, by consequence, inconsistencies on the graph.
-
-
 \paragraph{As a stateful pipe}
 
+Currently, the clustering algorithm is implemented as a stateful pipe. This means that all values of the adjacency matrix, the OCW's and ICW's  are maintained in our distributed key-value store. The id's of both involved clusters are provided and the graph is not needed anymore. This way, clustering is just a pipe like any other and therefore completely distributable.
+
+In the case of similarities being processed in parallel, we need to pay some extra attention. We do not want that the clustering mechanism inflicts race conditions and, by consequence, inconsistencies on the graph. In case of an intra-cluster similarity being added, we actually do not need locks as we can make use of a technique call optimistic locking. This technique assumes that multiple transactions can complete without affecting each other, and that therefore transactions can proceed without locking the data resources that they affect. Before committing, each transaction verifies that no other transaction has modified its data. Intra-cluster similarities can always be processed in parallel for any two instances. Inter-cluster similarities on the other hand require that no changes are made to the entire cluster.
+
+In case of an intra-cluster addition, we could watch the locks of both involved instances for modifications. If they are not set and do not change during the processing of the similarity, the transaction (intra\_add) succeeds. If the locks were modified the transaction will fail and we will retry to process the similarities. In case of an inter-cluster addition, the entire two clusters will be locked. This flow is shown in Algorithm \autoref{locking}. The cluster method locks all the instances of the clusters  of the provided instances in one transaction.
+
 \begin{algorithm}
-\caption{!!!}
-\label{mincutgusfield}
+\caption{Locking mechanism to control concurrent similarity processing.}
+\label{locking}
 \begin{algorithmic}
-\STATE \textbf{lock} $I_1,I_2$
-\IF{cluster($I_1$) == cluster($I_2$)}
-  \STATE \textbf{watch} $C_1,C_2$
-  \STATE \textbf{unlock} $I_1,I_2$
-  \STATE \textbf{process(intra-cluster)}
+\IF{$cluster(I_1) == cluster(I_2)$}
+  \STATE \textbf{label} retry
+  \STATE \textbf{watch} ${lock}_{I_1},{lock}_{I_2}$
+  \IF{${lock}_{I_1}$ and ${lock}_{I_2}$}
+  \STATE \textbf{goto} retry
+  \ELSIF{!transaction(intra\_add$(I_1,I_2))$}
+    \STATE \textbf{goto} retry
+  \ENDIF
 \ELSE
-  \STATE \textbf{lock} $C_1,C_2$
-  \STATE \textbf{unlock} $I_1,I_2$
-  \STATE \textbf{process(inter-cluster)}
-  \STATE \textbf{execute}
-  \STATE \textbf{unlock} $C_1,C_2$
+  \STATE \textbf{lock} cluster($I_1$),cluster($I_2$)
+  \STATE inter\_add$(I_1,I_2))$
 \ENDIF
 \end{algorithmic}
 \end{algorithm}
+
+\subsection{Dependency Resolution}
+\label{dependencies}
+
+Another difficulty turning up in our framework is the dependency of certain flow onto others. In this case, a flow can not be executed untill its dependencies are resolved. An example is the published fact: we are not able to process this until the associated instance is integrated in the graph. To solve this we designed a stateful pipe that manages these dependencies. A dependent flow then waits in this pipe until all its dependencies are resolved.
+
+\subsection{Overview}
+
+The previous sections each described a component of our pipe network. All of this components and pipes need to word together. How this is done is illustrated in \autoref{completepipesmall}. We added a Message Distribution pipe with the responsibility of forwarding the messages with the right types to right pipes.
+
+\begin{figure}[htb]
+	\centering
+		\includegraphics[width=1\textwidth]{fig/completepipesmall}
+	\caption{Clustering flow}
+	\label{fig:completepipesmall}
+\end{figure}
+
+

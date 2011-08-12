@@ -29,5 +29,7 @@ task :stat do
   Pipes::PersistSimilarity::STAT_MAPPING.each do |k,v|
     puts "#{k}: #{$redis.get("stat:#{v}") || 0}"
   end
+  puts ""
+  puts "keyword weight: #{$redis.get("stat:keywordweight")}"
 end
 

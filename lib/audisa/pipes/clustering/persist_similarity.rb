@@ -91,7 +91,7 @@ class Pipes::PersistSimilarity < Pipes::Pipe
     # calculate qualities
     fromquality = (sum(fromids) { |id| "ocw:#{id}" }+weight).to_f/(nV-fromids.size)
     toquality   = (sum(toids) { |id| "ocw:#{id}" }+weight).to_f/(nV-toids.size)
-		cut_value_formula = 2*(cut_value(fromids, toids)+weight).to_f/nV
+		cut_value_formula = 2*(cut_value(fromids, toids)+weight).to_f/(fromids.size+toids.size)
     # check the quality
     if fromquality <= Configuration::ALPHA && toquality <= Configuration::ALPHA
       puts "CASE 1"
@@ -110,7 +110,7 @@ class Pipes::PersistSimilarity < Pipes::Pipe
       deps = ["blueprints-core-0.8.jar","commons-pool-1.5.6.jar","gson-1.7.1.jar","jedis-2.0.0.jar","jung-3d-2.0.1.jar","jung-algorithms-2.0.1.jar","jung-graph-impl-2.0.1.jar"]
       cp = deps.map { |dep| "#{CLUSTERING}/lib/#{dep}"} * ':'
       p "#{fromids} #{toids} #{nV} #{Configuration::ALPHA}"
-      result = `java -cp #{cp}:#{CLUSTERING}/bin clustering.CaseThree #{Yajl::Encoder.encode(fromids)} #{Yajl::Encoder.encode(toids)} #{nV} #{Configuration::ALPHA}`
+      result = `java -cp #{cp}:#{CLUSTERING}/bin clustering.CaseThree #{Yajl::Encoder.encode(fromids)} #{Yajl::Encoder.encode(toids)} #{(fromids.size+toids.size)} #{Configuration::ALPHA}`
       result = Yajl::Parser.parse(result)
       p result
       relocate(fromids+toids, [fromcluster, tocluster], result)

@@ -6,7 +6,7 @@ class Parsers::DblpAuthorParser < Pipes::Pipe
 
   def execute
     # get the links
-    _in.get.scan(/href="([^"]*\.xml)"/).flatten.each do |url|
+    _in.get.scan(/href="([^"]*\.xml)"/).flatten[0..40].each do |url|
       out.push(:url => url)
     end
   end
