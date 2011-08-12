@@ -1,4 +1,4 @@
-\chapter{Framework evaluation and results}
+\chapter{Framework Evaluation and Results}
 
 
 
@@ -19,38 +19,126 @@ Borderline cases make more defiant evalutations. Author names containing foreign
 
 % Moeten we dit doen voor de clustering (dus vooral kijken naar name disambiguation) en de expert finding (hiervoor hebben we voornamelijk de category builder nodig voor goede resultaten)
 
-\section{Evaluation setup}
+\section{Evaluation Setup}
 
-\cite{han2004two} focuses on disambiguating between authors having the same name or names which are very closely related. They have one dataset consisting of fifteen different authors having the name "`J. Anderson"' and a training set containing 117 publications which they have manually collected from the web, mainly from publication lists from homepages. A second dataset consists of nine other names, with publications collected from DBLP. An overview of this dataset can been viewed on \autoref{table:auth-dblp-dataset}. The mean accuracy they accomplish with their best approach is $73.3\%$ with a standard deviation of $5.4\%$.
+\subsection{Comparative Research}
+
+The authors of \cite{han2004two} focus on disambiguating between authors having the same name or names which are very closely related. They use a dataset consisting of nine different names, each having at least 10 different name variations. For each variation they have collected publications from DBLP. An overview of this dataset can be viewed on \autoref{tab:auth-dblp-dataset} together with the results they achieve using different rules for disambiguation. The mean accuracy they accomplish with their best approach is $73.3\%$ with a standard deviation of $5.4\%$.
 
 \begin{table}
 	\centering
-		\begin{tabular}[ht]{|c|c|c|}
+		\begin{tabular}[ht]{|c||c|c|c|c|c|c|}
 			\hline
-			\bfseries{Name Set} & \bfseries{Name Variations} & \bfseries{Training Size} \\
+			\bfseries{Name} & \bfseries{Variations} & \bfseries{Size} & \bfseries{Coauthor} & \bfseries{Paper} & \bfseries{Journal} & \bfseries{Combination} \\
 			\hline
-			S Lee & 35 & 244 \\
+			S Lee & 35 & 244 & 61.3\% & 14.3\% & 43.8\% & 65.4\% \\
 			\hline
-			J Lee & 33 & 172 \\
+			J Lee & 33 & 172 & 70.9\% & 17.7\% & 39.9\% & 75.9\% \\
 			\hline
-			J Kim & 25 & 127 \\
+			J Kim & 25 & 127 & 57.1\% & 18.8\% & 40.2\% & 66.1\% \\
 			\hline
-			Y Chen & 24 & 108 \\
+			Y Chen & 24 & 108 & 78.5\% & 14.0\% & 26.9\% & 81.7\% \\
 			\hline
-			S Kim & 20 & 94 \\
+			S Kim & 20 & 94 & 69.0\% & 13.8\% & 27.6\% & 70.1\% \\
 			\hline
-			C Lee & 18 & 80 \\
+			C Lee & 18 & 80 & 72.2\% & 13.9\% & 43.1\% & 75.0\% \\
 			\hline
-			A Gupta & 16 & 172 \\
+			A Gupta & 16 & 172 & 75.0\% & 25.6\% & 50.6\% & 78.1\% \\
 			\hline
-			J Chen & 13 & 91 \\
+			J Chen & 13 & 91 & 66.3\% & 31.3\% & 44.6\% & 72.3\% \\
 			\hline
-			H Kim & 11 & 63 \\
+			H Kim & 11 & 63 & 73.7\% & 21.1\% & 43.9\% & 75.4\% \\
+			\hline
+			\hline
+			\bfseries{Mean} & & & 69.3\% & 18.9\% & 40.0\% & \bfseries{73.3\%} \\
+			\hline
+			\bfseries{StdDev} & & & 6.8\% & 6.1\% & 7.9\% & 5.4\% \\
 			\hline
 		\end{tabular}
-	\caption{The nine DBLP datasets. Each row contains the base name, the number of recorded variations and the total amount of examined publications of this name.}
+	\caption{The nine DBLP datasets used in \cite{han2004two}. Each row contains the base name, the number of recorded variations and the total amount of examined publications of this name. The last four columns show the accuracy measured using the different rules. The two bottom rows give the mean accuracy for the rules and the standard deviation.}
 	\label{tab:auth-dblp-dataset}
 \end{table}
 
-We have mailed the authors of the paper \cite{han2004two} and have received the DBLP datasets, already ordered by cluster. However, as the datasets are this huge, manual checking is very labor-intensive. The clusters are solely based on the division of the authors in DBLP. The quality of the disambiguation from DBLP, however, sometimes falls short. As we would still have to check the results manually to gain a proper insight into the disambiguation quality, we choose to compose our own dataset.
+It is important to note that the division of the clusters is solely based on the division of the authors in DBLP. As this division on DBLP is often wrong, we find that this makes a poor benchmark. Getting very high accuracy when comparing to DBLP does not mean the result is good. In order to get a proper insight into the disambiguation quality, we would still have to check the results manually. This is the main reason we choose to compose our own dataset.
+
+\subsection{Testset}
+\label{sec:testset}
+
+As stated before, we want to resemble a realistic combination of easier and harder use-cases for our own dataset. As \autoref{tab:testset} shows, we have chosen five base names, each with a number of variations and have manually disambiguated these variations and combined the authors into clusters using the information on DBLP and the actual papers, if they were available. In total our testset contains just over a 1000 publications. 
+
+Nevertheless we composed the clusters manually, there are no guarantees that this is completely accurate. Especially for the base names "Yu Chen" and "D. Johnson", there might be small mistakes as the amount of different authors is overwhelming. However, the dataset we composed is a lot more accurate than DBLP. The comparison between the number of authors represented by DBLP and the number of authors we disambiguated, is also shown on \autoref{tab:testset}.
+
+\begin{table}
+	\centering
+		\begin{tabular}[ht]{|c|c|c|c|}
+			\hline
+			\bfseries{Name Set} & \bfseries{Authors} & \bfseries{Publications} & \bfseries{DBLP} \\
+			\hline
+			De Turck & 4 & 172 & 4 \\
+			\hline
+			Yu Chen & 70 & 221 & 1 \\
+			\hline
+			Chong Woo & 1 & 9 & 3 \\
+			\hline
+			Kim/Tom Mens & 2 & 153 & 2 \\
+			\hline
+			D. Johnson & 107 & 460 & 64 \\
+			\hline
+		\end{tabular}
+	\caption{The classification of our manually composed dataset. The first column contains the base name. This is the name we used to find the authors on DBLP. The second column gives the number of clusters we defined manually for this base name. The third column gives the number of publications we found on DBLP and the last column gives the number of different authors DBLP gives for this base name.}
+	\label{tab:testset}
+\end{table}
+
+In order to be able to test the affiliation and the email rule, we had to get affiliations and email addresses for each of the authors of each publication. We started with writing a new pipe that would be able to search the publication on Bing \cite{bing}. The amount of papers that are actually available on Bing is abysmal, rendering this pipe useless. As the focus of our thesis is information processing, rather than retrieval, we manually added the affiliation and the email address of the author we are examining to each of the publications, if we could find them.
+
+\subsection{Setup}
+
+A simplified overview of the testsetup is shown in \autoref{fig:testsetup}. We start with the base name of the author we want to add. This is the input for the framework. The framework will search publications on DBLP for this name and combine them with the email and affiliation information that have been composed manually. The result is a graph containing clusters with the different authors. We extract the clusters from the graph and pass them to the result calculator. This is a script that calculates the precision, recall and $F_{1}$ measure by comparing the calculated clusters with the manually composed dataset, as explained in \autoref{sec:testset}, which is called the "groundtruth" in \autoref{fig:testsetup}.
+
+\begin{figure}[htb]
+	\centering
+		\includegraphics{./fig/testsetup.pdf}
+	\label{fig:testsetup}
+	\caption{A simplified overview of the testsetup starting with the author name and ending with the accuracy results.}
+\end{figure}
+
+The result calculator calculates the precision, recall and F measure as defined in \autoref{eq:prf}. Unless explicitly stated otherwise, when we refer to F measure, we mean the $F_{1}$ measure where recall and precision are equally important. These statistical values are calculated for each of the clusters from the groundtruth. 
+
+\begin{equation}
+	\label{eq:prf}
+	\begin{array}{r c l}
+		precision & = & \frac{\left|\left\{relevant~documents\right\} \cap \left\{retrieved~documents\right\}\right|}{\left|\left\{retrieved~documents\right\}\right|} \\
+		recall & = & \frac{\left|\left\{relevant~documents\right\} \cap \left\{retrieved~documents\right\}\right|}{\left|\left\{relevant~documents\right\}\right|} \\
+		F_{\beta} & = & ( 1 + \beta^{2} ) * \frac{precision * recall}{\beta^{2} * precision + recall} \\
+	\end{array}
+\end{equation}
+
+If we denote the cluster of the groundtruth as $C_g$, then the calculated cluster from the graph the result calculator will $C_g$ compare with is given by 
+
+\begin{equation}
+	\label{eq:calccluster}
+	\min_{\forall c \in calculated~clusters}{\left| C_g \setminus c \right|}
+\end{equation}
+
+In \autoref{eq:prf}, we use the terms relevant and retrieved documents. The explanations of these terms are given by the following definitions.
+
+\begin{mydef}
+	\textbf{Relevant documents} The publications from the cluster in the groundtruth
+\end{mydef}
+
+\begin{mydef}
+	\textbf{Retrieved documents} The publications from the cluster calculated by the framework belonging to the cluster in the groundtruth, calculated in \autoref{eq:calccluster}
+\end{mydef}
+
+After calculating these statistical values for all the clusters in the groundtruth, the mean F measure is calculated to give us an idea of the accuracy for a given test.
+
+\section{Results}
+
+
+
+\subsection{Rules}
+
+\subsection{Weights}
+
+\subsection{Comparing to DBLP}
 

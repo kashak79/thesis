@@ -1,5 +1,4 @@
 \select@language {english}
-\contentsline {chapter}{Inhoudsopgave}{i}{Doc-Start}
 \contentsline {chapter}{\numberline {1}Introduction}{1}{chapter.1}
 \contentsline {section}{\numberline {1.1}Thesis objective and approach}{1}{section.1.1}
 \contentsline {section}{\numberline {1.2}Chapter outline}{2}{section.1.2}
@@ -73,6 +72,15 @@
 \contentsline {subsection}{\numberline {6.2.2}Inter-cluster edge addition}{40}{subsection.6.2.2}
 \contentsline {paragraph}{Merging of clusters}{40}{section*.34}
 \contentsline {paragraph}{Contraction of clusters}{40}{section*.35}
-\contentsline {chapter}{\numberline {7}Framework evaluation and results}{44}{chapter.7}
-\contentsline {section}{\numberline {7.1}Evaluation setup}{44}{section.7.1}
-\contentsline {chapter}{\numberline {8}Conclusion and future work}{46}{chapter.8}
+\contentsline {chapter}{\numberline {7}Framework Evaluation and Results}{44}{chapter.7}
+\contentsline {section}{\numberline {7.1}Evaluation Setup}{44}{section.7.1}
+\contentsline {subsection}{\numberline {7.1.1}Comparative Research}{44}{subsection.7.1.1}
+\contentsline {subsection}{\numberline {7.1.2}Testset}{45}{subsection.7.1.2}
+\contentsline {subsection}{\numberline {7.1.3}Setup}{46}{subsection.7.1.3}
+\contentsline {section}{\numberline {7.2}Results}{47}{section.7.2}
+\contentsline {subsection}{\numberline {7.2.1}Rules}{47}{subsection.7.2.1}
+\contentsline {subsection}{\numberline {7.2.2}Weights}{47}{subsection.7.2.2}
+\contentsline {subsection}{\numberline {7.2.3}Comparing to DBLP}{47}{subsection.7.2.3}
+\contentsline {chapter}{\numberline {8}Conclusion and future work}{48}{chapter.8}
+\contentsline {chapter}{\numberline {A}Dataset}{49}{appendix.A}
+\contentsline {chapter}{\numberline {B}DVD Content}{53}{appendix.B}

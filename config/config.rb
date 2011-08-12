@@ -1,5 +1,5 @@
 
-$config = :highco
+$config = :basic
 
 if $config == :lowkey
   module Configuration
@@ -33,7 +33,7 @@ elsif $config == :basic
     COAUTHOR_MATCHINGNAME_WEIGHT = 6
     DEBUG = true
     
-    COMMUNITY = true
+    COMMUNITY = false
     EMAIL = true
     AFFILIATION = true
     KEYWORD = true
@@ -65,7 +65,7 @@ elsif $config == :highcoaff
   module Configuration
   
     ALPHA = 25
-    AFFILIATION_WEIGHT = 25
+    AFFILIATION_WEIGHT = 50
     AFFILIATION_THRESHOLD = 0.8
     EMAIL_WEIGHT = 1000
     KEYWORD_WEIGHT = 1

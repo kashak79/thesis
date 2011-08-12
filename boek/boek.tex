@@ -139,8 +139,6 @@
 %% inhoudstafel
 \renewcommand{\baselinestretch}{1.08} 	% De interlinie afstand wat verkleinen.
 \small\normalsize                       % Nodig om de baselinestretch goed te krijgen.
-\addcontentsline{toc}{chapter}{Inhoudsopgave}
-\setcounter{page}{1}
 \tableofcontents
 \renewcommand{\baselinestretch}{1.2} 	% De interlinie afstand wat vergroten.
 \small\normalsize                       % Nodig om de baselinestretch goed te krijgen.
@@ -188,8 +186,9 @@
 \include{futurework}
 
 % appendices
-%\appendix
-
+\appendix
+\include{appendixA}
+\include{appendixB}
 % hier worden de appendices ingevoegd (\includes)
 
 
