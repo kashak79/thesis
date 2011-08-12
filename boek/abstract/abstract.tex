@@ -43,7 +43,7 @@ author disambiguation, data processing, clustering
 
 \section{Introduction}
 
-Researchers loose valuable time searching for research material related to their field of expertise. The process of finding and verifying experts is extensive and troublesome. The aim of this article is creating a framework that is capable of retrieving publications and related information from online sources, analyzing this information and linking it to the correct author and enabling users to search for experts for a given subject. The main focus is on the disambiguation of authors, the classification into clusters and the extensibility of the framework.
+Researchers lose valuable time searching for research material related to their field of expertise. The process of finding and verifying experts is extensive and troublesome. The aim of this article is creating a framework that is capable of retrieving publications and related information from online sources, analyzing this information and linking it to the correct author and enabling users to search for experts for a given subject. The main focus is on the disambiguation of authors, the classification into clusters and the extensibility of the framework.
 
 \section{Theoretical Model}
 
@@ -75,10 +75,14 @@ The theoretical model also contains a summary of the different rules. They drive
 	\label{fig:pipes}
 \end{figure}
 
+Rules are triggered by different events in the system. A rule could for example be executed when it has been discovered that an instance has published a publication, but could be executed on the event of a reclustering as well. The latter is a message that is a byproduct of the system itself and not originating from an external source.
+
+Rules can be performed on three different scopes: instances with the same name, instances with similar names and instances part of the same cluster. That means that the instances of those collections are compared with the concerning instance. Strictly respecting this scopes narrow down the problem domain.
+
 \section{Pipes and Filters}
 \label{pipes}
 
-The core of the implementation of the framework is the simplicity achieved by pipes and filters. They allow for modifiability and extensibility as pipes processing new sources or calculating new similarities between instances can easily be added to the system. An overview of the different pipes and the flow that runs between them is shown on \autoref{fig:pipes}. The expressiveness of StatefulPipe and they scalability of AsyncConnection in combination with a shared key-value store enables out-of-the-box and carefree distribution.
+The core of the implementation of the framework is the simplicity achieved by pipes and filters. They allow for modifiability and extensibility as pipes processing new sources or calculating new similarities between instances can easily be added to the system. An overview of the different pipes and the flow that runs between them is shown on \autoref{fig:pipes}. The expressiveness of StatefulPipe and the scalability of AsyncConnection in combination with a shared key-value store enables out-of-the-box and carefree scalability.
 
 \begin{figure}[hb!]
 	\centering
@@ -89,13 +93,13 @@ The core of the implementation of the framework is the simplicity achieved by pi
 
 \section{Clustering}
 
-The article focuses a lot on the clustering process. This process is responsible for calculating what instances match to same author, based on similarities between the instances. Everytime a rule computes a new similarity, it is possible reclustering has to occur. As there is a constant influx of information, there is a need for a dynamic approach that maintains the cluster quality. 
+The article focuses a lot on the clustering process. This process is responsible for calculating which instances match to the same author, based on similarities between the instances. Every time a rule computes a new similarity, it is possible reclustering has to occur. As there is a constant influx of information, there is a need for a dynamic approach that maintains the cluster quality. 
 
 The article gives an in-depth explanation of the dynamic clustering algorithm described in \cite{dyncluster}. The algorithm itself depends on the minimum cut tree algorithm. The sequential Gusfield's algorithm described in \cite{gusfield} is implemented. 
 
-The article also proposes an addition to the original clustering algorithm. It introduces a new case, acting the same as case 1, but being executed instead of case 3 on the occasion that $2 * \frac{cutvalue(C_v, C_u)}{\left|V\right|} <= \alpha / 2$. This anticipates the fact that a lot of similarities with lower weights occur and they often take place in succession. Often this results in case 3 being calculated multiple times in succession, before finally merging the clusters together. By introducing this new case, the resource-intensive execution of case 3 is switched for the very quick execution of case 1.
+The article also proposes an addition to the original clustering algorithm. It introduces a new case, acting the same as case 1, but being executed instead of case 3 on the occasion that $2 * \frac{cutvalue(C_v, C_u)}{\left|V\right|} <= \alpha / 2$. This anticipates the fact that a lot of similarities with lower weights occur and they often take place in succession. Often this results in case 3 being calculated multiple times in succession, before finally merging the clusters together. By introducing this new case, the resource-intensive execution of case 3 is swapped for the very fast execution of case 1.
 
-The clustering process itself is also a pipe and as noted before, in \autoref{pipes}, the shared key-value store Redis allows this process to be distributed without any trouble.
+The clustering process is implemented as a stateful pipe and is not treated any different from the other pipes. The clustering process is completely decoupled from the graph representation. Better yet, the graph is almost not being accessed during the clustering process. The reasoning about the grouping of instances is done completely local and the state of the similarities (the similarity plane) is maintained in the shared key-value store. This approach takes a lot of load off the database, which is important as a graph database does not scale that easily.
 
 \section{Results}
 
