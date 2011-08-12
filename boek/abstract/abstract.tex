@@ -89,7 +89,7 @@ The core of the implementation of the framework is the simplicity achieved by pi
 
 \section{Clustering}
 
-The article focuses a lot on the clustering process. This process is responsible for calculating what instances match to same author, based on similarities between the instances. Everytime a rule computes a new similarity, it is possible reclustering has to occur. As there is a constant influx of information, there is a need for a dynamic approach that maintains the cluster quality. 
+The article focuses a lot on the clustering process. This process is responsible for calculating what instances match to the same author, based on similarities between the instances. Everytime a rule computes a new similarity, it is possible reclustering has to occur. As there is a constant influx of information, there is a need for a dynamic approach that maintains the cluster quality. 
 
 The article gives an in-depth explanation of the dynamic clustering algorithm described in \cite{dyncluster}. The algorithm itself depends on the minimum cut tree algorithm. The sequential Gusfield's algorithm described in \cite{gusfield} is implemented. 
 
@@ -99,19 +99,16 @@ The clustering process itself is also a pipe and as noted before, in \autoref{pi
 
 \section{Results}
 
+The proposed framework is tested against a manually annoted dataset containing over 1000 publications. The impact of each of the rules on the accuracy is tested and the combination of the four rules is concluded as having the highest overall accuracy. The co-author rule has the biggest positive impact on the correctness. The F measure is also calculated for different distributions of the weights for each of the rules. The distribution giving favor to a lot of clustering by setting all the values high and the alpha value just a little higher, renders the best results. 
+
+In the article, there is also a compirason between the results the proposed framework gets and the accuracy of DBLP. The conclusion is that the proposed framework overcomes DBLP by $14\%$ or $17\%$, depending on how the mean accuracy is calculated.
+
+
 \begin{figure}[htpb!]
 \centering
-%\includegraphics[width= 0.4\textwidth]{fig/performance_total.pdf}
-\caption{Performance test of the matchmaker on Laptop (2GHz processor, 1GB RAM) and ALIX (500MHz processor, 256MB RAM)}
+\includegraphics[width= 0.4\textwidth]{fig/test-rules.pdf}
+\caption{A comparison of different combinations of rules. The first four columns stack the rules, the fifth column uses all rules except the community rule and the last column depicts the base line, this is the F measure of the case where no clustering has happened.}
 \label{fig:testperformance}
-\end{figure}
-
-
-\begin{figure}[htpb!]
-\centering
-%\includegraphics[width= 0.4\textwidth]{fig/parameters_en.pdf}
-\caption{Test of influence of parameters on performance on Laptop (2GHz processor, 1GB RAM)}
-\label{fig:testparameters}
 \end{figure}
 
 

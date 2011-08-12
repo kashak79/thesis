@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.1415926-2.2-0.9997.4 (MiKTeX 2.9) (preloaded format=xelatex 2011.3.10)  12 AUG 2011 20:38
+This is XeTeX, Version 3.1415926-2.2-0.9997.4 (MiKTeX 2.9) (preloaded format=xelatex 2011.3.10)  12 AUG 2011 20:51
 entering extended mode
 **abstract.tex
 ("C:\Users\Simon Buelens\Workspace\thesis\boek\abstract\abstract.tex"
@@ -343,9 +343,11 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <9> on input line 96.
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <6> on input line 96.
- [2
+File: fig/test-rules.pdf Graphic file (type QTm)
+ <use  "fig/test-rules.pdf" > [2
 
-] ("C:\Users\Simon Buelens\Workspace\thesis\boek\abstract\abstract.aux")
+]
+("C:\Users\Simon Buelens\Workspace\thesis\boek\abstract\abstract.aux")
 
 LaTeX Warning: There were undefined references.
 
@@ -353,15 +355,15 @@ LaTeX Warning: There were undefined references.
 LaTeX Warning: There were multiply-defined labels.
 
  )
-(\end occurred when \ifx on line 113 was incomplete)
-(\end occurred when \ifx on line 105 was incomplete)
+(\end occurred when \ifx on line 118 was incomplete)
+(\end occurred when \ifx on line 110 was incomplete)
 (\end occurred when \ifx on line 86 was incomplete)
 (\end occurred when \ifx on line 74 was incomplete) 
 Here is how much of TeX's memory you used:
- 6267 strings out of 429293
- 84638 string characters out of 3170420
+ 6269 strings out of 429293
+ 84670 string characters out of 3170420
  161441 words of memory out of 3000000
- 9403 multiletter control sequences out of 15000+200000
+ 9404 multiletter control sequences out of 15000+200000
  31447 words of font info for 104 fonts, out of 3000000 for 9000
  674 hyphenation exceptions out of 8191
  30i,5n,45p,661b,319s stack positions out of 5000i,500n,10000p,200000b,50000s
