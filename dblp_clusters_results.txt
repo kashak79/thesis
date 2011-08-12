@@ -1,3 +1,5 @@
+Different F measures for the 5 families
+
 woo2 ::: Y_1 = 87.50000000000001, Y_.5 = 81.3953488372093, Y_weighted = 87.50000000000001
 yuchen ::: Y_1 = 2.7325856449747534, Y_.5 = 6.120928995781811, Y_weighted = 8.719004851766964
 mens2 ::: Y_1 = 100, Y_.5 = 100, Y_weighted = 100

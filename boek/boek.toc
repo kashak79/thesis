@@ -116,10 +116,10 @@
 \contentsline {subsection}{\numberline {8.1.3}Setup}{60}{subsection.8.1.3}
 \contentsline {section}{\numberline {8.2}Results}{62}{section.8.2}
 \contentsline {subsection}{\numberline {8.2.1}Rules}{62}{subsection.8.2.1}
-\contentsline {subsection}{\numberline {8.2.2}Weights}{62}{subsection.8.2.2}
-\contentsline {subsection}{\numberline {8.2.3}Comparing to DBLP}{62}{subsection.8.2.3}
-\contentsline {chapter}{\numberline {9}Conclusion and Future Work}{63}{chapter.9}
-\contentsline {section}{\numberline {9.1}Conclusion}{63}{section.9.1}
-\contentsline {section}{\numberline {9.2}Future Work}{64}{section.9.2}
-\contentsline {chapter}{\numberline {A}Dataset}{65}{appendix.A}
-\contentsline {chapter}{\numberline {B}DVD Content}{69}{appendix.B}
+\contentsline {subsection}{\numberline {8.2.2}Weights}{63}{subsection.8.2.2}
+\contentsline {subsection}{\numberline {8.2.3}Comparing to DBLP}{64}{subsection.8.2.3}
+\contentsline {chapter}{\numberline {9}Conclusion and Future Work}{66}{chapter.9}
+\contentsline {section}{\numberline {9.1}Conclusion}{66}{section.9.1}
+\contentsline {section}{\numberline {9.2}Future Work}{67}{section.9.2}
+\contentsline {chapter}{\numberline {A}Dataset}{69}{appendix.A}
+\contentsline {chapter}{\numberline {B}DVD Content}{73}{appendix.B}

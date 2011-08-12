@@ -32,6 +32,8 @@
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {8.1}{\ignorespaces A simplified overview of the test setup starting with the author name and ending with the accuracy results.}}{61}{figure.8.1}
+\contentsline {figure}{\numberline {8.2}{\ignorespaces A comparison of the accuracy, measured as F score, for the different rules and combinations. The first column shows the use of just the community rule (community rule). The second column shows it in combination with the email rule (email rule). The third rule is a combination of the previous two with the affiliation rule (affiliation rule), while the fourth is a combination of all four rules (keyword rule). The fifth column shows the combination of the email, affilation and keyword rule. The last column gives the so-called baseline, this is the F measure we get when all authors are considered different authors.}}{62}{figure.8.2}
+\contentsline {figure}{\numberline {8.3}{\ignorespaces The F measure for different weight distributions for each family. The weight distributions, from left to right, are "basic", "lowkey", "highco" and "highkey". The actual value for the distributions is shown on \autoref {table:distributions}.}}{64}{figure.8.3}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }

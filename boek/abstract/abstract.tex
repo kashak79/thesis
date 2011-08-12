@@ -7,7 +7,7 @@
 %\documentstyle[9pt,twocolumn,technote,twoside]{phdsymp}
 
 \usepackage[english]{babel}       % Voor nederlandstalige hyphenatie (woordsplitsing)
-
+\usepackage{hyperref}
 \usepackage{graphicx}                   % Om figuren te kunnen verwerken
 \usepackage{graphics}			% Om figuren te verwerken.
 \graphicspath{{figuren/}}               % De plaats waar latex zijn figuren gaat halen.
@@ -43,38 +43,61 @@ author disambiguation, data processing, clustering
 
 \section{Introduction}
 
-Researchers loose valuable time searching for 
+Researchers loose valuable time searching for research material related to their field of expertise. The process of finding and verifying experts is extensive and troublesome. The aim of this article is creating a framework that is capable of retrieving publications and related information from online sources, analyzing this information and linking it to the correct author and enabling users to search for experts for a given subject. The main focus is on the disambiguation of authors, the classification into clusters and the extensibility of the framework.
 
+\section{Theoretical Model}
 
-\section{Framework}
+The foundation of the framework is based on the five following observations:
 
-\begin{figure}
-\centering
-%\includegraphics[width= 0.35\textwidth]{fig/architectuur.pdf}
-\caption{Service Manager}
-\label{fig:architectuur}
+\begin{enumerate}
+	\item All instances are different authors until proven otherwise.
+	\item No decision is made permanent.
+	\item Any information is considered partial information.
+	\item A constantly changing input asks for a constantly changing output.
+	\item The stream of information is endless.
+\end{enumerate}
+
+Starting from this foundation, the article lays out the rudiments of the framework, starting with a theoretical model. This model is composed of three layers, combining the structural, informational and algorithmic aspects that emerge from dealing with the difficulties related to author disambiguation. This is achieved by a graph representation where the authors are phased in three different levels. At the highest level is the family name, below are authors that are considered unique (a cluster) containing instances of names that are linked to the publications. This allows name-matching and regrouping without losing information.
+
+The theoretical model also contains a summary of the different rules. They drive the entire flow of the framework by converting new information into similarities between instances. The four rules that are examined are:
+
+\begin{description}
+	\item[- Community Rule] Exploiting the fact that authors often work together with the same co-author. \autoref{fig:coauthor} gives a visual representation of how this works.
+	\item[- Interest Rule] The subjects of publications of the same author are usually located within the same field of research.
+	\item[- Email Rule] Authors with the same email address, are most likely the same person.
+	\item[- Affiliation Rule] Authors are more likely to work at one affiliation at a given time.
+\end{description}
+
+\begin{figure}[ht!]
+	\centering
+	\includegraphics[width= 0.35\textwidth]{fig/coauthorrulenameeq.pdf}
+	\caption{The co-author rule in action: comparing the two instance of James, a similarity ($w_m$) is added as the co-authors Yu and Yu C. match.}
+	\label{fig:pipes}
 \end{figure}
 
-%\begin{description}
-%\item[- Service Interaction Manager] Serves as a regulator for interactions with other parts of the system (AI and Context Manager) and external services.
-%\item[- Service Discovery] An interface offering classic syntax based service discovery. This component is responsible for finding semantic devices and their matching services and invoking and monitoring the semantically described services. 
-%\item[- MatchMaker] A service for matching incoming semantic requests with the descriptions of the services in the local repository. This component communicates with the \textit{Context Manager} in order to take into account the current context. A simple lightweight matchmaker was implemented supporting matching based on inputs, outputs, preconditions and effects, and including the local context into the process. 
-%\item[- Service Repository] This component is responsible for checking the availability of the offered services and provide a list of currently available services to the \textit{MatchMaker}. Services that are composed out of other services can rely on devices on the network for offering some subcomponent, when these are not available, the composite service will not be advertised by the \textit{Service Repository} as available.
-%\item[- Service Execution Manager] The best suitable service out of the obtained matching results, is selected by this component. The selection can be based on how well the offered services matches the semantic requests, but also on context information such as the distance to a goal location. After selecting a service, the semantic inputs are transformed according to the grounding and the service is invoked. The results of the service invocation are then translated to semantic outputs. Another task of this component is the monitoring of the progress of execution. When the execution of the service fails, the \textit{Execution Manager} is informed of this fact by the eventing mechanism and the next best service in the list will be selected for execution.
-%\end{description}
+\section{Pipes and Filters}
+\label{pipes}
 
+The core of the implementation of the framework is the simplicity achieved by pipes and filters. They allow for modifiability and extensibility as pipes processing new sources or calculating new similarities between instances can easily be added to the system. An overview of the different pipes and the flow that runs between them is shown on \autoref{fig:pipes}. The expressiveness of StatefulPipe and they scalability of AsyncConnection in combination with a shared key-value store enables out-of-the-box and carefree distribution.
 
-\section{Technology study}
-
-
-\begin{figure}[htpb!]
-\centering
-%\includegraphics[width= 0.35\textwidth]{fig/abstract_ontologie.pdf}
-\caption{Top-level of robot ontology}
-\label{fig:ontology}
+\begin{figure}[hb!]
+	\centering
+	\includegraphics[width= 0.35\textwidth]{fig/completepipesmall.pdf}
+	\caption{An overview of the different pipes and the flow running between them.}
+	\label{fig:pipes}
 \end{figure}
 
-\section{Testresults}
+\section{Clustering}
+
+The article focuses a lot on the clustering process. This process is responsible for calculating what instances match to same author, based on similarities between the instances. Everytime a rule computes a new similarity, it is possible reclustering has to occur. As there is a constant influx of information, there is a need for a dynamic approach that maintains the cluster quality. 
+
+The article gives an in-depth explanation of the dynamic clustering algorithm described in \cite{dyncluster}. The algorithm itself depends on the minimum cut tree algorithm. The sequential Gusfield's algorithm described in \cite{gusfield} is implemented. 
+
+The article also proposes an addition to the original clustering algorithm. It introduces a new case, acting the same as case 1, but being executed instead of case 3 on the occasion that $2 * \frac{cutvalue(C_v, C_u)}{\left|V\right|} <= \alpha / 2$. This anticipates the fact that a lot of similarities with lower weights occur and they often take place in succession. Often this results in case 3 being calculated multiple times in succession, before finally merging the clusters together. By introducing this new case, the resource-intensive execution of case 3 is switched for the very quick execution of case 1.
+
+The clustering process itself is also a pipe and as noted before, in \autoref{pipes}, the shared key-value store Redis allows this process to be distributed without any trouble.
+
+\section{Results}
 
 \begin{figure}[htpb!]
 \centering
