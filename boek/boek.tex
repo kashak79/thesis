@@ -113,32 +113,30 @@
 \setlength{\hoffset}{-1in}
 \setlength{\voffset}{-1in}
 
-%% geen paginanummering tot we aan de inhoudsopgave komen
+
+
+% geen paginanummering tot we aan de inhoudsopgave komen
 \pagestyle{empty}
-%
-%% voorwoord met dankwoord en toelating tot bruikleen (ondertekend)
+
+% voorwoord met dankwoord en toelating tot bruikleen (ondertekend)
 \include{voorwoord}
 
-% overzicht
 %\include{overzicht}
+
 
 \pagestyle{empty}
 
 \newpage
 
-\include{titelblad/voorblad}
 
-\newpage
-
-
-%%\setlength{\hoffset}{0in}
-%%\setlength{\voffset}{0in}
-%%%\addcontentsline{toc}{chapter}{Extended abstract}
-%%\includepdf[pages=-]{abstract/abstract.pdf}
-%%\setlength{\hoffset}{-1in}
-%%\setlength{\voffset}{-1in}
+\setlength{\hoffset}{0in}
+\setlength{\voffset}{0in}
+%\addcontentsline{toc}{chapter}{Extended abstract}
+\includepdf[pages=-]{abstract/abstract.pdf}
+\setlength{\hoffset}{-1in}
+\setlength{\voffset}{-1in}
 %
-%%\newpage
+\newpage
 %
 %
 %% inhoudstafel
