@@ -22,14 +22,16 @@
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {6.1}{\ignorespaces Pipes and Filters based Architecture.}}{38}{figure.6.1}
 \contentsline {figure}{\numberline {6.2}{\ignorespaces Pipe components, terminology and notations.}}{39}{figure.6.2}
-\contentsline {figure}{\numberline {6.3}{\ignorespaces Filter pipe.}}{41}{figure.6.3}
+\contentsline {figure}{\numberline {6.3}{\ignorespaces Filter pipe.}}{42}{figure.6.3}
 \contentsline {figure}{\numberline {6.4}{\ignorespaces Merge and Split pipes.}}{42}{figure.6.4}
-\contentsline {figure}{\numberline {6.5}{\ignorespaces Pipe Configuration for Instance Integration.}}{44}{figure.6.5}
-\contentsline {figure}{\numberline {6.6}{\ignorespaces Pipe Configuration for Publication Processing.}}{45}{figure.6.6}
-\contentsline {figure}{\numberline {6.7}{\ignorespaces Clustering flow}}{47}{figure.6.7}
+\contentsline {figure}{\numberline {6.5}{\ignorespaces Pipe Configuration for Instance Integration.}}{45}{figure.6.5}
+\contentsline {figure}{\numberline {6.6}{\ignorespaces Pipe Configuration for Magic Facts.}}{45}{figure.6.6}
+\contentsline {figure}{\numberline {6.7}{\ignorespaces Pipe Configuration for Publication Processing.}}{46}{figure.6.7}
+\contentsline {figure}{\numberline {6.8}{\ignorespaces Clustering flow}}{47}{figure.6.8}
+\contentsline {figure}{\numberline {6.9}{\ignorespaces Clustering flow}}{48}{figure.6.9}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {8.1}{\ignorespaces A simplified overview of the testsetup starting with the author name and ending with the accuracy results.}}{59}{figure.8.1}
+\contentsline {figure}{\numberline {8.1}{\ignorespaces A simplified overview of the testsetup starting with the author name and ending with the accuracy results.}}{61}{figure.8.1}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }

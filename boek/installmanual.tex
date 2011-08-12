@@ -1,0 +1,52 @@
+\chapter{Installation Manual}
+
+This installation manual assumes that you have a Linux (physical or virtual) machine at your disposal.
+
+\section{Installing Ruby}
+
+Ruby 1.9.2 or higher and Rubygems 1.3.5 or higher is required. We recommend using RVM (Ruby Version Manager) to take care of managing and installing your Rubies. RVM and Ruby 1.9.2 can be installed by executing:
+
+\begin{verbatim}
+bash < <(curl -s https://rvm.beginrescueend.com/install/rvm)
+rvm install 1.9.2
+\end{verbatim}
+
+You can now activate this Ruby by executing:
+
+\begin{verbatim}
+rvm 1.9.2
+\end{verbatim}
+
+\section{Dependencies}
+
+To install our program dependencies you need the bundler gem. Navigate to the folder where the source code is located. Then run the following commands to install this gem and necessary dependencies:
+
+\begin{verbatim}
+gem install bundler
+bundle install
+\end{verbatim}
+
+For native gems like nokogiri and typhoeus, it is possible that additional packages like ruby-dev, libcurl and/or libxml must be installed.
+
+\section{Installing Redis}
+
+The Redis binaries can best be fetched directly from the debian repositories. Then they can be installed as a debian package:
+
+\begin{verbatim}
+wget http://http.us.debian.org/debian/pool/main/r/redis/redis-server_2.2.12-1_i386.deb
+dpkg -i redis-server_2.2.12-1_i386.deb
+\end{verbatim}
+
+The redis server should now normally start on the default port.
+
+\section{Running the program}
+The available Rake tasks can be inspected with:
+
+\begin{verbatim}
+rake -T
+\end{verbatim}
+
+To start the graph software, execute the "graph:start" task followed by the "test" task. Make sure the right author page url's are pushed to the pipe system in testpipe.rb.
+
+\begin{verbatim}
+\end{verbatim}
