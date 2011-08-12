@@ -39,9 +39,17 @@ Clustering is the process that is responsible for grouping of authors based on t
 
 % TODO precieze resultaat waarden invullen, gemiddelde waarde en vergelijking met dblp
 
-We tested the framework thoroughly using a manually annotated testset of just over 1000 publications. We showed the impact of each of the rules on the accuracy, clarifying that the combination of all four of them render the best results, although the increased accuracy from the addition of a rule is minimal in certain cases. We also compared the accuracy of our framework with the accuracy of DBLP for the tested authors and concluded that our framework transcends DBLP.
+We tested the framework thoroughly using a manually annotated testset of just over 1000 publications. We showed the impact of each of the rules on the accuracy, clarifying that the combination of all four of them render the best average results, although the increased accuracy from the addition of a rule is minimal in certain cases. We also examined the accuracy using different distributions for the rules and we noticed that the community rule had the biggest impact. Finally, we also compared the accuracy of our framework with the accuracy of DBLP for the tested authors and concluded that our framework transcends DBLP by $14\%$ or $17\%$, depending on how the mean accuracy is calculated.
 
 \section{Future Work}
+
+There are many possible additions to be made to the framework. Adding extra online sources by writing new pipes can help us in the search for more information about each author and give us a better view for disambiguation. Additional, extra rules could be written to translate the newly acquired information to similarities between authors which were previously unknown.
+
+Another improvement is enabling the usage of negative weights for similarities. This could undo previously calculated results, when there is reason to believe two instances are not connected. Connected with these negative weights, would be the possibility to have immutable decisions. Especially if this decision is that two authors can never be the same. A simple reason that comes to mind is that they are both co-authors of the same publication.
+
+Using an actual category tree containing a large overview of categories, could help in calculating more accurate similarities between keywords that are not the same, but are bound to the same area of expertise. This could also enable giving higher weights to keywords that are more specific for a certain subject.
+
+Another addition would be using the abstract or even the actual text of the publication for deciding the category. This could get far better results are publication titles are sometimes vague and open for interpretation. Getting the abstract could be achieved by writing plugins for the most popular digital libriries by using web scraping.
 
 % Rekening houden met negatieve gewichten
 % Absolute vaststellingen kunnen maken : deze 2 auteurs zijn ZEKER verschillend en moeten altijd zo blijven

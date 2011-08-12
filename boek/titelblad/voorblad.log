@@ -1,0 +1,635 @@
+This is XeTeX, Version 3.1415926-2.2-0.9997.4 (MiKTeX 2.9) (preloaded format=xelatex 2011.3.10)  12 AUG 2011 12:06
+entering extended mode
+**voorblad.tex
+("C:\Users\Simon Buelens\Workspace\thesis\boek\titelblad\voorblad.tex"
+LaTeX2e <2009/09/24>
+Babel <v3.8l> and hyphenation patterns for english, afrikaans, ancientgreek, ar
+abic, armenian, assamese, basque, bengali, bokmal, bulgarian, catalan, coptic, 
+croatian, czech, danish, dutch, esperanto, estonian, farsi, finnish, french, ga
+lician, german, german-x-2009-06-19, greek, gujarati, hindi, hungarian, iceland
+ic, indonesian, interlingua, irish, italian, kannada, kurmanji, lao, latin, lat
+vian, lithuanian, malayalam, marathi, mongolian, mongolianlmc, monogreek, ngerm
+an, ngerman-x-2009-06-19, nynorsk, oriya, panjabi, pinyin, polish, portuguese, 
+romanian, russian, sanskrit, serbian, slovak, slovenian, spanish, swedish, swis
+sgerman, tamil, telugu, turkish, turkmen, ukenglish, ukrainian, uppersorbian, u
+senglishmax, welsh, loaded.
+
+! LaTeX Error: Environment titlepage undefined.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.6 \begin{titlepage}
+                     
+? q
+OK, entering \batchmode...
+
+! LaTeX Error: Missing \begin{document}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.28 I
+      dentifying experts through a framework for\\
+You're in trouble here.  Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+Overfull \hbox (112.24991pt too wide) in paragraph at lines 28--30
+[]\OT1/cmr/bx/n/17.28 Identifying
+ []
+
+
+Overfull \hbox (25.60999pt too wide) in paragraph at lines 28--30
+\OT1/cmr/bx/n/17.28 ex-
+ []
+
+
+Overfull \hbox (43.37799pt too wide) in paragraph at lines 28--30
+\OT1/cmr/bx/n/17.28 perts
+ []
+
+
+Overfull \hbox (67.33994pt too wide) in paragraph at lines 28--30
+\OT1/cmr/bx/n/17.28 through
+ []
+
+
+Overfull \hbox (9.45pt too wide) in paragraph at lines 28--30
+\OT1/cmr/bx/n/17.28 a
+ []
+
+
+Overfull \hbox (54.87997pt too wide) in paragraph at lines 28--30
+\OT1/cmr/bx/n/17.28 frame-
+ []
+
+
+Overfull \hbox (41.41997pt too wide) in paragraph at lines 28--30
+\OT1/cmr/bx/n/17.28 work
+ []
+
+
+Overfull \hbox (23.59998pt too wide) in paragraph at lines 28--30
+\OT1/cmr/bx/n/17.28 for 
+ []
+
+
+Overfull \hbox (87.93991pt too wide) in paragraph at lines 28--30
+\OT1/cmr/bx/n/17.28 knowledge
+ []
+
+
+Overfull \hbox (25.60999pt too wide) in paragraph at lines 28--30
+\OT1/cmr/bx/n/17.28 ex-
+ []
+
+
+Overfull \hbox (40.06999pt too wide) in paragraph at lines 28--30
+\OT1/cmr/bx/n/17.28 trac-
+ []
+
+
+Overfull \hbox (33.47997pt too wide) in paragraph at lines 28--30
+\OT1/cmr/bx/n/17.28 tion
+ []
+
+
+Overfull \hbox (39.79997pt too wide) in paragraph at lines 28--30
+\OT1/cmr/bx/n/17.28 from
+ []
+
+
+Overfull \hbox (38.87996pt too wide) in paragraph at lines 28--30
+\OT1/cmr/bx/n/17.28 pub-
+ []
+
+
+Overfull \hbox (19.43999pt too wide) in paragraph at lines 28--30
+\OT1/cmr/bx/n/17.28 lic
+ []
+
+
+Overfull \hbox (26.99997pt too wide) in paragraph at lines 28--30
+\OT1/cmr/bx/n/17.28 on-
+ []
+
+
+Overfull \hbox (30.46997pt too wide) in paragraph at lines 28--30
+\OT1/cmr/bx/n/17.28 line
+ []
+
+
+Overfull \hbox (53.63799pt too wide) in paragraph at lines 28--30
+\OT1/cmr/bx/n/17.28 source 
+ []
+
+
+! LaTeX Error: Missing \begin{document}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.33 S
+      imon Buelens, Mattias Putman
+You're in trouble here.  Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+Overfull \hbox (72.91995pt too wide) in paragraph at lines 33--34
+[]\OT1/cmr/bx/n/17.28 Simon
+ []
+
+
+Overfull \hbox (39.96999pt too wide) in paragraph at lines 33--34
+\OT1/cmr/bx/n/17.28 Bue-
+ []
+
+
+Overfull \hbox (38.13799pt too wide) in paragraph at lines 33--34
+\OT1/cmr/bx/n/17.28 lens,
+ []
+
+
+Overfull \hbox (41.93001pt too wide) in paragraph at lines 33--34
+\OT1/cmr/bx/n/17.28 Mat-
+ []
+
+
+Overfull \hbox (30.078pt too wide) in paragraph at lines 33--34
+\OT1/cmr/bx/n/17.28 tias
+ []
+
+
+Overfull \hbox (38.12pt too wide) in paragraph at lines 33--34
+\OT1/cmr/bx/n/17.28 Put-
+ []
+
+
+Overfull \hbox (36.44998pt too wide) in paragraph at lines 33--34
+\OT1/cmr/bx/n/17.28 man 
+ []
+
+
+! LaTeX Error: Missing \begin{document}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.41 P
+      romotoren: prof. dr. ir. Filip De Turck, dr. ir. Elena Tsiporkova (Sir...
+
+You're in trouble here.  Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+Overfull \hbox (84.13268pt too wide) in paragraph at lines 41--42
+[]\OT1/cmr/m/n/12 Promotoren:
+ []
+
+
+Overfull \hbox (23.82614pt too wide) in paragraph at lines 41--42
+\OT1/cmr/m/n/12 prof.
+ []
+
+
+Overfull \hbox (14.36096pt too wide) in paragraph at lines 41--42
+\OT1/cmr/m/n/12 dr.
+ []
+
+
+Overfull \hbox (11.0971pt too wide) in paragraph at lines 41--42
+\OT1/cmr/m/n/12 ir.
+ []
+
+
+Overfull \hbox (23.98726pt too wide) in paragraph at lines 41--42
+\OT1/cmr/m/n/12 Filip
+ []
+
+
+Overfull \hbox (14.1957pt too wide) in paragraph at lines 41--42
+\OT1/cmr/m/n/12 De
+ []
+
+
+Overfull \hbox (32.96494pt too wide) in paragraph at lines 41--42
+\OT1/cmr/m/n/12 Turck,
+ []
+
+
+Overfull \hbox (14.36096pt too wide) in paragraph at lines 41--42
+\OT1/cmr/m/n/12 dr.
+ []
+
+
+Overfull \hbox (11.0971pt too wide) in paragraph at lines 41--42
+\OT1/cmr/m/n/12 ir.
+ []
+
+
+Overfull \hbox (28.88304pt too wide) in paragraph at lines 41--42
+\OT1/cmr/m/n/12 Elena
+ []
+
+
+Overfull \hbox (20.30118pt too wide) in paragraph at lines 41--42
+\OT1/cmr/m/n/12 Tsi-
+ []
+
+
+Overfull \hbox (40.14542pt too wide) in paragraph at lines 41--42
+\OT1/cmr/m/n/12 porkova
+ []
+
+
+Overfull \hbox (22.84698pt too wide) in paragraph at lines 41--42
+\OT1/cmr/m/n/12 (Sir-
+ []
+
+
+Overfull \hbox (20.30118pt too wide) in paragraph at lines 41--42
+\OT1/cmr/m/n/12 ris),
+ []
+
+
+Overfull \hbox (14.36096pt too wide) in paragraph at lines 41--42
+\OT1/cmr/m/n/12 dr.
+ []
+
+
+Overfull \hbox (11.0971pt too wide) in paragraph at lines 41--42
+\OT1/cmr/m/n/12 ir.
+ []
+
+
+Overfull \hbox (23.17337pt too wide) in paragraph at lines 41--42
+\OT1/cmr/m/n/12 Tom
+ []
+
+
+Overfull \hbox (38.1871pt too wide) in paragraph at lines 41--42
+\OT1/cmr/m/n/12 Tourw^^Se
+ []
+
+
+Overfull \hbox (22.84698pt too wide) in paragraph at lines 41--42
+\OT1/cmr/m/n/12 (Sir-
+ []
+
+
+Overfull \hbox (17.03732pt too wide) in paragraph at lines 41--42
+\OT1/cmr/m/n/12 ris) 
+ []
+
+
+! LaTeX Error: Missing \begin{document}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.43 B
+      egeleiders: ir. Anna Hristoskova, ir. Tim Wauters
+You're in trouble here.  Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+Overfull \hbox (80.60771pt too wide) in paragraph at lines 43--44
+[]\OT1/cmr/m/n/12 Begeleiders:
+ []
+
+
+Overfull \hbox (11.0971pt too wide) in paragraph at lines 43--44
+\OT1/cmr/m/n/12 ir.
+ []
+
+
+Overfull \hbox (27.7386pt too wide) in paragraph at lines 43--44
+\OT1/cmr/m/n/12 Anna
+ []
+
+
+Overfull \hbox (25.1928pt too wide) in paragraph at lines 43--44
+\OT1/cmr/m/n/12 Hris-
+ []
+
+
+Overfull \hbox (41.18985pt too wide) in paragraph at lines 43--44
+\OT1/cmr/m/n/12 toskova,
+ []
+
+
+Overfull \hbox (11.0971pt too wide) in paragraph at lines 43--44
+\OT1/cmr/m/n/12 ir.
+ []
+
+
+Overfull \hbox (21.54144pt too wide) in paragraph at lines 43--44
+\OT1/cmr/m/n/12 Tim
+ []
+
+
+Overfull \hbox (42.49123pt too wide) in paragraph at lines 43--44
+\OT1/cmr/m/n/12 Wauters 
+ []
+
+
+! LaTeX Error: The font size command \normalsize is not defined:
+               there is probably something wrong with the class file.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.44 
+     
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+ [1]
+
+! LaTeX Error: Missing \begin{document}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.46 M
+      aster in de ingenieurswetenschappen: computerwetenschappen
+You're in trouble here.  Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+Overfull \hbox (55.63713pt too wide) in paragraph at lines 46--48
+[]\OT1/cmr/m/n/12 Master
+ []
+
+
+Overfull \hbox (9.79156pt too wide) in paragraph at lines 46--48
+\OT1/cmr/m/n/12 in
+ []
+
+
+Overfull \hbox (11.74988pt too wide) in paragraph at lines 46--48
+\OT1/cmr/m/n/12 de
+ []
+
+
+Overfull \hbox (13.70819pt too wide) in paragraph at lines 46--48
+\OT1/cmr/m/n/12 in-
+ []
+
+
+Overfull \hbox (15.01373pt too wide) in paragraph at lines 46--48
+\OT1/cmr/m/n/12 ge-
+ []
+
+
+Overfull \hbox (30.02747pt too wide) in paragraph at lines 46--48
+\OT1/cmr/m/n/12 nieur-
+ []
+
+
+Overfull \hbox (38.25238pt too wide) in paragraph at lines 46--48
+\OT1/cmr/m/n/12 sweten-
+ []
+
+
+Overfull \hbox (32.37744pt too wide) in paragraph at lines 46--48
+\OT1/cmr/m/n/12 schap-
+ []
+
+
+Overfull \hbox (21.86783pt too wide) in paragraph at lines 46--48
+\OT1/cmr/m/n/12 pen:
+ []
+
+
+Overfull \hbox (24.8053pt too wide) in paragraph at lines 46--48
+\OT1/cmr/m/n/12 com-
+ []
+
+
+Overfull \hbox (21.54144pt too wide) in paragraph at lines 46--48
+\OT1/cmr/m/n/12 put-
+ []
+
+
+Overfull \hbox (13.70819pt too wide) in paragraph at lines 46--48
+\OT1/cmr/m/n/12 er-
+ []
+
+
+Overfull \hbox (33.6177pt too wide) in paragraph at lines 46--48
+\OT1/cmr/m/n/12 weten-
+ []
+
+
+Overfull \hbox (32.37744pt too wide) in paragraph at lines 46--48
+\OT1/cmr/m/n/12 schap-
+ []
+
+
+Overfull \hbox (18.60397pt too wide) in paragraph at lines 46--48
+\OT1/cmr/m/n/12 pen
+ []
+
+
+Overfull \hbox (25.1928pt too wide) in paragraph at lines 46--48
+\OT1/cmr/m/n/12 Mas-
+ []
+
+
+Overfull \hbox (18.27759pt too wide) in paragraph at lines 46--48
+\OT1/cmr/m/n/12 ter-
+ []
+
+
+Overfull \hbox (26.11084pt too wide) in paragraph at lines 46--48
+\OT1/cmr/m/n/12 proef
+ []
+
+
+Overfull \hbox (24.8053pt too wide) in paragraph at lines 46--48
+\OT1/cmr/m/n/12 inge-
+ []
+
+
+Overfull \hbox (13.70819pt too wide) in paragraph at lines 46--48
+\OT1/cmr/m/n/12 di-
+ []
+
+
+Overfull \hbox (18.27759pt too wide) in paragraph at lines 46--48
+\OT1/cmr/m/n/12 end
+ []
+
+
+Overfull \hbox (15.01373pt too wide) in paragraph at lines 46--48
+\OT1/cmr/m/n/12 tot
+ []
+
+
+Overfull \hbox (16.31927pt too wide) in paragraph at lines 46--48
+\OT1/cmr/m/n/12 het
+ []
+
+
+Overfull \hbox (15.99289pt too wide) in paragraph at lines 46--48
+\OT1/cmr/m/n/12 be-
+ []
+
+
+Overfull \hbox (27.41638pt too wide) in paragraph at lines 46--48
+\OT1/cmr/m/n/12 halen
+ []
+
+
+Overfull \hbox (17.9512pt too wide) in paragraph at lines 46--48
+\OT1/cmr/m/n/12 van
+ []
+
+
+Overfull \hbox (11.74988pt too wide) in paragraph at lines 46--48
+\OT1/cmr/m/n/12 de
+ []
+
+
+Overfull \hbox (50.32864pt too wide) in paragraph at lines 46--48
+\OT1/cmr/m/n/12 academis-
+ []
+
+
+Overfull \hbox (16.64566pt too wide) in paragraph at lines 46--48
+\OT1/cmr/m/n/12 che
+ []
+
+
+Overfull \hbox (28.72192pt too wide) in paragraph at lines 46--48
+\OT1/cmr/m/n/12 graad
+ []
+
+
+Overfull \hbox (17.9512pt too wide) in paragraph at lines 46--48
+\OT1/cmr/m/n/12 van 
+ []
+
+
+! LaTeX Error: Environment table undefined.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.51 \begin{table}
+                  [width=1.0\textwidth]
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+
+! LaTeX Error: Missing \begin{document}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.51 \begin{table}[
+                   width=1.0\textwidth]
+You're in trouble here.  Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+! Missing number, treated as zero.
+<to be read again> 
+                   ]
+l.51 \begin{table}[width=1.0\textwidth]
+                                       
+A number should have been here; I inserted `0'.
+(If you can't figure out why I needed to see a number,
+look up `weird error' in the index to The TeXbook.)
+
+! Illegal unit of measure (pt inserted).
+<to be read again> 
+                   ]
+l.51 \begin{table}[width=1.0\textwidth]
+                                       
+Dimensions can be in units of em, ex, in, pt, pc,
+cm, mm, dd, cc, bp, or sp; but yours is a new one!
+I'll assume that you meant to say pt, for printer's points.
+To recover gracefully from this error, it's best to
+delete the erroneous units; e.g., type `2' to delete
+two letters. (See Chapter 27 of The TeXbook.)
+
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <12> on input line 52.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <8> on input line 52.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <6> on input line 52.
+! Undefined control sequence.
+l.54 Academiejaar 2010--2011 & \includegraphics
+                                               [height=2cm]{fig/ruglogo}
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+
+! LaTeX Error: \begin{document} ended by \end{table}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.56 \end{table}
+                
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+
+Overfull \hbox (80.05493pt too wide) in paragraph at lines 51--57
+[]\OT1/cmr/m/n/12 [width=1.0]
+ []
+
+
+Overfull \hbox (250.98631pt too wide) in paragraph at lines 51--57
+[]
+ []
+
+
+! LaTeX Error: \begin{document} ended by \end{titlepage}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.58 \end{titlepage}
+                    
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+)
+! Emergency stop.
+<*> voorblad.tex
+                
+*** (job aborted, no legal \end found)
+
+ 
+Here is how much of TeX's memory you used:
+ 35 strings out of 429293
+ 412 string characters out of 3170420
+ 48222 words of memory out of 3000000
+ 3372 multiletter control sequences out of 15000+200000
+ 6683 words of font info for 24 fonts, out of 3000000 for 9000
+ 669 hyphenation exceptions out of 8191
+ 19i,6n,12p,130b,158s stack positions out of 5000i,500n,10000p,200000b,50000s
+Output written on voorblad.pdf (1 page).

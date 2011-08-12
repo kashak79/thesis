@@ -64,7 +64,7 @@ It is important to note that the division of the clusters is solely based on the
 \subsection{Test set}
 \label{sec:testset}
 
-As stated before, we want to resemble a realistic combination of easier and harder use-cases for our own dataset. As \autoref{tab:testset} shows, we have chosen five base names, each with a number of variations and have manually disambiguated these variations and combined the authors into clusters using the information on DBLP and the actual papers, if they were available. In total our test set contains just over a 1000 publications. An overview of the names that correspond to each of these base names, can be found in \ref{appendix:testset}, together with links to DBLP. In order to make it easier, we will use the following definition in the rest of the text:
+As stated before, we want to resemble a realistic combination of easier and harder use-cases for our own dataset. As \autoref{tab:testset} shows, we have chosen five base names, each with a number of variations and have manually disambiguated these variations and combined the authors into clusters using the information on DBLP and the actual papers, if they were available. In total our test set contains just over a 1000 publications. An overview of the names that correspond to each of these base names, can be found in \autoref{appendix:testset}, together with links to DBLP. In order to make it easier, we will use the following definition in the rest of the text:
 
 \begin{mydef}
 	\bfseries{Family} With the term family, we refer to one of the five base names.
@@ -140,17 +140,142 @@ After calculating these statistical values for all the clusters in the ground tr
 
 \subsection{Rules}
 
-We have tested the influence of the different rules on the accuracy. For each of the families, we tested the same combination of rules in succession. The F measure for each of these combinations can be seen on \ref{fig:diff-rules}.
+We have tested the influence of the different rules on the accuracy. For each of the families, we tested the same combination of rules in succession. The F measure for each of these combinations can be seen on \autoref{fig:test-rules}. The combination of all four rules, renders the best result, although sometimes the increase in accuracy from an additional rule is minimal. For "Chen", adding the affiliation rule to the community and email rule even results in a small decrease in accuracy. This is because certain authors are clustered together wrongly. The exact F measures for this combination can be found in \autoref{table:comparison-dblp}. 
+
+\begin{figure}[htb]
+	\centering
+		\includegraphics[width=0.80\textwidth]{./fig/test-rules.pdf}
+	\caption{A comparison of the accuracy, measured as F score, for the different rules and combinations. The first column shows the use of just the community rule (community rule). The second column shows it in combination with the email rule (email rule). The third rule is a combination of the previous two with the affiliation rule (affiliation rule), while the fourth is a combination of all four rules (keyword rule). The fifth column shows the combination of the email, affilation and keyword rule. The last column gives the so-called baseline, this is the F measure we get when all authors are considered different authors.}
+	\label{fig:test-rules}
+\end{figure}
+
+The weights we used for the different rules are the same in each of the tests and is the result of \autoref{sub:weights}. We used the weight distribution called "highkey", as denoted in \autoref{table:highkey}, as this distribution yielded the highest average accuracy.
+
 
 % bespreek figuur
 
 \subsection{Weights}
+\label{sub:weights}
 
-We have tested different values for the weights allocated to each of the rules and also the value of \alpha which is used to determine if reclustering should occur. 
+We have tested different values for the weights allocated to each of the rules and also the value of $\alpha$ which is used to determine if reclustering should occur. The results are shown on \autoref{fig:test-weights}, while the different distributions are depicted in \autoref{table:distributions}. The average F measure for each distribution over the five families is given by:
+
+\begin{table}[ht]
+	\center
+	\begin{tabular}{|c|c|}
+		\hline
+		\bfseries{Distribution} & \bfseries{Average F measure} \\
+		\hline
+		basic & 81,5\% \\
+		\hline
+		lowkey & 72,7\% \\
+		\hline
+		highco & 79,0\% \\
+		\hline
+		highkey & 84,5\% \\
+		\hline
+	\end{tabular}
+	\caption{The average F measure over the five families for each of the weight distributions.}
+	\label{table:avg-f-distr}
+\end{table}
+
+The distribution "highkey" gets the best average accuracy. This distribution gives high values to all properties, favoring a lot of clustering, while the higher alpha makes sure there is still a threshold. Only for family "Johnson", it doesn't get the highest F measure. This can be attributed to too much clustering, resulting in a higher recall, but a lower precision. The actual F measures for this distribution can be seen in \autoref{comparison-dblp}.
+
+\begin{table}[ht]
+	\begin{minipage}[b]{0.5\linewidth}\centering
+		\begin{tabular}{|c|c|}
+			\hline
+			\bfseries{Property} & \bfseries{Weight} \\
+			\hline
+			$\alpha$ & 25 \\
+			\hline
+			keyword rule & 4\\
+			\hline
+			community rule & 8\\
+			\hline
+			affiliation rule & 10\\
+			\hline
+			email rule & 1000\\
+			\hline
+		\end{tabular}
+		\caption{Basic}
+	\end{minipage}
+	\begin{minipage}[b]{0.5\linewidth}
+		\centering
+		\begin{tabular}{|c|c|}
+			\hline
+			\bfseries{Property} & \bfseries{Weight} \\
+			\hline
+			$\alpha$ & 25 \\
+			\hline
+			keyword rule & 1\\
+			\hline
+			community rule & 8\\
+			\hline
+			affiliation rule & 10\\
+			\hline
+			email rule & 1000\\
+			\hline
+		\end{tabular}
+		\caption{Lowkey}
+	\end{minipage}
+	\begin{minipage}[b]{0.5\linewidth}\centering
+		\begin{tabular}{|c|c|}
+			\hline
+			\bfseries{Property} & \bfseries{Weight} \\
+			\hline
+			$\alpha$ & 25 \\
+			\hline
+			keyword rule & 1\\
+			\hline
+			community rule & 50\\
+			\hline
+			affiliation rule & 10\\
+			\hline
+			email rule & 1000\\
+			\hline
+		\end{tabular}
+		\caption{Highco}
+	\end{minipage}
+	\begin{minipage}[b]{0.5\linewidth}
+		\centering
+		\begin{tabular}{|c|c|}
+			\hline
+			\bfseries{Property} & \bfseries{Weight} \\
+			\hline
+			$\alpha$ & 25 \\
+			\hline
+			keyword rule & 10\\
+			\hline
+			community rule & 50\\
+			\hline
+			affiliation rule & 10\\
+			\hline
+			email rule & 1000\\
+			\hline
+		\end{tabular}
+		\caption{Highkey}
+		\label{table:highkey}
+	\end{minipage}
+	\caption{Weight distributions with the name of each distribution as used in \autoref{fig:test-weight}}
+	\label{table:distributions}
+\end{table}
+
+\begin{figure}[htb]
+	\centering
+		\includegraphics[width=0.80\textwidth]{./fig/test-weights.pdf}
+	\caption{The F measure for different weight distributions for each family. The weight distributions, from left to right, are "basic", "lowkey", "highco" and "highkey". The actual value for the distributions is shown on \autoref{table:distributions}.}
+	\label{fig:test-weights}
+\end{figure}
 
 \subsection{Comparing to DBLP}
 
-We have calculated the F measure for each of the families as they are divided on DBLP. They are depicted on \ref{table:f-dblp}. The divisions for "Turck" and "Mens" are completely correct, the other three are far less accurate with "Chen" having an astonishingly low F measure of $2.73\%$.
+We have calculated the F measure for each of the families as they are divided on DBLP, to make a comparison with our own results. The values are shown on \autoref{table:f-dblp}. The divisions for "Turck" and "Mens" are completely correct, the other three are far less accurate with "Chen" having an astonishingly low F measure of $2.73\%$. We compare the F measure to our highest average scoring distribution, "highkey". We also compare the mean F measures and a weighted variation of the mean measure which is calculated using the following formula ($F_X(f)$ is the F measure for family name $f$ for $X$):
+
+	\[
+	\sum_{f \in families}{\frac{F_{X}(f)}{|f_{publications}} * N},~X \in \left\{DBLP,highkey\right\},~N = total~number~of~publications
+\]
+
+Our framework scores $14\%$ to $17\%$ better than DBLP, depending on how the mean value is measured.
 
 \begin{table}
 	\centering
@@ -158,10 +283,11 @@ We have calculated the F measure for each of the families as they are divided on
 			\hline
 			& \bfseries{Turck} & \bfseries{Chen} & \bfseries{Woo} & \bfseries{Mens} & \bfseries{Johnson} & \bfseries{Mean} & \bfseries{Weighted} \\
 			\hline
-			\bfseries{DBLP} & 100.0\% & 87.5\% & 100.0\% & 2.7\% & 62.8\% & 70.6\% & 61.8\%\\
+			\bfseries{DBLP} & 100.0\% & 87.5\% & 100.0\% & 2.7\% & 62.8\% & 70.6\% & 61.8\% \\
 			\hline
-			\bfseries{Framework} & & & & & & \\
+			\bfseries{Highkey} & 100.0\% & 94,1\% & 89,8\% & 63,7\% & 74,7\% & 84,5\% & 79,0\% \\
+			\hline
 		\end{tabular}
 	\caption{Comparison of the F measures for the different families as they are divided on DBLP and as calculated by our framework. The last columns give the mean F measure and a weighted distribution based on the number of papers in each family.}
-	\label{tab:f-dblp}
+	\label{tab:comparison-dblp}
 \end{table}
