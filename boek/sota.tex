@@ -103,7 +103,9 @@ There are many different approaches with different computational performances. W
 \subsection*{Fuzzy String matching}
 \label{stringmatching}
 
-% TODO explain
+Fuzzy string matching is the technique of finding strings that match a pattern approximately (rather than exactly). Very different methods of string matching exist. Most of them either use a distance metric or a similarity metric. An example of an algorithm measuring the distance between two string is the Jaro-Winkler algorithm. The Jaro–Winkler distance metric is designed and best suited for short strings such as person names. A comparison of this algorithms with others can be found in \cite{cohen2003comparison}.
+
+An example of an method using a similarity metric is Dynamic Time Warping. In general, DTW is a method that allows a computer to find an optimal match between two given sequences (e.g. time series) with certain restrictions. The sequences are "warped" non-linearly in the time dimension to determine a measure of their similarity independent of certain non-linear variations in the time dimension.
 
 \subsection*{Part-Of-Speech Tagger}
 \label{postagger}
@@ -116,16 +118,18 @@ The POS Tagger we refer to is the Stanford Part-Of-Speech Tagger. This is a Java
 
 There is also a Ruby port of the Lingua::EN::Tagger, called EngTagger, available as a gem. Documentation can be found at \cite{engtagger}.
 
-\subsection*{Graph pattern-matching}
+\subsection*{Graph pattern-matching and Gremlin}
 \label{graphs}
 
-% TODO explain
+Gremlin is a domain specific language for traversing property graphs. Gremlin makes use of Groovy and Pipes to perform complex graph traversals. This language has application in the areas of graph query, analysis, and manipulation. One of the techniques used in Gemlin is graph pattern matching. Many graph applications have to do with identifying patterns in the graph. That is, identifying sub-graphs that match a particular topology and/or feature set. In single-relational graphs, usually a topology is only considered. An interesting article about pattern matching can be found at \cite{markopatterns}.
 
-%\subsection{Gremlin}
+\subsection{JUNG}
 
-%\subsection{JUNG}
+JUNG (the Java Universal Network/Graph Framework) is a software library that provides a common and extendible language for the modeling, analysis, and visualization of data that can be represented as a graph or network. It is written in Java, which allows JUNG-based applications to make use of the extensive built-in capabilities of the Java API, as well as those of other existing third-party Java libraries.
 
-%\subsection{Neo4j}
+The JUNG architecture is designed to support a variety of representations of entities and their relations, such as directed and undirected graphs, multi-modal graphs, graphs with parallel edges, and hypergraphs. It provides a mechanism for annotating graphs, entities, and relations with metadata. This facilitates the creation of analytic tools for complex data sets that can examine the relations between entities as well as the metadata attached to each entity and relation.
+
+JUNG comes with implementations of well known graph-algorithms and visualization algorithms which might be very useful.
 
 \section{Opinion mining}
 \label{opinionmining}

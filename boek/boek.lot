@@ -1,0 +1,23 @@
+\select@language {english}
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {2.1}{\ignorespaces Applications focusing on calculating social media influence}}{10}{table.2.1}
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {8.1}{\ignorespaces The nine DBLP datasets used in \cite {han2004two}. Each row contains the base name, the number of recorded variations and the total amount of examined publications of this name. The last four columns show the accuracy measured using the different rules. The two bottom rows give the mean accuracy for the rules and the standard deviation.}}{62}{table.8.1}
+\contentsline {table}{\numberline {8.2}{\ignorespaces The classification of our manually composed dataset. The first column contains the family. This is the name we used to find the authors on DBLP. The second column gives the number of clusters we defined manually for this family. The third column gives the number of publications we found on DBLP and the last column gives the number of different authors DBLP gives for this base name.}}{63}{table.8.2}
+\contentsline {table}{\numberline {8.3}{\ignorespaces The average F measure over the five families for each of the weight distributions.}}{67}{table.8.3}
+\contentsline {table}{\numberline {8.4}{\ignorespaces Basic}}{67}{table.8.4}
+\contentsline {table}{\numberline {8.5}{\ignorespaces Lowkey}}{67}{table.8.5}
+\contentsline {table}{\numberline {8.6}{\ignorespaces Highco}}{67}{table.8.6}
+\contentsline {table}{\numberline {8.7}{\ignorespaces Highkey}}{67}{table.8.7}
+\contentsline {table}{\numberline {8.8}{\ignorespaces Weight distributions with the name of each distribution as used in \autoref {fig:test-weight}}}{67}{table.8.8}
+\contentsline {table}{\numberline {8.9}{\ignorespaces Comparison of the F measures for the different families as they are divided on DBLP and as calculated by our framework. The last columns give the mean F measure and a weighted distribution based on the number of papers in each family.}}{67}{table.8.9}
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }

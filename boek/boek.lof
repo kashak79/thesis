@@ -1,0 +1,40 @@
+\select@language {english}
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {2.1}{\ignorespaces The internal representation of the entity Daniel, his relationships to other entities and the conclusions we can draw from analyzing these relationships.}}{11}{figure.2.1}
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {3.1}{\ignorespaces First attempt at the architecture based on the necessary components}}{16}{figure.3.1}
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {5.1}{\ignorespaces Merging of two authors}}{23}{figure.5.1}
+\contentsline {figure}{\numberline {5.2}{\ignorespaces Grouping of instances under the same author}}{24}{figure.5.2}
+\contentsline {figure}{\numberline {5.3}{\ignorespaces Problem with instance-author matching}}{26}{figure.5.3}
+\contentsline {figure}{\numberline {5.4}{\ignorespaces Solution of instance-author matching: pure name matching}}{27}{figure.5.4}
+\contentsline {figure}{\numberline {5.5}{\ignorespaces Overview of the structure layer of the graph model.}}{28}{figure.5.5}
+\contentsline {figure}{\numberline {5.6}{\ignorespaces Overview of the structure layer of the graph model with the similarity layer. We left out the family node.}}{29}{figure.5.6}
+\contentsline {figure}{\numberline {5.7}{\ignorespaces Community Rule combining the "Name Matching" and "Name Equality" variant.}}{31}{figure.5.7}
+\contentsline {figure}{\numberline {5.8}{\ignorespaces All three variants of the Community Rule combined.}}{32}{figure.5.8}
+\contentsline {figure}{\numberline {5.9}{\ignorespaces Main combinations of the variants of the Community Rule.}}{33}{figure.5.9}
+\contentsline {figure}{\numberline {5.10}{\ignorespaces Interest Rule.}}{35}{figure.5.10}
+\contentsline {figure}{\numberline {5.11}{\ignorespaces Email Rule.}}{36}{figure.5.11}
+\contentsline {figure}{\numberline {5.12}{\ignorespaces Affiliation Rule.}}{37}{figure.5.12}
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {6.1}{\ignorespaces Pipes and Filters based Architecture.}}{39}{figure.6.1}
+\contentsline {figure}{\numberline {6.2}{\ignorespaces Pipe components, terminology and notations.}}{40}{figure.6.2}
+\contentsline {figure}{\numberline {6.3}{\ignorespaces Filter pipe.}}{43}{figure.6.3}
+\contentsline {figure}{\numberline {6.4}{\ignorespaces Merge and Split pipes.}}{43}{figure.6.4}
+\contentsline {figure}{\numberline {6.5}{\ignorespaces Pipe Configuration for Instance Integration.}}{46}{figure.6.5}
+\contentsline {figure}{\numberline {6.6}{\ignorespaces Pipe Configuration for Magic Facts.}}{46}{figure.6.6}
+\contentsline {figure}{\numberline {6.7}{\ignorespaces Pipe Configuration for Publication Processing.}}{47}{figure.6.7}
+\contentsline {figure}{\numberline {6.8}{\ignorespaces Clustering flow}}{49}{figure.6.8}
+\contentsline {figure}{\numberline {6.9}{\ignorespaces Pipe Configuration of the Rules Network}}{50}{figure.6.9}
+\contentsline {figure}{\numberline {6.10}{\ignorespaces Clustering flow}}{52}{figure.6.10}
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {8.1}{\ignorespaces A simplified overview of the test setup starting with the author name and ending with the accuracy results.}}{64}{figure.8.1}
+\contentsline {figure}{\numberline {8.2}{\ignorespaces A comparison of the accuracy, measured as F score, for the different rules and combinations. The first column shows the use of just the community rule (community rule). The second column shows it in combination with the email rule (email rule). The third rule is a combination of the previous two with the affiliation rule (affiliation rule), while the fourth is a combination of all four rules (keyword rule). The fifth column shows the combination of the email, affilation and keyword rule. The last column gives the so-called baseline, this is the F measure we get when all authors are considered different authors.}}{66}{figure.8.2}
+\contentsline {figure}{\numberline {8.3}{\ignorespaces The F measure for different weight distributions for each family. The weight distributions, from left to right, are "basic", "lowkey", "highco" and "highkey". The actual value for the distributions is shown on \autoref {table:distributions}.}}{68}{figure.8.3}
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
