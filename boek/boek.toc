@@ -97,8 +97,7 @@
 \contentsline {subsection}{\numberline {6.4.4}Publications}{45}{subsection.6.4.4}
 \contentsline {paragraph}{Keyword Extraction}{45}{section*.48}
 \contentsline {subsection}{\numberline {6.4.5}Rules}{45}{subsection.6.4.5}
-\contentsline {subsection}{\numberline {6.4.6}Clustering}{47}{subsection.6.4.6}
-\contentsline {subsection}{\numberline {6.4.7}Overview}{47}{subsection.6.4.7}
+\contentsline {subsection}{\numberline {6.4.6}Overview}{47}{subsection.6.4.6}
 \contentsline {section}{\numberline {6.5}Inside the Pipes}{47}{section.6.5}
 \contentsline {subsection}{\numberline {6.5.1}Dependency Resolution}{47}{subsection.6.5.1}
 \contentsline {subsection}{\numberline {6.5.2}Concurrent, incremental Clustering}{47}{subsection.6.5.2}
