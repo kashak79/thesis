@@ -13,7 +13,7 @@ We will use the following steps to build such a platform:
 	\item \textbf{Seed data} We need a list of author names to start with.
 	\item \textbf{Information extraction}
 		\begin{itemize}
-			\item Looking up personal information, ie. profiles from LinkedIn.
+			\item Looking up personal information, for instance profiles from LinkedIn.
 			\item Looking up publications, extracting title, co-authors and affiliation. The co-authors can be used as new input for further information extraction.
 			\item Categorize publications by subject
 		\end{itemize}
@@ -57,7 +57,7 @@ There is a big dynamic concept tied to our thesis. People who are experts on a c
 
 % TODO make a comparison between the first architecture we came up with and the final architecture?
 
-Based on the scenario and the described features, we came up with the necessary components our framework needs. \autoref{fig:architectuur} shows a simplistic version of how the architecture will look like. The different components of the framework and their connection toward eachother is displayed. In the next sections, the most important components will be explained at large.
+Based on the scenario and the described features, we came up with the necessary components our framework needs. \autoref{fig:architectuur} shows a simplistic version of how the architecture will look like. The different components of the framework and their connection toward each other is displayed. In the next sections, the most important components will be explained at large.
 
 % TODO : say something about the seed data and scoperfu.rb ?
 
@@ -80,7 +80,7 @@ The Data Collector receives sources from the Source Generator. It will call each
 
 This component holds a collection of plugins, each responsible for generating data to be used by our framework coming from one source, and sends the a reference of the needed, decided by the Iteration Manager, plugins to the Source Queue in the Data Collector. 
 
-There are different kind of plugins, according to the possible data that can be extracted. This data can include background information about a name, like location, affiliation, work experience or university. Other plugins extract information about publications (title, authors, date...) and yet another might be responsible for collecting the pdf of a publication.
+There are different kind of plugins, according to the possible data that can be extracted. This data can include background information about a name, like location, affiliation, work experience or university. Other plugins extract information about publications (title, authors, date...) and yet another might be responsible for collecting the PDF of a publication.
 
 %For more information about the different plugins and how they work, please refer to ??
 %We want to/have set up our framework to allow new plugins to be made and used easily, extending the possibilities and usages.
@@ -99,11 +99,11 @@ The Category Builder's role is deciding the subject(s) of the publications and a
 
 % TODO : Uitleg hoe dit precies in zijn werk gaat, gebruik makende van de Wikipedia API, Stanford POS Tagger.
 
-We have two main possibilties to decide the subject of a publication. The first is by only focusing on the publication title, the second is by also making use of the actual text in the publication. The second will yield us with better results, but getting the text and analysing it will take a lot more time than just analysing a few words. 
+We have two main possibilities to decide the subject of a publication. The first is by only focusing on the publication title, the second is by also making use of the actual text in the publication. The second will yield us with better results, but getting the text and analyzing it will take a lot more time than just analyzing a few words. 
 
 For both manners in deciding the subject, we will make use of the Stanford Part-of-speech Tagger. We use it to select the adjectives and nouns, as these contain the most interesting information regarding to deciding the field of the publication.
 
-When only having the publication title, the words marked by the Stanford POS Tagger will be searched on Wikipedia, by use of the API. We will search for the words seperately and make combinations, based on the closeness of the words in their original context.
+When only having the publication title, the words marked by the Stanford POS Tagger will be searched on Wikipedia, by use of the API. We will search for the words separately and make combinations, based on the closeness of the words in their original context.
 
 % TODO : more information of HOW exactly this will work? What happens after we search them on Wikipedia ? How do we decide which ones are crap, which ones aren't ? Probably better to dedicate a whole section for the Category Builder.
 
@@ -113,9 +113,9 @@ When we have the original text of the publication, the easiest method is scannin
 \subsection{Disambiguator}
 \label{disambiguator}
 
-The disambiguation is an important factor towards the strength of our framework. In the data collection phase, we view each name as e new object in our database, even if that name is already stored. This is necessairy to keep the option open that the same name might be connected towards different authors. This also means our database grows fast. 
+The disambiguation is an important factor towards the strength of our framework. In the data collection phase, we view each name as e new object in our database, even if that name is already stored. This is necessary to keep the option open that the same name might be connected towards different authors. This also means our database grows fast. 
 
-The disambiguation exists out of a number of rules. These inspect several objects in the database and define the probabilities that names, typically connected to a publication or a profile, are connected to eachother and to one author. %These probabilities are stored as weights of edges between these objects.
+The disambiguation exists out of a number of rules. These inspect several objects in the database and define the probabilities that names, typically connected to a publication or a profile, are connected to each other and to one author. %These probabilities are stored as weights of edges between these objects.
 
 \subsection{Data Merger}
 

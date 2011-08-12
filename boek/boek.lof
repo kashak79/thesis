@@ -25,14 +25,16 @@
 \contentsline {figure}{\numberline {6.3}{\ignorespaces Filter pipe.}}{42}{figure.6.3}
 \contentsline {figure}{\numberline {6.4}{\ignorespaces Merge and Split pipes.}}{42}{figure.6.4}
 \contentsline {figure}{\numberline {6.5}{\ignorespaces Pipe Configuration for Instance Integration.}}{45}{figure.6.5}
-\contentsline {figure}{\numberline {6.6}{\ignorespaces Pipe Configuration for Magic Facts.}}{45}{figure.6.6}
+\contentsline {figure}{\numberline {6.6}{\ignorespaces Pipe Configuration for Magic Facts.}}{46}{figure.6.6}
 \contentsline {figure}{\numberline {6.7}{\ignorespaces Pipe Configuration for Publication Processing.}}{46}{figure.6.7}
 \contentsline {figure}{\numberline {6.8}{\ignorespaces Clustering flow}}{48}{figure.6.8}
 \contentsline {figure}{\numberline {6.9}{\ignorespaces Pipe Configuration of the Rules Network}}{49}{figure.6.9}
 \contentsline {figure}{\numberline {6.10}{\ignorespaces Clustering flow}}{51}{figure.6.10}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {8.1}{\ignorespaces A simplified overview of the testsetup starting with the author name and ending with the accuracy results.}}{63}{figure.8.1}
+\contentsline {figure}{\numberline {8.1}{\ignorespaces A simplified overview of the test setup starting with the author name and ending with the accuracy results.}}{63}{figure.8.1}
+\contentsline {figure}{\numberline {8.2}{\ignorespaces A comparison of the accuracy, measured as F score, for the different rules and combinations. The first column shows the use of just the community rule (community rule). The second column shows it in combination with the email rule (email rule). The third rule is a combination of the previous two with the affiliation rule (affiliation rule), while the fourth is a combination of all four rules (keyword rule). The fifth column shows the combination of the email, affilation and keyword rule. The last column gives the so-called baseline, this is the F measure we get when all authors are considered different authors.}}{64}{figure.8.2}
+\contentsline {figure}{\numberline {8.3}{\ignorespaces The F measure for different weight distributions for each family. The weight distributions, from left to right, are "basic", "lowkey", "highco" and "highkey". The actual value for the distributions is shown on \autoref {table:distributions}.}}{66}{figure.8.3}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
