@@ -1,5 +1,25 @@
 
-$config = :highkey
+$config = :custom
+
+  module Configuration
+  
+    ALPHA = 5
+    AFFILIATION_WEIGHT = 50
+    AFFILIATION_THRESHOLD = 0.6
+    EMAIL_WEIGHT = 1000
+    KEYWORD_WEIGHT = 0
+    COAUTHOR_EQNAME_WEIGHT = 50
+    COAUTHOR_MATCHINGNAME_WEIGHT = 30
+    DEBUG = true
+    
+    COMMUNITY = true
+    EMAIL = true
+    AFFILIATION = true
+    KEYWORD = false
+    
+    CASE3_SPECIAL = ALPHA/2
+    
+  end
 
 if $config == :lowkey
   module Configuration
@@ -73,7 +93,7 @@ elsif $config == :highkey
     COAUTHOR_MATCHINGNAME_WEIGHT = 30
     DEBUG = true
     
-    COMMUNITY = true
+    COMMUNITY = false
     EMAIL = true
     AFFILIATION = true
     KEYWORD = true
