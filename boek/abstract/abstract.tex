@@ -33,17 +33,24 @@
 
 \begin{abstract} 
 
-Researchers are loosing too much valuable time searching for related research material. This article 
+Researchers are losing too much valuable time searching for related research material. There are only few services out there that offer a keyword-based search for retrieving experts. The goal of this article is the creation of a framework that retrieves information from online sources, combines the information based on author and gives the authors a ranking based on the level of expertise for a certain keyword or keyphrase. The article starts with from a theoretical point of view, defining the optimum manner of execution. Afterwards, the actual implementation is thoroughly explained, which makes use of a graph representation and pipes and filters. The clustering process, responsible for linking the names to the actual authors, is one of the key components. The article ends with a comparative analysis of the results.
 
 \end{abstract}
 
 \begin{keywords}
-author disambiguation, data processing, clustering
+author disambiguation, data processing, clustering, pipes and filters
 \end{keywords}
 
 \section{Introduction}
 
 Researchers lose valuable time searching for research material related to their field of expertise. The process of finding and verifying experts is extensive and troublesome. The aim of this article is creating a framework that is capable of retrieving publications and related information from online sources, analyzing this information and linking it to the correct author and enabling users to search for experts for a given subject. The main focus is on the disambiguation of authors, the classification into clusters and the extensibility of the framework.
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width= 0.38\textwidth]{fig/architecturev2.pdf}
+	\caption{The architecture: pipes and filters.}
+	\label{fig:arch}
+\end{figure}
 
 \section{Theoretical Model}
 
@@ -70,7 +77,7 @@ The theoretical model also contains a summary of the different rules. They drive
 
 \begin{figure}[ht!]
 	\centering
-	\includegraphics[width= 0.35\textwidth]{fig/coauthorrulenameeq.pdf}
+	\includegraphics[width= 0.38\textwidth]{fig/coauthorrulenameeq.pdf}
 	\caption{The co-author rule in action: comparing the two instance of James, a similarity ($w_m$) is added as the co-authors Yu and Yu C. match.}
 	\label{fig:pipes}
 \end{figure}
@@ -82,11 +89,11 @@ Rules can be performed on three different scopes: instances with the same name, 
 \section{Pipes and Filters}
 \label{pipes}
 
-The core of the implementation of the framework is the simplicity achieved by pipes and filters. They allow for modifiability and extensibility as pipes processing new sources or calculating new similarities between instances can easily be added to the system. An overview of the different pipes and the flow that runs between them is shown on \autoref{fig:pipes}. The expressiveness of StatefulPipe and the scalability of AsyncConnection in combination with a shared key-value store enables out-of-the-box and carefree scalability.
+The core of the implementation of the framework is the simplicity achieved by pipes and filters. The architecture is shown in \autoref{fig:arch}. They allow for modifiability and extensibility as pipes processing new sources or calculating new similarities between instances can easily be added to the system. An overview of the different pipes and the flow that runs between them is shown on \autoref{fig:pipes}. The expressiveness of StatefulPipe and the scalability of AsyncConnection in combination with a shared key-value store enables out-of-the-box and carefree scalability.
 
 \begin{figure}[hb!]
 	\centering
-	\includegraphics[width= 0.35\textwidth]{fig/completepipesmall.pdf}
+	\includegraphics[width= 0.38\textwidth]{fig/completepipesmall.pdf}
 	\caption{An overview of the different pipes and the flow running between them.}
 	\label{fig:pipes}
 \end{figure}
@@ -95,7 +102,7 @@ The core of the implementation of the framework is the simplicity achieved by pi
 
 The article focuses a lot on the clustering process. This process is responsible for calculating which instances match to the same author, based on similarities between the instances. Every time a rule computes a new similarity, it is possible reclustering has to occur. As there is a constant influx of information, there is a need for a dynamic approach that maintains the cluster quality. 
 
-The article gives an in-depth explanation of the dynamic clustering algorithm described in \cite{dyncluster}. The algorithm itself depends on the minimum cut tree algorithm. The sequential Gusfield's algorithm described in \cite{gusfield} is implemented. 
+The article gives an in-depth explanation of the dynamic clustering algorithm described in \cite{dynamic}. The algorithm itself depends on the minimum cut tree algorithm. The sequential Gusfield's algorithm described in \cite{gusfield} is implemented. 
 
 The article also proposes an addition to the original clustering algorithm. It introduces a new case, acting the same as case 1, but being executed instead of case 3 on the occasion that $2 * \frac{cutvalue(C_v, C_u)}{\left|V\right|} <= \alpha / 2$. This anticipates the fact that a lot of similarities with lower weights occur and they often take place in succession. Often this results in case 3 being calculated multiple times in succession, before finally merging the clusters together. By introducing this new case, the resource-intensive execution of case 3 is swapped for the very fast execution of case 1.
 
@@ -103,24 +110,23 @@ The clustering process is implemented as a stateful pipe and is not treated any 
 
 \section{Results}
 
+The proposed framework is tested against a manually annoted dataset containing over 1000 publications. The impact of each of the rules on the accuracy is tested and the combination of the four rules is concluded as having the highest overall accuracy. The co-author rule has the biggest positive impact on the correctness. The F measure is also calculated for different distributions of the weights for each of the rules. The distribution giving favor to a lot of clustering by setting all the values high and the alpha value just a little higher, renders the best results. 
+
+In the article, there is also a compirason between the results the proposed framework gets and the accuracy of DBLP. The conclusion is that the proposed framework overcomes DBLP by $14\%$ or $17\%$, depending on how the mean accuracy is calculated.
+
+
 \begin{figure}[htpb!]
 \centering
-%\includegraphics[width= 0.4\textwidth]{fig/performance_total.pdf}
-\caption{Performance test of the matchmaker on Laptop (2GHz processor, 1GB RAM) and ALIX (500MHz processor, 256MB RAM)}
+\includegraphics[width= 0.45\textwidth]{fig/test-rules.pdf}
+\caption{A comparison of different combinations of rules. The first four columns stack the rules, the fifth column uses all rules except the community rule and the last column depicts the base line, this is the F measure of the case where no clustering has happened.}
 \label{fig:testperformance}
 \end{figure}
 
-
-\begin{figure}[htpb!]
-\centering
-%\includegraphics[width= 0.4\textwidth]{fig/parameters_en.pdf}
-\caption{Test of influence of parameters on performance on Laptop (2GHz processor, 1GB RAM)}
-\label{fig:testparameters}
-\end{figure}
-
-
-
 \section{Conclusions and future work}
+
+This article examined the opportunities using the semantic web and data processing. The possibilities within expert finding and author disambiguation are challenging and can contribute in solving a real-life problem. A framework has been composed, focusing on author disambiguation by implementing a dynamic clustering algorithm, allowing for real-time applications. The proposed extensibility has been accomplished by the usage of pipes and filters.
+
+The results show that the framework is able to improve the results from DBLP. However, there is still room for more improvements. The most important additions would be enabling the usage of negative weights and adding more online sources in order to retrieve more information about the authors. This extra information could also entail the addition of new rules, but, as stated before, pipes make this an easy task.
 
 
 %\nocite{*}
@@ -141,22 +147,11 @@ The clustering process is implemented as a stateful pipe and is not treated any 
 %\newblock {\em Optical Switching Architecture to Implement Moveable Cells in a Multimedia Train Environment},
 %\newblock Proc. of ECOC 2004, 30th European Conf. on Optical Communication, vol. 3, pp. 344-345, Stockholm, Sweden, 5-9 Sep. 2004.
 %
-\bibitem{upnp}
-Donoho A, Costa-requena J, Mcgee T, Messer A, Fiddian-green A, Fuller J. \newblock{\em UPnP Device Architecture 1.1.} Oct. 2008. 
+\bibitem{dynamic}
+Saha B., Mitra P. \newblock{\em Dynamic algorithm for graph clustering using minimum cut tree} 2006. 
 
-\bibitem{cling}
-Bauer C. \newblock{\em Cling UPnP.} 22 Mar. 2011. Available from: http://teleal.org/projects/cling/
-
-\bibitem{owl}
-Smith M, Welty C, McGuinness D. \newblock{\em OWL - Web Ontology Language.} 5 Apr. 2011. Available from: http://www.w3.org/TR/owl-guide/
-
-\bibitem{owls}
-Martin D, Burstein M, Hobbs J, Lassila O, McDermott D, McIlraith S, et al. \newblock{\em OWL-S - Semantic Markup for Web Services.} 21 Sep. 2010. Available from: http://www.w3.org/Submission/OWL-S/
-
-\bibitem{owlstc}
-SemWebCentral. \newblock{\em OWL-S Service Retrieval Test Collection: Project Info.} May 16 May. 2011. Available from: http://www.semwebcentral.org/projects/owls-tc/
-
-
+\bibitem{gusfield}
+Flake G.W., Tarjan R.E., Tsioutsiouliklis K. \newblock{\em Graph clustering and minimum cut trees} 2004
 
 %
 %\bibitem{click}

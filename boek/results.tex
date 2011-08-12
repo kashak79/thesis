@@ -142,9 +142,9 @@ After calculating these statistical values for all the clusters in the ground tr
 
 Any connection in a pipe network can be configured to be local or asynchronous. Asynchronous connections push the flow in a shared queue of flows that need to be processed. A pool of workers on different machines will poll this queue and resume the flow on their own machines, making the pipe network distributed. We expect this scaling to entail an increase in performance.
 
-We notice that a pipe network that is executed synchronously spends more than 50% of its time waiting for input. This is because accessing websites, distributed memory or the graph is associated with a certain latency causing pipes to wait for the service to respond. The amount of time spent waiting heavily depends on the characteristics of the input and the hardware. Some inputs require more computation and others more communication. When we run three workers on the same machine, we can already perceive a speedup of 200-300%.
+We notice that a pipe network that is executed synchronously spends more than 50\% of its time waiting for input. This is because accessing websites, distributed memory or the graph is associated with a certain latency causing pipes to wait for the service to respond. The amount of time spent waiting heavily depends on the characteristics of the input and the hardware. Some inputs require more computation and others more communication. When we run three workers on the same machine, we can already perceive a speedup of 200-300\%.
 
-We expect that distributing the pipes over multiple servers would have a enormous impact on performance. The pipes try to minimize the amount of communication with the graph database as much as possible, making the system more scalable. As we do not have decent server hardware at our disposal we were not able to test this.
+We expect that distributing the pipes over multiple servers would have a enormous impact on performance. The pipes try to minimize the amount of communication with the graph database as much as possible, making the system more scalable. As we do not have decent server hardware at our disposal, we were not able to test this.
 
 \subsection{Rules}
 
