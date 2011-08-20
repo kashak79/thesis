@@ -1,4 +1,5 @@
-\chapter{The framework}
+\chapter{The Framework}
+\label{framework}
 
 \section{Main Scenario}
 
@@ -24,7 +25,7 @@ We will use the following steps to build such a platform:
 
 Based on the main scenario, we can identify a few key features our framework will need. A short summarization of each follows, explaining the challenges we face with our thesis.
 
-\subsection{Information extraction}
+\subsection{Information Extraction}
 
 We need to extract information from multiple sources, which we will accomplish by using a plugin system. Each plugin is responsible for one source and will extract specific information which can be used by other plugins or other steps in our framework.
 
@@ -87,6 +88,4 @@ The disambiguation exists out of a number of rules. These inspect several object
 \subsection{Data Merger}
 
 The Data Merger is responsible for merging the names together from time to time so they would reference to the same author. This component uses the probabilities calculated by the Disambiguator in order to do so.
-
-\subsection{Data Layer and Database}
 

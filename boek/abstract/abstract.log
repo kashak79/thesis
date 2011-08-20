@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.1415926-2.2-0.9997.4 (MiKTeX 2.9) (preloaded format=xelatex 2010.12.12)  12 AUG 2011 21:58
+This is XeTeX, Version 3.1415926-2.2-0.9997.4 (MiKTeX 2.9) (preloaded format=xelatex 2010.12.12)  12 AUG 2011 22:54
 entering extended mode
 **abstract.tex
 (C:\Users\Mattias\Workspace\thesis\boek\abstract\abstract.tex
@@ -258,11 +258,7 @@ Package: times 2005/04/12 PSNFSS-v9.2a (SPQR)
 )
 \c@theorem=\count100
 
-(C:\Users\Mattias\Workspace\thesis\boek\abstract\abstract.aux
-
-LaTeX Warning: Label `fig:pipes' multiply defined.
-
-)
+(C:\Users\Mattias\Workspace\thesis\boek\abstract\abstract.aux)
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 24.
 LaTeX Font Info:    ... okay on input line 24.
 LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 24.
@@ -280,7 +276,8 @@ LaTeX Font Info:    ... okay on input line 24.
 LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 24.
 LaTeX Font Info:    ... okay on input line 24.
 LaTeX Font Info:    Try loading font information for OT1+ptm on input line 24.
- ("C:\Program Files\MiKTeX 2.9\tex\latex\psnfss\ot1ptm.fd"
+
+("C:\Program Files\MiKTeX 2.9\tex\latex\psnfss\ot1ptm.fd"
 File: ot1ptm.fd 2001/06/04 font definitions for OT1/ptm.
 )
 \AtBeginShipoutBox=\box27
@@ -321,50 +318,32 @@ File: se-ascii-print.def 2010/03/01 v1.8 stringenc: Printable ASCII characters
 File: fig/architecturev2.pdf Graphic file (type QTm)
 
 <use  "fig/architecturev2.pdf" >
-LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <9> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 72.
-
-
-LaTeX Warning: Reference `fig:coauthor' on page 1 undefined on input line 72.
-
 File: fig/coauthorrulenameeq.pdf Graphic file (type QTm)
-<use  "fig/coauthorrulenameeq.pdf" > [1
+ <use  "fig/coauthorrulenameeq.pdf" > [1
 
 
 ]
 File: fig/completepipesmall.pdf Graphic file (type QTm)
- <use  "fig/completepipesmall.pdf" >
 
-LaTeX Warning: Citation `dynamic' on page 2 undefined on input line 105.
-
-
-LaTeX Warning: Citation `gusfield' on page 2 undefined on input line 105.
-
+<use  "fig/completepipesmall.pdf" >
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <9> on input line 107.
+(Font)              <9> on input line 106.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <6> on input line 107.
+(Font)              <6> on input line 106.
 File: fig/test-rules.pdf Graphic file (type QTm)
-<use  "fig/test-rules.pdf" > [2]
-(C:\Users\Mattias\Workspace\thesis\boek\abstract\abstract.aux)
-
-LaTeX Warning: There were undefined references.
-
-
-LaTeX Warning: There were multiply-defined labels.
-
- )
-(\end occurred when \ifx on line 121 was incomplete)
+ <use  "fig/test-rules.pdf" > [2]
+(C:\Users\Mattias\Workspace\thesis\boek\abstract\abstract.aux) )
+(\end occurred when \ifx on line 120 was incomplete)
 (\end occurred when \ifx on line 97 was incomplete)
 (\end occurred when \ifx on line 81 was incomplete)
 (\end occurred when \ifx on line 51 was incomplete) 
 Here is how much of TeX's memory you used:
- 6277 strings out of 429293
- 84795 string characters out of 3170419
- 162643 words of memory out of 3000000
- 9412 multiletter control sequences out of 15000+200000
- 31447 words of font info for 104 fonts, out of 3000000 for 9000
+ 6270 strings out of 429293
+ 84736 string characters out of 3170419
+ 162686 words of memory out of 3000000
+ 9405 multiletter control sequences out of 15000+200000
+ 30928 words of font info for 103 fonts, out of 3000000 for 9000
  674 hyphenation exceptions out of 8191
- 30i,5n,45p,842b,321s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 30i,5n,45p,837b,321s stack positions out of 5000i,500n,10000p,200000b,50000s
 
 Output written on abstract.pdf (2 pages).

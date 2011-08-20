@@ -86,9 +86,6 @@
 %!!!!!!!!!!!              onderaan/bovenaan elk blad thesistitel zetten                !!!!!!!!!!!
 %!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-% overzicht/samenvatting
-%\include{overzicht}
-
 \frontmatter
 
 
@@ -127,6 +124,10 @@
 \pagestyle{empty}
 
 \newpage
+
+
+% overzicht/samenvatting
+\include{overzicht}
 
 
 \setlength{\hoffset}{0in}
@@ -208,7 +209,13 @@
 \listoftables
 
 % lege pagina (!!)
+\newpage
+\thispagestyle{empty}
+\mbox{}
 
 % kaft
+\newpage
+\thispagestyle{empty}
+\mbox{}
 
 \end{document}

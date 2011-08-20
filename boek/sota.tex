@@ -1,5 +1,5 @@
 \chapter{State of the Art}
-
+\label{sota}
 We examined a broad range of different topics with social media as central subject. It was an evolution starting from straightforward Twitter-related subjects to a full-fledged problem assignment many people struggle with.
 
 This chapter is subdivided into two main parts. The first part (\autoref{technologies}) is a summary of the different technologies we examined in regard with the problem statements together with a short explanation. The second part (\autoref{opinionmining}, \autoref{twitterinfluencers} and \autoref{expertfinding}) gives a chronological overview of thesis topics we examined. For each topic there are several references to technologies described in the first part which could be useful in solving the problem.
@@ -21,7 +21,7 @@ API stands for Application Programming Interface and is a particular set of rule
 
 We will use API's when they are available for obtaining information from online sources.
 
-\subsection*{Web scraping}
+\subsection*{Web Scraping}
 \label{scraping}
 
 Web scraping (also called Web harvesting or Web data extraction) is a computer software technique of extracting information from web sites. Usually, such software programs simulate human exploration of the Web by implementing low-level Hypertext Transfer Protocol (HTTP). Web scraping focuses on the transformation of unstructured data on the Web, typically in HTML format, into structured data that can be stored and analyzed in a central local database or spreadsheet. 
@@ -93,14 +93,14 @@ There are a lot of different graph clustering algorithms. Algorithms based on sp
 More recently there has been a new direction to graph clustering, modeling the minimum-cut, maximum-flow problem of the underlying graph \cite{flake2004graph}. The algorithm we will use is the dynamic version described in \cite{saha2006dynamic}. It is a dynamic algorithm based on the minimum-cut tree problem. It produces a high quality of clusters without having to look at the entire graph but only a subset of nodes, severely reducing the time of the algorithm.
 
 
-\subsection*{Machine learning}
+\subsection*{Machine Learning}
 \label{machinelearning}
 
 Machine learning, part of artificial intelligence, focuses on the development of algorithm that allow computer programs to learn from experience (ie. predicting the next event given a list of previous ones). This can be obtained by constructing rules and constraints, starting from some training data.
 
 There are many different approaches with different computational performances. With regard to Opinion Mining, described in \autoref{opinionmining}, the most interesting is probably support vector machines which uses a set of related supervised learning methods for classification and regression. Clustering is also a form of machine learning and has already been explained in more detail in \autoref{clustering}.
 
-\subsection*{Fuzzy String matching}
+\subsection*{Fuzzy String Matching}
 \label{stringmatching}
 
 Fuzzy string matching is the technique of finding strings that match a pattern approximately (rather than exactly). Very different methods of string matching exist. Most of them either use a distance metric or a similarity metric. An example of an algorithm measuring the distance between two string is the Jaro-Winkler algorithm. The Jaro–Winkler distance metric is designed and best suited for short strings such as person names. A comparison of this algorithms with others can be found in \cite{cohen2003comparison}.
@@ -118,7 +118,7 @@ The POS Tagger we refer to is the Stanford Part-Of-Speech Tagger. This is a Java
 
 There is also a Ruby port of the Lingua::EN::Tagger, called EngTagger, available as a gem. Documentation can be found at \cite{engtagger}.
 
-\subsection*{Graph pattern-matching and Gremlin}
+\subsection*{Graph Pattern-Matching and Gremlin}
 \label{graphs}
 
 Gremlin is a domain specific language for traversing property graphs. Gremlin makes use of Groovy and Pipes to perform complex graph traversals. This language has application in the areas of graph query, analysis, and manipulation. One of the techniques used in Gremlin is graph pattern matching. Many graph applications have to do with identifying patterns in the graph. That is, identifying sub-graphs that match a particular topology and/or feature set. In single-relational graphs, usually a topology is only considered. An interesting article about pattern matching can be found at \cite{markopatterns}.
@@ -131,7 +131,7 @@ The JUNG architecture is designed to support a variety of representations of ent
 
 JUNG comes with implementations of well known graph-algorithms and visualization algorithms which might be very useful.
 
-\section{Opinion mining}
+\section{Opinion Mining}
 \label{opinionmining}
 
 \label{general - opinion mining}
@@ -139,7 +139,7 @@ Opinion mining is part of the general area of \textit{sentiment analysis, opinio
 
 An example is a large company who wants to follow up on customer feedback. Large companies receive thousands of pieces of feedback on a daily basis, both direct as indirect. This feedback can exist out of online customer reviews, customer feedback, survey responses, social media messages or blogposts. Human processing of such text volumes is prohibitively expensive and close to impossible. The only alternative is automatic extraction of relevant information. Ideally one would like to be able to quickly and cheaply customize a system to provide an overview of the most interesting pieces of feedback which should be responded to or an overview of the general sentiment classification.
 
-\subsection{Current situation}
+\subsection{Current Situation}
 
 %Sentiment360, lots of papers and onderzoek, really to much to name and to add something of importance.
 
@@ -159,7 +159,7 @@ It is particularly interesting as others can follow the status of and updates on
 
 % TODO include a table comparing some existing pieces of software, comparing the pro's and con's ?
 
-\subsection{Improvements and additions}
+\subsection{Improvements and Additions}
 
 It could be interesting to work out previous research experiments with a focus on Twitter. The short and typically cryptic messages exchanged by users on this service form a new challenge where existing solutions may fall short as users often use shorthand codes, acronyms and abbreviations which are not part of the official language. A new approach or combination of existing solutions could be tested and compared to existing results.
 
@@ -170,14 +170,14 @@ Most of the approaches use some sort of classification algorithm or machine lear
 % TODO waarom hebben we dit niet gekozen ? 
 
 
-\section{Twitter influencers}
+\section{Twitter Influencers}
 \label{twitterinfluencers}
 
 As discussed in \autoref{general - opinion mining} about opinion mining, people talk about products, both positive as negative. They have the ability to influence the buying behavior of others who respect their opinion about a certain area. Identifying these influencers can be of great value, for instance in the advertising industry.
 
 There are two main aspects, reach and trust. A person's reach determines the number of people who listen when he has something of value to say. Trust depicts the value people give a certain person's opinion. Both aspects can vary a lot when comparing different topics for the same person.
 
-\subsection{Current situation}
+\subsection{Current Situation}
 
 There are papers discussing algorithms to find the ideal subset of individuals which will trigger a large cascade of conversions \cite{kempemax} and papers researching the more general economic issues regarding influencers \cite{kleinberg2007cascading}.
 
@@ -202,7 +202,7 @@ The amount of applications focusing on calculating social media influence, as th
 	\label{tab:influenceApps}
 \end{table}
 
-\subsection{Improvements and additions}
+\subsection{Improvements and Additions}
 
 %We kunnen hier nog zo veel meer over vertellen, dit is eigelijk de voornaamste voorloper van ons echt onderwerp, dus hier kunnen we reeds heel wat belangrijke dingen aankaarten die we uiteindelijk ook echt zullen gebruiken. 
 %Belangrijke dingen die nog aangekaart moeten worden: Semantic Web (Web of Data), DBPedia, RDF, OWL, FOAF, Google Social Graph, location based?, 
@@ -233,7 +233,7 @@ Finding experts is useful for seeking consultants, collaborators or speakers. It
 %Expert finding is a difficult task requiring a multitude of different steps in order to find results bearing certain value. There are databases containing records of people matched with their area of expertise, which can be queried for a nominal fee, mostly used by reporters. The data has been gathered manually over time. To receive a more up-to-date or specific result, one will have to send a separate request which will come with a higher price and take its time.\\
 %Another option is to do it manually. There are several steps which can be undertaken and they can be executed in fashionable order, repeated as often as necessary. One can search for conference sites about the topic and look up the names of the speakers. Current and past working experience can possibly be found on LinkedIn. Publications and co-authors can be retrieved from online databases with dedicated research publications or from more general databases such as Google Scholar. The authors and papers can be interlinked in order to see who works with who and who is most often cited or referenced. Influence can be measured on social media.\\
 %It is clearly a lengthy process.
-\subsection{Current situation}
+\subsection{Current Situation}
 
 % Say something about using OWL, FOAF, RDF, triplestores ... Generally saying more about the 2 month we needed to actually get to our problem ...
 
@@ -245,7 +245,7 @@ In research circles, \cite{balog2006finding} proposes four simple binary associa
 
 \cite{jung2007finding} proposes OntoFrame. It is an information service platform using Semantic Web technologies and is based on an extensive ontology of 16 classes using RDF triples. Identity resolution and full text analysis forms the basis of their expert-finding method. The framework looks promising, however the prototype does not function  \cite{ontoframe}.
 
-\subsection{Improvements and additions}
+\subsection{Improvements and Additions}
 
 % TODO Iets vermelden over de connectie met het TWIRL project?
 

@@ -1,4 +1,4 @@
-\chapter{Clustering algorithm}
+\chapter{Clustering Algorithm}
 
 In this chapter we describe the clustering process, one of the core components of our framework. This process is responsible for deciding which nodes match to the same author, based on similarities between these nodes. These similarities are calculated by the different rules (see \autoref{rules}) that are implemented in our framework. Every time a new similarity is available, it is possible we have to recluster, meaning the grouping of the authors will be altered.
 
@@ -8,7 +8,7 @@ The algorithm we clarify in this chapter, is largely based on the algorithm desc
 
 The main feature of this dynamic algorithm is that it only builds part of the minimum-cut tree as and when necessary. The tree is computed over a subset of nodes, limited to a number of clusters. In our graph there might be an immense amount of authors, and thus clusters. However, the amount of authors involved with one change is limited. By just computing the clusters of this coarsened graph we can obtain the clusters of the original graph. These two properties are the reason the algorithm is efficient while maintaining an identical cluster quality as the static version described in \autoref{staticcutclustering}. Formal proof for the efficiency of this algorithm and the quality of the clusters can be found in \cite{saha2006dynamic}.
 
-\section{Minimum-cut tree algorithm}
+\section{Minimum-Cut Tree Algorithm}
 \label{minimumcuttree}
 
 \begin{algorithm}
@@ -59,7 +59,7 @@ The algorithm consists of $n-1$ iterations of a Maximum Flow algorithm and for e
 
 We choose an implementation of the Edmonds-Karp algorithm to find the maximum flow and the minimum-cut. This algorithm is an implementation of the Ford-Fulkerson method for computing the maximum flow and is provided to us through the Java library JUNG.
 
-\section{Cut clustering}
+\section{Cut Clustering}
 
 \cite{flake2004graph} defines a static algorithm for clustering based on minimum cut trees. \autoref{staticcutclustering} gives the pseudocode of the basic cut clustering algorithm. It adds an artificial sink $t$ to all the vertices of the graph with weight $\alpha > 0$. The minimum cut tree is computed using this new graph and the disjoint components obtained after removing the artificial vertex $t$, are the required clusters.
 
@@ -94,7 +94,7 @@ A similarity between two instances is represented as a new edge between two node
 
 We assume we have $C = {C_1,C_2...C_s}$ as the clusters of the graph $G(V,E)$ which have been calculated in previous steps. We denote $A$ as the adjacency matrix of $G$.
 
-\subsection{Intra-cluster edge addition}
+\subsection{Intra-Cluster Edge Addition}
 
 Intra-cluster edge addition means that both the nodes of the added edge belong to the same cluster. The result is that the cluster becomes stronger connected. We only have to update the $ICW$ and the adjacency matrix $A$ while the nodes remain unchanged. \autoref{intracluster} shows the pseudocode.
 
@@ -111,7 +111,7 @@ Intra-cluster edge addition means that both the nodes of the added edge belong t
 \end{algorithmic}
 \end{algorithm}
 
-\subsection{Inter-cluster edge addition}
+\subsection{Inter-Cluster Edge Addition}
 
 Addition of an edge whose end nodes belong to different clusters is more challenging as it increases the connectivity across different clusters. This means the cluster quality of the clusters involved is lowered and as a result reclustering might be necessary when the quality is no longer maintained. 
 
@@ -123,11 +123,11 @@ There are three identifiable cases:
 	\item \textbf{CASE 3} The new edge deteriorates the cluster quality and the nodes in both the clusters have to be reclustered.
 \end{enumerate}
 
-In each of these three cases, the addition of the new edge results in updating the adjacency matrix $A$ and the Outer Cluster Weight of the nodes involved. This is described in \autoref{updateValues}. In order to understand the complete algorithm, we first need to explain two used processes: merging and contracting of clusters.
+In each of these three cases, the addition of the new edge results in updating the adjacency matrix $A$ and the Outer Cluster Weight of the nodes involved. This is described in \autoref{updatevalues}. In order to understand the complete algorithm, we first need to explain two used processes: merging and contracting of clusters.
 
 \begin{algorithm}
 \caption{Updating the adjacency matrix $A$ and the Outer Cluster Weight: UPDATE($(i,j),w(i,j)$)}
-\label{merging}
+\label{updatevalues}
 \begin{algorithmic}
 \STATE \textbf{Input:} Edge $(i,j)$ and weight $w(i,j)$
 \STATE $A(i,j) \leftarrow A(i,j) + w(i,j)$
@@ -136,7 +136,7 @@ In each of these three cases, the addition of the new edge results in updating t
 \end{algorithmic}
 \end{algorithm}
 
-\paragraph{Merging of clusters} occurs in CASE 2 and is described in \autoref{merging}. Two clusters $C_u$ and $C_v$ are merged into one new cluster containing the nodes of the two original clusters. This causes the ICW of all the nodes involved to increase and the OCW to decrease as all the nodes are now more connected.
+\paragraph{Merging of Clusters} occurs in CASE 2 and is described in \autoref{merging}. Two clusters $C_u$ and $C_v$ are merged into one new cluster containing the nodes of the two original clusters. This causes the ICW of all the nodes involved to increase and the OCW to decrease as all the nodes are now more connected.
 
 \begin{algorithm}
 \caption{Merging of clusters $C_u$ and $C_v$: MERGE($C_u,C_v$)}
@@ -157,7 +157,7 @@ In each of these three cases, the addition of the new edge results in updating t
 \end{algorithmic}
 \end{algorithm}
 
-\paragraph{Contraction of clusters} occurs in CASE 3 as part of the reclustering process and is shown in \autoref{contracting}. All the nodes outside the set of clusters $S$ are replaced by a single new node $x$. Self loops that are created in this process are removed and parallel edges are replaced by a single edge with weight equal to the sum of the parallel edges. The reason we consider the clusters outside $S$ is because $S$ will generally be small while the other clusters will contain a lot of nodes.
+\paragraph{Contraction of Clusters} occurs in CASE 3 as part of the reclustering process and is shown in \autoref{contracting}. All the nodes outside the set of clusters $S$ are replaced by a single new node $x$. Self loops that are created in this process are removed and parallel edges are replaced by a single edge with weight equal to the sum of the parallel edges. The reason we consider the clusters outside $S$ is because $S$ will generally be small while the other clusters will contain a lot of nodes.
 
 \begin{algorithm}
 \caption{Contraction of clusters outside the set of clusters $S$: CONTRACT($G(V,E),S)$)}

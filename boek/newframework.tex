@@ -49,7 +49,7 @@ The notations we introduced are summarized in \autoref{fig:pipecomponents}.
 
 \subsection{Core Extensions}
 
-In the architecture (\autoref{fig:architecturev2}), we already mentioned three core extensions. These extensions extensively used throughout the program, so we included them in the architecture. Each of these three extensions is explained below.
+In the architecture (\autoref{fig:architecturev2}), we already mentioned three core extensions. These extensions are extensively used throughout the program, so we included them in the architecture. Each of these three extensions is explained below.
 
 \paragraph{Local Connections}
 
@@ -63,7 +63,7 @@ A more complex connection is the asynchronous connection. It allows us to run an
 
 For some pipes, it is required to have a non-transient memory, a memory that survives between executions. This allows the pipe to process input differently based on what is present in its long-time memory. As Pipes can be run in a distributed fashion, it is possible for a pipe to be initialized on another physical machine for every execution. If the memory would be local, bound to a machine, the pipe would lose access to it if it was executed on another machine. To solve this, we use the distributed shared memory store (\autoref{redis}).
 
-\subsection{Implementation details and Technologies}
+\subsection{Implementation Details and Technologies}
 
 \paragraph{The Use of Ruby and Java}
 
@@ -127,7 +127,7 @@ We now apply these general concepts and designs in the context of our thesis pro
 
 After establishing these four main message types, we created another two generally usable pipes. Persisting discoveries is done with the Persist Discovery pipe. It provides automatic persisting of sets, automatic indexing and avoidance of duplicate discoveries. The Persist Fact pipe takes care of the same tasks for facts.
 
-\subsection{A Graph Database: Neo4j in Combination With the Tinkerpop Stack}
+\subsection{A Graph Database: Neo4j in Combination with the Tinkerpop Stack}
 
 As already shown, Neo4j performs much better when it comes to querying with a large depth. This is the same as doing joins in MySQL, which is slow. That is why we chose Neo4j to serve as our database. On top of Neo4j we use the Tinkerpop stack. This stack creates an abstract layer on top of several graph databases. It uses a general property graph model to persist and query data in the graph.
 
@@ -224,7 +224,7 @@ All similarities produced by these rules are merged into one stream which is fed
 	\label{fig:rulespipe}
 \end{figure}
 
-\subsection{Concurrent, incremental Clustering}
+\subsection{Concurrent, Incremental Clustering}
 
 Clustering is a very important step in building towards a solution. Each new flow of information indirectly leads to a clustering operation. Acquiring new information triggers rules which on their turn yield similarities. These similarities change the balance between clusters. In the worst case, an expensive rebalancing procedure is necessary.
 
@@ -273,7 +273,7 @@ Another difficulty turning up in our framework is the dependency of certain flow
 
 \subsection{Overview}
 
-The previous sections each described a component of our pipe network. All of these components and pipes need to work together. How this is done is illustrated in \autoref{completepipesmall}. We added a Message Distribution pipe with the responsibility of forwarding the messages with the right types to right pipes.
+The previous sections each described a component of our pipe network. All of these components and pipes need to work together. How this is done is illustrated in \autoref{fig:completepipesmall}. We added a Message Distribution pipe with the responsibility of forwarding the messages with the right types to right pipes.
 
 \begin{figure}[htb]
 	\centering

@@ -6,7 +6,7 @@ Leading search engines mainly provide keyword-based results in response of a sea
 
 % Doelstelling
 
-\section{Thesis objective and approach}
+\section{Thesis Objective and Approach}
 
 We want to help in this upcoming research by creating a framework that can retrieve experts for any given subject matter. The end result should allow anyone to query the framework with a set of keywords defining the subject area they want to investigate. The outcome of this query is a list of authors, ranked by decreasing level of expertise defined by the dictated keywords. Each author is accompanied by a profile, containing a list of papers, highly touted co-authors and any other information the user might find useful.
 
@@ -18,13 +18,13 @@ In the second component, each publication we retrieve from DBLP is saved as a un
 
 The last component is responsible for defining the area of interest of an author. In order to accomplish this, a category tree is created. Each publication is then mapped onto this tree and the combination of all the publications form a subtree which is linked an author's interests. To decide the level of expertise, the number of subject references, the number of publication citations and the level of expertise of co-authors should be combined. However, this is beyond the scope of our thesis and we have simplified this by comparing the subject of the publications extracted from the title and the abstract and the number of publications for each subject.
 
-\section{Chapter outline}
+\section{Chapter Outline}
 
 In \autoref{sota}, we start with a summary of existing technologies and techniques that we researched. Afterwards, we describe the different thesis topics we examined and how we could extend existing research. 
 
 \autoref{framework} contains a naive attempt to create the framework. Although the features are accurately construed, the proposed subdivisions and internal operations would never suffice for a real application. In \autoref{foundation}, we explain its shortcomings and clarify the five foundational acknowledgments.
 
-Based on the foundations, a theoretical model is unveiled in \autoref{theoreticalmodel}. It is based on a three-layer structure and the four rules that calculate the similarities are also handled in this chapter.
+Based on the foundations, a theoretical model is unveiled in \autoref{model}. It is based on a three-layer structure and the four rules that calculate the similarities are also handled in this chapter.
 
 The implementation details of the theoretical model can be found in \autoref{newframework}. The technologies we used to construct this implementation and the drafted pipes and filers are explained here.
 

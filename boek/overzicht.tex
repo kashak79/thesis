@@ -10,9 +10,9 @@
 \begin{center}
 
 \noindent \textbf{\huge
-Dynamische discovery en }
-\textbf{\huge gedistribueerde co\"{o}rdinatie van een}
-\textbf{\huge semantisch beschreven robot swarm}
+Identifying experts through }
+\textbf{\huge a framework for knowledge extraction}
+\textbf{\huge from public online sources}
 
 \setlength{\baselineskip}{12pt}
 \setlength{\parindent}{0pt}
@@ -20,10 +20,10 @@ Dynamische discovery en }
 
 door 
 
-Niels BOUTEN
+Simon Buelens, Mattias Putman
 
-Promotoren: Prof. Dr. Ir. Filip De Turck, Prof. Dr. Ir. Bart Dhoedt\\
-Begeleiders: Anna Hristoskova, Femke Ongenae, Jelle Nelis
+Promotors: Prof.~Dr.~Ir.~Filip~De~Turck,~Elena~Tsiporkova~(Sirris),~Tom~Tourw\'{e}~(Sirris)\\
+Scriptiebegeleiders: Anna~Hristoskova,~Tim~Wauters\\
 
 Masterproef ingediend tot het behalen van de academische graad van\\
 Master in de ingenieurswetenschappen: computerwetenschappen
@@ -44,17 +44,15 @@ Vakgroep Informatietechnologie\\
 
 \section*{Samenvatting}
 
-In de huidige swarm robotics toepassingen moeten interacties tussen robots worden geprogrammeerd in de applicaties. Het toevoegen van nieuwe robots aan de swarm of interacties met andere netwerkapparaten kan niet zonder aanpassingen aan de applicatie. Om flexibel gebruik te kunnen maken van deze functionaliteit, is er nood aan een manier om deze apparaten dynamisch te ontdekken en te gebruiken. Het gebruik van voorgeprogrammeerde invocaties limiteert echter de flexibiliteit. Dit kan worden opgelost door niet enkel de interfacedetails, maar ook de betekenis en functionaliteit te defini\"{e}ren in de servicebeschrijving.
+Onderzoekers verliezen veel tijd met de zoektocht naar informatie gerelateerd aan hun onderzoeksdomein. Er bestaan bijna geen diensten die toelaten om aan de hand van trefwoorden een overzicht te verkrijgen met experts voor de opgegeven domeinen. Er is onderzoek naar disambiguatie van auteurs, maar deze worden meestal niet in combinatie gebracht met het opzoeken van experten, maar het indelen van publicaties (alhoewel de twee gerelateerd zijn).
 
+In deze masterproef onderzoeken we de mogelijkheid om een framework op te stellen dat dit toelaat door online informatie op te zoeken, deze informatie in relatie te brengen met de correcte auteurs en gebruikers toe te laten dit framework te gebruiken om hierin te zoeken. De nadruk van het framework ligt op de disambiguatie van auteurs (aan de hand van de aanwezige informatie alle namen zo goed mogelijk connecteren met de juist auteur) aan de hand van een regelgebaseerde aanpak en de uitbreidbaarheid van het framework.
 
-Een mogelijke oplossing bestaat erin discovery protocollen zoals UPnP te combineren met semantische beschrijvingen van de services in OWL-S. Deze beschrijvingen moeten dan worden ge\"{e}valueerd ten opzichte van de gezochte services en de huidige context. Zo kan voor iedere aanvraag de op dat moment best passende service worden geselecteerd en aangeroepen, zonder dat deze oproep expliciet moet worden voorgeprogrammeerd.
-
-
-Binnen deze thesis wordt deze aanpak uitgewerkt met als resultaat een framework voor dynamische service discovery met behulp van semantische beschrijvingen. De verschillende eigenschappen van dit framework, zoals automatische discovery, semantische matching, contextafhankelijke selectie en monitoring van services, worden door middel van een proof of concept scenario aangetoond.
+We maken gebruik van een graafgebaseerde representatie van de data en de architectuur is gebaseerd op pipes en filters. Dit laat toe dat het framework uitbreidbaar, schaalbaar en eenvoudig aanpasbaar is. Op het einde volgen de resultaten gebaseerd op een manueel geannoteerde testset. Uiteindelijk gaan we ook de vergelijking aan met de verdeling van auteurs door DBLP.
 
 \section*{Trefwoorden}
 
-Swarm Robotics, Service Discovery, Semantische beschrijving, Gedistribueerde werking
+auteur disambiguatie, data verwerking, clustering, pipes en filters
 
 }
 

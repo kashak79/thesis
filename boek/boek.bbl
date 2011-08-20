@@ -39,6 +39,12 @@ B.~Saha and P.~Mitra.
 \newblock Dynamic algorithm for graph clustering using minimum cut tree.
 \newblock 2006.
 
+\bibitem{cohen2003comparison}
+W.W. Cohen, P.~Ravikumar, and S.E. Fienberg.
+\newblock A comparison of string distance metrics for name-matching tasks.
+\newblock In {\em Proceedings of the IJCAI-2003 Workshop on Information
+  Integration on the Web (IIWeb-03)}, pages 73--78. Citeseer, 2003.
+
 \bibitem{toutanova2000enriching}
 K.~Toutanova and C.D. Manning.
 \newblock Enriching the knowledge sources used in a maximum entropy
@@ -60,6 +66,15 @@ K.~Toutanova, D.~Klein, C.D. Manning, and Y.~Singer.
 \bibitem{postagger}
 K.~Toutanova.
 \newblock \url{http://nlp.stanford.edu/software/tagger.shtml}.
+
+\bibitem{engtagger}
+Yoichiro Hasebe.
+\newblock \url{http://engtagger.rubyforge.org/}.
+
+\bibitem{markopatterns}
+Marko~A. Rodriguez.
+\newblock
+  \url{http://markorodriguez.com/2011/06/15/graph-pattern-matching-with-gremlin-1-1/}.
 
 \bibitem{wright2009mining}
 A.~Wright.
@@ -104,6 +119,16 @@ Q.~Mei, X.~Ling, M.~Wondra, H.~Su, and C.X. Zhai.
 \newblock In {\em Proceedings of the 16th international conference on World
   Wide Web}, pages 171--180. ACM, 2007.
 
+\bibitem{kempemax}
+D.~Kempe, J.~Kleinberg, and E.~Tardos.
+\newblock Maximizing the spread of influence through a social network.
+\newblock pages 137 -- 146, 2003.
+
+\bibitem{kleinberg2007cascading}
+J.~Kleinberg.
+\newblock Cascading behavior in networks: Algorithmic and economic issues.
+\newblock {\em Algorithmic game theory}, pages 613--632, 2007.
+
 \bibitem{ziegler2005propagation}
 C.N. Ziegler and G.~Lausen.
 \newblock Propagation models for trust and distrust in social networks.
@@ -120,6 +145,18 @@ S.D. Kamvar, M.T. Schlosser, and H.~Garcia-Molina.
 \newblock The eigentrust algorithm for reputation management in p2p networks.
 \newblock In {\em Proceedings of the 12th international conference on World
   Wide Web}, pages 640--651. ACM, 2003.
+
+\bibitem{klout}
+Klout.
+\newblock \url{http://klout.com/home}.
+
+\bibitem{peerindex}
+Peerindex.
+\newblock \url{http://www.peerindex.net/}.
+
+\bibitem{traackr}
+Traackr.
+\newblock \url{http://traackr.com/}.
 
 \bibitem{balog2006finding}
 K.~Balog and M.~de~Rijke.
